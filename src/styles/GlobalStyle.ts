@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
-    /* Importação da fonte Inter do Google Fonts */
+    /* Importação da fonte Inter do Google Fonts - com fallbacks */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
     * {
@@ -17,8 +17,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        /* Usa a fonte Inter para todo o corpo */
-        font-family: ${theme.fonts.main};
+        /* Fonte Inter com fallbacks mais robustos */
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         /* Define o peso padrão como 'regular' */
         font-weight: 400;
         background-color: ${theme.colors.lightGray};
@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
 
     h1, h2, h3, h4, h5, h6 {
         /* Usa a mesma fonte, mas com um peso mais forte */
-        font-family: ${theme.fonts.main};
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         font-weight: 700; // Bold
         color: ${theme.colors.textDark};
         line-height: 1.2;
@@ -64,7 +64,7 @@ export const GlobalStyle = createGlobalStyle`
 
     /* Ajuste para botões e outros elementos que podem precisar de um peso diferente */
     button, input, select, textarea {
-        font-family: ${theme.fonts.main};
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     }
 
     button {

@@ -20,16 +20,22 @@ export default function RootLayout({
                 content="A única plataforma realmente integrada para gestão educacional. Do primeiro WhatsApp até a matrícula efetivada."
             />
 
-            {/* Favicon Configuration */}
-            <link rel="icon" href="/favicon.ico" sizes="any" />
-            <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-            <link rel="shortcut icon" href="/favicon.ico" />
+            {/* Favicon Configuration - Usando logo como fallback */}
+            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+            <link rel="icon" type="image/png" sizes="32x32" href="/logo_maskot_website.png" />
+            <link rel="icon" type="image/png" sizes="16x16" href="/logo_maskot_website.png" />
+            <link rel="shortcut icon" href="/logo_maskot_website.png" />
+            <link rel="apple-touch-icon" href="/logo_maskot_website.png" />
 
-            {/* Apple Touch Icon (se tiver) */}
-            <link rel="apple-touch-icon" href="/favicon.ico" />
-
-            {/* Manifest para PWA (futuro) */}
+            {/* Manifest para PWA */}
             <meta name="theme-color" content="#007BFF" />
+
+            {/* SEO Essencial */}
+            <meta property="og:title" content="Maskot CRM - O CRM que entende escolas" />
+            <meta property="og:description" content="A única plataforma realmente integrada para gestão educacional. Aumente suas matrículas com WhatsApp, automações e relatórios inteligentes." />
+            <meta property="og:image" content="/logo_maskot_website.png" />
+            <meta property="og:type" content="website" />
+            <meta name="twitter:card" content="summary_large_image" />
         </head>
         <body>
         <ThemeProvider theme={theme}>
