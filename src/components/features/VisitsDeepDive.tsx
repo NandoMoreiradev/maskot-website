@@ -2,7 +2,8 @@
 
 import styled, {css, keyframes} from 'styled-components'
 import {
-    Calendar, Clock, User, ArrowRight, MapPin,
+    Calendar, // <--- ADICIONADO AQUI
+    Clock, User, ArrowRight, MapPin,
     CheckCircle2, XCircle, Ban, RefreshCw,
     Smartphone, CalendarCheck, ShieldCheck,
     Bell, MessageSquare, Users, Link as LinkIcon
@@ -57,7 +58,7 @@ const TextContent = styled.div`
         margin-bottom: 1rem;
         line-height: 1.2;
     }
-    
+
     p {
         font-size: 1.1rem;
         color: ${props => props.theme.colors.textMedium};
@@ -77,8 +78,11 @@ const TextContent = styled.div`
         gap: 1rem;
         font-weight: 500;
         color: ${props => props.theme.colors.textDark};
-        
-        svg { color: ${props => props.theme.colors.primary}; flex-shrink: 0; }
+
+        svg {
+            color: ${props => props.theme.colors.primary};
+            flex-shrink: 0;
+        }
     }
 `
 
@@ -99,10 +103,24 @@ const PublicHeader = styled.div`
     padding: 2rem 1.5rem 1.5rem;
     color: white;
     text-align: center;
-    
-    .logo { width: 40px; height: 40px; background: white; border-radius: 50%; margin: 0 auto 10px; }
-    h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    span { font-size: 0.8rem; opacity: 0.9; }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+    }
+
+    h4 {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+    }
+
+    span {
+        font-size: 0.8rem;
+        opacity: 0.9;
+    }
 `
 
 const BookingBody = styled.div`
@@ -113,8 +131,17 @@ const StepIndicator = styled.div`
     display: flex;
     gap: 4px;
     margin-bottom: 1.5rem;
-    div { height: 4px; flex: 1; border-radius: 2px; background: #E2E8F0; }
-    div.active { background: ${props => props.theme.colors.primary}; }
+
+    div {
+        height: 4px;
+        flex: 1;
+        border-radius: 2px;
+        background: #E2E8F0;
+    }
+
+    div.active {
+        background: ${props => props.theme.colors.primary};
+    }
 `
 
 const SlotGrid = styled.div`
@@ -168,9 +195,12 @@ const PrimaryButton = styled.div`
 const InternalCard = styled.div`
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
-    // Cast seguro
-    border: 1px solid ${(props) => (props.theme.colors as any).borderLight || '#DEE2E6'};
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+
+    border: 1px solid ${(props) => (props.theme.colors as unknown as {
+        borderLight?: string
+    }).borderLight || '#DEE2E6'};
+
     overflow: hidden;
     max-width: 400px;
     margin: 0 auto;
@@ -307,12 +337,12 @@ const LeadInfo = styled.div`
     }
 `
 
-// --- MOCKUP 3: WHATSAPP CHAT (LEMBRETES) ---
+// --- MOCKUP 3: WHATSAPP CHAT ---
 const ChatMockup = styled.div`
     background: #F0F2F5;
     border-radius: 24px;
     padding: 1.5rem;
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
     max-width: 380px;
     margin: 0 auto;
     border: 8px solid #fff;
@@ -327,10 +357,29 @@ const ChatHeader = styled.div`
     padding-bottom: 1rem;
     border-bottom: 1px solid #E4E6EB;
 
-    .avatar { width: 40px; height: 40px; background: ${props => props.theme.colors.primary}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
-    .info { 
-        h5 { font-size: 1rem; font-weight: 700; color: #050505; margin: 0; }
-        span { font-size: 0.8rem; color: #65676B; }
+    .avatar {
+        width: 40px;
+        height: 40px;
+        background: ${props => props.theme.colors.primary};
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .info {
+        h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #050505;
+            margin: 0;
+        }
+
+        span {
+            font-size: 0.8rem;
+            color: #65676B;
+        }
     }
 `
 
@@ -386,8 +435,18 @@ const BenefitItem = styled.div`
     }
 
     div {
-        h4 { font-size: 1.1rem; font-weight: 700; color: ${props => props.theme.colors.textDark}; margin-bottom: 0.25rem; }
-        p { font-size: 0.95rem; color: ${props => props.theme.colors.textMedium}; margin: 0; }
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: ${props => props.theme.colors.textDark};
+            margin-bottom: 0.25rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: ${props => props.theme.colors.textMedium};
+            margin: 0;
+        }
     }
 `
 
@@ -406,12 +465,16 @@ const FeatureCard = styled.div`
     background: #F8F9FA;
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid ${(props) => (props.theme.colors as any).borderLight || '#DEE2E6'};
+
+    border: 1px solid ${(props) => (props.theme.colors as unknown as {
+        borderLight?: string
+    }).borderLight || '#DEE2E6'};
+
     transition: all 0.3s ease;
 
     &:hover {
         background: #fff;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         transform: translateY(-5px);
         border-color: ${props => props.theme.colors.primary}40;
     }
@@ -425,12 +488,23 @@ const FeatureCard = styled.div`
         align-items: center;
         justify-content: center;
         color: ${props => props.theme.colors.primary};
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         margin-bottom: 1.5rem;
     }
 
-    h4 { font-size: 1.25rem; font-weight: 700; color: ${props => props.theme.colors.textDark}; margin-bottom: 0.75rem; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+    h4 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: ${props => props.theme.colors.textDark};
+        margin-bottom: 0.75rem;
+    }
+
+    p {
+        font-size: 1rem;
+        color: ${props => props.theme.colors.textMedium};
+        line-height: 1.5;
+        margin: 0;
+    }
 `
 
 export default function VisitsDeepDive() {
@@ -444,7 +518,7 @@ export default function VisitsDeepDive() {
                         <h3>Experiência 5 Estrelas <br/> para os Pais</h3>
                         <p>
                             Uma página de agendamento moderna, rápida e que funciona perfeitamente no celular.
-                            O pai escolhe o horário, preenche os dados e recebe a confirmação no WhatsApp ou E-mail na hora.
+                            O pai escolhe o horário, preenche os dados e recebe a confirmação no WhatsApp na hora.
                         </p>
                         <ul>
                             <li><Smartphone size={20}/> <strong>100% Mobile First:</strong> Pensado para quem usa
@@ -558,7 +632,7 @@ export default function VisitsDeepDive() {
                     </TextContent>
                 </SplitLayout>
 
-                {/* --- BLOCO 3: LEMBRETES (ANTIGO VISITSFEATURES) --- */}
+                {/* --- BLOCO 3: LEMBRETES --- */}
                 <SplitLayout>
                     <TextContent>
                         <h3>Chega de &quot;Bolo&quot; na Recepção</h3>

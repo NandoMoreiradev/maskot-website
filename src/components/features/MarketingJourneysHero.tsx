@@ -61,7 +61,7 @@ export default function MarketingJourneysHero() {
                 <Tag>Nutrição & Funil de Vendas</Tag>
                 <Title>Transforme Interessados em Alunos com <br/><span>Jornadas Inteligentes</span></Title>
                 <Subtitle>
-                    Não perca matrículas porque "esqueceu" de acompanhar. Crie funis automáticos que
+                    Não perca matrículas porque esqueceu de acompanhar. Crie funis automáticos que
                     enviam a mensagem certa, na hora certa, baseada no comportamento do responsável (se abriu o e-mail, se clicou no link ou se visitou o site).
                 </Subtitle>
             </HeroContainer>

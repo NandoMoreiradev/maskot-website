@@ -59,7 +59,7 @@ export default function VisitsHero() {
         <HeroWrapper>
             <HeroContainer>
                 <Tag>Agendamento Inteligente</Tag>
-                <Title>Acabe com o "Ping-Pong" de <br/><span>Horários no WhatsApp</span></Title>
+                <Title>Acabe com o Ping-Pong de <br/><span>Horários no WhatsApp</span></Title>
                 <Subtitle>
                     Envie um link e deixe o pai escolher o melhor horário.
                     Sincronizado automaticamente com a agenda da sua equipe, sem conflitos e sem esquecimentos.

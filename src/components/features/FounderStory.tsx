@@ -114,13 +114,13 @@ export default function FounderStory() {
                         </p>
 
                         <p>
-                            Eu sabia que o pai "X" tinha ligado semana passada, mas ninguém lembrava de retornar.
-                            Eu sabia que a mãe "Y" queria visitar, mas a agenda de papel sumiu.
+                            Eu sabia que o pai X tinha ligado semana passada, mas ninguém lembrava de retornar.
+                            Eu sabia que a mãe Y queria visitar, mas a agenda de papel sumiu.
                         </p>
 
                         <QuoteBox>
                             <Quote size={32} color="#007BFF" style={{marginBottom: '10px'}} />
-                            <p>"Procurei CRMs no mercado. Ou eram complexos demais (feitos para vender software, não matrícula) ou eram caros demais. A escola precisava de algo que falasse a nossa língua."</p>
+                            <p>Procurei CRMs no mercado. Ou eram complexos demais (feitos para vender software, não matrícula) ou eram caros demais. A escola precisava de algo que falasse a nossa língua.</p>
                             <span>— Fundador do Maskot</span>
                         </QuoteBox>
 
