@@ -4,6 +4,7 @@ export const theme = {
     primary: '#007BFF',
     secondary: '#28A745',
     accent: '#FD7E14',
+    borderLight: '#DEE2E6',
     
     // Neutrals (Escala Completa)
     white: '#FFFFFF',

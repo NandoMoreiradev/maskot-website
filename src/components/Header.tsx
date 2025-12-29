@@ -1,7 +1,7 @@
 'use client'
 
 import styled, {css} from 'styled-components'
-import {Menu, X, ChevronDown, MessageCircle, KanbanSquare} from 'lucide-react'
+import {Menu, X, ChevronDown, MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap} from 'lucide-react'
 import {useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -88,7 +88,7 @@ const DropdownContent = styled.div`
     position: absolute;
     top: 100%;
     left: -20px;
-    min-width: 280px;
+    min-width: 320px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
@@ -191,6 +191,7 @@ const DropdownLink = styled(Link)`
         justify-content: center;
         color: ${props => props.theme.colors.primary};
         transition: all 0.2s ease;
+        flex-shrink: 0;
     }
 
     &:hover .icon-box {
@@ -363,13 +364,14 @@ export default function Header() {
 
                 <Nav $isOpen={isMobileMenuOpen}>
                     <NavLinks>
-                        {/* ITEM COM DROPDOWN */}
+                        {/* ITEM COM DROPDOWN - FUNCIONALIDADES */}
                         <NavItem>
                             <DropdownTrigger>
                                 Funcionalidades
                                 <ChevronDown/>
                             </DropdownTrigger>
                             <DropdownContent>
+                                {/* WhatsApp */}
                                 <DropdownLink href="/funcionalidades/whatsapp" onClick={handleLinkClick}>
                                     <div className="icon-box"><MessageCircle size={20}/></div>
                                     <div className="text">
@@ -378,11 +380,39 @@ export default function Header() {
                                     </div>
                                 </DropdownLink>
 
+                                {/* Jornadas */}
+                                <DropdownLink href="/funcionalidades/marketing-journeys" onClick={handleLinkClick}>
+                                    <div className="icon-box"><GitBranch size={20}/></div>
+                                    <div className="text">
+                                        <strong>Jornadas de Marketing</strong>
+                                        <span>Funis e nutrição automática</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Agendamento */}
+                                <DropdownLink href="/funcionalidades/agendamento" onClick={handleLinkClick}>
+                                    <div className="icon-box"><CalendarCheck size={20}/></div>
+                                    <div className="text">
+                                        <strong>Agendamento de Visitas</strong>
+                                        <span>Agenda online integrada</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Automações */}
+                                <DropdownLink href="/funcionalidades/automacoes" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Zap size={20}/></div>
+                                    <div className="text">
+                                        <strong>Automações</strong>
+                                        <span>Piloto automático 24h</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Gestão Comercial */}
                                 <DropdownLink href="/funcionalidades/gestao-comercial" onClick={handleLinkClick}>
                                     <div className="icon-box"><KanbanSquare size={20}/></div>
                                     <div className="text">
                                         <strong>Gestão Comercial</strong>
-                                        <span>Kanban, Agenda e Funil de Matrículas</span>
+                                        <span>Kanban e Funil de Matrículas</span>
                                     </div>
                                 </DropdownLink>
                             </DropdownContent>
@@ -397,7 +427,8 @@ export default function Header() {
                             Recursos
                         </SimpleLink>
 
-                        <SimpleLink href="/#sobre" onClick={handleLinkClick}>
+                        {/* LINK ATUALIZADO PARA A PÁGINA /sobre */}
+                        <SimpleLink href="/sobre" onClick={handleLinkClick}>
                             Sobre
                         </SimpleLink>
                     </NavLinks>

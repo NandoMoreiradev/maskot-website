@@ -10,17 +10,15 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-// 1. Viewport deve ser exportado separadamente agora
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#007BFF', // Movido de metadata para viewport
+  themeColor: '#007BFF',
 }
 
-// 2. Metadata otimizada
 export const metadata: Metadata = {
-  metadataBase: new URL('https://maskot.com.br'), // Resolve o aviso de URL relativa
+  metadataBase: new URL('https://maskot.com.br'),
   title: {
     default: 'Maskot CRM - O CRM que entende escolas',
     template: '%s | Maskot CRM',
@@ -72,11 +70,15 @@ export const metadata: Metadata = {
         'A única plataforma realmente integrada para gestão educacional.',
     images: ['/logo_maskot_website.png'],
   },
+  // REMOVIDO: O bloco 'icons' não é necessário se você tem um arquivo icon.png em src/app
+  // O Next.js App Router detecta src/app/icon.png automaticamente.
+  /*
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
+  */
   manifest: '/manifest.json',
 }
 

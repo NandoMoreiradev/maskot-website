@@ -1,10 +1,10 @@
 'use client'
 
-import styled, {keyframes} from 'styled-components'
+import styled, {keyframes, css} from 'styled-components'
 import {
-    Check, UserPlus, Users, ShieldCheck,
-    Send, LineChart, Filter,
-    Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip, FileText, Image as ImageIcon
+    Users, ShieldCheck, Send, LineChart, Filter,
+    Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip,
+    Workflow, Bot, GitBranch, MessageSquare
 } from 'lucide-react'
 
 // --- Animations ---
@@ -21,7 +21,7 @@ const float = keyframes`
 `
 
 const Section = styled.section`
-    padding: 4rem 0;
+    padding: 6rem 0;
     background: ${props => props.theme.colors.white};
     overflow: hidden;
 `
@@ -39,14 +39,14 @@ const FeatureRow = styled.div<{ $reverse?: boolean }>`
     align-items: center;
     margin-bottom: 8rem;
 
-    @media (max-width: 968px) {
+    @media (max-width: ${props => props.theme.breakpoints.lg}) {
         grid-template-columns: 1fr;
         gap: 3rem;
         margin-bottom: 6rem;
         display: flex;
         flex-direction: column-reverse;
 
-        ${props => !props.$reverse && `
+        ${props => !props.$reverse && css`
             flex-direction: column;
         `}
     }
@@ -54,15 +54,17 @@ const FeatureRow = styled.div<{ $reverse?: boolean }>`
 
 const TextContent = styled.div`
     h3 {
-        font-size: 2.25rem;
-        font-weight: 800;
+        font-family: ${props => props.theme.typography.fontFamily.main};
+        font-size: ${props => props.theme.typography.fontSize['3xl']};
+        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
         margin-bottom: 1.5rem;
         line-height: 1.2;
         color: ${props => props.theme.colors.textDark};
     }
 
     p {
-        font-size: 1.125rem;
+        font-family: ${props => props.theme.typography.fontFamily.main};
+        font-size: ${props => props.theme.typography.fontSize.lg};
         color: ${props => props.theme.colors.textMedium};
         line-height: 1.6;
         margin-bottom: 2rem;
@@ -78,10 +80,10 @@ const TextContent = styled.div`
 
     li {
         display: flex;
-        align-items: start;
+        align-items: flex-start;
         gap: 1rem;
-        font-size: 1.05rem;
-        font-weight: 500;
+        font-size: ${props => props.theme.typography.fontSize.base};
+        font-weight: ${props => props.theme.typography.fontWeight.medium};
         color: ${props => props.theme.colors.textDark};
 
         svg {
@@ -92,12 +94,12 @@ const TextContent = styled.div`
     }
 `
 
-// --- UI MOCKUPS GENÉRICOS ---
+// --- UI MOCKUPS BASE ---
 const MockupCard = styled.div`
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e0e0e0;
+    background: ${props => props.theme.colors.cardBackground};
+    border-radius: ${props => props.theme.borderRadius.xl};
+    box-shadow: ${props => props.theme.shadows['2xl']};
+    border: 1px solid ${props => props.theme.colors.backgroundMedium};
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -105,8 +107,8 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #eee;
+    background: ${props => props.theme.colors.lightGray};
+    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
     display: flex;
     align-items: center;
     padding: 0 1rem;
@@ -125,162 +127,220 @@ const MockupHeader = styled.div`
     }
 `
 
-// --- MOCKUPS ESPECÍFICOS ---
-
-// MOCKUP 1: INBOX & CHATBOT
+// --- MOCKUP 1: INBOX & CHATBOT ---
 const ChatLayout = styled.div`
     display: flex;
-    height: 380px;
+    height: 400px;
 `
 const SidebarMock = styled.div`
     width: 30%;
-    border-right: 1px solid #eee;
+    border-right: 1px solid ${props => props.theme.colors.backgroundMedium};
     padding: 10px;
 
     .item {
-        padding: 8px;
+        padding: 10px;
         margin-bottom: 5px;
         border-radius: 6px;
         display: flex;
-        gap: 8px;
+        gap: 10px;
         align-items: center;
+        transition: background 0.2s;
     }
 
     .item.active {
-        background: #f0f2f5;
+        background: #F0F2F5;
     }
 
     .avatar {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background: #ddd;
+        background: ${props => props.theme.colors.backgroundMedium};
     }
 
     .lines {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
 
         div {
-            height: 6px;
+            height: 8px;
             background: #eee;
-            border-radius: 3px;
+            border-radius: 4px;
         }
     }
 `
 const ChatAreaMock = styled.div`
     flex: 1;
-    background: #E5DDD5;
+    background: ${props => props.theme.colors.whatsapp.background};
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     background-image: radial-gradient(#00000008 1px, transparent 0);
-    background-size: 10px 10px;
+    background-size: 12px 12px;
 `
 const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
     padding: 10px 14px;
     border-radius: 8px;
-    background: ${props => props.$sent ? '#D9FDD3' : '#FFF'};
+    background: ${props => props.$sent ? props.theme.colors.whatsapp.outboundMessage : props.theme.colors.whatsapp.inboundMessage};
     align-self: ${props => props.$sent ? 'flex-end' : 'flex-start'};
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     font-size: 13px;
     max-width: 80%;
+    position: relative;
+    line-height: 1.4;
 
-    ${props => props.$bot && `border-left: 3px solid ${props.theme.colors.primary};`}
+    ${props => props.$bot && css`
+        border-left: 3px solid ${props.theme.colors.primary};
+        &::before {
+            content: '🤖 Bot';
+            font-size: 9px;
+            color: ${props.theme.colors.primary};
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+    `}
 
-    ${props => props.$note && `
-        background: #FFF9C4; 
+    ${props => props.$note && css`
+        background: #FFF9C4;
         border: 1px dashed #FBC02D;
         align-self: center;
         width: 90%;
         max-width: 100%;
         color: #555;
         font-style: italic;
+        font-size: 12px;
+        text-align: center;
     `}
 `
 
-// MOCKUP 2: PROFILE PANE (NOVO DESIGN BASEADO NO SEU CÓDIGO)
+// --- MOCKUP 2: VISUAL FLOW BUILDER ---
+const FlowBuilderMock = styled.div`
+    height: 380px;
+    background: #f0f2f5;
+    background-image: radial-gradient(#ccc 1px, transparent 0);
+    background-size: 20px 20px;
+    position: relative;
+    padding: 20px;
+    overflow: hidden;
+
+    .node {
+        background: white;
+        border-radius: 8px;
+        width: 200px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+        position: absolute;
+        z-index: 2;
+
+        &.start {
+            top: 40px;
+            left: 40%;
+            border-top: 4px solid ${props => props.theme.colors.secondary};
+        }
+
+        &.question {
+            top: 160px;
+            left: 20%;
+            border-top: 4px solid ${props => props.theme.colors.primary};
+        }
+
+        &.action {
+            top: 160px;
+            left: 60%;
+            border-top: 4px solid ${props => props.theme.colors.accent};
+        }
+    }
+
+    .node-header {
+        padding: 8px 12px;
+        font-size: 11px;
+        font-weight: bold;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .node-body {
+        padding: 10px;
+        font-size: 12px;
+        color: #555;
+    }
+
+    .connection-line {
+        position: absolute;
+        height: 2px;
+        background: #ccc;
+        z-index: 1;
+    }
+`
+
+// --- MOCKUP 3: PROFILE PANE ---
 const ProfileLayout = styled.div`
     display: flex;
     height: 420px;
 `
 const ChatSection = styled(ChatAreaMock)`
     width: 60%;
-    border-right: 1px solid #eee;
+    border-right: 1px solid ${props => props.theme.colors.backgroundMedium};
 `
 const ProfileSidebar = styled.div`
     width: 40%;
-    background: #fff;
+    background: white;
     display: flex;
     flex-direction: column;
 
     .profile-header {
         padding: 20px;
         text-align: center;
-        border-bottom: 1px solid #eee;
-        background: #f8f9fa;
+        border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+        background: ${props => props.theme.colors.lightGray};
 
         .avatar-large {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: #6c5ce7;
+            background: ${props => props.theme.colors.primary};
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             margin: 0 auto 10px;
-            border: 2px solid white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid white;
+            box-shadow: ${props => props.theme.shadows.md};
         }
-
-        h4 {
-            margin: 0;
-            font-size: 16px;
-            color: #333;
-        }
-
-        p {
-            margin: 0;
-            font-size: 12px;
-            color: #666;
-        }
+        h4 { margin: 0; font-size: 16px; color: ${props => props.theme.colors.textDark}; }
+        p { margin: 0; font-size: 12px; color: ${props => props.theme.colors.textMedium}; }
     }
 
     .tabs {
         display: flex;
         border-bottom: 1px solid #eee;
-
         div {
             flex: 1;
             text-align: center;
             padding: 10px;
             font-size: 12px;
             font-weight: bold;
-            color: #666;
+            color: #999;
             cursor: pointer;
         }
-
         div.active {
             color: ${props => props.theme.colors.primary};
-            border-bottom: 2px solid ${props => props.theme.colors.primary}
+            border-bottom: 2px solid ${props => props.theme.colors.primary};
         }
     }
 
-    .content {
-        padding: 15px;
-        flex: 1;
-        overflow-y: auto;
-    }
+    .content { padding: 15px; flex: 1; overflow-y: auto; }
 
     .info-row {
         margin-bottom: 15px;
-
         label {
             display: block;
             font-size: 10px;
@@ -289,10 +349,9 @@ const ProfileSidebar = styled.div`
             text-transform: uppercase;
             margin-bottom: 4px;
         }
-
         .val {
             font-size: 13px;
-            color: #333;
+            color: ${props => props.theme.colors.text};
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -306,71 +365,30 @@ const ProfileSidebar = styled.div`
         border-radius: 10px;
         font-size: 10px;
         background: #e6fffa;
-        color: #00a884;
+        color: ${props => props.theme.colors.whatsapp.accentGreen};
         border: 1px solid #b2f5ea;
     }
 `
 
-// MOCKUP 3: CAMPAIGNS
-const CampaignTable = styled.div`
-    padding: 0;
+// === CORREÇÃO: Componente criado para substituir o estilo inline que causava erro ===
+const ActionButton = styled.div`
+    margin-top: 20px;
+    padding: 10px;
+    background: ${props => props.theme.colors.primary};
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
 
-    .row {
-        display: flex;
-        padding: 1rem;
-        border-bottom: 1px solid #eee;
-        align-items: center;
-
-        &:last-child {
-            border: none;
-        }
-    }
-
-    .header-row {
-        background: #f8f9fa;
-        font-size: 0.75rem;
-        font-weight: bold;
-        color: #666;
-        text-transform: uppercase;
-    }
-
-    .col-name {
-        flex: 2;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .col-status {
-        flex: 1;
-    }
-
-    .col-stats {
-        flex: 1;
-        text-align: right;
-        color: #666;
-        font-size: 0.85rem;
-    }
-
-    .badge {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 12px;
-        font-size: 0.7rem;
-        font-weight: bold;
-    }
-
-    .badge-sent {
-        background: rgba(40, 167, 69, 0.12);
-        color: #1e7e34;
-    }
-
-    .badge-sending {
-        background: rgba(253, 126, 20, 0.12);
-        color: #dc6509;
+    &:hover {
+        opacity: 0.9;
     }
 `
 
-// MOCKUP 4: ANALYTICS
+// --- MOCKUP 4: ANALYTICS ---
 const DashboardMock = styled.div`
     padding: 1.5rem;
     display: grid;
@@ -415,29 +433,29 @@ const DashboardMock = styled.div`
     }
 `
 
-// --- POWER GRID SECTION ---
+// --- POWER GRID ---
 const PowerGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 4rem;
 
-    @media (max-width: 968px) {
+    @media (max-width: ${props => props.theme.breakpoints.md}) {
         grid-template-columns: 1fr;
     }
 `
 
 const PowerCard = styled.div`
-    background: #f8f9fa;
+    background: ${props => props.theme.colors.lightGray};
     padding: 2rem;
     border-radius: 16px;
     border: 1px solid #eee;
-    transition: all 0.3s ease;
+    transition: all ${props => props.theme.transitions.base};
 
     &:hover {
         transform: translateY(-5px);
         background: white;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        box-shadow: ${props => props.theme.shadows.lg};
         border-color: ${props => props.theme.colors.primary}40;
     }
 
@@ -448,22 +466,22 @@ const PowerCard = styled.div`
         background: white;
         display: flex;
         align-items: center;
-        justifyContent: center;
+        justify-content: center;
         color: ${props => props.theme.colors.primary};
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: ${props => props.theme.shadows.sm};
     }
 
     h4 {
         font-size: 1.25rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        color: #333;
+        color: ${props => props.theme.colors.textDark};
     }
 
     p {
         font-size: 1rem;
-        color: #666;
+        color: ${props => props.theme.colors.textMedium};
         line-height: 1.5;
         margin: 0;
     }
@@ -479,8 +497,8 @@ export default function WhatsAppDeepDive() {
                     <TextContent>
                         <h3>Chatbot que faz Triagem,<br/>Equipe que Converte</h3>
                         <p>
-                            Não deixe pais esperando. Configure fluxos automáticos para responder
-                            dúvidas frequentes (preços, endereço, horários) instantaneamente.
+                            Não deixe pais esperando. Nosso bot trabalha em modo híbrido: responde o básico (preços,
+                            horários) e transfere para humanos quando necessário (Escape Hatch).
                         </p>
                         <ul>
                             <li><Users size={20}/> <strong>Múltiplos Atendentes:</strong> Um número, toda a secretaria
@@ -504,33 +522,106 @@ export default function WhatsAppDeepDive() {
                         <ChatLayout>
                             <SidebarMock>
                                 <div className="item active">
-                                    <div className="avatar" style={{background: '#ffc107'}}></div>
+                                    <div className="avatar">Pai</div>
                                     <div className="lines">
                                         <div style={{width: '60%'}}></div>
                                         <div style={{width: '40%'}}></div>
                                     </div>
                                 </div>
                                 <div className="item">
-                                    <div className="avatar"></div>
+                                    <div className="avatar">Mãe</div>
                                     <div className="lines">
                                         <div></div>
                                     </div>
                                 </div>
                             </SidebarMock>
                             <ChatAreaMock>
-                                <Bubble>Gostaria de saber valores para o Maternal.</Bubble>
-                                <Bubble $sent $bot>🤖 Olá! Sou o assistente virtual. Para qual unidade seria?</Bubble>
-                                <Bubble>Unidade Centro.</Bubble>
-                                <Bubble $note>🔒 <strong>Nota Interna:</strong> @Financeiro verificar se há débitos
-                                    anteriores deste telefone.</Bubble>
-                                <Bubble $sent>Olá! Me chamo Maria. Vou te passar a tabela...</Bubble>
+                                <Bubble>Queria saber os valores do Berçário.</Bubble>
+                                <Bubble $sent $bot>Temos planos a partir de R$ 900. Quer ver a tabela completa?</Bubble>
+                                <Bubble>Não, quero falar com alguém.</Bubble>
+                                <Bubble $note>🚨 <strong>Sistema:</strong> Palavra-chave &quot;falar com
+                                    alguém&quot; detectada. Transferindo para @Secretaria.</Bubble>
+                                <Bubble $sent>Olá! Sou a Ana da Secretaria. Como posso ajudar?</Bubble>
                             </ChatAreaMock>
                         </ChatLayout>
                     </MockupCard>
                 </FeatureRow>
 
-                {/* 2. CRM CONTEXT (SIDEBAR) */}
+                {/* 2. VISUAL FLOW BUILDER */}
                 <FeatureRow $reverse>
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </MockupHeader>
+                        <FlowBuilderMock>
+                            <div className="node start">
+                                <div className="node-header"><GitBranch size={12}/> Início (Mensagem Recebida)</div>
+                                <div className="node-body">Olá! Bem vindo à Escola Maskot...</div>
+                            </div>
+
+                            <div className="connection-line"
+                                 style={{top: '90px', left: '50%', height: '70px', width: '2px'}}></div>
+                            <div className="connection-line"
+                                 style={{top: '160px', left: '30%', height: '2px', width: '40%'}}></div>
+
+                            <div className="node question">
+                                <div className="node-header"><MessageSquare size={12}/> Pergunta</div>
+                                <div className="node-body">Qual unidade você prefere?</div>
+                            </div>
+
+                            <div className="node action">
+                                <div className="node-header"><Zap size={12}/> Ação Automática</div>
+                                <div className="node-body">Criar Lead no CRM <br/> <span
+                                    style={{fontSize: '10px', color: '#999'}}>Agendar Visita</span></div>
+                            </div>
+                        </FlowBuilderMock>
+                    </MockupCard>
+
+                    <TextContent>
+                        <h3>Editor de Fluxos Visual</h3>
+                        <p>
+                            Configure fluxos de atendimento sem precisar de código. Crie caminhos personalizados para
+                            Matrícula, Financeiro ou Pedagógico.
+                        </p>
+                        <ul>
+                            <li><Workflow size={20}/> <strong>Drag-and-drop:</strong> Arraste e solte para criar seu
+                                robô.
+                            </li>
+                            <li><Zap size={20}/> <strong>Automações:</strong> O bot pode agendar visitas ou criar leads
+                                automaticamente.
+                            </li>
+                            <li><Bot size={20}/> <strong>Retomada:</strong> O sistema detecta inatividade e tenta
+                                retomar a conversa.
+                            </li>
+                        </ul>
+                    </TextContent>
+                </FeatureRow>
+
+                {/* 3. CRM CONTEXT */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Visão 360º do Aluno<br/>Sem Sair do Chat</h3>
+                        <p>
+                            Chega de alternar abas. Enquanto conversa, você tem o perfil completo do pai ao lado: status
+                            no funil, histórico e etiquetas.
+                        </p>
+                        <ul>
+                            <li><Filter size={20}/> <strong>Contexto Imediato:</strong> Saiba na hora quem é e o que ele
+                                quer.
+                            </li>
+                            <li><Paperclip size={20}/> <strong>Anexos:</strong> Encontre documentos e comprovantes na
+                                aba dedicada.
+                            </li>
+                            <li><Send size={20}/> <strong>Agilidade:</strong> Converta leads ou agende visitas com 1
+                                clique.
+                            </li>
+                        </ul>
+                    </TextContent>
+
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -541,8 +632,8 @@ export default function WhatsAppDeepDive() {
                         </MockupHeader>
                         <ProfileLayout>
                             <ChatSection>
-                                <Bubble>Já enviei a documentação.</Bubble>
-                                <Bubble $sent>Perfeito! Já recebi e salvei no sistema.</Bubble>
+                                <Bubble>Poderia agendar uma visita?</Bubble>
+                                <Bubble $sent>Claro! Qual o melhor horário para você?</Bubble>
                             </ChatSection>
                             <ProfileSidebar>
                                 <div className="profile-header">
@@ -558,12 +649,15 @@ export default function WhatsAppDeepDive() {
                                 <div className="content">
                                     <div className="info-row">
                                         <label>Funil de Vendas</label>
-                                        <div className="val"><span style={{
-                                            width: '8px',
-                                            height: '8px',
-                                            borderRadius: '50%',
-                                            background: '#f1c40f'
-                                        }}></span> Em Negociação
+                                        <div className="val">
+                                            <span style={{
+                                                width: '8px',
+                                                height: '8px',
+                                                borderRadius: '50%',
+                                                background: '#f1c40f',
+                                                marginRight: '6px'
+                                            }}></span>
+                                            Em Negociação
                                         </div>
                                     </div>
                                     <div className="info-row">
@@ -577,87 +671,15 @@ export default function WhatsAppDeepDive() {
                                             <span className="tag">Quente</span>
                                         </div>
                                     </div>
-                                    <div style={{
-                                        marginTop: '20px',
-                                        padding: '10px',
-                                        background: '#007BFF',
-                                        color: 'white',
-                                        textAlign: 'center',
-                                        borderRadius: '6px',
-                                        fontSize: '12px',
-                                        fontWeight: 'bold'
-                                    }}>
+
+                                    {/* CORREÇÃO: Uso do componente estilizado ActionButton */}
+                                    <ActionButton>
                                         Agendar Visita
-                                    </div>
+                                    </ActionButton>
+
                                 </div>
                             </ProfileSidebar>
                         </ProfileLayout>
-                    </MockupCard>
-
-                    <TextContent>
-                        <h3>Visão 360º do Aluno<br/>Sem Sair do Chat</h3>
-                        <p>
-                            Chega de alternar abas. Enquanto conversa, você tem o perfil completo do pai ao lado:
-                            status no funil, histórico de notas, boletos pendentes e documentos enviados.
-                        </p>
-                        <ul>
-                            <li><Filter size={20}/> <strong>Contexto Imediato:</strong> Saiba na hora quem é e o que ele
-                                quer.
-                            </li>
-                            <li><Paperclip size={20}/> <strong>Gestão de Anexos:</strong> Encontre documentos e
-                                comprovantes na aba dedicada.
-                            </li>
-                            <li><Send size={20}/> <strong>Agilidade:</strong> Converta leads ou agende visitas com 1
-                                clique.
-                            </li>
-                        </ul>
-                    </TextContent>
-                </FeatureRow>
-
-                {/* 3. CAMPAIGNS */}
-                <FeatureRow>
-                    <TextContent>
-                        <h3>Campanhas em Massa<br/>Sem Bloqueios</h3>
-                        <p>
-                            Crie campanhas segmentadas por Tags (ex: &quot;Interessados 2025&quot;) e dispare
-                            avisos de matrícula ou convites para eventos com segurança.
-                        </p>
-                        <ul>
-                            <li><Filter size={20}/> <strong>Segmentação Precisa:</strong> Envie apenas para quem
-                                importa.
-                            </li>
-                            <li><Clock size={20}/> <strong>Agendamento:</strong> Programe os disparos.</li>
-                            <li><Check size={20}/> <strong>Status em Tempo Real:</strong> Veja taxa de entrega e
-                                leitura.
-                            </li>
-                        </ul>
-                    </TextContent>
-
-                    <MockupCard>
-                        <MockupHeader>
-                            <div className="dots">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </MockupHeader>
-                        <CampaignTable>
-                            <div className="row header-row">
-                                <div className="col-name">Campanha</div>
-                                <div className="col-status">Status</div>
-                                <div className="col-stats">Envios</div>
-                            </div>
-                            <div className="row">
-                                <div className="col-name">Rematrícula 2026</div>
-                                <div className="col-status"><span className="badge badge-sent">ENVIADA</span></div>
-                                <div className="col-stats">450/450</div>
-                            </div>
-                            <div className="row">
-                                <div className="col-name">Festa Junina</div>
-                                <div className="col-status"><span className="badge badge-sending">ENVIANDO</span></div>
-                                <div className="col-stats">120/800</div>
-                            </div>
-                        </CampaignTable>
                     </MockupCard>
                 </FeatureRow>
 
@@ -672,16 +694,19 @@ export default function WhatsAppDeepDive() {
                             </div>
                         </MockupHeader>
                         <DashboardMock>
-                            <div className="card"><h4><LineChart size={16}/> Total</h4>
+                            <div className="card"><h4><LineChart size={16}/> Total de Atendimentos</h4>
                                 <div className="val">1,284</div>
                             </div>
-                            <div className="card"><h4><Clock size={16}/> T. Médio</h4>
+                            <div className="card"><h4><Clock size={16}/> Tempo Médio</h4>
                                 <div className="val">4min</div>
                             </div>
                             <div className="card full-width">
-                                <h4><Thermometer size={16}/> Mapa de Calor</h4>
-                                <div className="heatmap">{Array.from({length: 48}).map((_, i) => <div key={i}
-                                                                                                      style={{background: `rgba(37, 99, 235, ${Math.random()})`}}></div>)}</div>
+                                <h4><Thermometer size={16}/> Mapa de Calor (Horários de Pico)</h4>
+                                <div className="heatmap">
+                                    {Array.from({length: 48}).map((_, i) => (
+                                        <div key={i} style={{background: `rgba(37, 99, 235, ${Math.random()})`}}></div>
+                                    ))}
+                                </div>
                             </div>
                         </DashboardMock>
                     </MockupCard>
@@ -692,9 +717,10 @@ export default function WhatsAppDeepDive() {
                         </p>
                         <ul>
                             <li><Thermometer size={20}/> <strong>Mapa de Calor:</strong> Descubra horários de pico.</li>
-                            <li><Clock size={20}/> <strong>SLA de Resposta:</strong> Monitore a agilidade.</li>
-                            <li><LineChart size={20}/> <strong>Conversão:</strong> &quot;Ois&quot; que viraram
-                                matrículas.
+                            <li><Clock size={20}/> <strong>SLA de Resposta:</strong> Monitore a agilidade da equipe.
+                            </li>
+                            <li><LineChart size={20}/> <strong>Conversão:</strong> Saiba quantos atendimentos viraram
+                                matrícula.
                             </li>
                         </ul>
                     </TextContent>
@@ -702,8 +728,13 @@ export default function WhatsAppDeepDive() {
 
                 {/* 5. POWER FEATURES GRID */}
                 <div style={{textAlign: 'center', marginBottom: '3rem'}}>
-                    <h3 style={{fontSize: '2rem', fontWeight: 800, color: '#333'}}>Ferramentas de Produtividade</h3>
-                    <p style={{color: '#666'}}>Funcionalidades pensadas para a rotina escolar.</p>
+                    <h3 style={{
+                        fontSize: '2rem',
+                        fontWeight: 800,
+                        color: '#333',
+                        fontFamily: 'var(--font-inter)'
+                    }}>Ferramentas de Produtividade</h3>
+                    <p style={{color: '#666', marginTop: '0.5rem'}}>Funcionalidades pensadas para a rotina escolar.</p>
                 </div>
 
                 <PowerGrid>
