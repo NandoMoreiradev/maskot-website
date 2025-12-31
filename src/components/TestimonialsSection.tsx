@@ -5,9 +5,9 @@ import { Star, Quote, TrendingUp, Users, Target } from 'lucide-react'
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary}08 0%,
-    ${props => props.theme.colors.secondary}05 50%,
+    /* Background sutil para destacar os cards brancos */
+    background: linear-gradient(180deg,
+    ${props => props.theme.colors.pageBackground} 0%,
     ${props => props.theme.colors.lightGray} 100%
     );
     position: relative;
@@ -23,7 +23,7 @@ const Container = styled.div`
 const SectionHeader = styled.div`
     text-align: center;
     margin-bottom: 4rem;
-    max-width: 600px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 `
@@ -60,14 +60,9 @@ const TestimonialsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 
     @media (max-width: 968px) {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-
-    @media (max-width: 668px) {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -76,18 +71,19 @@ const TestimonialsGrid = styled.div`
 const TestimonialCard = styled.div`
     background: ${props => props.theme.colors.white};
     border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
     position: relative;
+    height: 100%; /* Garante altura igual */
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     }
 
+    /* Detalhe colorido no topo */
     &:before {
         content: '';
         position: absolute;
@@ -105,13 +101,17 @@ const TestimonialCard = styled.div`
 
 const QuoteIcon = styled.div`
     position: absolute;
-    top: -15px;
+    top: -20px;
     right: 2rem;
     background: linear-gradient(135deg,
     ${props => props.theme.colors.primary} 0%,
     ${props => props.theme.colors.secondary} 100%
     );
-    padding: 0.75rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 
@@ -119,14 +119,15 @@ const QuoteIcon = styled.div`
         width: 20px;
         height: 20px;
         color: white;
+        fill: white;
     }
 `
 
 const TestimonialText = styled.p`
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.7;
     color: ${props => props.theme.colors.textDark};
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     font-style: italic;
 `
 
@@ -134,6 +135,7 @@ const AuthorInfo = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-top: auto; /* Empurra para o fundo se o card for alto */
 `
 
 const Avatar = styled.div`
@@ -141,15 +143,15 @@ const Avatar = styled.div`
     height: 50px;
     border-radius: 50%;
     background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
+    ${props => props.theme.colors.primary}15 0%,
+    ${props => props.theme.colors.primary}30 100%
     );
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: white;
+    color: ${props => props.theme.colors.primary};
 `
 
 const AuthorDetails = styled.div`
@@ -158,25 +160,25 @@ const AuthorDetails = styled.div`
 
 const AuthorName = styled.h4`
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     color: ${props => props.theme.colors.textDark};
     margin: 0 0 0.25rem 0;
 `
 
 const AuthorRole = styled.p`
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: ${props => props.theme.colors.textMedium};
     margin: 0;
 `
 
 const StarsContainer = styled.div`
     display: flex;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
+    gap: 2px;
+    margin-top: 0.25rem;
 
     svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         color: #FFC107;
         fill: #FFC107;
     }
@@ -186,36 +188,28 @@ const StatsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
+    padding-top: 4rem;
+    border-top: 1px solid ${props => props.theme.colors.borderLight};
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding-top: 3rem;
     }
 `
 
 const StatCard = styled.div`
     text-align: center;
-    padding: 2rem;
-    background: ${props => props.theme.colors.white};
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    }
+    padding: 1rem;
 `
 
 const StatIcon = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary}15 0%,
-    ${props => props.theme.colors.secondary}15 100%
-    );
+    background: ${props => props.theme.colors.white};
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,13 +237,13 @@ const StatNumber = styled.div`
 
 const StatLabel = styled.h3`
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     color: ${props => props.theme.colors.textDark};
     margin: 0 0 0.5rem 0;
 `
 
 const StatDescription = styled.p`
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: ${props => props.theme.colors.textMedium};
     margin: 0;
     line-height: 1.4;
@@ -260,25 +254,25 @@ export default function TestimonialsSection() {
         {
             text: "O Maskot revolucionou nossa gestão de leads. Aumentamos nossa conversão em 45% no primeiro trimestre. A integração do WhatsApp foi um divisor de águas!",
             author: "Maria Silva",
-            role: "Diretora Pedagógica, Colégio Esperança",
+            role: "Diretora Pedagógica",
             initial: "MS"
         },
         {
             text: "Finalmente um CRM que entende escolas! Automatizamos todo nosso processo de captação e nossa equipe pode focar no que importa: atender bem as famílias.",
             author: "Carlos Santos",
-            role: "Coordenador de Marketing, Grupo Educacional Futuro",
+            role: "Coord. de Marketing",
             initial: "CS"
         },
         {
             text: "A facilidade de usar é impressionante. Em 2 semanas já estávamos operando 100%. Os relatórios nos dão insights que nunca tivemos antes.",
             author: "Ana Costa",
-            role: "Gestora Comercial, Instituto Nova Era",
+            role: "Gestora Comercial",
             initial: "AC"
         }
     ];
 
     return (
-        <Section>
+        <Section id="depoimentos"> {/* ID ESSENCIAL PARA O MENU */}
             <Container>
                 <SectionHeader>
                     <SectionTitle>
@@ -298,7 +292,7 @@ export default function TestimonialsSection() {
                             </QuoteIcon>
 
                             <TestimonialText>
-                                &ldquo;{testimonial.text}&rdquo;
+                                {testimonial.text}
                             </TestimonialText>
 
                             <AuthorInfo>
@@ -325,9 +319,9 @@ export default function TestimonialsSection() {
                             <TrendingUp />
                         </StatIcon>
                         <StatNumber>+67%</StatNumber>
-                        <StatLabel>Aumento Médio de Conversão</StatLabel>
+                        <StatLabel>Conversão Média</StatLabel>
                         <StatDescription>
-                            Escolas relatam crescimento significativo nas matrículas
+                            Crescimento real nas matrículas nos primeiros 6 meses de uso.
                         </StatDescription>
                     </StatCard>
 
@@ -338,7 +332,7 @@ export default function TestimonialsSection() {
                         <StatNumber>500+</StatNumber>
                         <StatLabel>Escolas Atendidas</StatLabel>
                         <StatDescription>
-                            Da educação infantil ao ensino médio, em todo o Brasil
+                            Da educação infantil ao ensino médio, em todo o Brasil.
                         </StatDescription>
                     </StatCard>
 
@@ -347,9 +341,9 @@ export default function TestimonialsSection() {
                             <Target />
                         </StatIcon>
                         <StatNumber>98%</StatNumber>
-                        <StatLabel>Satisfação dos Clientes</StatLabel>
+                        <StatLabel>Satisfação</StatLabel>
                         <StatDescription>
-                            Recomendariam o Maskot para outras escolas
+                            Escolas que renovam o contrato anualmente com o Maskot.
                         </StatDescription>
                     </StatCard>
                 </StatsGrid>

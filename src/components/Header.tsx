@@ -515,6 +515,10 @@ export default function Header() {
                             Recursos
                         </SimpleLink>
 
+                        <SimpleLink href="/#depoimentos" onClick={handleLinkClick}>
+                            Depoimentos
+                        </SimpleLink>
+
                         <SimpleLink href="/sobre" onClick={handleLinkClick}>
                             Sobre
                         </SimpleLink>

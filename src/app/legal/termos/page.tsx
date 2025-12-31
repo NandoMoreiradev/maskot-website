@@ -1,60 +1,99 @@
-import type { Metadata } from 'next'
+import type {Metadata} from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import LegalDocument from '@/components/legal/LegalDocument'
 
 export const metadata: Metadata = {
-    title: 'Termos de Uso | Maskot',
-    description: 'Termos e condições para uso da plataforma Maskot CRM.',
+    title: 'Termos de Uso | Maskot CRM',
+    description: 'Termos e condições contratuais para uso da plataforma Maskot SaaS.',
 }
 
 export default function TermsPage() {
     return (
         <>
-            <Header />
-            <LegalDocument title="Termos de Uso" lastUpdated="15 de Janeiro de 2025">
-                <h2>1. Termos</h2>
+            <Header/>
+            <LegalDocument title="Termos de Uso e Condições Gerais" lastUpdated="31 de Dezembro de 2025">
                 <p>
-                    Ao acessar ao site <a href="https://maskot.com.br">Maskot</a>, concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis e concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não concordar com algum desses termos, está proibido de usar ou acessar este site.
+                    Bem-vindo ao <strong>Maskot CRM</strong>. Estes Termos de Uso regem o acesso e uso da plataforma
+                    SaaS fornecida pela <strong>MASKOT SOLUÇÕES EM TECNOLOGIA LTDA</strong> à Instituição de Ensino ou
+                    Empresa (Contratante). Ao utilizar nossos serviços, você concorda integralmente com estes termos.
                 </p>
 
-                <h2>2. Licença de Uso</h2>
+                <h2>1. Licença de Uso (SaaS)</h2>
                 <p>
-                    É concedida permissão para baixar temporariamente uma cópia dos materiais (informações ou software) no site Maskot, apenas para visualização transitória pessoal e não comercial. Esta é a concessão de uma licença, não uma transferência de título e, sob esta licença, você não pode:
+                    A Maskot concede à Contratante uma licença revogável, não exclusiva, intransferível e limitada para
+                    uso do software de gestão educacional e CRM. A licença abrange o acesso aos módulos contratados
+                    (Gestão, Comercial, Automação), conforme descrito no seu plano de assinatura.
+                </p>
+
+                <h2>2. Responsabilidades da Escola</h2>
+                <ul>
+                    <li><strong>Base Legal (LGPD):</strong> A Escola declara ser a única responsável pela coleta e
+                        inserção de dados de alunos/pais na plataforma, garantindo possuir o devido consentimento ou
+                        base legal para tal.
+                    </li>
+                    <li><strong>Credenciais:</strong> É responsabilidade da Escola manter o sigilo das senhas de seus
+                        usuários administrativos.
+                    </li>
+                    <li><strong>Uso Ético:</strong> É proibido utilizar a plataforma para armazenar conteúdo ilegal,
+                        ofensivo ou discriminatório.
+                    </li>
+                </ul>
+
+                <h2>3. Política de Uso do WhatsApp (Importante)</h2>
+                <p>
+                    A integração utiliza a API Oficial do WhatsApp Business (Meta). O uso está condicionado à aceitação
+                    das políticas da Meta Platforms, Inc. <strong>É estritamente proibido:</strong>
                 </p>
                 <ol>
-                    <li>Modificar ou copiar os materiais;</li>
-                    <li>Usar os materiais para qualquer finalidade comercial ou para exibição pública (comercial ou não comercial) sem autorização expressa;</li>
-                    <li>Tentar descompilar ou fazer engenharia reversa de qualquer software contido no site Maskot;</li>
-                    <li>Remover quaisquer direitos autorais ou outras notações de propriedade dos materiais.</li>
+                    <li>Enviar SPAM ou mensagens em massa não solicitadas;</li>
+                    <li>Utilizar bases de contatos compradas de terceiros;</li>
+                    <li>Violar direitos de propriedade intelectual ou privacidade.</li>
                 </ol>
-
-                <h2>3. Isenção de responsabilidade</h2>
                 <p>
-                    Os materiais no site da Maskot são fornecidos como estão. Maskot não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização, adequação a um fim específico ou não violação de propriedade intelectual ou outra violação de direitos.
+                    <em>A Maskot não se responsabiliza por bloqueios do número (WABA) decorrentes de violações destas
+                        políticas pela Escola.</em>
                 </p>
 
-                <h2>4. Limitações</h2>
+                <h2>4. Inteligência Artificial (Isenção)</h2>
                 <p>
-                    Em nenhum caso o Maskot ou seus fornecedores serão responsáveis por quaisquer danos (incluindo, sem limitação, danos por perda de dados ou lucro ou devido a interrupção dos negócios) decorrentes do uso ou da incapacidade de usar os materiais em Maskot, mesmo que Maskot ou um representante autorizado da Maskot tenha sido notificado oralmente ou por escrito da possibilidade de tais danos.
+                    O módulo de IA (Maskot AI) utiliza modelos probabilísticos. A Escola reconhece que:
+                </p>
+                <ul>
+                    <li>A IA pode, ocasionalmente, gerar informações imprecisas (alucinações);</li>
+                    <li>A Escola deve supervisionar os fluxos de automação periodicamente;</li>
+                    <li>A Maskot não se responsabiliza por acordos comerciais ou informações pedagógicas errôneas
+                        fornecidas autonomamente pelo bot sem supervisão humana.
+                    </li>
+                </ul>
+
+                <h2>5. Planos e Pagamentos</h2>
+                <p>
+                    O serviço é pré-pago. O atraso no pagamento superior a 05 (cinco) dias poderá acarretar a suspensão
+                    temporária do acesso. O cancelamento pode ser solicitado a qualquer momento pelo painel, sem multa,
+                    encerrando-se o acesso ao fim do ciclo vigente.
                 </p>
 
-                <h2>5. Precisão dos materiais</h2>
+                <h2>6. Disponibilidade (SLA)</h2>
                 <p>
-                    Os materiais exibidos no site da Maskot podem incluir erros técnicos, tipográficos ou fotográficos. Maskot não garante que qualquer material em seu site seja preciso, completo ou atual. Maskot pode fazer alterações nos materiais contidos em seu site a qualquer momento, sem aviso prévio.
+                    Nos esforçamos para manter 99,5% de disponibilidade mensal. Excluem-se do SLA instabilidades
+                    causadas por terceiros (ex: queda geral do WhatsApp, AWS ou falhas na conexão de internet da
+                    Escola).
                 </p>
 
-                <h2>6. Modificações</h2>
+                <h2>7. Propriedade Intelectual</h2>
                 <p>
-                    O Maskot pode revisar estes termos de serviço do site a qualquer momento, sem aviso prévio. Ao usar este site, você concorda em ficar vinculado à versão atual desses termos de serviço.
+                    Todo o código-fonte, design, logotipos e fluxos lógicos do Maskot são de propriedade exclusiva da
+                    MASKOT SOLUÇÕES. A assinatura não transfere direitos de propriedade, apenas de uso.
                 </p>
 
-                <h2>Lei aplicável</h2>
+                <h2>8. Foro</h2>
                 <p>
-                    Estes termos e condições são regidos e interpretados de acordo com as leis do Brasil e você se submete irrevogavelmente à jurisdição exclusiva dos tribunais naquele estado ou localidade.
+                    Fica eleito o foro da comarca da sede da Maskot para dirimir quaisquer questões oriundas destes
+                    termos.
                 </p>
             </LegalDocument>
-            <Footer />
+            <Footer/>
         </>
     )
 }

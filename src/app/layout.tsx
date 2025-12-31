@@ -20,8 +20,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://maskot.com.br'),
   title: {
-    default: 'Maskot CRM - O CRM que entende escolas',
-    template: '%s | Maskot CRM',
+    default: 'Maskot Edu - O CRM que entende escolas',
+    template: '%s | Maskot Edu',
   },
   description:
       'A única plataforma realmente integrada para gestão educacional. Do primeiro WhatsApp até a matrícula efetivada.',
@@ -50,35 +50,27 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: 'https://maskot.com.br',
-    title: 'Maskot CRM - O CRM que entende escolas',
+    title: 'Maskot Edu - O CRM que entende escolas',
     description:
         'A única plataforma realmente integrada para gestão educacional. Aumente suas matrículas com WhatsApp, automações e relatórios inteligentes.',
-    siteName: 'Maskot CRM',
+    siteName: 'Maskot Edu',
     images: [
       {
         url: '/logo_maskot_website.png',
         width: 1200,
         height: 630,
-        alt: 'Maskot CRM',
+        alt: 'Maskot Edu',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maskot CRM - O CRM que entende escolas',
+    title: 'Maskot Edu - O CRM que entende escolas',
     description:
         'A única plataforma realmente integrada para gestão educacional.',
     images: ['/logo_maskot_website.png'],
   },
-  // REMOVIDO: O bloco 'icons' não é necessário se você tem um arquivo icon.png em src/app
-  // O Next.js App Router detecta src/app/icon.png automaticamente.
-  /*
-  icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
-  },
-  */
+
   manifest: '/manifest.json',
 }
 

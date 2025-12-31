@@ -3,82 +3,85 @@
 import styled from 'styled-components'
 import { Check, Zap, Crown, Building } from 'lucide-react'
 
+// Adicionei o ID 'precos' para o menu funcionar
 const Section = styled.section`
-  padding: 6rem 0;
-  background: ${props => props.theme.colors.white};
-  position: relative;
+    padding: 6rem 0;
+    background: ${props => props.theme.colors.white};
+    position: relative;
 `
 
 const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 `
 
 const SectionHeader = styled.div`
-  text-align: center;
-  margin-bottom: 4rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 `
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: ${props => props.theme.colors.textDark};
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: ${props => props.theme.colors.textDark};
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+    }
 `
 
 const SectionSubtitle = styled.p`
-  font-size: 1.1rem;
-  color: ${props => props.theme.colors.textMedium};
-  line-height: 1.6;
-  margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.6;
+    margin-bottom: 1rem;
 `
 
 const Highlight = styled.span`
-  background: linear-gradient(135deg, 
-    ${props => props.theme.colors.primary} 0%, 
+    background: linear-gradient(135deg,
+    ${props => props.theme.colors.primary} 0%,
     ${props => props.theme.colors.secondary} 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
 `
 
 const TrialBanner = styled.div`
-  background: linear-gradient(135deg, 
-    ${props => props.theme.colors.primary}15 0%, 
+    background: linear-gradient(135deg,
+    ${props => props.theme.colors.primary}15 0%,
     ${props => props.theme.colors.secondary}15 100%
-  );
-  border: 2px solid ${props => props.theme.colors.primary}30;
-  border-radius: 12px;
-  padding: 1rem 2rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  
-  span {
-    font-weight: 600;
-    color: ${props => props.theme.colors.primary};
-  }
+    );
+    border: 2px solid ${props => props.theme.colors.primary}30;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    display: inline-block;
+
+    span {
+        font-weight: 600;
+        color: ${props => props.theme.colors.primary};
+    }
 `
 
 const PricingGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-bottom: 3rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-  }
+    margin-bottom: 3rem;
+    align-items: center; /* Alinha verticalmente se houver destaque */
+
+    @media (max-width: 968px) {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
 `
 
 interface PricingCardProps {
@@ -86,142 +89,149 @@ interface PricingCardProps {
 }
 
 const PricingCard = styled.div<PricingCardProps>`
-  background: ${props => props.theme.colors.white};
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: ${props => props.$isPopular
-    ? '0 20px 60px rgba(0, 123, 255, 0.15)'
-    : '0 10px 40px rgba(0, 0, 0, 0.08)'
-};
-  border: ${props => props.$isPopular
-    ? `3px solid ${props.theme.colors.primary}`
-    : '1px solid rgba(0, 0, 0, 0.1)'
-};
-  position: relative;
-  transition: all 0.4s ease;
-  transform: ${props => props.$isPopular ? 'scale(1.05)' : 'scale(1)'};
-  
-  &:hover {
-    transform: ${props => props.$isPopular ? 'scale(1.08)' : 'scale(1.03)'};
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-  }
+    background: ${props => props.theme.colors.white};
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
 
-  @media (max-width: 968px) {
-    transform: scale(1);
-    
+    /* Sombra e Borda Condicional */
+    box-shadow: ${props => props.$isPopular
+            ? '0 20px 60px rgba(0, 123, 255, 0.15)'
+            : '0 10px 40px rgba(0, 0, 0, 0.05)'
+    };
+    border: ${props => props.$isPopular
+            ? `2px solid ${props.theme.colors.primary}`
+            : `1px solid ${props.theme.colors.borderLight}` // Uso correto do borderLight
+    };
+
+    position: relative;
+    transition: all 0.4s ease;
+    transform: ${props => props.$isPopular ? 'scale(1.05)' : 'scale(1)'};
+    z-index: ${props => props.$isPopular ? 2 : 1};
+
     &:hover {
-      transform: scale(1.02);
+        transform: ${props => props.$isPopular ? 'scale(1.08)' : 'translateY(-5px)'};
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
     }
-  }
+
+    @media (max-width: 968px) {
+        transform: scale(1);
+
+        &:hover {
+            transform: scale(1);
+        }
+    }
 `
 
 const PopularBadge = styled.div`
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, 
-    ${props => props.theme.colors.primary} 0%, 
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg,
+    ${props => props.theme.colors.primary} 0%,
     ${props => props.theme.colors.secondary} 100%
-  );
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    );
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 `
 
 const PlanIcon = styled.div<{ $color: string }>`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: ${props => props.$color}15;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  
-  svg {
-    width: 28px;
-    height: 28px;
-    color: ${props => props.$color};
-  }
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: ${props => props.$color}15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    svg {
+        width: 28px;
+        height: 28px;
+        color: ${props => props.$color};
+    }
 `
 
 const PlanName = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${props => props.theme.colors.textDark};
-  margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: ${props => props.theme.colors.textDark};
+    margin-bottom: 0.5rem;
 `
 
 const PlanDescription = styled.p`
-  font-size: 0.95rem;
-  color: ${props => props.theme.colors.textMedium};
-  margin-bottom: 2rem;
-  line-height: 1.5;
+    font-size: 0.95rem;
+    color: ${props => props.theme.colors.textMedium};
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    min-height: 45px; /* Alinha altura das descrições */
 `
 
 const PriceContainer = styled.div`
-  margin-bottom: 2rem;
-  text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid ${props => props.theme.colors.borderLight};
 `
 
 const Price = styled.div`
-  font-size: 3rem;
-  font-weight: 800;
-  color: ${props => props.theme.colors.textDark};
-  line-height: 1;
-  margin-bottom: 0.5rem;
-  
-  span {
-    font-size: 1rem;
-    font-weight: 500;
-    color: ${props => props.theme.colors.textMedium};
-  }
+    font-size: 3rem;
+    font-weight: 800;
+    color: ${props => props.theme.colors.textDark};
+    line-height: 1;
+    margin-bottom: 0.5rem;
+
+    span {
+        font-size: 1rem;
+        font-weight: 500;
+        color: ${props => props.theme.colors.textMedium};
+    }
 `
 
 const PriceNote = styled.p`
-  font-size: 0.875rem;
-  color: ${props => props.theme.colors.textMedium};
-  margin: 0;
+    font-size: 0.875rem;
+    color: ${props => props.theme.colors.textMedium};
+    margin: 0;
 `
 
 const FeaturesList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2rem 0;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
 `
 
 const FeatureItem = styled.li`
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  color: ${props => props.theme.colors.textDark};
-  
-  svg {
-    width: 18px;
-    height: 18px;
-    color: ${props => props.theme.colors.secondary};
-    margin-right: 0.75rem;
-    margin-top: 0.1rem;
-    flex-shrink: 0;
-  }
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: ${props => props.theme.colors.textDark};
+    line-height: 1.4;
+
+    svg {
+        width: 18px;
+        height: 18px;
+        color: ${props => props.theme.colors.secondary}; // Check verde
+        margin-right: 0.75rem;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
 `
 
 const CTAButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
-  width: 100%;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  ${props => props.$variant === 'primary' ? `
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    ${props => props.$variant === 'primary' ? `
     background: linear-gradient(135deg, 
       ${props.theme.colors.primary} 0%, 
       ${props.theme.colors.secondary} 100%
@@ -239,113 +249,104 @@ const CTAButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
     border: 2px solid ${props.theme.colors.primary};
     
     &:hover {
-      background: ${props.theme.colors.primary};
-      color: white;
+      background: ${props.theme.colors.primary}10;
       transform: translateY(-2px);
     }
   `}
 `
 
 const FAQSection = styled.div`
-  margin-top: 4rem;
-  text-align: center;
+    margin-top: 4rem;
+    text-align: center;
 `
 
 const FAQTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${props => props.theme.colors.textDark};
-  margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: ${props => props.theme.colors.textDark};
+    margin-bottom: 1rem;
 `
 
 const FAQText = styled.p`
-  font-size: 1rem;
-  color: ${props => props.theme.colors.textMedium};
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto 2rem;
+    font-size: 1rem;
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 2rem;
 `
 
 const ContactButton = styled.button`
-  background: transparent;
-  color: ${props => props.theme.colors.primary};
-  border: 2px solid ${props => props.theme.colors.primary};
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-    transform: translateY(-2px);
-  }
+    background: transparent;
+    color: ${props => props.theme.colors.textMedium};
+    border: 1px solid ${props => props.theme.colors.borderLight};
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.primary};
+    }
 `
 
 export default function PricingSection() {
     const plans = [
         {
             name: "Starter",
-            description: "Ideal para escolas pequenas que estão começando",
+            description: "Para escolas pequenas que precisam sair do WhatsApp pessoal.",
             price: "R$ 297",
             period: "/mês",
-            note: "Até 100 leads ativos",
+            note: "Até 100 leads ativos no funil",
             icon: Zap,
             color: "#28A745",
             features: [
-                "WhatsApp Business integrado",
-                "Funil visual (Kanban)",
-                "Até 2 usuários",
-                "Email automático básico",
-                "Agendamento público",
-                "Relatórios essenciais",
-                "Suporte por email"
+                "WhatsApp Business (1 Número)",
+                "Funil Visual (Kanban)",
+                "Até 2 Usuários",
+                "Agendamento de Visitas",
+                "Suporte por Email"
             ],
             buttonText: "Começar Teste Grátis",
             buttonVariant: "secondary" as const
         },
         {
             name: "Professional",
-            description: "Para escolas que querem automatizar tudo",
+            description: "A máquina de vendas completa com automação e controle.",
             price: "R$ 597",
             period: "/mês",
-            note: "Até 500 leads ativos",
+            note: "Até 500 leads ativos no funil",
             icon: Crown,
             color: "#007BFF",
             isPopular: true,
             features: [
                 "Tudo do Starter +",
-                "Até 5 usuários",
-                "Email builder avançado",
-                "Automações ilimitadas",
-                "Onboarding estruturado",
-                "Multi-unidades (até 3)",
-                "Relatórios avançados",
-                "Suporte prioritário",
-                "Integrações API"
+                "Até 5 Usuários",
+                "Régua de Follow-up (Automação)",
+                "Disparos em Massa (Campanhas)",
+                "Relatórios de Conversão",
+                "Suporte Prioritário WhatsApp"
             ],
-            buttonText: "Começar Teste Grátis",
+            buttonText: "Testar Grátis (14 dias)",
             buttonVariant: "primary" as const
         },
         {
             name: "Enterprise",
-            description: "Para grupos educacionais e grandes escolas",
+            description: "Para redes de ensino e escolas com alto volume de matrículas.",
             price: "Sob consulta",
             period: "",
             note: "Leads ilimitados",
             icon: Building,
             color: "#FD7E14",
             features: [
-                "Tudo do Professional +",
-                "Usuários ilimitados",
-                "Unidades ilimitadas",
-                "Customizações personalizadas",
-                "Suporte dedicado",
-                "Onboarding personalizado",
-                "SLA garantido",
-                "Integrações customizadas"
+                "Múltiplos Números WhatsApp",
+                "Usuários Ilimitados",
+                "API de Integração (Webhooks)",
+                "Gerente de Sucesso Dedicado",
+                "Treinamento da Equipe",
+                "Setup Personalizado"
             ],
             buttonText: "Falar com Consultor",
             buttonVariant: "secondary" as const
@@ -353,25 +354,25 @@ export default function PricingSection() {
     ];
 
     return (
-        <Section>
+        <Section id="precos"> {/* ID CRUCIAL PARA O MENU */}
             <Container>
                 <SectionHeader>
                     <SectionTitle>
                         Planos que <Highlight>crescem</Highlight> com sua escola
                     </SectionTitle>
                     <SectionSubtitle>
-                        Escolha o plano ideal para o tamanho da sua escola.
-                        Todos incluem 14 dias de teste grátis, sem cartão de crédito.
+                        Sem taxa de implantação. Sem fidelidade.
+                        Cancele a qualquer momento se não vender mais.
                     </SectionSubtitle>
                     <TrialBanner>
-                        🎉 <span>14 dias grátis</span> • Sem cartão de crédito • Cancele quando quiser
+                        🎉 <span>14 dias grátis</span> no plano Professional
                     </TrialBanner>
                 </SectionHeader>
 
                 <PricingGrid>
                     {plans.map((plan, index) => (
                         <PricingCard key={index} $isPopular={plan.isPopular}>
-                            {plan.isPopular && <PopularBadge>Mais Popular</PopularBadge>}
+                            {plan.isPopular && <PopularBadge>Mais Escolhido</PopularBadge>}
 
                             <PlanIcon $color={plan.color}>
                                 <plan.icon />
@@ -405,11 +406,9 @@ export default function PricingSection() {
                 </PricingGrid>
 
                 <FAQSection>
-                    <FAQTitle>Dúvidas sobre os planos?</FAQTitle>
+                    <FAQTitle>Precisa de ajuda para escolher?</FAQTitle>
                     <FAQText>
-                        Nossa equipe está pronta para ajudar você a escolher o plano ideal
-                        para sua escola. Agende uma conversa sem compromisso e vamos
-                        mostrar como o Maskot pode transformar seus resultados.
+                        Nossa equipe está pronta para analisar o momento da sua escola e sugerir o melhor caminho.
                     </FAQText>
                     <ContactButton>
                         Falar com Especialista

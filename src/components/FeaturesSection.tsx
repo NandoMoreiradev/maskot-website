@@ -1,14 +1,20 @@
 'use client'
 
 import styled from 'styled-components'
-import { MessageCircle, Zap, TrendingUp, MessageSquare, GitBranch, Calendar, CheckCircle } from 'lucide-react'
+import {
+    LayoutDashboard,
+    MessageSquare,
+    Megaphone,
+    Zap,
+    Users,
+    BarChart3
+} from 'lucide-react'
+
+// --- ESTILOS GERAIS DA SEÇÃO ---
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.lightGray} 0%,
-    ${props => props.theme.colors.white} 100%
-    );
+    background: ${props => props.theme.colors.pageBackground};
     position: relative;
     overflow: hidden;
 `
@@ -22,7 +28,7 @@ const Container = styled.div`
 const SectionHeader = styled.div`
     text-align: center;
     margin-bottom: 5rem;
-    max-width: 700px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 `
@@ -32,6 +38,7 @@ const SectionTitle = styled.h2`
     font-weight: 800;
     margin-bottom: 1rem;
     color: ${props => props.theme.colors.textDark};
+    line-height: 1.2;
 
     @media (max-width: 768px) {
         font-size: 2rem;
@@ -42,93 +49,71 @@ const SectionSubtitle = styled.p`
     font-size: 1.1rem;
     color: ${props => props.theme.colors.textMedium};
     line-height: 1.6;
-    margin-bottom: 0.5rem;
 `
 
 const Highlight = styled.span`
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: ${props => props.theme.colors.primary};
     font-weight: 700;
 `
+
+// --- GRID DE FEATURES ---
 
 const FeaturesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    margin-bottom: 5rem;
+    gap: 2rem;
+    margin-bottom: 6rem;
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr;
-        gap: 3rem;
     }
 `
 
 interface FeatureCardProps {
-    $gradient?: string;
+    $gradient: string;
 }
 
 const FeatureCard = styled.div<FeatureCardProps>`
     background: ${props => props.theme.colors.white};
+    padding: 2.5rem;
     border-radius: 20px;
-    padding: 3rem 2rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 
-    &:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-    }
-
-    &:before {
+    /* Barra colorida no topo */
+    &::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        height: 4px;
-        background: ${props => props.$gradient || props.theme.colors.primary};
+        width: 100%;
+        height: 6px;
+        background: ${props => props.$gradient};
+    }
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 `
 
-interface IconWrapperProps {
-    $bg?: string;
-    $gradient?: string;
-}
-
-const IconWrapper = styled.div<IconWrapperProps>`
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: ${props => props.$bg || props.theme.colors.lightGray};
+const IconWrapper = styled.div<{ $color: string }>`
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: ${props => props.$color}15; /* 15% opacidade */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
-    position: relative;
+    margin-bottom: 1.5rem;
+    color: ${props => props.$color};
 
     svg {
         width: 32px;
         height: 32px;
-        color: ${props => props.theme.colors.primary};
-    }
-
-    &:after {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border-radius: 22px;
-        background: ${props => props.$gradient || props.theme.colors.primary};
-        z-index: -1;
-        opacity: 0.3;
     }
 `
 
@@ -140,246 +125,359 @@ const FeatureTitle = styled.h3`
 `
 
 const FeatureDescription = styled.p`
-    font-size: 1rem;
     color: ${props => props.theme.colors.textMedium};
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
 `
 
 const FeatureList = styled.ul`
     list-style: none;
     padding: 0;
-    margin: 0;
-`
 
-const FeatureListItem = styled.li`
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-    color: ${props => props.theme.colors.textDark};
-
-    &:before {
-        content: '✓';
-        display: inline-flex;
+    li {
+        display: flex;
         align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: ${props => props.theme.colors.secondary};
-        color: white;
-        font-size: 0.75rem;
-        font-weight: 700;
-        margin-right: 0.75rem;
-        flex-shrink: 0;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        color: ${props => props.theme.colors.textDark};
+        font-weight: 500;
+
+        /* Bullet point customizado */
+        &::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: ${props => props.theme.colors.secondary};
+            flex-shrink: 0;
+        }
     }
 `
 
-const IntegrationFlow = styled.div`
-    background: ${props => props.theme.colors.white};
-    border-radius: 20px;
-    padding: 3rem;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+// --- BANNER DE INTEGRAÇÃO PREMIUM (GLASSMORPHISM) ---
+
+const IntegrationBanner = styled.div`
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 24px;
+    padding: 4rem;
     position: relative;
     overflow: hidden;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    gap: 4rem;
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 
-    &:before {
+    /* Efeito de Luz de Fundo (Glow Principal) */
+    &::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg,
-        ${props => props.theme.colors.primary} 0%,
-        ${props => props.theme.colors.secondary} 50%,
-        ${props => props.theme.colors.accent} 100%
-        );
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, ${props => props.theme.colors.primary}40 0%, transparent 70%);
+        filter: blur(80px);
+        opacity: 0.6;
+        pointer-events: none;
     }
-`
 
-const FlowTitle = styled.h3`
-    font-size: 1.75rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: ${props => props.theme.colors.textDark};
-`
-
-const FlowSteps = styled.div`
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    align-items: center;
+    /* Ponto de luz secundário */
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -20%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, ${props => props.theme.colors.secondary}30 0%, transparent 70%);
+        filter: blur(60px);
+        opacity: 0.4;
+        pointer-events: none;
+    }
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 3rem;
+    }
+`
+
+const BannerContent = styled.div`
+    position: relative;
+    z-index: 2;
+
+    h3 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        background: linear-gradient(90deg, #fff, #cbd5e1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+`
+
+const StepsWrapper = styled.div`
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+
+    /* Linha conectora (Timeline) */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 40px;
+        right: 40px;
+        height: 2px;
+        background: linear-gradient(90deg,
+        rgba(255,255,255,0.05) 0%,
+        ${props => props.theme.colors.primary} 50%,
+        rgba(255,255,255,0.05) 100%
+        );
+        z-index: 0;
+        transform: translateY(-50%);
+    }
+
+    @media (max-width: 650px) {
+        flex-direction: column;
         gap: 2rem;
+        padding: 0;
+
+        /* Linha Vertical no Mobile */
+        &::before {
+            width: 2px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg,
+            rgba(255,255,255,0.05) 0%,
+            ${props => props.theme.colors.primary} 50%,
+            rgba(255,255,255,0.05) 100%
+            );
+        }
     }
 `
 
-interface FlowStepProps {
-    $bg?: string;
-}
-
-const FlowStep = styled.div<FlowStepProps>`
-    text-align: center;
-    padding: 1.5rem 1rem;
-    background: ${props => props.$bg || props.theme.colors.lightGray};
+const StepCard = styled.div`
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
     border-radius: 16px;
-    transition: all 0.3s ease;
-
-    &:hover {
-        transform: scale(1.05);
-    }
-`
-
-const FlowIcon = styled.div`
-    margin-bottom: 1rem;
     display: flex;
-    justify-content: center;
-
-    svg {
-        width: 28px;
-        height: 28px;
-        color: ${props => props.theme.colors.primary};
-    }
-`
-
-const FlowLabel = styled.p`
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: ${props => props.theme.colors.textDark};
-    margin: 0;
-`
-
-const FlowArrow = styled.div`
-    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    color: ${props => props.theme.colors.primary};
+    gap: 0.8rem;
+    width: 110px;
+    height: 110px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 
-    @media (max-width: 968px) {
-        transform: rotate(90deg);
+    /* Ícone */
+    .icon {
+        color: ${props => props.theme.colors.primary};
+        filter: drop-shadow(0 0 8px ${props => props.theme.colors.primary}60);
+        transition: transform 0.3s ease;
+    }
+
+    span {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+    }
+
+    &:hover {
+        transform: translateY(-5px) scale(1.05);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: ${props => props.theme.colors.primary}60;
+        box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+
+        .icon {
+            transform: scale(1.1);
+            color: white;
+        }
+    }
+
+    @media (max-width: 650px) {
+        width: 140px;
+        height: auto;
+        padding: 1rem;
+        flex-direction: row;
+        gap: 1rem;
+
+        span {
+            text-align: left;
+        }
     }
 `
 
 export default function FeaturesSection() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
                 <SectionHeader>
                     <SectionTitle>
-                        Tudo funciona <Highlight>conectado</Highlight> no Maskot
+                        Foque em <Highlight>Vendas e Captação</Highlight>
                     </SectionTitle>
                     <SectionSubtitle>
-                        Não são apenas funcionalidades separadas. É um <strong>sistema único</strong> onde cada parte
-                        se comunica perfeitamente, criando uma experiência fluida do primeiro contato até a matrícula.
+                        O Maskot é o CRM especializado em transformar interessados em alunos.
+                        Organize o comercial, agilize o atendimento e nunca mais perca um lead.
                     </SectionSubtitle>
                 </SectionHeader>
 
                 <FeaturesGrid>
-                    <FeatureCard
-                        $gradient={`linear-gradient(135deg, #007BFF 0%, #0056b3 100%)`}
-                    >
-                        <IconWrapper
-                            $bg={`linear-gradient(135deg, #007BFF15 0%, #0056b315 100%)`}
-                            $gradient={`linear-gradient(135deg, #007BFF 0%, #0056b3 100%)`}
-                        >
-                            <MessageCircle />
+                    {/* CARD 1: CRM / KANBAN */}
+                    <FeatureCard $gradient="linear-gradient(to right, #007BFF, #00C6FF)">
+                        <IconWrapper $color="#007BFF">
+                            <LayoutDashboard />
                         </IconWrapper>
-                        <FeatureTitle>Comunicação 360°</FeatureTitle>
+                        <FeatureTitle>Funil de Vendas Visual</FeatureTitle>
                         <FeatureDescription>
-                            Todas as conversas em um só lugar. WhatsApp, email e telefone
-                            integrados com histórico completo por lead.
+                            Pare de usar planilhas confusas. Visualize todos os interessados em colunas (Kanban), saiba quem visitou, quem está negociando e quem sumiu.
                         </FeatureDescription>
                         <FeatureList>
-                            <FeatureListItem>WhatsApp Business API nativo</FeatureListItem>
-                            <FeatureListItem>Email builder visual (MJML)</FeatureListItem>
-                            <FeatureListItem>Histórico unificado de conversas</FeatureListItem>
-                            <FeatureListItem>Templates personalizáveis</FeatureListItem>
+                            <li>Arraste e solte para mover leads</li>
+                            <li>Histórico completo da negociação</li>
+                            <li>Alertas de leads estagnados</li>
                         </FeatureList>
                     </FeatureCard>
 
-                    <FeatureCard
-                        $gradient={`linear-gradient(135deg, #28A745 0%, #1e7e34 100%)`}
-                    >
-                        <IconWrapper
-                            $bg={`linear-gradient(135deg, #28A74515 0%, #1e7e3415 100%)`}
-                            $gradient={`linear-gradient(135deg, #28A745 0%, #1e7e34 100%)`}
-                        >
+                    {/* CARD 2: WHATSAPP CENTRAL */}
+                    <FeatureCard $gradient="linear-gradient(to right, #25D366, #128C7E)">
+                        <IconWrapper $color="#128C7E">
+                            <MessageSquare />
+                        </IconWrapper>
+                        <FeatureTitle>WhatsApp Centralizado</FeatureTitle>
+                        <FeatureDescription>
+                            Conecte sua equipe no mesmo número oficial. O diretor acompanha tudo e garante que nenhum pai fique sem resposta.
+                        </FeatureDescription>
+                        <FeatureList>
+                            <li>Múltiplos atendentes no mesmo número</li>
+                            <li>Distribuição de conversas por setor</li>
+                            <li>Auditoria e gravação de mensagens</li>
+                        </FeatureList>
+                    </FeatureCard>
+
+                    {/* CARD 3: CAMPANHAS */}
+                    <FeatureCard $gradient="linear-gradient(to right, #FD7E14, #F2C94C)">
+                        <IconWrapper $color="#FD7E14">
+                            <Megaphone />
+                        </IconWrapper>
+                        <FeatureTitle>Campanhas em Massa</FeatureTitle>
+                        <FeatureDescription>
+                            Precisa avisar sobre rematrículas ou um evento aberto? Dispare mensagens para milhares de contatos com segurança e segmentação.
+                        </FeatureDescription>
+                        <FeatureList>
+                            <li>Envio seguro (API Oficial)</li>
+                            <li>Segmentação por etapa do funil</li>
+                            <li>Recuperação de ex-alunos</li>
+                        </FeatureList>
+                    </FeatureCard>
+
+                    {/* CARD 4: AUTOMAÇÃO */}
+                    <FeatureCard $gradient="linear-gradient(to right, #8E2DE2, #4A00E0)">
+                        <IconWrapper $color="#8E2DE2">
                             <Zap />
                         </IconWrapper>
-                        <FeatureTitle>Automação Inteligente</FeatureTitle>
+                        <FeatureTitle>Régua de Follow-up</FeatureTitle>
                         <FeatureDescription>
-                            O sistema trabalha 24/7 para você. Workflows automáticos,
-                            follow-ups inteligentes e processos otimizados.
+                            Crie automações que cobram o retorno do pai. Se o lead não respondeu em 2 dias, o Maskot manda uma mensagem automática para reaquecer.
                         </FeatureDescription>
                         <FeatureList>
-                            <FeatureListItem>Agendamento público automático</FeatureListItem>
-                            <FeatureListItem>Email triggers por estágio</FeatureListItem>
-                            <FeatureListItem>Onboarding estruturado</FeatureListItem>
-                            <FeatureListItem>Follow-ups automáticos</FeatureListItem>
+                            <li>Mensagens automáticas de saudação</li>
+                            <li>Lembretes de visita agendada</li>
+                            <li>Follow-up de leads frios</li>
                         </FeatureList>
                     </FeatureCard>
 
-                    <FeatureCard
-                        $gradient={`linear-gradient(135deg, #FD7E14 0%, #e8590c 100%)`}
-                    >
-                        <IconWrapper
-                            $bg={`linear-gradient(135deg, #FD7E1415 0%, #e8590c15 100%)`}
-                            $gradient={`linear-gradient(135deg, #FD7E14 0%, #e8590c 100%)`}
-                        >
-                            <TrendingUp />
+                    {/* CARD 5: EQUIPE */}
+                    <FeatureCard $gradient="linear-gradient(to right, #FF416C, #FF4B2B)">
+                        <IconWrapper $color="#FF416C">
+                            <Users />
                         </IconWrapper>
-                        <FeatureTitle>Gestão Estratégica</FeatureTitle>
+                        <FeatureTitle>Gestão da Equipe</FeatureTitle>
                         <FeatureDescription>
-                            Decisões baseadas em dados reais. Analytics educacionais,
-                            metas acompanhadas e crescimento escalável.
+                            Saiba quem está atendendo bem e quem está demorando. Defina permissões e acompanhe a produtividade do seu time comercial.
                         </FeatureDescription>
                         <FeatureList>
-                            <FeatureListItem>Analytics educacionais específicos</FeatureListItem>
-                            <FeatureListItem>Gestão de metas e objetivos</FeatureListItem>
-                            <FeatureListItem>Multi-unidades (grupos)</FeatureListItem>
-                            <FeatureListItem>Relatórios em tempo real</FeatureListItem>
+                            <li>Controle de tempo de resposta</li>
+                            <li>Permissões de acesso granulares</li>
+                            <li>Transferência de leads entre vendedores</li>
+                        </FeatureList>
+                    </FeatureCard>
+
+                    {/* CARD 6: RELATÓRIOS */}
+                    <FeatureCard $gradient="linear-gradient(to right, #11998e, #38ef7d)">
+                        <IconWrapper $color="#11998e">
+                            <BarChart3 />
+                        </IconWrapper>
+                        <FeatureTitle>Relatórios de Marketing</FeatureTitle>
+                        <FeatureDescription>
+                            Descubra de onde vêm seus alunos (Instagram, Google, Indicação). Invista seu orçamento de marketing apenas no que traz resultado.
+                        </FeatureDescription>
+                        <FeatureList>
+                            <li>Origem dos leads (Rastreamento)</li>
+                            <li>Taxa de conversão por canal</li>
+                            <li>Motivos de perda de venda</li>
                         </FeatureList>
                     </FeatureCard>
                 </FeaturesGrid>
 
-                <IntegrationFlow>
-                    <FlowTitle>
-                        Como tudo funciona integrado na prática
-                    </FlowTitle>
-                    <FlowSteps>
-                        <FlowStep $bg={`linear-gradient(135deg, #007BFF15 0%, #007BFF10 100%)`}>
-                            <FlowIcon><MessageSquare /></FlowIcon>
-                            <FlowLabel>Lead chega via WhatsApp</FlowLabel>
-                        </FlowStep>
+                <IntegrationBanner>
+                    <BannerContent>
+                        <h3>Fluxo sem fricção</h3>
+                        <p>
+                            Enquanto seus concorrentes usam planilhas, sua escola opera em um fluxo contínuo.
+                            Os dados viajam da captação ao fechamento sem trabalho manual.
+                        </p>
+                    </BannerContent>
 
-                        <FlowArrow>→</FlowArrow>
+                    <StepsWrapper>
+                        <StepCard>
+                            <MessageSquare className="icon" size={28} />
+                            <span>Captação</span>
+                        </StepCard>
 
-                        <FlowStep $bg={`linear-gradient(135deg, #28A74515 0%, #28A74510 100%)`}>
-                            <FlowIcon><GitBranch /></FlowIcon>
-                            <FlowLabel>Entra automaticamente no funil</FlowLabel>
-                        </FlowStep>
+                        <StepCard>
+                            <LayoutDashboard className="icon" size={28} />
+                            <span>Qualificação</span>
+                        </StepCard>
 
-                        <FlowArrow>→</FlowArrow>
+                        <StepCard>
+                            <Users className="icon" size={28} />
+                            <span>Visita</span>
+                        </StepCard>
 
-                        <FlowStep $bg={`linear-gradient(135deg, #FD7E1415 0%, #FD7E1410 100%)`}>
-                            <FlowIcon><Calendar /></FlowIcon>
-                            <FlowLabel>Agendamento automático</FlowLabel>
-                        </FlowStep>
-
-                        <FlowArrow>→</FlowArrow>
-
-                        <FlowStep $bg={`linear-gradient(135deg, #6f42c115 0%, #6f42c110 100%)`}>
-                            <FlowIcon><CheckCircle /></FlowIcon>
-                            <FlowLabel>Onboarding guiado</FlowLabel>
-                        </FlowStep>
-                    </FlowSteps>
-                </IntegrationFlow>
+                        <StepCard>
+                            <Zap className="icon" size={28} />
+                            <span>Matrícula</span>
+                        </StepCard>
+                    </StepsWrapper>
+                </IntegrationBanner>
             </Container>
         </Section>
     )

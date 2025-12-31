@@ -7,7 +7,8 @@ declare module 'styled-components' {
       primary: string;
       secondary: string;
       accent: string;
-      
+      borderLight: string; // <--- CORREÇÃO AQUI
+
       // Neutrals
       white: string;
       lightGray: string;
@@ -15,17 +16,17 @@ declare module 'styled-components' {
       textMedium: string;
       text: string;
       textDark: string;
-      
+
       // Status Colors
       success: string;
       danger: string;
       warning: string;
       info: string;
-      
+
       // Backgrounds
       pageBackground: string;
       cardBackground: string;
-      
+
       // WhatsApp Palette
       whatsapp: {
         background: string;
@@ -37,7 +38,7 @@ declare module 'styled-components' {
         icon: string;
       };
     };
-    
+
     typography: {
       fontFamily: {
         main: string;
@@ -67,7 +68,7 @@ declare module 'styled-components' {
         relaxed: number;
       };
     };
-    
+
     spacing: {
       xs: string;
       sm: string;
@@ -78,7 +79,7 @@ declare module 'styled-components' {
       '3xl': string;
       '4xl': string;
     };
-    
+
     breakpoints: {
       xs: string;
       sm: string;
@@ -87,7 +88,7 @@ declare module 'styled-components' {
       xl: string;
       '2xl': string;
     };
-    
+
     media: {
       xs: string;
       sm: string;
@@ -96,7 +97,7 @@ declare module 'styled-components' {
       xl: string;
       '2xl': string;
     };
-    
+
     borderRadius: {
       none: string;
       sm: string;
@@ -105,7 +106,7 @@ declare module 'styled-components' {
       xl: string;
       full: string;
     };
-    
+
     shadows: {
       sm: string;
       md: string;
@@ -113,13 +114,13 @@ declare module 'styled-components' {
       xl: string;
       '2xl': string;
     };
-    
+
     transitions: {
       fast: string;
       base: string;
       slow: string;
     };
-    
+
     zIndex: {
       dropdown: number;
       sticky: number;

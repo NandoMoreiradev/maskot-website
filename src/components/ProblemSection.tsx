@@ -1,12 +1,24 @@
 'use client'
 
 import styled from 'styled-components'
-import { AlertTriangle, Rocket, ArrowRight } from 'lucide-react'
+import {
+    Clock,
+    UserX,
+    Ban,
+    FileWarning,
+    SearchX,
+    Zap,
+    ShieldCheck,
+    Filter,
+    MessageSquare,
+    ArrowRight
+} from 'lucide-react'
 
 const Section = styled.section`
     padding: 6rem 0;
     background: ${props => props.theme.colors.white};
     position: relative;
+    overflow: hidden;
 `
 
 const Container = styled.div`
@@ -18,7 +30,7 @@ const Container = styled.div`
 const SectionHeader = styled.div`
     text-align: center;
     margin-bottom: 4rem;
-    max-width: 600px;
+    max-width: 750px;
     margin-left: auto;
     margin-right: auto;
 `
@@ -28,6 +40,7 @@ const SectionTitle = styled.h2`
     font-weight: 800;
     margin-bottom: 1rem;
     color: ${props => props.theme.colors.textDark};
+    line-height: 1.2;
 
     @media (max-width: 768px) {
         font-size: 2rem;
@@ -40,12 +53,14 @@ const SectionSubtitle = styled.p`
     line-height: 1.6;
 `
 
+// --- Grid de Comparação ---
+
 const ComparisonGrid = styled.div`
     display: grid;
-    grid-template-columns: 1fr 100px 1fr;
+    grid-template-columns: 1fr 80px 1fr;
     gap: 2rem;
-    align-items: center;
-    margin-bottom: 3rem;
+    align-items: stretch;
+    margin-bottom: 5rem;
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr;
@@ -54,143 +69,136 @@ const ComparisonGrid = styled.div`
 `
 
 const ProblemCard = styled.div`
-    background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a5215 100%);
-    border: 2px solid #ff6b6b30;
-    border-radius: 16px;
-    padding: 2rem;
+    background: #FFF5F5;
+    border: 1px solid #FEB2B2;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
     position: relative;
+    height: 100%;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
 `
 
 const SolutionCard = styled.div`
     background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary}15 0%,
-    ${props => props.theme.colors.secondary}15 100%
+    ${props => props.theme.colors.pageBackground} 0%,
+    ${props => props.theme.colors.white} 100%
     );
-    border: 2px solid ${props => props.theme.colors.primary}30;
-    border-radius: 16px;
-    padding: 2rem;
+    border: 1px solid ${props => props.theme.colors.primary}40;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
     position: relative;
-`
+    height: 100%;
+    box-shadow: 0 10px 30px -10px rgba(0, 123, 255, 0.15);
+    transition: transform 0.3s ease;
 
-const ProblemIcon = styled.div`
-    position: absolute;
-    top: -15px;
-    left: 2rem;
-    background: white;
-    padding: 0.5rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-    z-index: 2;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px -10px rgba(0, 123, 255, 0.25);
+    }
 
-    svg {
-        width: 20px;
-        height: 20px;
-        color: #ff6b6b;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg,
+        ${props => props.theme.colors.primary},
+        ${props => props.theme.colors.secondary}
+        );
     }
 `
 
-const SolutionIcon = styled.div`
+const IconHeader = styled.div<{ $type: 'problem' | 'solution' }>`
     position: absolute;
-    top: -15px;
+    top: -24px;
     left: 2rem;
     background: white;
-    padding: 0.5rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    padding: 0.75rem;
+    border-radius: 16px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px ${props => props.theme.colors.primary}30;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 1px solid ${props => props.$type === 'problem' ? '#FEB2B2' : props.theme.colors.borderLight};
     z-index: 2;
 
     svg {
-        width: 20px;
-        height: 20px;
-        color: ${props => props.theme.colors.primary};
+        width: 28px;
+        height: 28px;
+        color: ${props => props.$type === 'problem' ? props.theme.colors.danger : props.theme.colors.primary};
     }
 `
 
 const CardTitle = styled.h3`
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     margin-top: 1rem;
+    color: ${props => props.theme.colors.textDark};
 `
 
-const ProblemList = styled.ul`
+const FeatureList = styled.ul`
     list-style: none;
     padding: 0;
     margin: 0;
 `
 
-const ProblemItem = styled.li`
+const FeatureItem = styled.li<{ $type: 'problem' | 'solution' }>`
     display: flex;
     align-items: flex-start;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     font-size: 0.95rem;
-    color: ${props => props.theme.colors.textDark};
+    color: ${props => props.$type === 'problem' ? props.theme.colors.textMedium : props.theme.colors.textDark};
+    line-height: 1.5;
 
     svg {
-        width: 16px;
-        height: 16px;
-        color: #ff6b6b;
-        margin-right: 0.75rem;
-        margin-top: 0.2rem;
+        width: 20px;
+        height: 20px;
+        margin-right: 1rem;
         flex-shrink: 0;
+        margin-top: 3px;
+        color: ${props => props.$type === 'problem' ? props.theme.colors.danger : props.theme.colors.success};
+        opacity: ${props => props.$type === 'problem' ? 0.8 : 1};
+    }
+
+    span {
+        flex: 1;
+        strong {
+            color: ${props => props.$type === 'problem' ? props.theme.colors.danger : props.theme.colors.textDark};
+            font-weight: 700;
+        }
     }
 `
 
-const SolutionList = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 0;
-`
-
-const SolutionItem = styled.li`
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    color: ${props => props.theme.colors.textDark};
-
-    svg {
-        width: 16px;
-        height: 16px;
-        color: ${props => props.theme.colors.secondary};
-        margin-right: 0.75rem;
-        margin-top: 0.2rem;
-        flex-shrink: 0;
-    }
-`
-
-const VSIcon = styled.div`
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.accent} 0%,
-    ${props => props.theme.colors.primary} 100%
-    );
+const VsDivider = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    box-shadow: 0 8px 25px rgba(253, 126, 20, 0.3);
-    margin: 0 auto;
 
-    svg {
-        width: 32px;
-        height: 32px;
-    }
+    div {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: ${props => props.theme.colors.lightGray};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: ${props => props.theme.colors.textMedium};
+        border: 4px solid ${props => props.theme.colors.white};
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 
-    @media (max-width: 968px) {
-        display: none;
+        @media (max-width: 968px) {
+            transform: rotate(90deg);
+            margin: 1rem 0;
+        }
     }
 `
 
@@ -198,25 +206,18 @@ const ResultsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid ${props => props.theme.colors.borderLight};
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
     }
 `
 
 const ResultCard = styled.div`
     text-align: center;
-    padding: 2rem 1rem;
-    background: ${props => props.theme.colors.lightGray};
-    border-radius: 12px;
-    transition: all 0.3s ease;
-
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
+    padding: 1rem;
 `
 
 const ResultNumber = styled.div`
@@ -230,20 +231,20 @@ const ResultNumber = styled.div`
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    line-height: 1.2;
 `
 
 const ResultLabel = styled.p`
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: ${props => props.theme.colors.textDark};
-    font-weight: 600;
-    margin: 0;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 `
 
 const ResultDescription = styled.p`
-  font-size: 0.875rem;
-  color: ${props => props.theme.colors.textMedium};
-  margin: 0.5rem 0 0 0;
-  line-height: 1.4;
+    font-size: 0.9rem;
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.4;
 `
 
 export default function ProblemSection() {
@@ -252,114 +253,122 @@ export default function ProblemSection() {
             <Container>
                 <SectionHeader>
                     <SectionTitle>
-                        Por que as escolas perdem leads todos os dias?
+                        Onde sua escola está perdendo matrículas?
                     </SectionTitle>
                     <SectionSubtitle>
-                        A maioria das escolas usa ferramentas separadas que não se comunicam.
-                        O resultado? Informações perdidas, oportunidades que escapam e muito retrabalho.
+                        A captação de alunos mudou. Pais esperam respostas imediatas no WhatsApp.
+                        Processos manuais e caderninhos estão matando sua taxa de conversão.
                     </SectionSubtitle>
                 </SectionHeader>
 
                 <ComparisonGrid>
+                    {/* LADO DO PROBLEMA (Processo Manual/Antigo) */}
                     <ProblemCard>
-                        <ProblemIcon>
-                            <AlertTriangle />
-                        </ProblemIcon>
-                        <CardTitle>Como está hoje (Caótico)</CardTitle>
-                        <ProblemList>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                WhatsApp Business desconectado do controle
-                            </ProblemItem>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                Planilhas manuais para acompanhar leads
-                            </ProblemItem>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                Google Calendar para agendamentos isolados
-                            </ProblemItem>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                Email marketing em ferramenta separada
-                            </ProblemItem>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                Relatórios manuais que tomam horas
-                            </ProblemItem>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                Follow-ups esquecidos constantemente
-                            </ProblemItem>
-                            <ProblemItem>
-                                <AlertTriangle />
-                                Informações espalhadas e perdidas
-                            </ProblemItem>
-                        </ProblemList>
+                        <IconHeader $type="problem">
+                            <UserX />
+                        </IconHeader>
+                        <CardTitle>Captação Analógica</CardTitle>
+                        <FeatureList>
+                            <FeatureItem $type="problem">
+                                <Clock />
+                                <span>
+                                    <strong>Lead esfria:</strong> Demora de horas (ou dias) para responder um pai interessado.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="problem">
+                                <FileWarning />
+                                <span>
+                                    <strong>Sem Follow-up:</strong> O pai para de responder e a equipe esquece de cobrar o retorno.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="problem">
+                                <SearchX />
+                                <span>
+                                    <strong>Cegueira Comercial:</strong> Você não sabe quantos leads chegaram nem o motivo da perda.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="problem">
+                                <Ban />
+                                <span>
+                                    <strong>Bloqueio de WhatsApp:</strong> Perda do chip em meio a uma campanha de matrículas.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="problem">
+                                <UserX />
+                                <span>
+                                    <strong>Dados Perdidos:</strong> Telefones anotados em post-its ou Excel que ninguém atualiza.
+                                </span>
+                            </FeatureItem>
+                        </FeatureList>
                     </ProblemCard>
 
-                    <VSIcon><ArrowRight /></VSIcon>
+                    <VsDivider>
+                        <div><ArrowRight size={24} /></div>
+                    </VsDivider>
 
+                    {/* LADO DA SOLUÇÃO (CRM Maskot) */}
                     <SolutionCard>
-                        <SolutionIcon>
-                            <Rocket />
-                        </SolutionIcon>
-                        <CardTitle>Com Maskot (Integrado)</CardTitle>
-                        <SolutionList>
-                            <SolutionItem>
-                                <Rocket />
-                                WhatsApp Business nativo na plataforma
-                            </SolutionItem>
-                            <SolutionItem>
-                                <Rocket />
-                                Funil visual automático (Kanban)
-                            </SolutionItem>
-                            <SolutionItem>
-                                <Rocket />
-                                Agendamento público integrado
-                            </SolutionItem>
-                            <SolutionItem>
-                                <Rocket />
-                                Email builder visual com triggers
-                            </SolutionItem>
-                            <SolutionItem>
-                                <Rocket />
-                                Relatórios automáticos em tempo real
-                            </SolutionItem>
-                            <SolutionItem>
-                                <Rocket />
-                                Follow-ups automáticos por estágio
-                            </SolutionItem>
-                            <SolutionItem>
-                                <Rocket />
-                                Tudo conectado, nada se perde
-                            </SolutionItem>
-                        </SolutionList>
+                        <IconHeader $type="solution">
+                            <Zap />
+                        </IconHeader>
+                        <CardTitle>Máquina de Matrículas</CardTitle>
+                        <FeatureList>
+                            <FeatureItem $type="solution">
+                                <MessageSquare />
+                                <span>
+                                    <strong>Resposta Imediata 24/7:</strong> O Chatbot acolhe, tira dúvidas e agenda a visita na hora.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="solution">
+                                <Filter />
+                                <span>
+                                    <strong>CRM / Funil de Vendas:</strong> Visualize cada interessado e arraste cards até a matrícula.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="solution">
+                                <Zap />
+                                <span>
+                                    <strong>Régua de Follow-up:</strong> O sistema lembra o vendedor de ligar ou manda msg automática.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="solution">
+                                <ShieldCheck />
+                                <span>
+                                    <strong>API Oficial Blindada:</strong> Dispare campanhas de rematrícula sem risco de bloqueio.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="solution">
+                                <Zap />
+                                <span>
+                                    <strong>Centralização:</strong> WhatsApp, Instagram e Site caindo no mesmo funil organizado.
+                                </span>
+                            </FeatureItem>
+                        </FeatureList>
                     </SolutionCard>
                 </ComparisonGrid>
 
                 <ResultsGrid>
                     <ResultCard>
-                        <ResultNumber>+40%</ResultNumber>
-                        <ResultLabel>Mais Conversões</ResultLabel>
+                        <ResultNumber>+Velocidade</ResultNumber>
+                        <ResultLabel>Zero Lead Esperando</ResultLabel>
                         <ResultDescription>
-                            Com follow-ups automáticos e nenhum lead esquecido
+                            O primeiro a responder é quem ganha a matrícula. O Maskot garante atendimento em segundos.
                         </ResultDescription>
                     </ResultCard>
 
                     <ResultCard>
-                        <ResultNumber>-80%</ResultNumber>
-                        <ResultLabel>Menos Trabalho Manual</ResultLabel>
+                        <ResultNumber>+Controle</ResultNumber>
+                        <ResultLabel>Gestão do Comercial</ResultLabel>
                         <ResultDescription>
-                            Automações inteligentes cuidam do operacional
+                            Saiba exatamente como sua equipe está atendendo e onde estão os gargalos do funil.
                         </ResultDescription>
                     </ResultCard>
 
                     <ResultCard>
-                        <ResultNumber>100%</ResultNumber>
-                        <ResultLabel>Visibilidade Total</ResultLabel>
+                        <ResultNumber>+Conversão</ResultNumber>
+                        <ResultLabel>Nutrição Automática</ResultLabel>
                         <ResultDescription>
-                            Relatórios em tempo real, decisões baseadas em dados
+                            Não deixe o lead esquecer de você. Automações mantêm a escola na mente dos pais.
                         </ResultDescription>
                     </ResultCard>
                 </ResultsGrid>
