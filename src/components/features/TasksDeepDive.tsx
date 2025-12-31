@@ -381,11 +381,11 @@ export default function TasksDeepDive() {
                         <h3>Controle Total da Execução:<br/>Checklists e Cronômetro</h3>
                         <p>
                             Não basta criar a tarefa, é preciso saber se ela foi feita. Use checklists para padronizar processos
-                            (ex: "Passo a passo da Matrícula") e o cronômetro (Time Tracking) para medir a produtividade.
+                            (ex: Passo a passo da Matrícula) e o cronômetro (Time Tracking) para medir a produtividade.
                         </p>
                         <ul>
                             <li><CheckSquare size={20}/> <strong>Checklists:</strong> Quebre tarefas grandes em passos menores.</li>
-                            <li><Clock size={20}/> <strong>Time Tracking:</strong> Dê "Play" na tarefa e saiba quanto tempo sua equipe gasta.</li>
+                            <li><Clock size={20}/> <strong>Time Tracking:</strong> Dê Play na tarefa e saiba quanto tempo sua equipe gasta.</li>
                             <li><Users size={20}/> <strong>Colaboradores:</strong> Adicione múltiplos responsáveis na mesma tarefa.</li>
                         </ul>
                     </TextContent>
@@ -400,7 +400,7 @@ export default function TasksDeepDive() {
                             o Maskot reage automaticamente.
                         </p>
                         <ul>
-                            <li><Zap size={20}/> <strong>Gatilhos:</strong> "Quando o status mudar", "Quando a prioridade for Alta".</li>
+                            <li><Zap size={20}/> <strong>Gatilhos:</strong> Quando o status mudar, Quando a prioridade for Alta.</li>
                             <li><Bell size={20}/> <strong>Ações:</strong> Enviar e-mail, notificar gestor, criar subtarefa.</li>
                             <li><Repeat size={20}/> <strong>Produtividade:</strong> Garanta que nenhum processo pare por falta de aviso.</li>
                         </ul>
@@ -417,7 +417,7 @@ export default function TasksDeepDive() {
                                 <div className="icon"><Layout size={20}/></div>
                                 <div className="content">
                                     <h5>QUANDO Status Mudar</h5>
-                                    <p>De "Em Andamento" para <strong>"Concluído"</strong></p>
+                                    <p>De Em Andamento para <strong>Concluído</strong></p>
                                 </div>
                             </LogicBlock>
 
@@ -454,7 +454,7 @@ export default function TasksDeepDive() {
                     <PowerCard>
                         <div className="icon"><Filter size={24}/></div>
                         <h4>Contextos e Projetos</h4>
-                        <p>Organize tarefas por área: "Campanha de Matrículas", "Festa Junina", "Manutenção Predial".</p>
+                        <p>Organize tarefas por área: Campanha de Matrículas, Festa Junina, Manutenção Predial.</p>
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><Users size={24}/></div>
@@ -469,7 +469,7 @@ export default function TasksDeepDive() {
                     <PowerCard>
                         <div className="icon"><Play size={24}/></div>
                         <h4>Dependências</h4>
-                        <p>Bloqueie uma tarefa até que outra seja concluída (ex: "Enviar Contrato" depende de "Aprovar Financeiro").</p>
+                        <p>Bloqueie uma tarefa até que outra seja concluída (ex: Enviar Contrato depende de Aprovar Financeiro).</p>
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><Layout size={24}/></div>

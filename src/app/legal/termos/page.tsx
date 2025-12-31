@@ -31,7 +31,7 @@ export default function TermsPage() {
 
                 <h2>3. Isenção de responsabilidade</h2>
                 <p>
-                    Os materiais no site da Maskot são fornecidos 'como estão'. Maskot não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização, adequação a um fim específico ou não violação de propriedade intelectual ou outra violação de direitos.
+                    Os materiais no site da Maskot são fornecidos como estão. Maskot não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização, adequação a um fim específico ou não violação de propriedade intelectual ou outra violação de direitos.
                 </p>
 
                 <h2>4. Limitações</h2>

@@ -328,7 +328,7 @@ export default function CommissionsDeepDive() {
                     <TextContent>
                         <h3>Formalize o Pagamento<br/>Gere Recibos em 1 Clique</h3>
                         <p>
-                            Evite o "disse-me-disse". Ao pagar uma comissão, o Maskot gera automaticamente
+                            Evite o disse-me-disse. Ao pagar uma comissão, o Maskot gera automaticamente
                             um comprovante detalhado com campos para assinatura.
                         </p>
                         <ul>
@@ -342,7 +342,7 @@ export default function CommissionsDeepDive() {
                 {/* 3. CLAWBACK & REGRAS */}
                 <FeatureRow>
                     <TextContent>
-                        <h3>Proteção Financeira:<br/>O Famoso "Clawback"</h3>
+                        <h3>Proteção Financeira:<br/>O Famoso Clawback</h3>
                         <p>
                             E se o aluno cancelar a matrícula na primeira semana? O Maskot protege seu caixa com o
                             <strong> Estorno Automático</strong>.
@@ -404,7 +404,7 @@ export default function CommissionsDeepDive() {
                     <PowerCard>
                         <div className="icon"><CheckCircle size={24}/></div>
                         <h4>Validação de Vendas</h4>
-                        <p>A comissão só entra como "Confirmada" após a matrícula ser efetivada e paga.</p>
+                        <p>A comissão só entra como Confirmada após a matrícula ser efetivada e paga.</p>
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><Banknote size={24}/></div>
