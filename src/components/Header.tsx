@@ -1,8 +1,14 @@
 'use client'
 
-import styled, {css} from 'styled-components'
-import {Menu, X, ChevronDown, MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap} from 'lucide-react'
-import {useState} from 'react'
+import styled, { css } from 'styled-components'
+import {
+    Menu, X, ChevronDown,
+    // Ícones Antigos
+    MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
+    // Novos Ícones
+    Wallet, BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare
+} from 'lucide-react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -84,28 +90,35 @@ const NavLinks = styled.div`
 
 // --- DROPDOWN LOGIC ---
 
-const DropdownContent = styled.div`
+const DropdownContent = styled.div<{ $isMobileOpen?: boolean }>`
     position: absolute;
     top: 100%;
-    left: -20px;
-    min-width: 320px;
+    left: -100px; /* Centralizando melhor o menu grande */
+    width: 650px; /* Largura maior para 2 colunas */
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-    padding: 8px;
+    padding: 16px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+
+    /* Grid Layout para Desktop */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
 
     @media (max-width: 968px) {
+        /* Reset para Mobile */
         position: relative;
         top: 0;
         left: 0;
+        width: 100%;
+        display: ${props => props.$isMobileOpen ? 'flex' : 'none'}; /* Controle via Estado */
+        flex-direction: column;
+
         opacity: 1;
         visibility: visible;
         transform: none;
@@ -116,7 +129,6 @@ const DropdownContent = styled.div`
         margin-bottom: 10px;
         padding-left: 1rem;
         border-left: 2px solid #f0f0f0;
-        min-width: 100%;
     }
 `
 
@@ -124,10 +136,13 @@ const NavItem = styled.div`
     position: relative;
     padding: 10px 0;
 
-    &:hover ${DropdownContent} {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+    /* Desktop Hover Logic */
+    @media (min-width: 969px) {
+        &:hover ${DropdownContent} {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
     }
 
     @media (max-width: 968px) {
@@ -136,7 +151,7 @@ const NavItem = styled.div`
     }
 `
 
-const DropdownTrigger = styled.div`
+const DropdownTrigger = styled.div<{ $isActive?: boolean }>`
     display: flex;
     align-items: center;
     gap: 4px;
@@ -155,16 +170,22 @@ const DropdownTrigger = styled.div`
         height: 16px;
         transition: transform 0.2s ease;
         opacity: 0.6;
+        /* Rotação condicional no mobile */
+        transform: ${props => props.$isActive ? 'rotate(180deg)' : 'rotate(0deg)'};
     }
 
-    ${NavItem}:hover & svg {
-        transform: rotate(180deg);
+    /* Rotação no hover desktop */
+    @media (min-width: 969px) {
+        ${NavItem}:hover & svg {
+            transform: rotate(180deg);
+        }
     }
 
     @media (max-width: 968px) {
         font-size: 1.1rem;
         width: 100%;
         justify-content: space-between;
+        padding: 10px 0;
     }
 `
 
@@ -172,7 +193,7 @@ const DropdownLink = styled(Link)`
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px;
+    padding: 10px;
     text-decoration: none;
     border-radius: 8px;
     transition: background 0.2s ease;
@@ -182,8 +203,8 @@ const DropdownLink = styled(Link)`
     }
 
     .icon-box {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
         border-radius: 8px;
         background: #f0f2f5;
         display: flex;
@@ -204,14 +225,15 @@ const DropdownLink = styled(Link)`
         flex-direction: column;
 
         strong {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: ${props => props.theme.colors.textDark};
             font-weight: 600;
         }
 
         span {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: ${props => props.theme.colors.textMedium};
+            line-height: 1.2;
         }
     }
 `
@@ -339,13 +361,22 @@ const MobileMenuButton = styled.button`
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    // Novo estado para controlar o acordeão de funcionalidades no mobile
+    const [isFeaturesOpen, setIsFeaturesOpen] = useState(false)
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
+        // Fecha o acordeão ao fechar o menu principal
+        if (isMobileMenuOpen) setIsFeaturesOpen(false)
+    }
+
+    const toggleFeaturesMenu = () => {
+        setIsFeaturesOpen(!isFeaturesOpen)
     }
 
     const handleLinkClick = () => {
         setIsMobileMenuOpen(false)
+        setIsFeaturesOpen(false)
     }
 
     return (
@@ -366,53 +397,110 @@ export default function Header() {
                     <NavLinks>
                         {/* ITEM COM DROPDOWN - FUNCIONALIDADES */}
                         <NavItem>
-                            <DropdownTrigger>
+                            {/* Adicionado onClick para toggle mobile */}
+                            <DropdownTrigger onClick={toggleFeaturesMenu} $isActive={isFeaturesOpen}>
                                 Funcionalidades
                                 <ChevronDown/>
                             </DropdownTrigger>
-                            <DropdownContent>
+
+                            {/* Passando o estado mobile */}
+                            <DropdownContent $isMobileOpen={isFeaturesOpen}>
                                 {/* WhatsApp */}
                                 <DropdownLink href="/funcionalidades/whatsapp" onClick={handleLinkClick}>
-                                    <div className="icon-box"><MessageCircle size={20}/></div>
+                                    <div className="icon-box"><MessageCircle size={18}/></div>
                                     <div className="text">
-                                        <strong>Gestão de WhatsApp</strong>
-                                        <span>Atendimento centralizado e Chatbot</span>
+                                        <strong>WhatsApp & Chatbot</strong>
+                                        <span>Atendimento centralizado</span>
                                     </div>
                                 </DropdownLink>
 
-                                {/* Jornadas */}
-                                <DropdownLink href="/funcionalidades/marketing-journeys" onClick={handleLinkClick}>
-                                    <div className="icon-box"><GitBranch size={20}/></div>
+                                {/* Gestão Comercial */}
+                                <DropdownLink href="/funcionalidades/gestao-comercial" onClick={handleLinkClick}>
+                                    <div className="icon-box"><KanbanSquare size={18}/></div>
                                     <div className="text">
-                                        <strong>Jornadas de Marketing</strong>
-                                        <span>Funis e nutrição automática</span>
+                                        <strong>Gestão Comercial</strong>
+                                        <span>Funil de vendas CRM</span>
                                     </div>
                                 </DropdownLink>
 
-                                {/* Agendamento */}
-                                <DropdownLink href="/funcionalidades/agendamento" onClick={handleLinkClick}>
-                                    <div className="icon-box"><CalendarCheck size={20}/></div>
+                                {/* Gestão de Tarefas (NOVO) */}
+                                <DropdownLink href="/funcionalidades/gestao-tarefas" onClick={handleLinkClick}>
+                                    <div className="icon-box"><CheckSquare size={18}/></div>
                                     <div className="text">
-                                        <strong>Agendamento de Visitas</strong>
-                                        <span>Agenda online integrada</span>
+                                        <strong>Gestão de Tarefas</strong>
+                                        <span>Projetos e processos</span>
                                     </div>
                                 </DropdownLink>
 
                                 {/* Automações */}
                                 <DropdownLink href="/funcionalidades/automacoes" onClick={handleLinkClick}>
-                                    <div className="icon-box"><Zap size={20}/></div>
+                                    <div className="icon-box"><Zap size={18}/></div>
                                     <div className="text">
                                         <strong>Automações</strong>
                                         <span>Piloto automático 24h</span>
                                     </div>
                                 </DropdownLink>
 
-                                {/* Gestão Comercial */}
-                                <DropdownLink href="/funcionalidades/gestao-comercial" onClick={handleLinkClick}>
-                                    <div className="icon-box"><KanbanSquare size={20}/></div>
+                                {/* Marketing (NOVO) */}
+                                <DropdownLink href="/funcionalidades/marketing" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Megaphone size={18}/></div>
                                     <div className="text">
-                                        <strong>Gestão Comercial</strong>
-                                        <span>Kanban e Funil de Matrículas</span>
+                                        <strong>Marketing</strong>
+                                        <span>Campanhas de e-mail e SMS</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Jornadas */}
+                                <DropdownLink href="/funcionalidades/marketing-journeys" onClick={handleLinkClick}>
+                                    <div className="icon-box"><GitBranch size={18}/></div>
+                                    <div className="text">
+                                        <strong>Jornadas</strong>
+                                        <span>Fluxos de nutrição</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Analytics (NOVO) */}
+                                <DropdownLink href="/funcionalidades/analytics" onClick={handleLinkClick}>
+                                    <div className="icon-box"><BarChart2 size={18}/></div>
+                                    <div className="text">
+                                        <strong>Analytics & BI</strong>
+                                        <span>Relatórios avançados</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Comissões (NOVO) */}
+                                <DropdownLink href="/funcionalidades/gestao-comissoes" onClick={handleLinkClick}>
+                                    <div className="icon-box"><BadgeDollarSign size={18}/></div>
+                                    <div className="text">
+                                        <strong>Comissões</strong>
+                                        <span>Controle de vendedores</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Onboarding (NOVO) */}
+                                <DropdownLink href="/funcionalidades/onboarding" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Rocket size={18}/></div>
+                                    <div className="text">
+                                        <strong>Onboarding</strong>
+                                        <span>Sucesso do aluno</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Multi-Escolas (NOVO) */}
+                                <DropdownLink href="/funcionalidades/multi-escolas" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Building2 size={18}/></div>
+                                    <div className="text">
+                                        <strong>Multi-Escolas</strong>
+                                        <span>Gestão de redes</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Agendamento */}
+                                <DropdownLink href="/funcionalidades/agendamento" onClick={handleLinkClick}>
+                                    <div className="icon-box"><CalendarCheck size={18}/></div>
+                                    <div className="text">
+                                        <strong>Agendamento</strong>
+                                        <span>Agenda de visitas</span>
                                     </div>
                                 </DropdownLink>
                             </DropdownContent>
@@ -427,7 +515,6 @@ export default function Header() {
                             Recursos
                         </SimpleLink>
 
-                        {/* LINK ATUALIZADO PARA A PÁGINA /sobre */}
                         <SimpleLink href="/sobre" onClick={handleLinkClick}>
                             Sobre
                         </SimpleLink>

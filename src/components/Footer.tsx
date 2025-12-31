@@ -1,7 +1,8 @@
 'use client'
 
 import styled from 'styled-components'
-import { Target, Mail, Phone, MapPin, ExternalLink, Instagram, Linkedin, Youtube } from 'lucide-react'
+import Link from 'next/link' // Importação necessária para navegação SPA
+import { Mail, Phone, MapPin, ExternalLink, Instagram, Linkedin, Youtube } from 'lucide-react'
 
 const FooterWrapper = styled.footer`
     background: linear-gradient(135deg,
@@ -147,7 +148,8 @@ const LinkItem = styled.li`
     margin-bottom: 0.75rem;
 `
 
-const FooterLink = styled.a`
+// ATUALIZADO: styled(Link) para navegação SPA
+const FooterLink = styled(Link)`
     color: #cccccc;
     text-decoration: none;
     font-size: 0.95rem;
@@ -190,6 +192,7 @@ const SocialLinks = styled.div`
     }
 `
 
+// SocialLink permanece como 'a' pois são links externos
 const SocialLink = styled.a`
     width: 44px;
     height: 44px;
@@ -246,7 +249,8 @@ const LegalLinks = styled.div`
     }
 `
 
-const LegalLink = styled.a`
+// ATUALIZADO: styled(Link) para navegação SPA
+const LegalLink = styled(Link)`
     font-size: 0.875rem;
     color: #999999;
     text-decoration: none;
@@ -291,31 +295,32 @@ export default function Footer() {
                         <SectionTitle>Produto</SectionTitle>
                         <LinksList>
                             <LinkItem>
-                                <FooterLink href="#funcionalidades">
+                                {/* Atualizado com /# para funcionar de outras páginas */}
+                                <FooterLink href="/#funcionalidades">
                                     Funcionalidades
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#precos">
+                                <FooterLink href="/#precos">
                                     Preços
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#integracoes">
+                                <FooterLink href="/#integracoes">
                                     Integrações
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#atualizacoes">
+                                <FooterLink href="/#atualizacoes">
                                     Atualizações
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#roadmap">
+                                <FooterLink href="/#roadmap">
                                     Roadmap
                                     <ExternalLink />
                                 </FooterLink>
@@ -327,31 +332,31 @@ export default function Footer() {
                         <SectionTitle>Recursos</SectionTitle>
                         <LinksList>
                             <LinkItem>
-                                <FooterLink href="#blog">
+                                <FooterLink href="/#blog">
                                     Blog
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#casos-sucesso">
+                                <FooterLink href="/#casos-sucesso">
                                     Cases de Sucesso
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#central-ajuda">
+                                <FooterLink href="/#central-ajuda">
                                     Central de Ajuda
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#webinars">
+                                <FooterLink href="/#webinars">
                                     Webinars
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="#ebooks">
+                                <FooterLink href="/#ebooks">
                                     E-books Gratuitos
                                     <ExternalLink />
                                 </FooterLink>
@@ -383,9 +388,10 @@ export default function Footer() {
                         © 2025 Maskot CRM. Todos os direitos reservados.
                     </Copyright>
                     <LegalLinks>
-                        <LegalLink href="#privacidade">Política de Privacidade</LegalLink>
-                        <LegalLink href="#termos">Termos de Uso</LegalLink>
-                        <LegalLink href="#cookies">Cookies</LegalLink>
+                        {/* Links integrados com as novas páginas */}
+                        <LegalLink href="/legal/privacidade">Política de Privacidade</LegalLink>
+                        <LegalLink href="/legal/termos">Termos de Uso</LegalLink>
+                        <LegalLink href="/legal/cookies">Cookies</LegalLink>
                     </LegalLinks>
                 </FooterBottom>
             </Container>
