@@ -1,4 +1,4 @@
-import type {Metadata} from 'next'
+import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import LegalDocument from '@/components/legal/LegalDocument'
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
     return (
         <>
-            <Header/>
+            <Header />
             <LegalDocument title="Política de Privacidade e Proteção de Dados" lastUpdated="31 de Dezembro de 2025">
                 <p>
-                    A <strong>MASKOT SOLUÇÕES EM TECNOLOGIA LTDA</strong> (Maskot) reafirma seu compromisso com a
+                    A <strong>MASKOT SOLUÇÕES EM TECNOLOGIA (55.188.948 FERNANDO DOS SANTOS MOREIRA)</strong> (Maskot) reafirma seu compromisso com a
                     segurança, privacidade e transparência no tratamento das informações. Esta política descreve como
                     tratamos dados pessoais em nossa plataforma SaaS de Gestão Educacional, em conformidade com a Lei
                     Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).
@@ -74,38 +74,43 @@ export default function PrivacyPage() {
 
                 <table>
                     <thead>
-                    <tr>
-                        <th>Parceiro</th>
-                        <th>Categoria</th>
-                        <th>Finalidade</th>
-                    </tr>
+                        <tr>
+                            <th>Parceiro</th>
+                            <th>Categoria</th>
+                            <th>Finalidade</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><strong>AWS</strong></td>
-                        <td>Infraestrutura</td>
-                        <td>Hospedagem segura de banco de dados e servidores.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Meta / WhatsApp</strong></td>
-                        <td>Comunicação</td>
-                        <td>Tráfego de mensagens da API Oficial do WhatsApp Business.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Google (Gemini AI)</strong></td>
-                        <td>Inteligência Artificial</td>
-                        <td>Processamento de linguagem natural para o Chatbot Inteligente.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Stripe / Asaas</strong></td>
-                        <td>Pagamentos</td>
-                        <td>Processamento seguro de transações financeiras.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Resend</strong></td>
-                        <td>E-mail</td>
-                        <td>Disparo de e-mails transacionais e notificações.</td>
-                    </tr>
+                        <tr>
+                            <td><strong>Render</strong></td>
+                            <td>Infraestrutura</td>
+                            <td>Hospedagem segura da aplicação e banco de dados.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloudflare</strong></td>
+                            <td>Armazenamento</td>
+                            <td>Armazenamento seguro de arquivos e mídia (R2).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Meta / WhatsApp</strong></td>
+                            <td>Comunicação</td>
+                            <td>Tráfego de mensagens da API Oficial do WhatsApp Business.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Google (Gemini AI)</strong></td>
+                            <td>Inteligência Artificial</td>
+                            <td>Processamento de linguagem natural para o Chatbot Inteligente.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stripe / Asaas</strong></td>
+                            <td>Pagamentos</td>
+                            <td>Processamento seguro de transações financeiras.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resend</strong></td>
+                            <td>E-mail</td>
+                            <td>Disparo de e-mails transacionais e notificações.</td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -133,10 +138,10 @@ export default function PrivacyPage() {
                 <h2>7. Contato do Encarregado (DPO)</h2>
                 <p>
                     Para questões legais ou sobre proteção de dados, entre em contato através do e-mail <a
-                    href="mailto:privacidade@maskot.com.br">privacidade@maskot.com.br</a>.
+                        href="mailto:privacidade@maskot.com.br">privacidade@maskot.com.br</a>.
                 </p>
             </LegalDocument>
-            <Footer/>
+            <Footer />
         </>
     )
 }
