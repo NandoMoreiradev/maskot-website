@@ -11,17 +11,13 @@ import Footer from '@/components/Footer'
 export default function Home() {
     return (
         <>
-            <Header />
-            <main style={{ marginTop: '70px', minHeight: 'calc(100vh - 70px)' }}>
-                <Hero />
-                <ProblemSection />
-                <ComparisonSection />
-                <FeaturesSection />
-                <TestimonialsSection />
-                <PricingSection />
-                <CTASection />
-            </main>
-            <Footer />
+            <Hero />
+            <ProblemSection />
+            <ComparisonSection />
+            <FeaturesSection />
+            <TestimonialsSection />
+            <PricingSection />
+            <CTASection />
         </>
     )
 }
