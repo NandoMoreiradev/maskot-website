@@ -1,7 +1,6 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText, JSXMapSerializer } from "@prismicio/react";
 import Image from "next/image";
-import { ReactNode } from "react";
 
 const components: JSXMapSerializer = {
   image: ({ node }) => (

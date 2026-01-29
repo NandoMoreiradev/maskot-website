@@ -22,7 +22,7 @@ interface BlogPostData {
     url?: string;
     alt?: string | null;
   };
-  slices: unknown[]; // Usar unknown[] para os slices, o Prismic gerencia internamente
+  slices: unknown[];
 }
 
 interface BlogPost {
@@ -142,11 +142,24 @@ function generateArticleSchema(post: BlogPost) {
 function calculateReadingTime(slices: unknown[]): number {
   let totalWords = 0;
   
-  slices.forEach((slice: any) => {
-    if (slice.slice_type === 'rich_text' && slice.primary?.text) {
-      const text = asText(slice.primary.text);
-      if (text && typeof text === 'string') {
-        totalWords += text.split(/\s+/).filter(word => word.length > 0).length;
+  slices.forEach((slice) => {
+    if (
+      typeof slice === 'object' && 
+      slice !== null && 
+      'slice_type' in slice && 
+      slice.slice_type === 'rich_text' &&
+      'primary' in slice &&
+      slice.primary &&
+      typeof slice.primary === 'object' &&
+      'text' in slice.primary
+    ) {
+      try {
+        const text = asText(slice.primary.text as RichTextField);
+        if (text && typeof text === 'string') {
+          totalWords += text.split(/\s+/).filter(word => word.length > 0).length;
+        }
+      } catch {
+        // Ignora erros de conversão
       }
     }
   });
@@ -230,7 +243,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             )}
 
             <RichTextWrapper>
-              <SliceZone slices={page.data.slices as any} components={components} />
+              <SliceZone slices={page.data.slices as never} components={components} />
             </RichTextWrapper>
             
             <div style={{
