@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import { createPrismicClient } from "@/prismicio";
 import { components } from "@/slices";
-import { asText } from "@prismicio/client";
+import { asText, RichTextField } from "@prismicio/client";
 import Image from "next/image";
 import BlogSidebar from "@/components/BlogSidebar";
 import { 
@@ -13,7 +13,27 @@ import {
 
 type Params = { uid: string };
 
-export async function generateStaticParams() {
+// ==================== TIPOS DO PRISMIC ====================
+interface BlogPostData {
+  title: RichTextField;
+  excerpt: RichTextField;
+  category?: string;
+  featured_image?: {
+    url?: string;
+    alt?: string | null;
+  };
+  slices: unknown[]; // Usar unknown[] para os slices, o Prismic gerencia internamente
+}
+
+interface BlogPost {
+  id: string;
+  uid: string;
+  data: BlogPostData;
+  first_publication_date: string;
+  last_publication_date: string;
+}
+
+export async function generateStaticParams(): Promise<{ uid: string }[]> {
   const client = createPrismicClient();
   const posts = await client.getAllByType("blog_post");
   return posts.map((post) => ({ uid: post.uid }));
@@ -23,11 +43,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { uid } = await params;
   const client = createPrismicClient();
-  const page = await client.getByUID("blog_post", uid).catch(() => notFound());
+  const page = await client.getByUID("blog_post", uid).catch(() => notFound()) as BlogPost;
   
-  const title = asText(page.data.title);
-  const description = asText(page.data.excerpt);
-  const imageUrl = page.data.featured_image?.url ?? '/default-og-image.jpg'; // Usa ?? em vez de ||
+  const title = asText(page.data.title) || 'Post do Blog';
+  const description = asText(page.data.excerpt) || '';
+  const imageUrl = page.data.featured_image?.url ?? '/default-og-image.jpg';
   const publishedTime = page.first_publication_date;
   const modifiedTime = page.last_publication_date;
   const category = page.data.category || 'Blog';
@@ -36,7 +56,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: `${title} | Maskot Blog`,
     description,
     
-    // Open Graph (Facebook, LinkedIn)
     openGraph: {
       title,
       description,
@@ -54,24 +73,21 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       type: 'article',
       publishedTime,
       modifiedTime,
-      authors: ['Equipe Maskot'], // TODO: Adicionar autor real do Prismic
+      authors: ['Equipe Maskot'],
     },
     
-    // Twitter Cards
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       images: [imageUrl],
-      creator: '@maskot', // TODO: Adicionar seu handle do Twitter
+      creator: '@maskot',
     },
     
-    // Canonical URL
     alternates: {
       canonical: `https://maskot.com.br/blog/${uid}`,
     },
     
-    // Robots
     robots: {
       index: true,
       follow: true,
@@ -84,15 +100,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       },
     },
     
-    // Keywords (opcional, não impacta muito SEO mas ajuda)
     keywords: [category, 'gestão escolar', 'CRM educacional', 'Maskot'],
   };
 }
 
 // ==================== STRUCTURED DATA (Schema.org) ====================
-function generateArticleSchema(post: any) {
-  const title = asText(post.data.title);
-  const description = asText(post.data.excerpt);
+function generateArticleSchema(post: BlogPost) {
+  const title = asText(post.data.title) || '';
+  const description = asText(post.data.excerpt) || '';
   const imageUrl = post.data.featured_image?.url || null;
   
   return {
@@ -113,7 +128,7 @@ function generateArticleSchema(post: any) {
       "name": "Maskot",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://maskot.com.br/logo.png" // TODO: Adicionar logo real
+        "url": "https://maskot.com.br/logo.png"
       }
     },
     "mainEntityOfPage": {
@@ -124,20 +139,18 @@ function generateArticleSchema(post: any) {
 }
 
 // ==================== CALCULAR TEMPO DE LEITURA ====================
-function calculateReadingTime(slices: any[]): number {
+function calculateReadingTime(slices: unknown[]): number {
   let totalWords = 0;
   
-  slices.forEach((slice) => {
+  slices.forEach((slice: any) => {
     if (slice.slice_type === 'rich_text' && slice.primary?.text) {
       const text = asText(slice.primary.text);
-      // Checagem adicional: só contar se text não for null/undefined
       if (text && typeof text === 'string') {
         totalWords += text.split(/\s+/).filter(word => word.length > 0).length;
       }
     }
   });
   
-  // Média de 200 palavras por minuto, mínimo 1 minuto
   return Math.max(1, Math.ceil(totalWords / 200));
 }
 
@@ -146,15 +159,16 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   const { uid } = await params;
   
   const client = createPrismicClient();
-  const page = await client.getByUID("blog_post", uid).catch(() => notFound());
-  const recentPosts = await client.getAllByType("blog_post", { limit: 4 });
+  const page = await client.getByUID("blog_post", uid).catch(() => notFound()) as BlogPost;
+  const recentPosts = await client.getAllByType("blog_post", { limit: 4 }) as BlogPost[];
   
   const readingTime = calculateReadingTime(page.data.slices);
   const articleSchema = generateArticleSchema(page);
+  const postTitle = asText(page.data.title) || 'Post do Blog';
+  const postExcerpt = asText(page.data.excerpt) || '';
 
   return (
     <>
-      {/* Structured Data para SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -162,10 +176,8 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
       
       <PageWrapper>
         <Container>
-          {/* COLUNA ESQUERDA: ARTIGO */}
           <ArticleContent>
             <PostHeader>
-              {/* Category Badge */}
               {page.data.category && (
                 <span style={{
                   display: 'inline-block',
@@ -182,10 +194,9 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                 </span>
               )}
               
-              <h1>{asText(page.data.title)}</h1>
-              <p>{asText(page.data.excerpt)}</p>
+              <h1>{postTitle}</h1>
+              <p>{postExcerpt}</p>
               
-              {/* Meta Info */}
               <div style={{
                 display: 'flex',
                 gap: '1rem',
@@ -206,12 +217,11 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
               </div>
             </PostHeader>
 
-            {/* Featured Image */}
             {page.data.featured_image?.url && (
               <FeaturedImage>
                 <Image
                   src={page.data.featured_image.url}
-                  alt={page.data.featured_image.alt ?? asText(page.data.title)}
+                  alt={page.data.featured_image.alt || postTitle}
                   fill
                   priority
                   style={{ objectFit: "cover" }}
@@ -219,12 +229,10 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
               </FeaturedImage>
             )}
 
-            {/* Conteúdo do Artigo */}
             <RichTextWrapper>
-              <SliceZone slices={page.data.slices} components={components} />
+              <SliceZone slices={page.data.slices as any} components={components} />
             </RichTextWrapper>
             
-            {/* CTA no Final do Post */}
             <div style={{
               marginTop: '3rem',
               padding: '2rem',
@@ -245,7 +253,6 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             </div>
           </ArticleContent>
 
-          {/* COLUNA DIREITA: SIDEBAR */}
           <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} />
         </Container>
       </PageWrapper>

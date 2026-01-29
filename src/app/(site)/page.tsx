@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import ProblemSection from '@/components/ProblemSection'
+import ComparisonSection from '@/components/ComparisonSection'
 import FeaturesSection from '@/components/FeaturesSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import PricingSection from '@/components/PricingSection'
@@ -14,6 +15,7 @@ export default function Home() {
             <main style={{ marginTop: '70px', minHeight: 'calc(100vh - 70px)' }}>
                 <Hero />
                 <ProblemSection />
+                <ComparisonSection />
                 <FeaturesSection />
                 <TestimonialsSection />
                 <PricingSection />

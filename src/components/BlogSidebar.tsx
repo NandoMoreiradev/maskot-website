@@ -3,17 +3,17 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
-import { asText } from '@prismicio/client'
+import { asText, RichTextField } from '@prismicio/client'
 
 // ==================== TYPES ====================
 type BlogPost = {
   id: string
   uid: string
   data: {
-    title: any
-    excerpt: any
+    title: RichTextField
+    excerpt: RichTextField
     category?: string
-    featured_image: {
+    featured_image?: {
       url?: string | null
       alt?: string | null
     }
@@ -23,16 +23,15 @@ type BlogPost = {
 
 type Props = {
   recentPosts: BlogPost[]
-  currentPostId?: string // Para não mostrar o post atual na lista
+  currentPostId?: string
 }
 
-// ==================== STYLES ====================
+// ==================== STYLES (mantidos iguais) ====================
 const Sidebar = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   
-  /* Sticky apenas em desktop */
   @media (min-width: 968px) {
     position: sticky;
     top: 100px;
@@ -179,7 +178,6 @@ const CategoryBadge = styled.span`
 
 // ==================== COMPONENT ====================
 export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
-  // Filtra para não mostrar o post atual
   const filteredPosts = recentPosts.filter(post => post.id !== currentPostId).slice(0, 3)
   
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -187,65 +185,66 @@ export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email')
     
-    // TODO: Integrar com seu serviço de email (MailChimp, SendGrid, etc)
     console.log('Newsletter signup:', email)
     alert('Obrigado por se inscrever! 🎉')
   }
   
   return (
     <Sidebar>
-      {/* POSTS RECENTES */}
       {filteredPosts.length > 0 && (
         <Widget>
           <WidgetTitle>📚 Posts Recentes</WidgetTitle>
           <PostList>
-            {filteredPosts.map((post) => (
-              <MiniPostCard key={post.id}>
-                <Link href={`/blog/${post.uid}`}>
-                  <MiniImage>
-                    {post.data.featured_image?.url ? (
-                      <Image
-                        src={post.data.featured_image.url}
-                        alt={post.data.featured_image.alt || ''}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                      />
-                    ) : (
-                      <div style={{
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '2rem',
-                        color: '#ddd'
-                      }}>
-                        📄
-                      </div>
-                    )}
-                  </MiniImage>
-                  
-                  <MiniContent>
-                    {post.data.category && (
-                      <CategoryBadge>{post.data.category}</CategoryBadge>
-                    )}
-                    <h4>{asText(post.data.title)}</h4>
-                    <span>
-                      {new Date(post.first_publication_date).toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric'
-                      })}
-                    </span>
-                  </MiniContent>
-                </Link>
-              </MiniPostCard>
-            ))}
+            {filteredPosts.map((post) => {
+              const postTitle = asText(post.data.title) || 'Post sem título';
+              
+              return (
+                <MiniPostCard key={post.id}>
+                  <Link href={`/blog/${post.uid}`}>
+                    <MiniImage>
+                      {post.data.featured_image?.url ? (
+                        <Image
+                          src={post.data.featured_image.url}
+                          alt={post.data.featured_image.alt || postTitle}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div style={{
+                          width: '100%',
+                          height: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '2rem',
+                          color: '#ddd'
+                        }}>
+                          📄
+                        </div>
+                      )}
+                    </MiniImage>
+                    
+                    <MiniContent>
+                      {post.data.category && (
+                        <CategoryBadge>{post.data.category}</CategoryBadge>
+                      )}
+                      <h4>{postTitle}</h4>
+                      <span>
+                        {new Date(post.first_publication_date).toLocaleDateString('pt-BR', {
+                          day: '2-digit',
+                          month: 'short',
+                          year: 'numeric'
+                        })}
+                      </span>
+                    </MiniContent>
+                  </Link>
+                </MiniPostCard>
+              );
+            })}
           </PostList>
         </Widget>
       )}
       
-      {/* CTA NEWSLETTER */}
       <Widget>
         <CTABox>
           <h4>📧 Fique por Dentro</h4>
@@ -262,13 +261,9 @@ export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
         </CTABox>
       </Widget>
       
-      {/* BANNER CTA - TESTAR PRODUTO */}
       <Widget>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ 
-            fontSize: '3rem', 
-            marginBottom: '0.5rem' 
-          }}>
+          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>
             🚀
           </div>
           <h4 style={{ 
