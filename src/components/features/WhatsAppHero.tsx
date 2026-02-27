@@ -57,10 +57,10 @@ export default function WhatsAppHero() {
         <HeroWrapper>
             <HeroContainer>
                 <Tag>Módulo WhatsApp</Tag>
-                <Title>Transforme seu WhatsApp <br/><span> em uma Máquina de Matrículas</span></Title>
+                <Title>O WhatsApp da sua escola,<br/><span>turbinado com IA e CRM integrado</span></Title>
                 <Subtitle>
-                    Centralize todos os números, use Chatbots para triagem automática 24/7
-                    e transforme conversas em matrículas com um clique.
+                    Conecte departamentos, tenha dezenas de usuários no mesmo número e deixe nosso 
+                    Chatbot com Inteligência Artificial agendar visitas 24/7.
                 </Subtitle>
             </HeroContainer>
         </HeroWrapper>

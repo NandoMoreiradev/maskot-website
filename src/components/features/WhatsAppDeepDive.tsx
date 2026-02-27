@@ -4,7 +4,8 @@ import styled, {keyframes, css} from 'styled-components'
 import {
     Users, ShieldCheck, Send, LineChart, Filter,
     Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip,
-    Workflow, Bot, GitBranch, MessageSquare
+    Workflow, Bot, GitBranch, MessageSquare,
+    Network, Sparkles, CalendarSync, FileHeart, UserPlus, FileDown, Route
 } from 'lucide-react'
 
 // --- Animations ---
@@ -495,19 +496,16 @@ export default function WhatsAppDeepDive() {
                 {/* 1. INBOX & CHATBOT */}
                 <FeatureRow>
                     <TextContent>
-                        <h3>Chatbot que faz Triagem,<br/>Equipe que Converte</h3>
+                        <h3>Nenhum pai sem resposta.<br/>Organização total.</h3>
                         <p>
-                            Não deixe pais esperando. Nosso bot trabalha em modo híbrido: responde o básico (preços,
-                            horários) e transfere para humanos quando necessário (Escape Hatch).
+                            Tenha dezenas de usuários em um único número. Organize o atendimento por departamentos (Secretaria, Financeiro, Pedagógico) e defina regras de distribuição.
                         </p>
                         <ul>
-                            <li><Users size={20}/> <strong>Múltiplos Atendentes:</strong> Um número, toda a secretaria
-                                conectada.
+                            <li><Users size={20}/> <strong>Usuários Ilimitados:</strong> Sem limites. Toda a escola conectada ao mesmo tempo.
                             </li>
-                            <li><ShieldCheck size={20}/> <strong>Botão &quot;Assumir&quot;:</strong> Evite que dois
-                                consultores respondam o mesmo pai.
+                            <li><Network size={20}/> <strong>Departamentos e Fila:</strong> Direcione o pai para o setor certo, organizando quem chegou primeiro.
                             </li>
-                            <li><Clock size={20}/> <strong>Fila de Espera:</strong> Organize quem chegou primeiro.</li>
+                            <li><ShieldCheck size={20}/> <strong>Regras e Transferências:</strong> Transfira conversas entre setores com um clique levando todo o histórico.</li>
                         </ul>
                     </TextContent>
 
@@ -604,20 +602,16 @@ export default function WhatsAppDeepDive() {
                 {/* 3. CRM CONTEXT */}
                 <FeatureRow>
                     <TextContent>
-                        <h3>Visão 360º do Aluno<br/>Sem Sair do Chat</h3>
+                        <h3>O CRM na palma da mão<br/>dentro do WhatsApp</h3>
                         <p>
-                            Chega de alternar abas. Enquanto conversa, você tem o perfil completo do pai ao lado: status
-                            no funil, histórico e etiquetas.
+                            Não perca tempo trocando de tela. Adicione leads, acesse dados, carteirize contatos e crie tarefas diretamente na interface do chat.
                         </p>
                         <ul>
-                            <li><Filter size={20}/> <strong>Contexto Imediato:</strong> Saiba na hora quem é e o que ele
-                                quer.
+                            <li><UserPlus size={20}/> <strong>Adicionar Leads & Dados:</strong> Crie um novo lead e edite informações no funil sem sair da conversa.
                             </li>
-                            <li><Paperclip size={20}/> <strong>Anexos:</strong> Encontre documentos e comprovantes na
-                                aba dedicada.
+                            <li><CalendarSync size={20}/> <strong>Agendar & Tarefas:</strong> Marque eventos e tarefas pontuais vinculadas ao CRM com 1 clique.
                             </li>
-                            <li><Send size={20}/> <strong>Agilidade:</strong> Converta leads ou agende visitas com 1
-                                clique.
+                            <li><FileHeart size={20}/> <strong>Carteirização:</strong> Favorite ou designe um lead especificamente para um consultor.
                             </li>
                         </ul>
                     </TextContent>
@@ -680,6 +674,96 @@ export default function WhatsAppDeepDive() {
                                 </div>
                             </ProfileSidebar>
                         </ProfileLayout>
+                    </MockupCard>
+                </FeatureRow>
+
+                {/* 3.1 AI CHATBOT */}
+                <FeatureRow $reverse>
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </MockupHeader>
+                        <ChatLayout>
+                            <SidebarMock>
+                                <div className="item active">
+                                    <div className="avatar">Mãe</div>
+                                    <div className="lines">
+                                        <div style={{width: '60%'}}></div>
+                                        <div style={{width: '40%'}}></div>
+                                    </div>
+                                </div>
+                            </SidebarMock>
+                            <ChatAreaMock>
+                                <Bubble>Boa noite! O Berçário funciona até que horas?</Bubble>
+                                <Bubble $sent $bot>
+                                    Olá, boa noite! 🌙 O nosso Berçário funciona das 07h às 19h no período estendido.
+                                </Bubble>
+                                <Bubble>Posso visitar amanhã às 14h?</Bubble>
+                                <Bubble $sent $bot>
+                                    Deixe-me conferir a agenda... Sim, temos disponibilidade! Agendei sua visita para amanhã às 14h. 🎉
+                                </Bubble>
+                                <Bubble $note>✅ <strong>IA:</strong> Visita agendada. Lead atualizada no CRM.</Bubble>
+                            </ChatAreaMock>
+                        </ChatLayout>
+                    </MockupCard>
+                    <TextContent>
+                        <h3>Inteligência Artificial:<br/>Sua melhor secretária 24/7</h3>
+                        <p>
+                            Treine nossa Inteligência Artificial com a base de conhecimento da sua escola. Ela tira dúvidas complexas, atende de madrugada e até agenda visitas sozinha.
+                        </p>
+                        <ul>
+                            <li><Sparkles size={20}/> <strong>Respostas Humanizadas:</strong> A IA entende o contexto e responde como membro da sua equipe.
+                            </li>
+                            <li><Clock size={20}/> <strong>Atendimento 24 horas:</strong> Pais nunca ficam sem resposta, mesmo fora do expediente.
+                            </li>
+                            <li><CalendarSync size={20}/> <strong>Agendamento Automático:</strong> A IA acessa a agenda da escola e marca visitas no CRM.
+                            </li>
+                        </ul>
+                    </TextContent>
+                </FeatureRow>
+
+                {/* 3.2 MARKETING & AUTOMATIONS */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Jornadas de Marketing<br/>com WhatsApp Nativo</h3>
+                        <p>
+                            Insira o WhatsApp em todas as suas automações. Envie mensagens proativas, réguas de relacionamento e lembretes financeiros baseados em disparos de gatilhos do CRM.
+                        </p>
+                        <ul>
+                            <li><Route size={20}/> <strong>Automações de Funil:</strong> Mande mensagens após X dias do envio da proposta caso o pai não responda.
+                            </li>
+                            <li><Bot size={20}/> <strong>Régua de Cobrança:</strong> Lembretes de vencimento enviados no WhatsApp automaticamente.
+                            </li>
+                            <li><Zap size={20}/> <strong>Disparos em Massa Personalizados:</strong> Comunique campanhas usando as tags do Maskot.
+                            </li>
+                        </ul>
+                    </TextContent>
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </MockupHeader>
+                        <FlowBuilderMock>
+                            <div className="node start" style={{top: '40px', left: '30%', width: '220px'}}>
+                                <div className="node-header"><Filter size={12}/> Etapa do Funil: Proposta</div>
+                                <div className="node-body">Sem resposta há 2 dias.</div>
+                            </div>
+                            
+                            <div className="connection-line"
+                                 style={{top: '90px', left: '50%', height: '70px', width: '2px'}}></div>
+
+                            <div className="node action" style={{top: '160px', left: '20%', width: '260px'}}>
+                                <div className="node-header"><Send size={12}/> Disparo WhatsApp Automático</div>
+                                <div className="node-body">Template: "Olá [Nome], restou alguma dúvida..."</div>
+                            </div>
+                        </FlowBuilderMock>
                     </MockupCard>
                 </FeatureRow>
 
@@ -778,6 +862,24 @@ export default function WhatsAppDeepDive() {
                         <h4>Transferência Inteligente</h4>
                         <p>Transfira atendimentos entre departamentos (ex: Secretaria para Financeiro) levando todo o
                             histórico junto.</p>
+                    </PowerCard>
+
+                    <PowerCard>
+                        <div className="icon"><MessageSquare size={24}/></div>
+                        <h4>Templates Aprovados</h4>
+                        <p>Inicie conversas enviando templates oficiais de WhatsApp aprovados pela Meta para reengajar contatos frios.</p>
+                    </PowerCard>
+
+                    <PowerCard>
+                        <div className="icon"><FileDown size={24}/></div>
+                        <h4>Exportação em PDF</h4>
+                        <p>Precisa documentar um atendimento crítico? Exporte o histórico completo da conversa em um arquivo PDF em 1 clique.</p>
+                    </PowerCard>
+
+                    <PowerCard>
+                        <div className="icon"><Clock size={24}/></div>
+                        <h4>Histórico Vitalício</h4>
+                        <p>Nunca perca o contexto. Acesse conversas de meses atrás para relembrar acordos ou informações trocadas com as famílias.</p>
                     </PowerCard>
                 </PowerGrid>
 
