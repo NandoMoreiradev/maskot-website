@@ -446,7 +446,16 @@ export default function Header() {
                                     <div className="icon-box"><Megaphone size={18}/></div>
                                     <div className="text">
                                         <strong>Marketing</strong>
-                                        <span>Campanhas de e-mail e SMS</span>
+                                        <span>Mensagens ativas</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Campanhas de Matrículas (NOVO) */}
+                                <DropdownLink href="/funcionalidades/campanhas" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Rocket size={18}/></div>
+                                    <div className="text">
+                                        <strong>Campanhas</strong>
+                                        <span>Atração e ROI</span>
                                     </div>
                                 </DropdownLink>
 

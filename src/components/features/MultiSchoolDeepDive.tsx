@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import {
     Building2, Globe, TrendingUp, Eye,
     Users, Share2, MapPin, Store,
-    ChevronDown, ShieldCheck, ArrowRightLeft
+    ShieldCheck, ArrowRightLeft
 } from 'lucide-react'
 
 // --- Animations ---

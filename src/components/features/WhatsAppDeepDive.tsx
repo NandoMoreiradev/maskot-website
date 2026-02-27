@@ -761,7 +761,7 @@ export default function WhatsAppDeepDive() {
 
                             <div className="node action" style={{top: '160px', left: '20%', width: '260px'}}>
                                 <div className="node-header"><Send size={12}/> Disparo WhatsApp Automático</div>
-                                <div className="node-body">Template: "Olá [Nome], restou alguma dúvida..."</div>
+                                <div className="node-body">Template: &quot;Olá [Nome], restou alguma dúvida...&quot;</div>
                             </div>
                         </FlowBuilderMock>
                     </MockupCard>

@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import {
     Layout, Kanban, Calendar, Clock, CheckSquare,
     Play, Pause, Users, Zap, Bell, Repeat,
-    List, ArrowRight, Tag, Filter
+    List, Tag, Filter
 } from 'lucide-react'
 
 // --- Animations ---

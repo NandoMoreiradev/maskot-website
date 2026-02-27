@@ -3,8 +3,8 @@
 import styled, {keyframes, css} from 'styled-components'
 import {
     Zap, Mail, MessageCircle, Clock, GitBranch,
-    TrendingUp, LogOut, Users, CheckCircle2, AlertCircle,
-    MousePointerClick, BarChart3, Award
+    TrendingUp, LogOut, Users, CheckCircle2,
+    BarChart3, Award
 } from 'lucide-react'
 
 // --- ANIMATIONS ---

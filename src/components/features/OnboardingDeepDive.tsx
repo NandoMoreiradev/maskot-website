@@ -3,7 +3,7 @@
 import styled, {keyframes, css} from 'styled-components'
 import {
     Rocket, CheckSquare, GraduationCap, Copy,
-    UserPlus, FileCheck, Users, Zap,
+    FileCheck, Users, Zap,
     LayoutTemplate, Clock, CalendarCheck
 } from 'lucide-react'
 
