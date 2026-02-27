@@ -502,7 +502,7 @@ export default function CampaignDeepDive() {
                     </MockupCard>
 
                     <TextContent>
-                        <h3>Biblioteca de Criativos:<br/>Adeus ao "Manda de novo?"</h3>
+                        <h3>Biblioteca de Criativos:<br/>Adeus ao &quot;Manda de novo?&quot;</h3>
                         <p>
                             Sua agência fez uma arte nova? Eles sobem direto na campanha. 
                             Você aprova, e toda a sua equipe na mesma hora tem acesso 
@@ -510,7 +510,7 @@ export default function CampaignDeepDive() {
                         </p>
                         <ul>
                             <li><ImageIcon size={20}/> <strong>Gestão de Ativos:</strong> Imagens, Vídeos e Documentos centralizados.</li>
-                            <li><CheckCircle2 size={20}/> <strong>Fluxo de Aprovação:</strong> A arte só vai pra rua após o "OK" da Direção.</li>
+                            <li><CheckCircle2 size={20}/> <strong>Fluxo de Aprovação:</strong> A arte só vai pra rua após o &quot;OK&quot; da Direção.</li>
                             <li><MessageSquare size={20}/> <strong>Ligado à Ponta:</strong> O consultor pode enviar anexos da campanha em 1 clique.</li>
                         </ul>
                     </TextContent>

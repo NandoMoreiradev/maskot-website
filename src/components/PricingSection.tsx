@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import styled, { css } from 'styled-components'
-import { Check, Zap, Crown, Building2, School, Bot, ArrowRight, MessageCircle, Cpu } from 'lucide-react'
+import { Check, Zap, Crown, Building2, Bot, ArrowRight, MessageCircle, Cpu } from 'lucide-react'
 
 // --- STYLED COMPONENTS ---
 
