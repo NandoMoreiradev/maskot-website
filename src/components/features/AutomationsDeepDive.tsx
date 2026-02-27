@@ -2,8 +2,8 @@
 
 import styled, {keyframes, css} from 'styled-components'
 import {
-    Zap, Mail, MessageSquare, Clock, CheckCircle2,
-    ArrowRight, ListChecks, Play, MoreVertical,
+    Mail, MessageSquare, Clock, CheckCircle2,
+    ArrowRight, Play, MoreVertical,
     Plus, UserPlus, GripVertical, MousePointerClick,
     UserX, Calendar, UserCheck, AlertCircle, Phone
 } from 'lucide-react'

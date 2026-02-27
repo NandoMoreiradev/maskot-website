@@ -1,12 +1,12 @@
 'use client'
 
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
     Menu, X, ChevronDown,
     // Ícones Antigos
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
-    Wallet, BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare
+    BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'

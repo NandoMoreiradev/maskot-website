@@ -3,7 +3,7 @@
 import styled, {keyframes, css} from 'styled-components'
 import {
     Zap, Mail, MessageCircle, Clock, GitBranch,
-    TrendingUp, LogOut, Users, CheckCircle2,
+    TrendingUp, Users, CheckCircle2,
     BarChart3, Award
 } from 'lucide-react'
 

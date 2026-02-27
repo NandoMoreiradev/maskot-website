@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import Link from 'next/link' // Importação necessária para navegação SPA
+import Image from 'next/image'
 import { Mail, Phone, MapPin, ExternalLink, Instagram, Linkedin, Youtube } from 'lucide-react'
 
 const FooterWrapper = styled.footer`
@@ -268,7 +269,7 @@ export default function Footer() {
                 <FooterContent>
                     <CompanySection>
                         <Logo>
-                            <img src="/logo_maskot_website.png" alt="Maskot CRM" />
+                            <Image src="/logo_maskot_website.png" alt="Maskot CRM" width={140} height={40} />
                         </Logo>
                         <CompanyDescription>
                             O CRM que realmente entende escolas. Centralize toda a gestão de leads,
