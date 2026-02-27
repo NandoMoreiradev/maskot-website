@@ -11,6 +11,7 @@ import {
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import ContactModal from './ContactModal'
 
 const HeaderWrapper = styled.header`
     position: fixed;
@@ -301,7 +302,7 @@ const LoginButton = styled.a`
     }
 `
 
-const TrialButton = styled.a`
+const TrialButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -542,10 +543,12 @@ export default function Header() {
                         </LoginButton>
 
                         <TrialButton
-                            href="https://app.maskotedu.com.br/signup"
-                            onClick={handleLinkClick}
+                            onClick={() => {
+                                handleLinkClick()
+                                window.dispatchEvent(new Event('open-contact-modal'))
+                            }}
                         >
-                            Começar Grátis
+                            Falar com Especialista
                         </TrialButton>
                     </CTAButtons>
                 </Nav>
@@ -557,6 +560,7 @@ export default function Header() {
                     {isMobileMenuOpen ? <X size={28}/> : <Menu size={28}/>}
                 </MobileMenuButton>
             </Container>
+            <ContactModal />
         </HeaderWrapper>
     )
 }

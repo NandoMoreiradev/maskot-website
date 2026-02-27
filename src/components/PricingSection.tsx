@@ -224,10 +224,10 @@ const Currency = styled.span`
 `
 
 const PriceValue = styled.span`
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   color: ${props => props.theme.colors.textDark};
-  line-height: 1;
+  line-height: 1.2;
 `
 
 const PricePeriod = styled.span`
@@ -356,8 +356,8 @@ const PLANS_CRM = [
     id: 'essencial',
     name: 'Essencial',
     description: 'Para pequenas escolas que precisam organizar o comercial.',
-    price: '297',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#28A745', 
     icon: Zap,
     isPopular: false,
@@ -372,11 +372,11 @@ const PLANS_CRM = [
     variant: 'outline' as const
   },
   {
-    id: 'crescimento',
-    name: 'Crescimento',
+    id: 'pro',
+    name: 'Pro',
     description: 'A máquina de vendas com automação para escalar.',
-    price: '597',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#007BFF', 
     icon: Crown,
     isPopular: true,
@@ -388,15 +388,15 @@ const PLANS_CRM = [
       'Domínio de Email Próprio',
       'Analytics Avançado'
     ],
-    cta: 'Testar Grátis (14 dias)',
+    cta: 'Começar Agora',
     variant: 'primary' as const
   },
   {
-    id: 'escala',
-    name: 'Escala',
+    id: 'enterprise',
+    name: 'Enterprise',
     description: 'Para grandes operações que precisam de inteligência.',
-    price: '997',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#FD7E14', 
     icon: Building2,
     isPopular: false,
@@ -413,123 +413,59 @@ const PLANS_CRM = [
   }
 ]
 
-const PLANS_EDU = [
-  {
-    id: 'edu_avancado',
-    name: 'Avançado',
-    description: 'Gestão escolar completa, do financeiro ao pedagógico.',
-    price: '8',
-    period: '/aluno/mês',
-    color: '#6610f2', 
-    icon: School,
-    isPopular: false,
-    features: [
-      'Tudo do Maskot CRM Incluso',
-      'Gestão Acadêmica & Diário',
-      'Portal do Aluno e Responsável',
-      'Gestão Financeira & Boletos',
-      'IA de Assistência Básica'
-    ],
-    cta: 'Simular Valores',
-    variant: 'outline' as const
-  },
-  {
-    id: 'edu_premium',
-    name: 'Premium IA+',
-    description: 'O poder da Inteligência Artificial na retenção de alunos.',
-    price: '12',
-    period: '/aluno/mês',
-    color: '#007BFF',
-    icon: Bot,
-    isPopular: true,
-    features: [
-      'Tudo do Plano Avançado',
-      'IA Preditiva de Evasão (Churn)',
-      'Módulos Operacionais (Estoque, Portaria)',
-      'SLA Premium de Suporte',
-      'Onboarding Assistido',
-      'Gerente de Sucesso'
-    ],
-    cta: 'Falar com Especialista',
-    variant: 'primary' as const
-  },
-  {
-    id: 'rede',
-    name: 'Rede Educacional',
-    description: 'Gestão multi-unidades centralizada para grupos.',
-    price: 'Custom',
-    period: '',
-    color: '#17a2b8',
-    icon: Building2,
-    isPopular: false,
-    features: [
-      'Painel Consolidado do Grupo',
-      'Relatórios Comparativos',
-      'Gestão Centralizada de Matrículas',
-      'Controle Financeiro Unificado',
-      'API Aberta para Integrações'
-    ],
-    cta: 'Cotar para Rede',
-    variant: 'outline' as const
-  }
-]
-
 const PLANS_WA_INBOX = [
   {
     id: 'wa_start',
     name: 'Inbox Start',
     description: 'Atendimento Profissional para começar.',
-    price: '697',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#28A745',
     icon: MessageCircle,
     isPopular: false,
     features: [
       'Usuários Ilimitados',
-      'Franquia: 1.000 conversas/mês',
       'WhatsApp Oficial (API)',
       'Dashboard de Atendimento',
       'Histórico Centralizado'
     ],
-    cta: 'Contratar Start',
+    cta: 'Falar com Especialista',
     variant: 'outline' as const
   },
   {
     id: 'wa_plus',
     name: 'Inbox Plus',
     description: 'Para colégios sólidos em expansão.',
-    price: '997',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#28A745',
     icon: MessageCircle,
     isPopular: true,
     features: [
-      'Usuários Ilimitados',
-      'Franquia: 2.500 conversas/mês',
+      'Usuários Ilimitados',      
       'WhatsApp Oficial (API)',
       'Departamentos (Filas)',
       'Relatórios de Performance'
     ],
-    cta: 'Contratar Plus',
+    cta: 'Falar com Especialista',
     variant: 'primary' as const
   },
   {
     id: 'wa_pro',
     name: 'Inbox Pro',
     description: 'Alta demanda de atendimento.',
-    price: '1.697',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#28A745',
     icon: MessageCircle,
     isPopular: false,
     features: [
       'Usuários Ilimitados',
-      'Franquia: 5.000 conversas/mês',
       'WhatsApp Oficial (API)',
       'Gestor de Conta Dedicado',
       'SLA Prioritário'
     ],
-    cta: 'Contratar Pro',
+    cta: 'Falar com Especialista',
     variant: 'outline' as const
   }
 ]
@@ -539,52 +475,49 @@ const PLANS_WA_AI = [
     id: 'wa_ai_std',
     name: 'AI Standard',
     description: 'Sua secretaria digital funcionando 24/7.',
-    price: '1.497',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#007BFF',
     icon: Bot,
     isPopular: false,
     features: [
       'Módulo Inbox Incluso',
       'IA Treinada na sua Escola',
-      'Franquia: 1.500 conversas/mês',
       'Agendamento de Visitas Automático',
       'Tira dúvidas frequentes'
     ],
-    cta: 'Ver Demo IA',
+    cta: 'Falar com Especialista',
     variant: 'outline' as const
   },
   {
     id: 'wa_ai_adv',
     name: 'AI Advanced',
     description: 'Inteligência avançada para escalar atendimento.',
-    price: '2.297',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#007BFF',
     icon: Cpu,
     isPopular: true,
     features: [
       'Módulo Inbox Incluso',
-      'Franquia: 3.000 conversas/mês',
       'Qualificação de Leads Avançada',
       'Transbordo para Humano Inteligente',
       'Personalidade da Marca Customizável'
     ],
-    cta: 'Contratar Advanced',
+    cta: 'Falar com Especialista',
     variant: 'primary' as const
   },
   {
     id: 'wa_ai_pro',
     name: 'AI Pro',
     description: 'Volume massivo com máxima eficiência.',
-    price: '3.897',
-    period: '/mês',
+    price: 'Sob Consulta',
+    period: '',
     color: '#007BFF',
     icon: Cpu,
     isPopular: false,
     features: [
       'Módulo Inbox Incluso',
-      'Franquia: 6.000 conversas/mês',
       'IA Generativa Premium',
       'Treinamento Contínuo Supervisionado',
       'Relatórios de Sentimento'
@@ -595,11 +528,10 @@ const PLANS_WA_AI = [
 ]
 
 export default function PricingSection() {
-  const [activeTab, setActiveTab] = useState<'CRM' | 'EDU' | 'WA'>('CRM')
+  const [activeTab, setActiveTab] = useState<'CRM' | 'WA'>('CRM')
   const [waMode, setWaMode] = useState<'INBOX' | 'AI'>('INBOX')
   
   let currentPlans = PLANS_CRM
-  if (activeTab === 'EDU') currentPlans = PLANS_EDU
   if (activeTab === 'WA') {
     currentPlans = waMode === 'INBOX' ? PLANS_WA_INBOX : PLANS_WA_AI
   }
@@ -623,12 +555,6 @@ export default function PricingSection() {
               onClick={() => setActiveTab('CRM')}
             >
               Maskot CRM (Vendas)
-            </ToggleButton>
-            <ToggleButton 
-              $isActive={activeTab === 'EDU'} 
-              onClick={() => setActiveTab('EDU')}
-            >
-              Maskot EDU (Gestão)
             </ToggleButton>
             <ToggleButton 
               $isActive={activeTab === 'WA'} 
@@ -671,7 +597,7 @@ export default function PricingSection() {
               </CardHeader>
 
               <PriceWrapper>
-                {plan.price !== 'Custom' && <Currency>R$</Currency>}
+                {plan.price !== 'Sob Consulta' && plan.price !== 'Custom' && <Currency>R$</Currency>}
                 <PriceValue>{plan.price}</PriceValue>
                 <PricePeriod>{plan.period}</PricePeriod>
               </PriceWrapper>
@@ -684,7 +610,7 @@ export default function PricingSection() {
                 ))}
               </FeaturesList>
 
-              <ActionButton $variant={plan.variant}>
+              <ActionButton $variant={plan.variant} onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
                 {plan.cta} <ArrowRight size={18} />
               </ActionButton>
             </PricingCard>
@@ -692,9 +618,8 @@ export default function PricingSection() {
         </PricingGrid>
 
         <Disclaimer>
-          {activeTab === 'EDU' && "* Valores por aluno ativo. Mínimo mensal de R$ 500,00 para planos EDU."}
-          {activeTab === 'CRM' && "* Sem fidelidade. Cancele quando quiser."}
-          {activeTab === 'WA' && "* Valores adicionais ao plano base. Franquia de conversas iniciadas pelo usuário."}
+          {activeTab === 'CRM' && "* Nossos planos garantem que você otimize o retorno de cada lead."}
+          {activeTab === 'WA' && "* Valores adicionais ao plano base. Franquia de conversas."}
         </Disclaimer>
 
       </Container>

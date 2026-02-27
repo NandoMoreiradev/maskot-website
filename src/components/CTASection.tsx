@@ -67,8 +67,9 @@ const CTASubtitle = styled.p`
     margin-right: auto;
 `
 
-// Transformado em 'a' para funcionar como link, mantendo seu estilo visual
-const CTAButton = styled.a`
+// Transformado em 'button' para acionar o modal
+const CTAButton = styled.button`
+    border: none;
     display: inline-block;
     background: linear-gradient(135deg, 
         ${props => props.theme.colors.primary} 0%, 
@@ -97,10 +98,10 @@ export default function CTASection() {
                 <Content>
                     <CTATitle>Pronto para transformar sua escola?</CTATitle>
                     <CTASubtitle>
-                        Comece seu teste gratuito hoje e veja como o Maskot pode aumentar suas matrículas
+                        Fale com nossos especialistas e veja como o Maskot pode escalar suas matrículas
                     </CTASubtitle>
-                    <CTAButton href="https://app.maskotedu.com.br/signup">
-                        Iniciar Teste Grátis - 14 dias
+                    <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
+                        Falar com Especialista
                     </CTAButton>
                 </Content>
             </CTACard>

@@ -3,7 +3,9 @@
 import styled, {keyframes, css} from 'styled-components'
 import {
     LineChart, PieChart, Sparkles, Filter, Link as LinkIcon, 
-    Share2, Megaphone, PenTool, LayoutTemplate, Target
+    Share2, Megaphone, PenTool, LayoutTemplate, Target,
+    Globe, Users, Image as ImageIcon, FileText, CheckCircle2, Clock,
+    MessageSquare, Layers
 } from 'lucide-react'
 
 // --- Animations ---
@@ -220,6 +222,76 @@ const DashboardMock = styled.div`
     }
 `
 
+// --- MOCKUP 3: GESTÃO DE CANAIS ---
+const ChannelMock = styled.div`
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .channel-row {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            
+            .icon-box {
+                width: 40px; height: 40px; border-radius: 8px; 
+                display: flex; align-items: center; justify-content: center;
+            }
+            .name { font-size: 0.9rem; font-weight: 600; color: #1e293b; }
+            .type { font-size: 0.75rem; color: #64748b; }
+        }
+        
+        .stats {
+            text-align: right;
+            .leads { font-weight: bold; color: #1e293b; font-size: 1.1rem; }
+            .cac { font-size: 0.8rem; color: #10B981; font-weight: 500; }
+        }
+    }
+`
+
+// --- MOCKUP 4: APROVAÇÃO DE ATIVOS ---
+const AssetMock = styled.div`
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    .asset-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+        
+        .preview {
+            height: 100px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+        }
+        .details {
+            padding: 1rem;
+            .title { font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+            .status { 
+                font-size: 0.7rem; font-weight: 600; padding: 4px 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px;
+                &.approved { background: #dcfce7; color: #166534; }
+                &.pending { background: #fef9c3; color: #854d0e; }
+            }
+        }
+    }
+`
+
 // --- POWER GRID ---
 const PowerGrid = styled.div`
     display: grid;
@@ -355,7 +427,96 @@ export default function CampaignDeepDive() {
                     </TextContent>
                 </FeatureRow>
 
-                {/* 3. ASSETS E RASTREIO */}
+                {/* 3. GESTÃO DE CANAIS (MULTICANAL) */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Múltiplos Canais,<br/>Uma Só Verdade</h3>
+                        <p>
+                            Chega de planilhas separadas. Organize suas frentes: 
+                            Tráfego Pago, Indicações, Outdoors e Parcerias em um só lugar.
+                        </p>
+                        <ul>
+                            <li><Globe size={20}/> <strong>Meta & Google Ads:</strong> Compare o custo de aquisição (CAC) em tempo real.</li>
+                            <li><Users size={20}/> <strong>Parceiros Estratégicos:</strong> Saiba exatamente quantas matrículas vieram da escola parceira.</li>
+                            <li><Layers size={20}/> <strong>Tracking Automático:</strong> Os leads caem no CRM com a origem <code>UTM</code> já preenchida.</li>
+                        </ul>
+                    </TextContent>
+
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots"><div></div><div></div><div></div></div>
+                        </MockupHeader>
+                        <ChannelMock>
+                            <div className="channel-row">
+                                <div className="info">
+                                    <div className="icon-box" style={{ background: '#e0f2fe', color: '#0ea5e9' }}><Globe size={20}/></div>
+                                    <div>
+                                        <div className="name">Meta Ads - Inverno</div>
+                                        <div className="type">Online Secundário</div>
+                                    </div>
+                                </div>
+                                <div className="stats">
+                                    <div className="leads">128 leads</div>
+                                    <div className="cac">R$ 18,50 / lead</div>
+                                </div>
+                            </div>
+                            <div className="channel-row">
+                                <div className="info">
+                                    <div className="icon-box" style={{ background: '#fef3c7', color: '#d97706' }}><Users size={20}/></div>
+                                    <div>
+                                        <div className="name">Escola Parceira ABC</div>
+                                        <div className="type">Indicação</div>
+                                    </div>
+                                </div>
+                                <div className="stats">
+                                    <div className="leads">45 leads</div>
+                                    <div className="cac">R$ 0,00 / lead</div>
+                                </div>
+                            </div>
+                        </ChannelMock>
+                    </MockupCard>
+                </FeatureRow>
+
+                {/* 4. APROVAÇÃO DE ATIVOS (ASSET MANAGEMENT) */}
+                <FeatureRow $reverse>
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots"><div></div><div></div><div></div></div>
+                        </MockupHeader>
+                        <AssetMock>
+                            <div className="asset-card">
+                                <div className="preview"><ImageIcon size={32}/></div>
+                                <div className="details">
+                                    <div className="title">Banner Insta - V1</div>
+                                    <span className="status approved"><CheckCircle2 size={12}/> Aprovado</span>
+                                </div>
+                            </div>
+                            <div className="asset-card">
+                                <div className="preview"><FileText size={32}/></div>
+                                <div className="details">
+                                    <div className="title">Copy WhatsApp</div>
+                                    <span className="status pending"><Clock size={12}/> Pendente</span>
+                                </div>
+                            </div>
+                        </AssetMock>
+                    </MockupCard>
+
+                    <TextContent>
+                        <h3>Biblioteca de Criativos:<br/>Adeus ao "Manda de novo?"</h3>
+                        <p>
+                            Sua agência fez uma arte nova? Eles sobem direto na campanha. 
+                            Você aprova, e toda a sua equipe na mesma hora tem acesso 
+                            ao PDF ou Vídeo para disparar aos pais.
+                        </p>
+                        <ul>
+                            <li><ImageIcon size={20}/> <strong>Gestão de Ativos:</strong> Imagens, Vídeos e Documentos centralizados.</li>
+                            <li><CheckCircle2 size={20}/> <strong>Fluxo de Aprovação:</strong> A arte só vai pra rua após o "OK" da Direção.</li>
+                            <li><MessageSquare size={20}/> <strong>Ligado à Ponta:</strong> O consultor pode enviar anexos da campanha em 1 clique.</li>
+                        </ul>
+                    </TextContent>
+                </FeatureRow>
+
+                {/* 5. ASSETS E RASTREIO */}
                 <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '4rem' }}>
                     <h3 style={{ fontSize: '2rem', fontWeight: 800, color: '#333' }}>Ferramentas de Tração</h3>
                     <p style={{ color: '#666', marginTop: '0.5rem' }}>Tudo que seu time precisa para dominar a prospecção.</p>

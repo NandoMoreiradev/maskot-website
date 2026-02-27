@@ -337,8 +337,8 @@ export default function Hero() {
                         </TrustBadges>
 
                         <ButtonGroup>
-                            <CTAButton>
-                                Começar Grátis
+                            <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
+                                Falar com Especialista
                             </CTAButton>
                             <SecondaryButton>
                                 Ver o CRM por dentro <ArrowRight size={18} />

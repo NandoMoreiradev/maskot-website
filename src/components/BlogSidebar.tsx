@@ -279,10 +279,13 @@ export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
             color: '#6C757D', 
             marginBottom: '1rem' 
           }}>
-            Teste o Maskot gratuitamente por 14 dias
+            Fale com nossos especialistas agora mesmo
           </p>
-          <Link 
-            href="/"
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              window.dispatchEvent(new Event('open-contact-modal'));
+            }}
             style={{
               display: 'inline-block',
               padding: '0.75rem 1.5rem',
@@ -291,14 +294,15 @@ export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
               borderRadius: '8px',
               fontWeight: 600,
               fontSize: '0.9rem',
-              textDecoration: 'none',
+              border: 'none',
+              cursor: 'pointer',
               transition: 'transform 0.2s',
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            Começar Agora
-          </Link>
+            Falar com Especialista
+          </button>
         </div>
       </Widget>
     </Sidebar>

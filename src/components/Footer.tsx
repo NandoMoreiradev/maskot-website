@@ -3,7 +3,7 @@
 import styled from 'styled-components'
 import Link from 'next/link' // Importação necessária para navegação SPA
 import Image from 'next/image'
-import { Mail, Phone, MapPin, ExternalLink, Instagram, Linkedin, Youtube } from 'lucide-react'
+import { Mail, Phone, ExternalLink, Instagram, Facebook } from 'lucide-react'
 
 const FooterWrapper = styled.footer`
     background: linear-gradient(135deg,
@@ -269,7 +269,7 @@ export default function Footer() {
                 <FooterContent>
                     <CompanySection>
                         <Logo>
-                            <Image src="/logo_maskot_website.png" alt="Maskot CRM" width={140} height={40} />
+                            <Image src="/maskot_crm_logo1.png" alt="Maskot Edu" width={140} height={40} />
                         </Logo>
                         <CompanyDescription>
                             O CRM que realmente entende escolas. Centralize toda a gestão de leads,
@@ -279,15 +279,14 @@ export default function Footer() {
                         <ContactInfo>
                             <ContactItem>
                                 <Mail />
-                                <a href="mailto:contato@maskotcrm.com.br">contato@maskotcrm.com.br</a>
+                                <a href="mailto:contato@maskotedu.com.br">contato@maskotedu.com.br</a>
                             </ContactItem>
                             <ContactItem>
                                 <Phone />
-                                <a href="tel:+5511999999999">(11) 99999-9999</a>
+                                <a href="tel:+5579996268858">(79) 99626-8858</a>
                             </ContactItem>
                             <ContactItem>
-                                <MapPin />
-                                São Paulo, SP - Brasil
+                                <span style={{ fontWeight: 'bold' }}>CNPJ:</span> 55.188.948/0001-04
                             </ContactItem>
                         </ContactInfo>
                     </CompanySection>
@@ -371,14 +370,11 @@ export default function Footer() {
                             Siga-nos nas redes sociais para dicas, novidades e conteúdo exclusivo sobre gestão educacional.
                         </CompanyDescription>
                         <SocialLinks>
-                            <SocialLink href="#" aria-label="Instagram">
+                            <SocialLink href="https://instagram.com/maskotedu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                                 <Instagram />
                             </SocialLink>
-                            <SocialLink href="#" aria-label="LinkedIn">
-                                <Linkedin />
-                            </SocialLink>
-                            <SocialLink href="#" aria-label="YouTube">
-                                <Youtube />
+                            <SocialLink href="https://facebook.com/maskotedu" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <Facebook />
                             </SocialLink>
                         </SocialLinks>
                     </SocialSection>
