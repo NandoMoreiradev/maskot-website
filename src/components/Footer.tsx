@@ -70,7 +70,6 @@ const Logo = styled.div`
     img {
         height: 40px;
         width: auto;
-        filter: brightness(0) invert(1);
     }
 
     svg {
@@ -382,7 +381,7 @@ export default function Footer() {
 
                 <FooterBottom>
                     <Copyright>
-                        © 2025 Maskot CRM. Todos os direitos reservados.
+                        © 2026 Maskot CRM. Todos os direitos reservados.
                     </Copyright>
                     <LegalLinks>
                         {/* Links integrados com as novas páginas */}
