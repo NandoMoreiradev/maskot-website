@@ -158,58 +158,71 @@ const SubToggleButton = styled.button<{ $isActive: boolean }>`
 
 // --- GRID & CARDS ---
 const PricingGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
   align-items: stretch;
+  width: 100%;
+  max-width: 1200px; /* increase max width to fit 4 items well */
+  margin-left: auto;
+  margin-right: auto;
+
+  > div {
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+  }
 
   @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    flex-direction: column;
+    align-items: center;
+    > div {
+      width: 100%;
+      max-width: 400px;
+    }
   }
 `
 
 const CardHeader = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 `
 
 const PlanIconWrapper = styled.div<{ $color: string }>`
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
   background: ${props => props.$color}15;
   color: ${props => props.$color};
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 0.75rem;
   
   svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 `
 
 const PlanName = styled.h3`
-  font-size: ${props => props.theme.typography.fontSize.xl};
+  font-size: ${props => props.theme.typography.fontSize.lg};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
   color: ${props => props.theme.colors.textDark};
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 `
 
 const PlanDescription = styled.p`
-  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-size: 0.8rem;
   color: ${props => props.theme.colors.textMedium};
-  min-height: 40px;
+  min-height: 48px;
   line-height: 1.4;
 `
 
 const PriceWrapper = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -224,7 +237,7 @@ const Currency = styled.span`
 `
 
 const PriceValue = styled.span`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   color: ${props => props.theme.colors.textDark};
   line-height: 1.2;
@@ -239,14 +252,14 @@ const PricePeriod = styled.span`
 const FeaturesList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.5rem 0;
   text-align: left;
 `
 
 const FeatureItem = styled.li`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   font-size: ${props => props.theme.typography.fontSize.sm};
   color: ${props => props.theme.colors.text};
   
@@ -299,7 +312,7 @@ const ActionButton = styled.button<{ $variant: 'primary' | 'outline' }>`
 const PricingCard = styled.div<{ $isPopular?: boolean }>`
   background: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.borderRadius.xl};
-  padding: 2.5rem;
+  padding: 1.25rem;
   position: relative;
   transition: all ${props => props.theme.transitions.base};
   border: 1px solid ${props => props.$isPopular ? props.theme.colors.primary : props.theme.colors.borderLight};
