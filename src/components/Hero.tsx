@@ -20,10 +20,10 @@ const HeroSection = styled.section`
     );
     position: relative;
     overflow: hidden;
-    padding-top: 4rem;
+    padding-top: 8rem;
 
     @media (max-width: 768px) {
-        padding-top: 6rem;
+        padding-top: 9rem;
         min-height: auto;
         padding-bottom: 4rem;
     }

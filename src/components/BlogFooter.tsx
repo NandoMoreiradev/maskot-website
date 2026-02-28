@@ -2,24 +2,38 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.footer`
-  background: #f4f4f4;
-  padding: 3rem 2rem;
+  background: white;
+  padding: 4rem 2rem;
   text-align: center;
-  margin-top: auto;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid ${props => props.theme.colors.borderLight}50;
+  margin-top: 4rem;
+`
+const Logo = styled.div`
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: ${props => props.theme.colors.textDark};
+  margin-bottom: 1rem;
+  
+  span {
+    color: ${props => props.theme.colors.primary};
+  }
 `
 const Text = styled.p`
-  color: #888;
-  font-size: 0.9rem;
-  margin-top: 1rem;
+  color: ${props => props.theme.colors.textMedium};
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 400px;
+  margin: 0.5rem auto;
 `
 
 export default function BlogFooter() {
   return (
     <Wrapper>
-      <h3>Maskot Blog</h3>
-      <Text>Conteúdo pensado para gestores escolares.</Text>
-      <Text>© {new Date().getFullYear()} Maskot Edu.</Text>
+      <Logo>Maskot<span>Edu</span> Blog</Logo>
+      <Text>Transformando a gestão escolar através de conteúdo estratégico e tecnologia.</Text>
+      <Text style={{ marginTop: '2rem', fontSize: '0.85rem', opacity: 0.7 }}>
+        © {new Date().getFullYear()} Maskot Edu. Todos os direitos reservados.
+      </Text>
     </Wrapper>
   )
 }
