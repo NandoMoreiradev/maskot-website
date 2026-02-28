@@ -268,7 +268,7 @@ export default function Footer() {
                 <FooterContent>
                     <CompanySection>
                         <Logo>
-                            <Image src="/maskot_crm_logo1.png" alt="Maskot Edu" width={140} height={40} />
+                            <Image src="/maskot_crm_logo1.png" alt="Maskot Edu" width={180} height={50} />
                         </Logo>
                         <CompanyDescription>
                             O CRM que realmente entende escolas. Centralize toda a gestão de leads,
@@ -297,6 +297,12 @@ export default function Footer() {
                                 {/* Atualizado com /# para funcionar de outras páginas */}
                                 <FooterLink href="/#funcionalidades">
                                     Funcionalidades
+                                    <ExternalLink />
+                                </FooterLink>
+                            </LinkItem>
+                            <LinkItem>
+                                <FooterLink href="/comparativo">
+                                    Comparativo Real
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>

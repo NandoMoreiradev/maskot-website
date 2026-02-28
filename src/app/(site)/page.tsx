@@ -1,6 +1,5 @@
 import Hero from '@/components/Hero'
 import ProblemSection from '@/components/ProblemSection'
-import ComparisonSection from '@/components/ComparisonSection'
 import FeaturesSection from '@/components/FeaturesSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import PricingSection from '@/components/PricingSection'
@@ -11,7 +10,6 @@ export default function Home() {
         <>
             <Hero />
             <ProblemSection />
-            <ComparisonSection />
             <FeaturesSection />
             <TestimonialsSection />
             <PricingSection />

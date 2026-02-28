@@ -20,9 +20,10 @@ const ModalContainer = styled.div`
     background: white;
     width: 100%;
     max-width: 500px;
+    max-height: 90vh;
     border-radius: 16px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
+    overflow-y: auto;
     position: relative;
     animation: slideUp 0.3s ease-out;
 

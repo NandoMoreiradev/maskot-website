@@ -224,7 +224,7 @@ const Currency = styled.span`
 `
 
 const PriceValue = styled.span`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   color: ${props => props.theme.colors.textDark};
   line-height: 1.2;
@@ -409,6 +409,24 @@ const PLANS_CRM = [
       'Upload até 100MB'
     ],
     cta: 'Falar com Consultor',
+    variant: 'outline' as const
+  },
+  {
+    id: 'rede',
+    name: 'Rede Educacional',
+    description: 'Gestão multi-unidades centralizada para grupos.',
+    price: 'Sob Consulta',
+    period: '',
+    color: '#17a2b8',
+    icon: Building2,
+    isPopular: false,
+    features: [
+      'Painel Consolidado do Grupo',
+      'Relatórios Comparativos',
+      'Gestão Centralizada de Matrículas',
+      'API Aberta para Integrações'
+    ],
+    cta: 'Cotar para Rede',
     variant: 'outline' as const
   }
 ]
