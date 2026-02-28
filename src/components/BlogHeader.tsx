@@ -1,5 +1,6 @@
 'use client'
 import styled from 'styled-components'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const Wrapper = styled.header`
@@ -25,37 +26,44 @@ const Container = styled.div`
 const LogoArea = styled(Link)`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   text-decoration: none;
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: ${props => props.theme.colors.textDark};
+  height: 40px;
   transition: opacity 0.2s ease;
 
   &:hover {
     opacity: 0.8;
   }
   
-  span {
+  .logo-container {
+    height: 32px;
+    width: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  span.badge {
     background: linear-gradient(135deg, ${props => props.theme.colors.primary} 0%, ${props => props.theme.colors.secondary} 100%);
     color: white;
     padding: 2px 8px;
     border-radius: 6px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 `
 const Nav = styled.nav`
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   
-  @media (max-width: 768px) {
+  @media (max-width: 968px) {
     display: none;
   }
   
   a {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: ${props => props.theme.colors.textDark};
     text-decoration: none;
@@ -65,11 +73,11 @@ const Nav = styled.nav`
   }
 `
 const BackLink = styled(Link)`
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: ${props => props.theme.colors.primary};
   text-decoration: none;
-  padding: 0.6rem 1.25rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
   background: ${props => props.theme.colors.primary}10;
   transition: all 0.2s ease;
@@ -81,19 +89,36 @@ const BackLink = styled(Link)`
   }
 `
 
-export default function BlogHeader() {
+interface BlogHeaderProps {
+  categories?: string[]
+}
+
+export default function BlogHeader({ categories = [] }: BlogHeaderProps) {
   return (
     <Wrapper>
       <Container>
         <LogoArea href="/blog">
-           Maskot <span>Blog</span>
+          <div className="logo-container">
+            <Image 
+              src="/logo_maskot_website.png" 
+              alt="Maskot Edu" 
+              width={120} 
+              height={32} 
+              style={{ width: 'auto', height: '100%' }}
+              priority
+            />
+          </div>
+          <span className="badge">Blog</span>
         </LogoArea>
         <Nav>
-          <Link href="/blog">Página Inicial</Link>
-          <Link href="/#recursos">Recursos</Link>
-          <Link href="/sobre">Sobre nós</Link>
+          <Link href="/blog">Início</Link>
+          {categories.map(category => (
+            <Link key={category} href={`/blog?category=${category}`}>
+              {category}
+            </Link>
+          ))}
         </Nav>
-        <BackLink href="/">Ir para o Site</BackLink>
+        <BackLink href="/">Sair do Blog</BackLink>
       </Container>
     </Wrapper>
   )
