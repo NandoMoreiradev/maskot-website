@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { createPrismicClient } from '@/prismicio';
 import BlogFeed from '@/components/BlogFeed';
 import { PageWrapper } from './styles';
@@ -12,7 +13,6 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const client = createPrismicClient();
   
-  // Buscamos TODOS os posts
   const posts = await client.getAllByType('blog_post', {
     orderings: { field: 'document.first_publication_date', direction: 'desc' },
   });
@@ -25,8 +25,10 @@ export default async function BlogPage() {
           <p>Conteúdo estratégico para revolucionar sua escola</p>
         </BlogPageHeader>
 
-        {/* Passamos os dados para o componente interativo */}
-        <BlogFeed posts={posts} />
+        {/* BlogFeed uses useSearchParams → must be wrapped in Suspense */}
+        <Suspense fallback={<div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Carregando...</div>}>
+          <BlogFeed posts={posts} />
+        </Suspense>
       </BlogPageInner>
     </PageWrapper>
   );

@@ -1,0 +1,45 @@
+{
+  "id": "banner_ad",
+  "type": "SharedSlice",
+  "name": "BannerAd",
+  "description": "BannerAd",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "cta_text": {
+          "type": "Text",
+          "config": {
+            "label": "CTA Text",
+            "placeholder": "Ex: Conheça o Maskot Edu →"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

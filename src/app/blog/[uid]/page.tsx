@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import { createPrismicClient } from "@/prismicio";
 import { components } from "@/slices";
-import { asText, RichTextField } from "@prismicio/client";
+import { asText, isFilled, RichTextField } from "@prismicio/client";
 import Image from "next/image";
 import BlogSidebar from "@/components/BlogSidebar";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
@@ -134,6 +134,21 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   const postTitle = asText(page.data.title) || 'Post do Blog';
   const postUrl = `https://maskot.com.br/blog/${uid}`;
 
+  // Fetch sidebar banner from Prismic Blog Settings
+  let sidebarBanner: { imageUrl: string; imageAlt?: string; linkUrl: string } | null = null;
+  try {
+    const settings = await client.getSingle('blog_settings');
+    const img = settings.data.sidebar_banner_image;
+    const lnk = settings.data.sidebar_banner_link;
+    if (isFilled.image(img) && isFilled.link(lnk)) {
+      sidebarBanner = {
+        imageUrl: img.url!,
+        imageAlt: img.alt ?? undefined,
+        linkUrl: (lnk as { url: string }).url,
+      };
+    }
+  } catch { /* blog_settings not yet published — banner simply won't show */ }
+
   return (
     <>
       <ReadingProgressBar />
@@ -225,7 +240,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             )}
           </ArticleContent>
 
-          <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} />
+          <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} sidebarBanner={sidebarBanner} />
         </Container>
       </PageWrapper>
     </>

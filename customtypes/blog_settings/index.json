@@ -1,0 +1,30 @@
+{
+  "format": "custom",
+  "id": "blog_settings",
+  "label": "Blog Settings",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "sidebar_banner_image": {
+        "type": "Image",
+        "config": {
+          "label": "Sidebar Banner Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "sidebar_banner_link": {
+        "type": "Link",
+        "config": {
+          "label": "Sidebar Banner Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      }
+    }
+  }
+}

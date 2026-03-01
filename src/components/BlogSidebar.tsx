@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { asText, RichTextField } from '@prismicio/client'
 import { ArrowRight, Mail, Users } from 'lucide-react'
+import StickyBannerAd from './StickyBannerAd'
 
 // ==================== TYPES ====================
 type BlogPost = {
@@ -25,6 +26,12 @@ type BlogPost = {
 type Props = {
   recentPosts: BlogPost[]
   currentPostId?: string
+  sidebarBanner?: {
+    imageUrl: string
+    imageAlt?: string
+    linkUrl: string
+    ctaText?: string
+  } | null
 }
 
 // ==================== STYLES ====================
@@ -256,7 +263,7 @@ const SidebarButton = styled.button`
 `
 
 // ==================== COMPONENT ====================
-export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
+export default function BlogSidebar({ recentPosts, currentPostId, sidebarBanner }: Props) {
   const filteredPosts = recentPosts.filter(post => post.id !== currentPostId).slice(0, 3)
   
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -266,6 +273,15 @@ export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
   
   return (
     <Sidebar>
+      {/* Sticky banner from Prismic Blog Settings */}
+      {sidebarBanner?.imageUrl && (
+        <StickyBannerAd
+          imageUrl={sidebarBanner.imageUrl}
+          imageAlt={sidebarBanner.imageAlt}
+          linkUrl={sidebarBanner.linkUrl}
+          ctaText={sidebarBanner.ctaText}
+        />
+      )}
       <Widget>
         <WidgetTitle>Artigos Populares</WidgetTitle>
         <PostList>

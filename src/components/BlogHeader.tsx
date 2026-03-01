@@ -2,8 +2,9 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { Search, X, LogIn } from 'lucide-react'
 
 // ==================== STYLES ====================
 
@@ -15,63 +16,150 @@ const Wrapper = styled.header`
   z-index: 1000;
 `
 
-/** Row 1: Logo + main CTA */
+/** Row 1: Logo + main nav + CTA */
 const MainBar = styled.div`
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px) saturate(180%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   padding: 0 2rem;
 `
 
 const MainBarInner = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 68px;
+  height: 64px;
+  gap: 1.5rem;
 `
 
 const LogoArea = styled(Link)`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   text-decoration: none;
+  flex-shrink: 0;
   transition: opacity 0.2s ease;
   &:hover { opacity: 0.8; }
 
   .logo-container {
-    height: 32px;
-    position: relative;
+    height: 50px;
     display: flex;
     align-items: center;
   }
+`
 
-  span.badge {
-    background: linear-gradient(135deg, ${props => props.theme.colors.primary} 0%, ${props => props.theme.colors.secondary} 100%);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+const MainNav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+
+  @media (max-width: 1024px) { display: none; }
+`
+
+const NavLink = styled(Link)`
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: ${props => props.theme.colors.textMedium};
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: 7px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    color: ${props => props.theme.colors.textDark};
+    background: ${props => props.theme.colors.pageBackground};
   }
 `
 
-const BackLink = styled(Link)`
+const MainBarRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+`
+
+const HeaderSearchBar = styled.div<{ $open: boolean }>`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: ${props => props.$open ? '200px' : '0'};
+    padding: ${props => props.$open ? '0.45rem 2.2rem 0.45rem 0.85rem' : '0'};
+    border: ${props => props.$open ? `1px solid ${props.theme.colors.borderLight}` : 'none'};
+    border-radius: 8px;
+    font-size: 0.875rem;
+    background: ${props => props.$open ? props.theme.colors.pageBackground : 'transparent'};
+    outline: none;
+    overflow: hidden;
+    transition: width 0.3s ease, padding 0.3s ease;
+
+    &:focus {
+      border-color: ${props => props.theme.colors.primary};
+      box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}12;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    right: ${props => props.$open ? '8px' : '0'};
+    cursor: pointer;
+    color: ${props => props.theme.colors.textMedium};
+    display: flex;
+    align-items: center;
+    padding: 0.3rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    &:hover { color: ${props => props.theme.colors.primary}; background: ${props => props.theme.colors.pageBackground}; }
+  }
+`
+
+const EnterBtn = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: ${props => props.theme.colors.textMedium};
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  border: 1.5px solid ${props => props.theme.colors.borderLight};
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: ${props => props.theme.colors.primary}50;
+    color: ${props => props.theme.colors.primary};
+  }
+
+  @media (max-width: 768px) { display: none; }
+`
+
+const CTABtn = styled(Link)`
   font-size: 0.85rem;
   font-weight: 700;
-  color: ${props => props.theme.colors.primary};
+  color: white;
   text-decoration: none;
   padding: 0.5rem 1.1rem;
   border-radius: 8px;
-  border: 1.5px solid ${props => props.theme.colors.primary}30;
-  transition: all 0.2s ease;
+  background: ${props => props.theme.colors.primary};
+  transition: all 0.2s;
+  white-space: nowrap;
+
   &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-    border-color: ${props => props.theme.colors.primary};
+    background: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  }
+
+  @media (max-width: 600px) { 
+    font-size: 0.8rem;
+    padding: 0.4rem 0.85rem;
   }
 `
 
@@ -88,7 +176,7 @@ const CategoryBar = styled.div`
 `
 
 const CategoryBarInner = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -97,9 +185,9 @@ const CategoryBarInner = styled.div`
 const CategoryLink = styled(Link)<{ $active?: boolean }>`
   display: inline-flex;
   align-items: center;
-  padding: 0 1.25rem;
-  height: 44px;
-  font-size: 0.9rem;
+  padding: 0 1.1rem;
+  height: 42px;
+  font-size: 0.875rem;
   font-weight: ${props => props.$active ? '700' : '500'};
   color: ${props => props.$active ? props.theme.colors.primary : props.theme.colors.textMedium};
   text-decoration: none;
@@ -109,7 +197,7 @@ const CategoryLink = styled(Link)<{ $active?: boolean }>`
 
   &:hover {
     color: ${props => props.theme.colors.primary};
-    border-bottom-color: ${props => props.theme.colors.primary}60;
+    border-bottom-color: ${props => props.theme.colors.primary}50;
   }
 `
 
@@ -146,30 +234,74 @@ interface BlogHeaderProps {
 }
 
 export default function BlogHeader({ categories = [] }: BlogHeaderProps) {
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+  const router = useRouter()
+
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && searchValue.trim()) {
+      router.push(`/blog?q=${encodeURIComponent(searchValue.trim())}`)
+    }
+    if (e.key === 'Escape') {
+      setSearchOpen(false)
+      setSearchValue('')
+    }
+  }
+
   return (
     <Wrapper>
-      {/* Row 1 — branding + exit */}
+      {/* Row 1 — main navigation */}
       <MainBar>
         <MainBarInner>
+          {/* Logo */}
           <LogoArea href="/blog">
             <div className="logo-container">
               <Image
                 src="/logo_maskot_website.png"
                 alt="Maskot Edu"
-                width={120}
-                height={32}
+                width={150}
+                height={40}
                 style={{ width: 'auto', height: '100%' }}
                 priority
               />
             </div>
-            <span className="badge">Blog</span>
           </LogoArea>
 
-          <BackLink href="/">Sair do Blog</BackLink>
+          {/* Main site nav links */}
+          <MainNav>
+            <NavLink href="/#funcionalidades">Funcionalidades</NavLink>
+            <NavLink href="/#precos">Preços</NavLink>
+            <NavLink href="/#sobre">Sobre</NavLink>
+          </MainNav>
+
+          {/* Right side: search + auth + CTA */}
+          <MainBarRight>
+            <HeaderSearchBar $open={searchOpen}>
+              <input
+                type="text"
+                placeholder="Buscar artigos..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={handleSearch}
+                autoFocus={searchOpen}
+              />
+              <span className="search-icon" onClick={() => setSearchOpen(o => !o)}>
+                {searchOpen ? <X size={18} /> : <Search size={18} />}
+              </span>
+            </HeaderSearchBar>
+
+            <EnterBtn href="/login">
+              <LogIn size={15} /> Entrar
+            </EnterBtn>
+
+            <CTABtn href="/#demo">
+              Conhecer o Maskot Edu
+            </CTABtn>
+          </MainBarRight>
         </MainBarInner>
       </MainBar>
 
-      {/* Row 2 — category navigation (wrapped in Suspense for useSearchParams) */}
+      {/* Row 2 — category navigation */}
       <Suspense fallback={
         <CategoryBar>
           <CategoryBarInner>

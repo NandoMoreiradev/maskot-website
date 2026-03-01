@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type BlogPostDocumentDataSlicesSlice = RichTextSlice;
+type BlogPostDocumentDataSlicesSlice = BannerAdSlice | RichTextSlice;
 
 /**
  * Content for Blog Post documents
@@ -151,7 +151,121 @@ export type BlogPostDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = BlogPostDocument;
+/**
+ * Content for Blog Settings documents
+ */
+interface BlogSettingsDocumentData {
+  /**
+   * Sidebar Banner Image field in *Blog Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_settings.sidebar_banner_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  sidebar_banner_image: prismic.ImageField<never>;
+
+  /**
+   * Sidebar Banner Link field in *Blog Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_settings.sidebar_banner_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  sidebar_banner_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Blog Settings document from Prismic
+ *
+ * - **API ID**: `blog_settings`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type BlogSettingsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<BlogSettingsDocumentData>,
+    "blog_settings",
+    Lang
+  >;
+
+export type AllDocumentTypes = BlogPostDocument | BlogSettingsDocument;
+
+/**
+ * Primary content in *BannerAd → Default → Primary*
+ */
+export interface BannerAdSliceDefaultPrimary {
+  /**
+   * Image field in *BannerAd → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_ad.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Link field in *BannerAd → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_ad.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * CTA Text field in *BannerAd → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Ex: Conheça o Maskot Edu →
+   * - **API ID Path**: banner_ad.default.primary.cta_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_text: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for BannerAd Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BannerAdSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BannerAdSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BannerAd*
+ */
+type BannerAdSliceVariation = BannerAdSliceDefault;
+
+/**
+ * BannerAd Shared Slice
+ *
+ * - **API ID**: `banner_ad`
+ * - **Description**: BannerAd
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BannerAdSlice = prismic.SharedSlice<
+  "banner_ad",
+  BannerAdSliceVariation
+>;
 
 /**
  * Primary content in *RichText → Default → Primary*
@@ -222,7 +336,13 @@ declare module "@prismicio/client" {
       BlogPostDocument,
       BlogPostDocumentData,
       BlogPostDocumentDataSlicesSlice,
+      BlogSettingsDocument,
+      BlogSettingsDocumentData,
       AllDocumentTypes,
+      BannerAdSlice,
+      BannerAdSliceDefaultPrimary,
+      BannerAdSliceVariation,
+      BannerAdSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
