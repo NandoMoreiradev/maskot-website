@@ -4,6 +4,7 @@ import FeaturesSection from '@/components/FeaturesSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import PricingSection from '@/components/PricingSection'
 import CTASection from '@/components/CTASection'
+import RecentPostsSection from '@/components/RecentPostsSection'
 
 export default function Home() {
     return (
@@ -13,6 +14,7 @@ export default function Home() {
             <FeaturesSection />
             <TestimonialsSection />
             <PricingSection />
+            <RecentPostsSection />
             <CTASection />
         </>
     )

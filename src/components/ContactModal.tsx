@@ -7,7 +7,7 @@ import { X, Send } from 'lucide-react'
 const Overlay = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(15, 23, 42, 0.4);
     backdrop-filter: blur(4px);
     z-index: 9999;
     display: ${props => props.$isOpen ? 'flex' : 'none'};
@@ -19,13 +19,25 @@ const Overlay = styled.div<{ $isOpen: boolean }>`
 const ModalContainer = styled.div`
     background: white;
     width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    border-radius: 16px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 480px;
+    max-height: 95vh; /* Allow a slightly taller modal if needed */
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     animation: slideUp 0.3s ease-out;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
 
     @keyframes slideUp {
         from { opacity: 0; transform: translateY(20px); }
@@ -34,16 +46,16 @@ const ModalContainer = styled.div`
 `
 
 const ModalHeader = styled.div`
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     h2 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #1e293b;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #0f172a;
         margin: 0;
     }
     
@@ -54,42 +66,54 @@ const ModalHeader = styled.div`
         cursor: pointer;
         padding: 4px;
         border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
         &:hover { background: #f1f5f9; color: #0f172a; }
     }
 `
 
 const ModalBody = styled.div`
-    padding: 2rem;
+    padding: 1.5rem;
 `
 
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
 `
 
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.375rem;
 
     label {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #334155;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #475569;
     }
 
     input, select {
-        padding: 0.75rem 1rem;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
-        font-size: 0.95rem;
+        padding: 0.625rem 0.875rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: #1e293b;
         outline: none;
-        transition: border-color 0.2s;
+        transition: all 0.2s;
+        box-sizing: border-box;
+        width: 100%;
+        background-color: #fff;
+
+        &::placeholder {
+            color: #94a3b8;
+        }
 
         &:focus {
             border-color: ${props => props.theme.colors.primary};
-            box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}20;
+            box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}15;
         }
     }
 `
@@ -97,7 +121,7 @@ const FormGroup = styled.div`
 const Row = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
     
     @media (max-width: 480px) {
         grid-template-columns: 1fr;
@@ -105,23 +129,24 @@ const Row = styled.div`
 `
 
 const SubmitButton = styled.button`
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     background: ${props => props.theme.colors.primary};
     color: white;
     border: none;
-    padding: 1rem;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
+    padding: 0.875rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9375rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: background 0.2s;
+    transition: all 0.2s;
 
     &:hover {
         background: ${props => props.theme.colors.secondary};
+        transform: translateY(-1px);
     }
 `
 
@@ -224,7 +249,7 @@ export default function ContactModal(): React.ReactElement | null {
                             </FormGroup>
                         </Row>
                         <SubmitButton type="submit">
-                            Solicitar Demonstração <Send size={18} />
+                            Enviar <Send size={18} />
                         </SubmitButton>
                     </Form>
                 </ModalBody>

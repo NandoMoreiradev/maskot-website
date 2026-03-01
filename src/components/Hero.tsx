@@ -11,7 +11,7 @@ const float = keyframes`
 `
 
 const HeroSection = styled.section`
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     background: radial-gradient(circle at 50% 50%,
@@ -20,12 +20,12 @@ const HeroSection = styled.section`
     );
     position: relative;
     overflow: hidden;
-    padding-top: 8rem;
+    padding-top: 10rem;
 
     @media (max-width: 768px) {
         padding-top: 9rem;
         min-height: auto;
-        padding-bottom: 4rem;
+        padding-bottom: 4em;
     }
 `
 

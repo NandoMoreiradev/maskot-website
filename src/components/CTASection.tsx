@@ -2,16 +2,15 @@
 
 import styled from 'styled-components'
 
-// Wrapper externo para dar espaçamento na página (fundo do site)
+
 const SectionWrapper = styled.section`
-    padding: 6rem 2rem;
+    padding: 4rem 1rem;
     background-color: ${props => props.theme.colors.pageBackground};
     display: flex;
     justify-content: center;
 `
 
-// O Card mantém a identidade visual do seu Footer (Escuro com gradiente)
-// Alterei o background base para #1a1a1a (igual ao seu footer) para garantir leitura
+
 const CTACard = styled.div`
     width: 100%;
     max-width: 1000px;
@@ -21,7 +20,7 @@ const CTACard = styled.div`
     );
     border: 2px solid ${props => props.theme.colors.primary}30;
     border-radius: 16px;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -67,7 +66,6 @@ const CTASubtitle = styled.p`
     margin-right: auto;
 `
 
-// Transformado em 'button' para acionar o modal
 const CTAButton = styled.button`
     border: none;
     display: inline-block;
@@ -98,10 +96,10 @@ export default function CTASection() {
                 <Content>
                     <CTATitle>Pronto para transformar sua escola?</CTATitle>
                     <CTASubtitle>
-                        Fale com nossos especialistas e veja como o Maskot pode escalar suas matrículas
+                        Fale com nossos especialistas e veja como o Maskot pode escalar suas matrículas e levar agilidade para toda a sua gestão.
                     </CTASubtitle>
                     <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
-                        Falar com Especialista
+                        Fale com um Consultor
                     </CTAButton>
                 </Content>
             </CTACard>

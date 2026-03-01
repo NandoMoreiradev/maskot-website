@@ -68,7 +68,7 @@ const Logo = styled.div`
     gap: 0.75rem;
 
     img {
-        height: 40px;
+        height: 60px;
         width: auto;
     }
 
@@ -268,7 +268,7 @@ export default function Footer() {
                 <FooterContent>
                     <CompanySection>
                         <Logo>
-                            <Image src="/maskot_crm_logo1.png" alt="Maskot Edu" width={180} height={50} />
+                            <Image src="/maskot_crm_logo_branca.png" alt="Maskot Edu" width={180} height={50} />
                         </Logo>
                         <CompanyDescription>
                             O CRM que realmente entende escolas. Centralize toda a gestão de leads,

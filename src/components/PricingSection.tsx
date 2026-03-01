@@ -351,8 +351,8 @@ const Disclaimer = styled.p`
   text-align: center;
   color: ${props => props.theme.colors.textMedium};
   font-size: ${props => props.theme.typography.fontSize.sm};
-  margin-top: -2rem;
-  margin-bottom: 4rem;
+  margin-top: 1rem;
+  margin-bottom: -1rem;
   
   a {
     color: ${props => props.theme.colors.primary};
@@ -585,13 +585,13 @@ export default function PricingSection() {
               $isActive={activeTab === 'CRM'} 
               onClick={() => setActiveTab('CRM')}
             >
-              Maskot CRM (Vendas)
+              Maskot CRM
             </ToggleButton>
             <ToggleButton 
               $isActive={activeTab === 'WA'} 
               onClick={() => setActiveTab('WA')}
             >
-              WhatsApp & IA (Add-ons)
+              WhatsApp & IA
             </ToggleButton>
           </MainToggleContainer>
 
@@ -601,13 +601,13 @@ export default function PricingSection() {
                 $isActive={waMode === 'INBOX'} 
                 onClick={() => setWaMode('INBOX')}
               >
-                Módulo Inbox (Humano)
+                Chatbot Tradicional
               </SubToggleButton>
               <SubToggleButton 
                 $isActive={waMode === 'AI'} 
                 onClick={() => setWaMode('AI')}
               >
-                Secretaria IA (Gemini)
+                Chatbot com IA
               </SubToggleButton>
             </SubToggleContainer>
           )}

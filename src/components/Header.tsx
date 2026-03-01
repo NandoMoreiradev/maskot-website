@@ -41,7 +41,7 @@ const LogoLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     position: relative;
-    height: 40px;
+    height: 50px;
     width: auto;
     transition: opacity 0.2s ease;
 
