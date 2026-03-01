@@ -268,6 +268,91 @@ export type BannerAdSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ContentTable → Default → Primary*
+ */
+export interface ContentTableSliceDefaultPrimary {
+  /**
+   * title field in *ContentTable → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_table.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * col1_header field in *ContentTable → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_table.default.primary.col1_header
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  col1_header: prismic.KeyTextField;
+
+  /**
+   * col2_header field in *ContentTable → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_table.default.primary.col2_header
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  col2_header: prismic.KeyTextField;
+
+  /**
+   * col3_header field in *ContentTable → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_table.default.primary.col3_header
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  col3_header: prismic.KeyTextField;
+
+  /**
+   * col4_header field in *ContentTable → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_table.default.primary.col4_header
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  col4_header: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for ContentTable Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContentTableSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContentTableSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContentTable*
+ */
+type ContentTableSliceVariation = ContentTableSliceDefault;
+
+/**
+ * ContentTable Shared Slice
+ *
+ * - **API ID**: `content_table`
+ * - **Description**: ContentTable
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContentTableSlice = prismic.SharedSlice<
+  "content_table",
+  ContentTableSliceVariation
+>;
+
+/**
  * Primary content in *RichText → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
@@ -343,6 +428,10 @@ declare module "@prismicio/client" {
       BannerAdSliceDefaultPrimary,
       BannerAdSliceVariation,
       BannerAdSliceDefault,
+      ContentTableSlice,
+      ContentTableSliceDefaultPrimary,
+      ContentTableSliceVariation,
+      ContentTableSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,

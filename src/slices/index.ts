@@ -4,5 +4,6 @@ import dynamic from "next/dynamic";
 
 export const components = {
   banner_ad: dynamic(() => import("./BannerAd")),
+  content_table: dynamic(() => import("./ContentTable")),
   rich_text: dynamic(() => import("./RichText")),
 };

@@ -1,0 +1,54 @@
+{
+  "id": "content_table",
+  "type": "SharedSlice",
+  "name": "ContentTable",
+  "description": "ContentTable",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "col1_header": {
+          "type": "Text",
+          "config": {
+            "label": "col1_header",
+            "placeholder": ""
+          }
+        },
+        "col2_header": {
+          "type": "Text",
+          "config": {
+            "label": "col2_header",
+            "placeholder": ""
+          }
+        },
+        "col3_header": {
+          "type": "Text",
+          "config": {
+            "label": "col3_header",
+            "placeholder": ""
+          }
+        },
+        "col4_header": {
+          "type": "Text",
+          "config": {
+            "label": "col4_header",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
