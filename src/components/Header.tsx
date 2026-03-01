@@ -533,6 +533,10 @@ export default function Header() {
                         <SimpleLink href="/sobre" onClick={handleLinkClick}>
                             Sobre
                         </SimpleLink>
+
+                        <SimpleLink href="/blog" onClick={handleLinkClick}>
+                            Blog
+                        </SimpleLink>
                     </NavLinks>
 
                     <CTAButtons>
