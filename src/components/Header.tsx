@@ -553,7 +553,7 @@ export default function Header() {
                                 window.dispatchEvent(new Event('open-contact-modal'))
                             }}
                         >
-                            Falar com Especialista
+                            Fale com um Consultor
                         </TrialButton>
                     </CTAButtons>
                 </Nav>

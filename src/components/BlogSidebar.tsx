@@ -329,7 +329,7 @@ export default function BlogSidebar({ recentPosts, currentPostId, sidebarBanner 
           <h5>Consultoria Especializada</h5>
           <p>Tire suas dúvidas e veja como o Maskot pode ajudar sua escola a faturar mais.</p>
           <SidebarButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
-            Falar com Especialista <ArrowRight size={18} />
+            Fale com um Consultor <ArrowRight size={18} />
           </SidebarButton>
         </ExpertWidget>
       </Widget>

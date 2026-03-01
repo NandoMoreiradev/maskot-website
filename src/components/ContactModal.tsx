@@ -200,7 +200,7 @@ export default function ContactModal(): React.ReactElement | null {
         <Overlay $isOpen={isOpen} onClick={() => setIsOpen(false)}>
             <ModalContainer onClick={e => e.stopPropagation()}>
                 <ModalHeader>
-                    <h2>Falar com Especialista</h2>
+                    <h2>Fale com um Consultor</h2>
                     <button onClick={() => setIsOpen(false)}><X size={20} /></button>
                 </ModalHeader>
                 <ModalBody>

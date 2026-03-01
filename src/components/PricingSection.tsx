@@ -460,7 +460,7 @@ const PLANS_WA_INBOX = [
       'Dashboard de Atendimento',
       'Histórico Centralizado'
     ],
-    cta: 'Falar com Especialista',
+    cta: 'Falar com um Consultor',
     variant: 'outline' as const
   },
   {
@@ -478,7 +478,7 @@ const PLANS_WA_INBOX = [
       'Departamentos (Filas)',
       'Relatórios de Performance'
     ],
-    cta: 'Falar com Especialista',
+    cta: 'Falar com um Consultor',
     variant: 'primary' as const
   },
   {
@@ -496,7 +496,7 @@ const PLANS_WA_INBOX = [
       'Gestor de Conta Dedicado',
       'SLA Prioritário'
     ],
-    cta: 'Falar com Especialista',
+    cta: 'Falar com um Consultor',
     variant: 'outline' as const
   }
 ]
@@ -517,7 +517,7 @@ const PLANS_WA_AI = [
       'Agendamento de Visitas Automático',
       'Tira dúvidas frequentes'
     ],
-    cta: 'Falar com Especialista',
+    cta: 'Falar com um Consultor',
     variant: 'outline' as const
   },
   {
@@ -535,7 +535,7 @@ const PLANS_WA_AI = [
       'Transbordo para Humano Inteligente',
       'Personalidade da Marca Customizável'
     ],
-    cta: 'Falar com Especialista',
+    cta: 'Falar com um Consultor',
     variant: 'primary' as const
   },
   {

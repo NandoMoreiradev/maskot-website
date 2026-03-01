@@ -320,7 +320,7 @@ export default function Hero() {
                     <TextContent>
                         <TechBadge>
                             <Rocket size={18} />
-                            <span>Especialista em Crescimento Escolar</span>
+                            <span>Especialistas em Crescimento Escolar</span>
                         </TechBadge>
 
                         <MainHeading>
@@ -332,16 +332,16 @@ export default function Hero() {
                         </Subtitle>
 
                         <TrustBadges>
-                            <div><ShieldCheck /> API Oficial (Sem Bloqueios)</div>
+                            <div><ShieldCheck /> API Oficial</div>
                             <div><CheckCircle /> CRM Educacional Completo</div>
                         </TrustBadges>
 
                         <ButtonGroup>
                             <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
-                                Falar com Especialista
+                                Fale com um Consultor
                             </CTAButton>
                             <SecondaryButton>
-                                Ver o CRM por dentro <ArrowRight size={18} />
+                                Veja o CRM por dentro <ArrowRight size={18} />
                             </SecondaryButton>
                         </ButtonGroup>
                     </TextContent>
