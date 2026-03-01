@@ -86,8 +86,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 function calculateReadingTime(slices: unknown[]): number {
   let totalWords = 0;
   slices.forEach((slice) => {
-    if (typeof slice === 'object' && slice !== null && 'slice_type' in slice && slice.slice_type === 'rich_text') {
-       const s = slice as any;
+    if (
+      typeof slice === 'object' && 
+      slice !== null && 
+      'slice_type' in slice && 
+      slice.slice_type === 'rich_text' &&
+      'primary' in slice
+    ) {
+       const s = slice as { primary: { text: RichTextField } };
        const text = asText(s.primary.text);
        if (text) totalWords += text.split(/\s+/).filter(w => w.length > 0).length;
     }
