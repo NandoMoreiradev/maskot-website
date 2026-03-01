@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
 import { asText, RichTextField } from '@prismicio/client'
+import { ArrowRight, Mail, Users } from 'lucide-react'
 
 // ==================== TYPES ====================
 type BlogPost = {
@@ -26,11 +27,11 @@ type Props = {
   currentPostId?: string
 }
 
-// ==================== STYLES (mantidos iguais) ====================
+// ==================== STYLES ====================
 const Sidebar = styled.aside`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
   
   @media (min-width: 968px) {
     position: sticky;
@@ -40,50 +41,65 @@ const Sidebar = styled.aside`
 `
 
 const Widget = styled.div`
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid ${props => props.theme.colors.borderLight};
-  box-shadow: ${props => props.theme.shadows.sm};
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 `
 
-const WidgetTitle = styled.h3`
+const WidgetTitle = styled.h4`
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 800;
   color: ${props => props.theme.colors.textDark};
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid ${props => props.theme.colors.primary};
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &:after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: ${props => props.theme.colors.borderLight}80;
+  }
 `
 
 const PostList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 `
 
 const MiniPostCard = styled.li`
   a {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
     text-decoration: none;
-    transition: ${props => props.theme.transitions.base};
+    align-items: center;
     
-    &:hover {
-      opacity: 0.8;
+    &:hover h5 {
+      color: ${props => props.theme.colors.primary};
+    }
+
+    &:hover .img-wrapper img {
+      transform: scale(1.1);
     }
   }
-`
 
-const MiniImage = styled.div`
-  position: relative;
-  width: 80px;
-  height: 80px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  overflow: hidden;
-  background: ${props => props.theme.colors.lightGray};
+  .img-wrapper {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+    img {
+      transition: transform 0.3s ease;
+    }
+  }
 `
 
 const MiniContent = styled.div`
@@ -92,88 +108,151 @@ const MiniContent = styled.div`
   flex-direction: column;
   gap: 0.25rem;
   
-  h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
+  h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
     color: ${props => props.theme.colors.textDark};
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: color 0.2s;
   }
   
   span {
-    font-size: 0.75rem;
-    color: ${props => props.theme.colors.textMedium};
+    font-size: 0.8rem;
+    color: ${props => props.theme.colors.textMedium}80;
   }
 `
 
-const CTABox = styled.div`
-  background: linear-gradient(135deg, ${props => props.theme.colors.primary} 0%, #0056b3 100%);
-  color: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  text-align: center;
+const NewsletterWidget = styled.div`
+  background: #f8fbff;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid ${props => props.theme.colors.primary}15;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   
-  h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+  .icon-box {
+    width: 48px;
+    height: 48px;
+    background: ${props => props.theme.colors.primary}10;
+    color: ${props => props.theme.colors.primary};
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
+
+  h5 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: ${props => props.theme.colors.textDark};
+    line-height: 1.2;
+  }
+
   p {
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
-    opacity: 0.9;
+    font-size: 0.95rem;
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.5;
   }
 `
 
-const NewsletterForm = styled.form`
+const NewsForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   
   input {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    border: 1px solid ${props => props.theme.colors.borderLight};
+    border-radius: 10px;
     font-size: 0.9rem;
     outline: none;
+    transition: all 0.2s;
     
-    &::placeholder {
-      color: #999;
+    &:focus {
+      border-color: ${props => props.theme.colors.primary};
+      box-shadow: 0 0 0 4px ${props => props.theme.colors.primary}10;
     }
   }
   
   button {
-    padding: 0.75rem;
-    background: ${props => props.theme.colors.textDark};
+    padding: 0.9rem;
+    background: ${props => props.theme.colors.primary};
     color: white;
     border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    border-radius: 10px;
+    font-weight: 700;
     cursor: pointer;
-    transition: ${props => props.theme.transitions.base};
+    transition: all 0.2s;
     
     &:hover {
-      background: #000;
+      background: #0056b3;
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
     }
   }
 `
 
-const CategoryBadge = styled.span`
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 3px 6px;
-  border-radius: 4px;
-  background: ${props => props.theme.colors.primary}15;
+const ExpertWidget = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid ${props => props.theme.colors.borderLight}50;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .users-icon {
+    width: 54px;
+    height: 54px;
+    background: #28a74510;
+    color: #28a745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  h5 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: ${props => props.theme.colors.textDark};
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.5;
+  }
+`
+
+const SidebarButton = styled.button`
+  width: 100%;
+  padding: 0.9rem;
+  background: white;
   color: ${props => props.theme.colors.primary};
-  text-transform: uppercase;
-  margin-bottom: 0.25rem;
+  border: 2px solid ${props => props.theme.colors.primary};
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: ${props => props.theme.colors.primary};
+    color: white;
+  }
 `
 
 // ==================== COMPONENT ====================
@@ -182,128 +261,61 @@ export default function BlogSidebar({ recentPosts, currentPostId }: Props) {
   
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const email = formData.get('email')
-    
-    console.log('Newsletter signup:', email)
-    alert('Obrigado por se inscrever! 🎉')
+    alert('Inscrição realizada! Fique de olho no seu e-mail. 🎉')
   }
   
   return (
     <Sidebar>
-      {filteredPosts.length > 0 && (
-        <Widget>
-          <WidgetTitle>📚 Posts Recentes</WidgetTitle>
-          <PostList>
-            {filteredPosts.map((post) => {
-              const postTitle = asText(post.data.title) || 'Post sem título';
-              
-              return (
-                <MiniPostCard key={post.id}>
-                  <Link href={`/blog/${post.uid}`}>
-                    <MiniImage>
-                      {post.data.featured_image?.url ? (
-                        <Image
-                          src={post.data.featured_image.url}
-                          alt={post.data.featured_image.alt || postTitle}
-                          fill
-                          style={{ objectFit: 'cover' }}
-                        />
-                      ) : (
-                        <div style={{
-                          width: '100%',
-                          height: '100%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '2rem',
-                          color: '#ddd'
-                        }}>
-                          📄
-                        </div>
-                      )}
-                    </MiniImage>
-                    
-                    <MiniContent>
-                      {post.data.category && (
-                        <CategoryBadge>{post.data.category}</CategoryBadge>
-                      )}
-                      <h4>{postTitle}</h4>
-                      <span>
-                        {new Date(post.first_publication_date).toLocaleDateString('pt-BR', {
-                          day: '2-digit',
-                          month: 'short',
-                          year: 'numeric'
-                        })}
-                      </span>
-                    </MiniContent>
-                  </Link>
-                </MiniPostCard>
-              );
-            })}
-          </PostList>
-        </Widget>
-      )}
-      
       <Widget>
-        <CTABox>
-          <h4>📧 Fique por Dentro</h4>
-          <p>Receba dicas exclusivas de gestão escolar toda semana</p>
-          <NewsletterForm onSubmit={handleNewsletterSubmit}>
-            <input 
-              type="email" 
-              name="email"
-              placeholder="Seu melhor e-mail" 
-              required 
-            />
-            <button type="submit">Quero Receber</button>
-          </NewsletterForm>
-        </CTABox>
+        <WidgetTitle>Artigos Populares</WidgetTitle>
+        <PostList>
+          {filteredPosts.map((post) => {
+            const postTitle = asText(post.data.title) || 'Post sem título';
+            return (
+              <MiniPostCard key={post.id}>
+                <Link href={`/blog/${post.uid}`}>
+                  <div className="img-wrapper">
+                    <Image
+                      src={post.data.featured_image?.url || ''}
+                      alt={asText(post.data.title)}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <MiniContent>
+                    <h5>{postTitle}</h5>
+                    <span>
+                      {new Date(post.first_publication_date).toLocaleDateString('pt-BR')}
+                    </span>
+                  </MiniContent>
+                </Link>
+              </MiniPostCard>
+            );
+          })}
+        </PostList>
       </Widget>
       
       <Widget>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>
-            🚀
-          </div>
-          <h4 style={{ 
-            fontSize: '1rem', 
-            fontWeight: 700, 
-            marginBottom: '0.5rem',
-            color: '#343A40'
-          }}>
-            Pronto para Transformar sua Escola?
-          </h4>
-          <p style={{ 
-            fontSize: '0.85rem', 
-            color: '#6C757D', 
-            marginBottom: '1rem' 
-          }}>
-            Fale com nossos especialistas agora mesmo
-          </p>
-          <button 
-            onClick={(e) => {
-              e.preventDefault();
-              window.dispatchEvent(new Event('open-contact-modal'));
-            }}
-            style={{
-              display: 'inline-block',
-              padding: '0.75rem 1.5rem',
-              background: '#007BFF',
-              color: 'white',
-              borderRadius: '8px',
-              fontWeight: 600,
-              fontSize: '0.9rem',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'transform 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-          >
-            Falar com Especialista
-          </button>
-        </div>
+        <NewsletterWidget>
+          <div className="icon-box"><Mail size={24} /></div>
+          <h5>Gestão Escolar na sua caixa de entrada</h5>
+          <p>Receba semanalmente nossas melhores estratégias para sua escola.</p>
+          <NewsForm onSubmit={handleNewsletterSubmit}>
+            <input type="email" placeholder="Seu e-mail profissional" required />
+            <button type="submit">Inscrever-se Grátis</button>
+          </NewsForm>
+        </NewsletterWidget>
+      </Widget>
+      
+      <Widget>
+        <ExpertWidget>
+          <div className="users-icon"><Users size={28} /></div>
+          <h5>Consultoria Especializada</h5>
+          <p>Tire suas dúvidas e veja como o Maskot pode ajudar sua escola a faturar mais.</p>
+          <SidebarButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
+            Falar com Especialista <ArrowRight size={18} />
+          </SidebarButton>
+        </ExpertWidget>
       </Widget>
     </Sidebar>
   )

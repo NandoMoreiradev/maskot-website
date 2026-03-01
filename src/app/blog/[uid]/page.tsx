@@ -6,9 +6,12 @@ import { components } from "@/slices";
 import { asText, RichTextField } from "@prismicio/client";
 import Image from "next/image";
 import BlogSidebar from "@/components/BlogSidebar";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
+import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter } from "lucide-react";
 import { 
   PageWrapper, Container, ArticleContent, PostHeader, 
-  FeaturedImage, RichTextWrapper, CTAButton
+  FeaturedImage, RichTextWrapper, AuthorBox, CTAButton,
+  MetaInfo, RelatedSection, RelatedCard, ShareButtons
 } from "./styles";
 
 type Params = { uid: string };
@@ -55,27 +58,18 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${title} | Maskot Blog`,
     description,
-    
     openGraph: {
       title,
       description,
       url: `https://maskot.com.br/blog/${uid}`,
       siteName: 'Maskot',
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: title,
-        }
-      ],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
       locale: 'pt_BR',
       type: 'article',
       publishedTime,
       modifiedTime,
       authors: ['Equipe Maskot'],
     },
-    
     twitter: {
       card: 'summary_large_image',
       title,
@@ -83,87 +77,21 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       images: [imageUrl],
       creator: '@maskot',
     },
-    
-    alternates: {
-      canonical: `https://maskot.com.br/blog/${uid}`,
-    },
-    
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    
+    alternates: { canonical: `https://maskot.com.br/blog/${uid}` },
     keywords: [category, 'gestão escolar', 'CRM educacional', 'Maskot'],
-  };
-}
-
-// ==================== STRUCTURED DATA (Schema.org) ====================
-function generateArticleSchema(post: BlogPost) {
-  const title = asText(post.data.title) || '';
-  const description = asText(post.data.excerpt) || '';
-  const imageUrl = post.data.featured_image?.url || null;
-  
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": title,
-    "description": description,
-    "image": imageUrl,
-    "datePublished": post.first_publication_date,
-    "dateModified": post.last_publication_date,
-    "author": {
-      "@type": "Organization",
-      "name": "Maskot",
-      "url": "https://maskot.com.br"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maskot",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://maskot.com.br/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://maskot.com.br/blog/${post.uid}`
-    }
   };
 }
 
 // ==================== CALCULAR TEMPO DE LEITURA ====================
 function calculateReadingTime(slices: unknown[]): number {
   let totalWords = 0;
-  
   slices.forEach((slice) => {
-    if (
-      typeof slice === 'object' && 
-      slice !== null && 
-      'slice_type' in slice && 
-      slice.slice_type === 'rich_text' &&
-      'primary' in slice &&
-      slice.primary &&
-      typeof slice.primary === 'object' &&
-      'text' in slice.primary
-    ) {
-      try {
-        const text = asText(slice.primary.text as RichTextField);
-        if (text && typeof text === 'string') {
-          totalWords += text.split(/\s+/).filter(word => word.length > 0).length;
-        }
-      } catch {
-        // Ignora erros de conversão
-      }
+    if (typeof slice === 'object' && slice !== null && 'slice_type' in slice && slice.slice_type === 'rich_text') {
+       const s = slice as any;
+       const text = asText(s.primary.text);
+       if (text) totalWords += text.split(/\s+/).filter(w => w.length > 0).length;
     }
   });
-  
   return Math.max(1, Math.ceil(totalWords / 200));
 }
 
@@ -173,61 +101,59 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   
   const client = createPrismicClient();
   const page = await client.getByUID("blog_post", uid).catch(() => notFound()) as BlogPost;
-  const recentPosts = await client.getAllByType("blog_post", { limit: 4 }) as BlogPost[];
+  
+  // Recent posts for sidebar
+  const recentPosts = await client.getAllByType("blog_post", { 
+    limit: 4,
+    orderings: { field: 'document.first_publication_date', direction: 'desc' }
+  }) as BlogPost[];
+
+  // Related posts (same category, excluding current)
+  const allRelated = await client.getAllByType("blog_post", {
+    limit: 6, // Fetch more to filter
+    orderings: { field: 'document.first_publication_date', direction: 'desc' }
+  }) as BlogPost[];
+  
+  const relatedPosts = allRelated
+    .filter(p => p.id !== page.id)
+    .sort((a, b) => {
+      // Prioritize same category
+      if (a.data.category === page.data.category && b.data.category !== page.data.category) return -1;
+      if (a.data.category !== page.data.category && b.data.category === page.data.category) return 1;
+      return 0;
+    })
+    .slice(0, 3);
   
   const readingTime = calculateReadingTime(page.data.slices);
-  const articleSchema = generateArticleSchema(page);
   const postTitle = asText(page.data.title) || 'Post do Blog';
-  const postExcerpt = asText(page.data.excerpt) || '';
+  const postUrl = `https://maskot.com.br/blog/${uid}`;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
+      <ReadingProgressBar />
       
       <PageWrapper>
         <Container>
           <ArticleContent>
             <PostHeader>
-              {page.data.category && (
-                <span style={{
-                  display: 'inline-block',
-                  background: '#007BFF15',
-                  color: '#007BFF',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  padding: '4px 10px',
-                  borderRadius: '6px',
-                  marginBottom: '1rem',
-                  textTransform: 'uppercase',
-                }}>
-                  {page.data.category}
-                </span>
-              )}
-              
+              <span className="category">{page.data.category || 'Gestão Escolar'}</span>
               <h1>{postTitle}</h1>
-              <p>{postExcerpt}</p>
+              <div className="excerpt">{asText(page.data.excerpt)}</div>
               
-              <div style={{
-                display: 'flex',
-                gap: '1rem',
-                flexWrap: 'wrap',
-                fontSize: '0.9rem',
-                color: '#6C757D',
-                paddingTop: '1rem',
-                borderTop: '1px solid #DEE2E6',
-              }}>
+              <MetaInfo>
                 <span>
-                  📅 {new Date(page.first_publication_date).toLocaleDateString('pt-BR', {
+                  <Calendar size={18} color="#007BFF" /> 
+                  {new Date(page.first_publication_date).toLocaleDateString('pt-BR', {
                     day: '2-digit',
                     month: 'long',
                     year: 'numeric'
                   })}
                 </span>
-                <span>⏱️ {readingTime} min de leitura</span>
-              </div>
+                <span>
+                  <Clock size={18} color="#007BFF" /> 
+                  {readingTime} min de leitura
+                </span>
+              </MetaInfo>
             </PostHeader>
 
             {page.data.featured_image?.url && (
@@ -237,7 +163,6 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                   alt={page.data.featured_image.alt || postTitle}
                   fill
                   priority
-                  style={{ objectFit: "cover" }}
                 />
               </FeaturedImage>
             )}
@@ -246,24 +171,52 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
               <SliceZone slices={page.data.slices as never} components={components} />
             </RichTextWrapper>
             
-            <div style={{
-              marginTop: '3rem',
-              padding: '2rem',
-              background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)',
-              borderRadius: '12px',
-              color: 'white',
-              textAlign: 'center',
-            }}>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-                Gostou do Conteúdo?
-              </h3>
-              <p style={{ marginBottom: '1.5rem', opacity: 0.9 }}>
-                Veja como o Maskot pode transformar a gestão da sua escola
+            <ShareButtons>
+              <span><Share2 size={20} /> Compartilhe:</span>
+              <div className="icons">
+                <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${postTitle}`} target="_blank" rel="noopener noreferrer">
+                  <Twitter size={18} />
+                </a>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer">
+                  <Facebook size={18} />
+                </a>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer">
+                  <Linkedin size={18} />
+                </a>
+              </div>
+            </ShareButtons>
+
+            <AuthorBox>
+              <h3>Gostou deste conteúdo?</h3>
+              <p>
+                O Maskot ajuda centenas de escolas a crescerem e fidelizarem alunos. 
+                Que tal conhecer na prática?
               </p>
               <CTAButton href="/">
-                Conhecer o Maskot
+                Agendar demonstração gratuita
               </CTAButton>
-            </div>
+            </AuthorBox>
+
+            {relatedPosts.length > 0 && (
+              <RelatedSection>
+                <h2>Continue lendo</h2>
+                <div className="grid">
+                  {relatedPosts.map(post => (
+                    <RelatedCard key={post.id} href={`/blog/${post.uid}`}>
+                      <div className="img-box">
+                        <Image 
+                          src={post.data.featured_image?.url || ''} 
+                          alt={asText(post.data.title)} 
+                          fill 
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                      <h3>{asText(post.data.title)}</h3>
+                    </RelatedCard>
+                  ))}
+                </div>
+              </RelatedSection>
+            )}
           </ArticleContent>
 
           <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} />
