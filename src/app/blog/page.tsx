@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { createPrismicClient } from '@/prismicio';
-import BlogFeed from '@/components/BlogFeed'; // Importamos o novo componente
-import { PageWrapper, HeaderArea } from './styles'; // Mantemos apenas o Wrapper e Header do styles antigo
+import BlogFeed from '@/components/BlogFeed';
+import { PageWrapper } from './styles';
+import { BlogPageInner, BlogPageHeader } from './blog-page-styles';
 
 export const metadata: Metadata = {
   title: 'Blog Educacional | Maskot',
@@ -18,14 +19,15 @@ export default async function BlogPage() {
 
   return (
     <PageWrapper>
-      <HeaderArea>
-        <h1>Blog do Maskot</h1>
-        <p>Conteúdo estratégico para revolucionar sua escola</p>
-      </HeaderArea>
+      <BlogPageInner>
+        <BlogPageHeader>
+          <h1>Blog do Maskot</h1>
+          <p>Conteúdo estratégico para revolucionar sua escola</p>
+        </BlogPageHeader>
 
-      {/* Passamos os dados para o componente interativo */}
-      <BlogFeed posts={posts} />
-
+        {/* Passamos os dados para o componente interativo */}
+        <BlogFeed posts={posts} />
+      </BlogPageInner>
     </PageWrapper>
   );
 }

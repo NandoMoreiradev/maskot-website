@@ -19,11 +19,11 @@ export const ProgressBar = styled.div<{ width: number }>`
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: white;
-  padding-top: 5rem;
+  padding-top: 7.5rem; /* accounts for 68px main bar + 44px category bar */
   padding-bottom: 6rem;
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
-    padding-top: 6rem;
+    padding-top: 8rem;
   }
 `
 
@@ -37,7 +37,7 @@ export const Container = styled.div`
   grid-template-columns: 1fr;
   gap: 3rem;
   
-  @media (min-width: ${props => props.theme.breakpoints.md}) {
+  @media (min-width: 1240px) {
     padding: 0 2rem;
   }
   

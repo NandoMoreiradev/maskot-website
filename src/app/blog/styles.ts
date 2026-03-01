@@ -3,26 +3,20 @@
 import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
-  padding-top: 8rem; /* Aumentado para alinhar com o novo Hero */
+  padding-top: 7.5rem; /* dual header: 68px main + 44px category bar */
   padding-bottom: 6rem;
   background-color: ${props => props.theme.colors.pageBackground};
   min-height: 100vh;
 `;
 
+/* For external use if needed */
 export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
-  
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 4rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
+  padding: 0 1.5rem;
+  @media (min-width: 1240px) { padding: 0 2rem; }
 `;
+
 
 export const HeaderArea = styled.div`
   text-align: center;
