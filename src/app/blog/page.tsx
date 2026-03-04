@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { createPrismicClient } from '@/prismicio';
+
+// Revalidate every 60 seconds as a fallback (webhook handles instant updates)
+export const revalidate = 60;
 import BlogFeed from '@/components/BlogFeed';
 import { PageWrapper } from './styles';
 import { BlogPageInner, BlogPageHeader } from './blog-page-styles';
