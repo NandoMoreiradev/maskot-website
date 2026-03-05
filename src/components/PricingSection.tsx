@@ -371,55 +371,60 @@ const PLANS_CRM = [
     description: 'Para pequenas escolas que precisam organizar o comercial.',
     price: 'Sob Consulta',
     period: '',
-    color: '#28A745', 
+    color: '#28A745',
     icon: Zap,
     isPopular: false,
     features: [
       'Até 2 Usuários',
-      'Até 1.000 Leads',
-      'Funil de Vendas Visual (Kanban)',
-      'Histórico de Atividades',
-      'Suporte via Email'
+      'Até 1.000 Leads Ativos',
+      'Funil de Matrículas (Kanban Visual)',
+      'Gestão de Atividades e Histórico',
+      'Calendário de Visitas',
+      'Gestão de Tarefas da Equipe',
+      'Suporte via E-mail'
     ],
     cta: 'Começar Agora',
     variant: 'outline' as const
   },
   {
-    id: 'pro',
-    name: 'Pro',
-    description: 'A máquina de vendas com automação para escalar.',
+    id: 'crescimento',
+    name: 'Crescimento',
+    description: 'A máquina de matrículas com automação para escalar.',
     price: 'Sob Consulta',
     period: '',
-    color: '#007BFF', 
+    color: '#007BFF',
     icon: Crown,
     isPopular: true,
     features: [
       'Até 5 Usuários',
-      'Até 5.000 Leads',
+      'Até 5.000 Leads Ativos',
       'Automações de Funil (Régua)',
-      'Disparos em Massa (Campanhas)',
-      'Domínio de Email Próprio',
-      'Analytics Avançado'
+      'Jornadas Automatizadas de Lead',
+      'Campanhas de Matrícula',
+      'Disparos em Massa (E-mail)',
+      'Domínio de E-mail Próprio',
+      'Analytics Avançado de Captação'
     ],
     cta: 'Começar Agora',
     variant: 'primary' as const
   },
   {
-    id: 'enterprise',
-    name: 'Enterprise',
+    id: 'escala',
+    name: 'Escala',
     description: 'Para grandes operações que precisam de inteligência.',
     price: 'Sob Consulta',
     period: '',
-    color: '#FD7E14', 
+    color: '#FD7E14',
     icon: Building2,
     isPopular: false,
     features: [
       '15 Usuários',
       'Leads Ilimitados',
-      'IA Preditiva de Risco',
-      'Gerente de Sucesso Dedicado',
+      'IA Preditiva de Risco de Evasão',
       'Relatórios Customizados',
-      'Upload até 100MB'
+      'Gerente de Sucesso Dedicado',
+      'Suporte Prioritário',
+      'Upload até 200MB'
     ],
     cta: 'Falar com Consultor',
     variant: 'outline' as const
@@ -434,10 +439,13 @@ const PLANS_CRM = [
     icon: Building2,
     isPopular: false,
     features: [
+      'Usuários Ilimitados',
+      '2 Unidades Inclusas',
       'Painel Consolidado do Grupo',
-      'Relatórios Comparativos',
+      'Relatórios Comparativos entre Unidades',
       'Gestão Centralizada de Matrículas',
-      'API Aberta para Integrações'
+      'Gerente de Sucesso Dedicado',
+      'Faturamento Consolidado por Grupo'
     ],
     cta: 'Cotar para Rede',
     variant: 'outline' as const
@@ -446,58 +454,24 @@ const PLANS_CRM = [
 
 const PLANS_WA_INBOX = [
   {
-    id: 'wa_start',
-    name: 'Inbox Start',
-    description: 'Atendimento Profissional para começar.',
-    price: 'Sob Consulta',
-    period: '',
-    color: '#28A745',
-    icon: MessageCircle,
-    isPopular: false,
-    features: [
-      'Usuários Ilimitados',
-      'WhatsApp Oficial (API)',
-      'Dashboard de Atendimento',
-      'Histórico Centralizado'
-    ],
-    cta: 'Falar com um Consultor',
-    variant: 'outline' as const
-  },
-  {
-    id: 'wa_plus',
-    name: 'Inbox Plus',
-    description: 'Para colégios sólidos em expansão.',
+    id: 'wa_inbox',
+    name: 'Maskot Inbox',
+    description: 'Atendimento humano profissional via WhatsApp Oficial (API Meta). Centralize todas as conversas com atendentes ilimitados.',
     price: 'Sob Consulta',
     period: '',
     color: '#28A745',
     icon: MessageCircle,
     isPopular: true,
     features: [
-      'Usuários Ilimitados',      
-      'WhatsApp Oficial (API)',
-      'Departamentos (Filas)',
-      'Relatórios de Performance'
+      'Atendentes Ilimitados',
+      'WhatsApp Oficial (API Meta)',
+      'Departamentos e Filas de Atendimento',
+      'Histórico Centralizado de Conversas',
+      'Dashboard de Performance',
+      'Regras de Distribuição Automática'
     ],
     cta: 'Falar com um Consultor',
     variant: 'primary' as const
-  },
-  {
-    id: 'wa_pro',
-    name: 'Inbox Pro',
-    description: 'Alta demanda de atendimento.',
-    price: 'Sob Consulta',
-    period: '',
-    color: '#28A745',
-    icon: MessageCircle,
-    isPopular: false,
-    features: [
-      'Usuários Ilimitados',
-      'WhatsApp Oficial (API)',
-      'Gestor de Conta Dedicado',
-      'SLA Prioritário'
-    ],
-    cta: 'Falar com um Consultor',
-    variant: 'outline' as const
   }
 ]
 
@@ -505,7 +479,7 @@ const PLANS_WA_AI = [
   {
     id: 'wa_ai_std',
     name: 'AI Standard',
-    description: 'Sua secretaria digital funcionando 24/7.',
+    description: 'Sua secretaria digital funcionando 24/7. Ideal para começar com inteligência artificial.',
     price: 'Sob Consulta',
     period: '',
     color: '#007BFF',
@@ -515,7 +489,8 @@ const PLANS_WA_AI = [
       'Módulo Inbox Incluso',
       'IA Treinada na sua Escola',
       'Agendamento de Visitas Automático',
-      'Tira dúvidas frequentes'
+      'Respostas Automáticas 24/7',
+      'Até 2.000 interações/mês'
     ],
     cta: 'Falar com um Consultor',
     variant: 'outline' as const
@@ -523,7 +498,7 @@ const PLANS_WA_AI = [
   {
     id: 'wa_ai_adv',
     name: 'AI Advanced',
-    description: 'Inteligência avançada para escalar atendimento.',
+    description: 'Para escolas em expansão com foco em matrículas. Maior volume e inteligência de qualificação.',
     price: 'Sob Consulta',
     period: '',
     color: '#007BFF',
@@ -531,17 +506,18 @@ const PLANS_WA_AI = [
     isPopular: true,
     features: [
       'Módulo Inbox Incluso',
-      'Qualificação de Leads Avançada',
-      'Transbordo para Humano Inteligente',
-      'Personalidade da Marca Customizável'
+      'Qualificação Automática de Leads',
+      'Transbordo Inteligente para Humano',
+      'Personalidade da Marca Customizável',
+      'Até 5.000 interações/mês'
     ],
     cta: 'Falar com um Consultor',
     variant: 'primary' as const
   },
   {
-    id: 'wa_ai_pro',
-    name: 'AI Pro',
-    description: 'Volume massivo com máxima eficiência.',
+    id: 'wa_ai_elite',
+    name: 'AI Elite',
+    description: 'Alta capacidade para redes e grandes colégios com volume massivo de atendimento.',
     price: 'Sob Consulta',
     period: '',
     color: '#007BFF',
@@ -549,9 +525,10 @@ const PLANS_WA_AI = [
     isPopular: false,
     features: [
       'Módulo Inbox Incluso',
-      'IA Generativa Premium',
-      'Treinamento Contínuo Supervisionado',
-      'Relatórios de Sentimento'
+      'IA Generativa de Alta Performance',
+      'Qualificação e Triagem Avançada',
+      'Relatórios de Conversação e Sentimento',
+      'Até 10.000 interações/mês'
     ],
     cta: 'Falar com Consultor',
     variant: 'outline' as const
