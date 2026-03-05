@@ -3,53 +3,56 @@
 import { useEffect } from 'react'
 
 interface DisqusCommentsProps {
-  pageUrl: string
   pageIdentifier: string
   pageTitle: string
 }
 
-export default function DisqusComments({ pageUrl, pageIdentifier, pageTitle }: DisqusCommentsProps) {
+export default function DisqusComments({ pageIdentifier, pageTitle }: DisqusCommentsProps) {
   useEffect(() => {
-    // Reset Disqus thread when navigating between posts
-    if (typeof window !== 'undefined') {
-      const disqusReset = (window as Window & { DISQUS?: { reset: (config: object) => void } }).DISQUS
+    if (typeof window === 'undefined') return
 
-      if (disqusReset) {
-        disqusReset.reset({
-          reload: true,
-          config: function (this: { page: { url: string; identifier: string; title: string } }) {
-            this.page.url = pageUrl
-            this.page.identifier = pageIdentifier
-            this.page.title = pageTitle
-          },
-        })
-      } else {
-        // First load: inject Disqus script
-        const win = window as Window & {
-          disqus_config?: (this: { page: { url: string; identifier: string; title: string } }) => void
-          disqus_shortname?: string
-        }
+    // Use the real browser URL so Disqus always gets the correct domain
+    // This works for both localhost (dev) and production automatically
+    const actualUrl = window.location.href
 
-        win.disqus_config = function () {
-          this.page.url = pageUrl
+    type DisqusWindow = Window & {
+      DISQUS?: { reset: (config: object) => void }
+      disqus_config?: (this: { page: { url: string; identifier: string; title: string } }) => void
+    }
+
+    const win = window as DisqusWindow
+
+    if (win.DISQUS) {
+      // Already loaded — just reset to the new page
+      win.DISQUS.reset({
+        reload: true,
+        config: function (this: { page: { url: string; identifier: string; title: string } }) {
+          this.page.url = actualUrl
           this.page.identifier = pageIdentifier
           this.page.title = pageTitle
-        }
-
-        const script = document.createElement('script')
-        script.src = 'https://maskotedu.disqus.com/embed.js'
-        script.setAttribute('data-timestamp', String(+new Date()))
-        script.async = true
-        ;(document.head || document.body).appendChild(script)
+        },
+      })
+    } else {
+      // First load: set config then inject the embed script
+      win.disqus_config = function () {
+        this.page.url = actualUrl
+        this.page.identifier = pageIdentifier
+        this.page.title = pageTitle
       }
+
+      const script = document.createElement('script')
+      script.src = 'https://maskotedu.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', String(+new Date()))
+      script.async = true
+      ;(document.head || document.body).appendChild(script)
     }
 
     return () => {
-      // Cleanup: remove thread iframe on unmount so next page starts fresh
+      // Clear the thread so the next post starts fresh
       const thread = document.getElementById('disqus_thread')
       if (thread) thread.innerHTML = ''
     }
-  }, [pageUrl, pageIdentifier, pageTitle])
+  }, [pageIdentifier, pageTitle])
 
   return (
     <section

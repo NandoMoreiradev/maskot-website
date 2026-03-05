@@ -209,7 +209,6 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             </ShareButtons>
 
             <DisqusComments
-              pageUrl={postUrl}
               pageIdentifier={uid}
               pageTitle={postTitle}
             />
