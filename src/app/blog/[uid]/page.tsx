@@ -6,6 +6,7 @@ import { components } from "@/slices";
 import { asText, isFilled, RichTextField } from "@prismicio/client";
 import Image from "next/image";
 import BlogSidebar from "@/components/BlogSidebar";
+import DisqusComments from "@/components/DisqusComments";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter } from "lucide-react";
 import { 
@@ -206,6 +207,12 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                 </a>
               </div>
             </ShareButtons>
+
+            <DisqusComments
+              pageUrl={postUrl}
+              pageIdentifier={uid}
+              pageTitle={postTitle}
+            />
 
             <AuthorBox>
               <h3>Gostou deste conteúdo?</h3>
