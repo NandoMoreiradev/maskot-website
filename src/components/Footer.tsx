@@ -343,8 +343,8 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="/#casos-sucesso">
-                                    Cases de Sucesso
+                                <FooterLink href="/#impacto">
+                                    Impacto do CRM
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>

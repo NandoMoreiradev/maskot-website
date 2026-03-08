@@ -612,7 +612,10 @@ const PLANS_WA_INBOX = [
       'Departamentos e Filas de Atendimento',
       'Histórico Centralizado de Conversas',
       'Dashboard de Performance',
-      'Regras de Distribuição Automática'
+      'Regras de Distribuição Automática',
+      'Tags de Conversas',
+      'Chatbot no Modelo If/Else',
+      'Integração com CRM'
     ],
     cta: 'Falar com um Consultor',
     variant: 'primary' as const
@@ -836,7 +839,7 @@ export default function PricingSection() {
         )}
 
         <Disclaimer>
-          {activeTab === 'CRM' && '* Todos os planos incluem onboarding guiado e suporte para configuração inicial.'}
+          {activeTab === 'CRM' && '* Todos os planos incluem onboarding guiado e suporte para configuração inicial. Pode ser cobrada uma taxa de migração de dados se a escola tiver CRM antigo e desejar migrar os dados.'}
           {activeTab === 'WA' && '* Valores adicionais ao plano base. Franquia de conversas.'}
         </Disclaimer>
 
