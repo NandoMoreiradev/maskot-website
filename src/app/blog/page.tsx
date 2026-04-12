@@ -20,6 +20,8 @@ export default async function BlogPage() {
     orderings: { field: 'document.first_publication_date', direction: 'desc' },
   });
 
+  console.log('[Blog] posts fetched:', posts.length, posts.map(p => p.uid));
+
   return (
     <PageWrapper>
       <BlogPageInner>
