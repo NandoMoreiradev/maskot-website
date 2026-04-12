@@ -39,7 +39,9 @@ interface BlogPost {
 
 export async function generateStaticParams(): Promise<{ uid: string }[]> {
   const client = createPrismicClient();
-  const posts = await client.getAllByType("blog_post");
+  const posts = await client.getAllByType("blog_post", {
+    fetchOptions: { next: { tags: ['prismic'] } },
+  });
   return posts.map((post) => ({ uid: post.uid }));
 }
 
@@ -47,7 +49,9 @@ export async function generateStaticParams(): Promise<{ uid: string }[]> {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { uid } = await params;
   const client = createPrismicClient();
-  const page = await client.getByUID("blog_post", uid).catch(() => notFound()) as BlogPost;
+  const page = await client.getByUID("blog_post", uid, {
+    fetchOptions: { next: { tags: ['prismic'] } },
+  }).catch(() => notFound()) as BlogPost;
   
   const title = asText(page.data.title) || 'Post do Blog';
   const description = asText(page.data.excerpt) || '';
@@ -107,18 +111,22 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   const { uid } = await params;
   
   const client = createPrismicClient();
-  const page = await client.getByUID("blog_post", uid).catch(() => notFound()) as BlogPost;
-  
+  const page = await client.getByUID("blog_post", uid, {
+    fetchOptions: { next: { tags: ['prismic'] } },
+  }).catch(() => notFound()) as BlogPost;
+
   // Recent posts for sidebar
-  const recentPosts = await client.getAllByType("blog_post", { 
+  const recentPosts = await client.getAllByType("blog_post", {
     limit: 4,
-    orderings: { field: 'document.first_publication_date', direction: 'desc' }
+    orderings: { field: 'document.first_publication_date', direction: 'desc' },
+    fetchOptions: { next: { tags: ['prismic'] } },
   }) as BlogPost[];
 
   // Related posts (same category, excluding current)
   const allRelated = await client.getAllByType("blog_post", {
-    limit: 6, // Fetch more to filter
-    orderings: { field: 'document.first_publication_date', direction: 'desc' }
+    limit: 6,
+    orderings: { field: 'document.first_publication_date', direction: 'desc' },
+    fetchOptions: { next: { tags: ['prismic'] } },
   }) as BlogPost[];
   
   const relatedPosts = allRelated
@@ -138,7 +146,9 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   // Fetch sidebar banner from Prismic Blog Settings
   let sidebarBanner: { imageUrl: string; imageAlt?: string; linkUrl: string } | null = null;
   try {
-    const settings = await client.getSingle('blog_settings');
+    const settings = await client.getSingle('blog_settings', {
+      fetchOptions: { next: { tags: ['prismic'] } },
+    });
     const img = settings.data.sidebar_banner_image;
     const lnk = settings.data.sidebar_banner_link;
     if (isFilled.image(img) && isFilled.link(lnk)) {

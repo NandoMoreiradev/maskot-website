@@ -1,9 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { createPrismicClient } from '@/prismicio';
-
-// Revalidate every 60 seconds as a fallback (webhook handles instant updates)
-export const revalidate = 60;
 import BlogFeed from '@/components/BlogFeed';
 import { PageWrapper } from './styles';
 import { BlogPageInner, BlogPageHeader } from './blog-page-styles';
@@ -15,12 +12,11 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const client = createPrismicClient();
-  
+
   const posts = await client.getAllByType('blog_post', {
     orderings: { field: 'document.first_publication_date', direction: 'desc' },
+    fetchOptions: { next: { tags: ['prismic'] } },
   });
-
-  console.log('[Blog] posts fetched:', posts.length, posts.map(p => p.uid));
 
   return (
     <PageWrapper>
