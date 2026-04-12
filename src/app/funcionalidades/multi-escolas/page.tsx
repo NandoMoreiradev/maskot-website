@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Gerencie múltiplas unidades escolares em um único lugar. Painel consolidado, login único e controle total para grupos educacionais.',
     keywords: ['gestão rede escolas', 'sistema franquia educacional', 'multi-unidades', 'crm grupo educacional', 'erp escolar multi-escola'],
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/multi-escolas',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/multi-escolas',
     },
 }
 

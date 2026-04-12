@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Organize a rotina da sua escola. Kanban, checklists, tarefas recorrentes e automação para Secretaria, Financeiro e Pedagógico.',
     keywords: ['gestão de tarefas escolar', 'kanban para escolas', 'organização escolar', 'produtividade secretaria escolar'],
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/gestao-tarefas',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/gestao-tarefas',
     },
 }
 

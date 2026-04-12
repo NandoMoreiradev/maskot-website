@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Campanhas de Matrícula e Marketing',
     description: 'Meça o ROI de marketing, crie textos com IA e centralize os ativos de tração da sua escola.',
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/campanhas',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/campanhas',
     },
 }
 

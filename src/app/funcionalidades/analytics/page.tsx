@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Painel de dados completo para gestão escolar. Acompanhe funil de vendas, performance da equipe e indicadores financeiros em tempo real.',
     keywords: ['analytics escolar', 'bi educacional', 'indicadores gestão escolar', 'funil de matrículas', 'relatórios escola'],
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/analytics',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/analytics',
     },
 }
 

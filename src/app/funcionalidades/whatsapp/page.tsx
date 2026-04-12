@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Gestão de WhatsApp Para Escolas',
     description: 'Centralize o atendimento da sua escola, use nosso chatbot para responder pais e nunca mais perca uma matrícula por demora no WhatsApp.',
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/whatsapp',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/whatsapp',
     },
 }
 

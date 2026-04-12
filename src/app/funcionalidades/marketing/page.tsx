@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Crie campanhas de WhatsApp e E-mail segmentadas pelo CRM. Capte mais alunos e automatize sua régua de relacionamento.',
     keywords: ['marketing escolar', 'campanha whatsapp escola', 'captação de alunos', 'crm educacional', 'disparo email marketing'],
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/marketing',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/marketing',
     },
 }
 

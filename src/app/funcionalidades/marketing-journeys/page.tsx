@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Automação de Jornada de Marketing para Escolas | Maskot CRM',
     description: 'Crie funis de venda automáticos, nutra leads com e-mail marketing e WhatsApp e aumente sua conversão de matrículas com jornadas inteligentes.',
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/marketing-journeys',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/marketing-journeys',
     },
 }
 

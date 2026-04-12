@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Automatize o cálculo de comissões de matrículas. Gere recibos, configure regras de estorno e elimine planilhas do seu financeiro.',
     keywords: ['comissão escolar', 'gestão de comissões', 'vendas escolas', 'cálculo comissão matrícula'],
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/gestao-comissoes',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/gestao-comissoes',
     },
 }
 

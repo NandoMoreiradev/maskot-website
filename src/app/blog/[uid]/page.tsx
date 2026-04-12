@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     openGraph: {
       title,
       description,
-      url: `https://maskot.com.br/blog/${uid}`,
+      url: `https://www.maskotedu.com.br/blog/${uid}`,
       siteName: 'Maskot',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
       locale: 'pt_BR',
@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       images: [imageUrl],
       creator: '@maskot',
     },
-    alternates: { canonical: `https://maskot.com.br/blog/${uid}` },
+    alternates: { canonical: `https://www.maskotedu.com.br/blog/${uid}` },
     keywords: [category, 'gestão escolar', 'CRM educacional', 'Maskot'],
   };
 }
@@ -141,7 +141,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   
   const readingTime = calculateReadingTime(page.data.slices);
   const postTitle = asText(page.data.title) || 'Post do Blog';
-  const postUrl = `https://maskot.com.br/blog/${uid}`;
+  const postUrl = `https://www.maskotedu.com.br/blog/${uid}`;
 
   // Fetch sidebar banner from Prismic Blog Settings
   let sidebarBanner: { imageUrl: string; imageAlt?: string; linkUrl: string } | null = null;

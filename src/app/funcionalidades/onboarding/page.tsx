@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Garanta a retenção desde o primeiro dia. Padronize a entrada de novos alunos, automatize checklists de documentos e organize sua secretaria.',
     keywords: ['onboarding alunos', 'retenção escolar', 'gestão de documentos escolares', 'secretaria digital', 'sucesso do aluno'],
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/onboarding',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/onboarding',
     },
 }
 

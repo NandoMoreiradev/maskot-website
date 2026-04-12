@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'CRM e Gestão de Matrículas | Maskot',
     description: 'Organize seu funil de vendas escolar com Kanban, listas inteligentes e automação. O fim das planilhas de Excel na sua escola.',
     alternates: {
-        canonical: 'https://maskot.com.br/funcionalidades/gestao-comercial',
+        canonical: 'https://www.maskotedu.com.br/funcionalidades/gestao-comercial',
     },
 }
 
