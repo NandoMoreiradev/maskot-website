@@ -4,11 +4,17 @@ import { createPrismicClient } from '@/prismicio';
 export async function GET() {
   try {
     const client = createPrismicClient({ fetchOptions: { cache: 'no-store' } });
-    const posts = await client.getAllByType('blog_post');
+
+    // Busca todos os documentos, independente do tipo
+    const all = await client.get({ fetchOptions: { cache: 'no-store' } });
+
+    // Lista os tipos únicos encontrados
+    const types = [...new Set(all.results.map(d => d.type))];
+
     return NextResponse.json({
-      count: posts.length,
-      uids: posts.map(p => p.uid),
-      first: posts[0]?.data?.title ?? null,
+      total_results_size: all.total_results_size,
+      types_found: types,
+      results: all.results.map(d => ({ type: d.type, uid: d.uid, id: d.id })),
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
