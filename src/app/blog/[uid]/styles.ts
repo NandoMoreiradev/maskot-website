@@ -51,6 +51,7 @@ export const Container = styled.div`
 export const ArticleContent = styled.article`
   background: white;
   padding: 0;
+  min-width: 0;
 `
 
 // ==================== POST HEADER ====================
@@ -127,7 +128,10 @@ export const RichTextWrapper = styled.div`
   font-size: 1.15rem;
   line-height: 1.8;
   color: #333;
-  
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+
   h2 {
     font-size: 2rem;
     font-weight: 800;
@@ -136,27 +140,42 @@ export const RichTextWrapper = styled.div`
     margin-bottom: 1.5rem;
     line-height: 1.2;
     letter-spacing: -0.01em;
+
+    @media (max-width: 600px) {
+      font-size: 1.5rem;
+      margin-top: 2.5rem;
+    }
   }
-  
+
   h3 {
     font-size: 1.6rem;
     font-weight: 700;
     color: ${props => props.theme.colors.textDark};
     margin-top: 3rem;
     margin-bottom: 1.25rem;
+
+    @media (max-width: 600px) {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+    }
   }
-  
+
   p {
     margin-bottom: 2rem;
   }
-  
+
   blockquote {
     margin: 3.5rem 0;
     padding: 2.5rem;
     background: #f8fbff;
     border-left: 5px solid ${props => props.theme.colors.primary};
     border-radius: 12px;
-    
+
+    @media (max-width: 600px) {
+      padding: 1.25rem 1rem;
+      margin: 2rem 0;
+    }
+
     p {
       margin: 0;
       font-size: 1.4rem;
@@ -164,19 +183,37 @@ export const RichTextWrapper = styled.div`
       line-height: 1.5;
       color: ${props => props.theme.colors.textDark};
       font-style: italic;
+
+      @media (max-width: 600px) {
+        font-size: 1.1rem;
+      }
     }
   }
 
   /* Imagens */
   img {
+    max-width: 100%;
+    height: auto;
     border-radius: 16px;
     margin: 3.5rem 0;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+    @media (max-width: 600px) {
+      margin: 2rem 0;
+      border-radius: 10px;
+    }
+  }
+
+  /* Tabelas e blocos de código */
+  table, pre, code {
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   /* Listas */
   ul, ol {
     margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
     li {
       margin-bottom: 1rem;
     }
@@ -237,8 +274,9 @@ export const RelatedCard = styled(Link)`
 // ==================== SHARE BUTTONS ====================
 export const ShareButtons = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem 1.5rem;
   margin-top: 5rem;
   padding-top: 2rem;
   border-top: 1px solid ${props => props.theme.colors.borderLight}50;
@@ -254,6 +292,7 @@ export const ShareButtons = styled.div`
 
   .icons {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
 
@@ -284,13 +323,23 @@ export const ShareButtons = styled.div`
   border-radius: 24px;
   color: white;
   text-align: center;
-  
+
+  @media (max-width: 600px) {
+    padding: 2rem 1.25rem;
+    border-radius: 16px;
+    margin-top: 3rem;
+  }
+
   h3 {
     font-size: 2rem;
     font-weight: 800;
     margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+      font-size: 1.4rem;
+    }
   }
-  
+
   p {
     font-size: 1.2rem;
     opacity: 0.9;
@@ -298,6 +347,10 @@ export const ShareButtons = styled.div`
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
   }
 `
 
