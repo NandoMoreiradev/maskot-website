@@ -119,7 +119,15 @@ interface BlogPostDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   category: prismic.SelectField<
-    "Gestão Escolar" | "Marketing" | "Retenção" | "Tecnologia" | "Vendas",
+    | "Gestão Escolar"
+    | "Marketing"
+    | "Retenção"
+    | "Tecnologia"
+    | "Vendas"
+    | "Gestão de Leads"
+    | "Leads"
+    | "Retenção de Matrículas"
+    | "Funil de Matrículas",
     "filled"
   >;
 

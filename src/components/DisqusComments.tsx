@@ -41,7 +41,7 @@ export default function DisqusComments({ pageIdentifier, pageTitle }: DisqusComm
       }
 
       const script = document.createElement('script')
-      script.src = 'https://maskotedu.disqus.com/embed.js'
+      script.src = 'https://https-www-maskotedu-com-br.disqus.com/embed.js'
       script.setAttribute('data-timestamp', String(+new Date()))
       script.async = true
       ;(document.head || document.body).appendChild(script)

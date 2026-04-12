@@ -48,7 +48,11 @@
             "Marketing",
             "Retenção",
             "Tecnologia",
-            "Vendas"
+            "Vendas",
+            "Gestão de Leads",
+            "Leads",
+            "Retenção de Matrículas",
+            "Funil de Matrículas"
           ],
           "default_value": "Gestão Escolar"
         }
