@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import CTASection from '@/components/CTASection'
 import CampaignHero from '@/components/features/CampaignHero'
 import CampaignDeepDive from '@/components/features/CampaignDeepDive'
+import CampaignFeatures from '@/components/features/CampaignFeatures'
 
 export const metadata: Metadata = {
     title: 'Campanhas de Matrícula e Marketing',
@@ -20,6 +21,7 @@ export default function CampaignsPage() {
             <main style={{ marginTop: '72px' }}>
                 <CampaignHero />
                 <CampaignDeepDive />
+                <CampaignFeatures />
                 <CTASection />
             </main>
             <Footer />

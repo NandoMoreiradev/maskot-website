@@ -542,6 +542,69 @@ export default function CampaignDeepDive() {
                     </PowerCard>
                 </PowerGrid>
 
+                {/* --- EXEMPLOS DE USO (Use Cases) --- */}
+                <div style={{textAlign: 'center', marginBottom: '3rem', marginTop: '6rem'}}>
+                    <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#333'}}>Casos de Uso Comuns</h3>
+                </div>
+
+                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
+                    {/* CASE 1 */}
+                    <div style={{
+                        background: 'white',
+                        padding: '2rem',
+                        borderRadius: '16px',
+                        border: '1px solid #DEE2E6'
+                    }}>
+                        <h4 style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '1.2rem',
+                            marginBottom: '1rem',
+                            color: '#333'
+                        }}>
+                            <span style={{
+                                background: '#E0F2FE',
+                                color: '#007BFF',
+                                padding: '6px',
+                                borderRadius: '8px'
+                            }}><Users size={18}/></span>
+                            Captação Antecipada (Bolsões)
+                        </h4>
+                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                            Gere uma Landing Page pública, associe cupons de desconto limitados e acompanhe o batimento da sua Meta de Inscrições em tempo real.
+                        </p>
+                    </div>
+
+                    {/* CASE 2 */}
+                    <div style={{
+                        background: 'white',
+                        padding: '2rem',
+                        borderRadius: '16px',
+                        border: '1px solid #DEE2E6'
+                    }}>
+                        <h4 style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '1.2rem',
+                            marginBottom: '1rem',
+                            color: '#333'
+                        }}>
+                            <span style={{
+                                background: '#DCFCE7',
+                                color: '#166534',
+                                padding: '6px',
+                                borderRadius: '8px'
+                            }}><CheckCircle2 size={18}/></span>
+                            Recuperação de Evasão
+                        </h4>
+                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                            Defina um orçamento reduzido para disparos de WhatsApp e crie uma campanha focada em ligar para alunos que deixaram a escola no último ano.
+                        </p>
+                    </div>
+                </div>
+
             </Container>
         </Section>
     )
