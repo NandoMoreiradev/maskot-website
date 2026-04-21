@@ -13,7 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const client = createPrismicClient();
   
   try {
-    const doc = await client.getSingle('success_cases_index');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const doc: any = await client.getSingle('success_cases_index' as any);
     return {
       title: doc.data.meta_title || 'Cases de Sucesso | Maskot',
       description: doc.data.meta_description || 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
@@ -36,8 +37,10 @@ export default async function CasesIndexPage() {
 
   try {
     // Attempt to fetch data. If types don't exist yet (before slice machine push), this might throw
-    indexData = await client.getSingle('success_cases_index').catch(() => null);
-    cases = await client.getAllByType('success_case', {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    indexData = await client.getSingle('success_cases_index' as any).catch(() => null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    cases = await client.getAllByType('success_case' as any, {
       orderings: { field: 'document.first_publication_date', direction: 'desc' }
     }).catch(() => []);
   } catch (e) {

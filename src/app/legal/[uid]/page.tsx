@@ -16,7 +16,8 @@ export async function generateMetadata(
   const client = createPrismicClient();
   
   try {
-    const page = await client.getByUID('legal_page', params.uid);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const page: any = await client.getByUID('legal_page' as any, params.uid);
     return {
       title: page.data.meta_title || `${asText(page.data.title)} | Maskot`,
       description: page.data.meta_description || 'Documento Legal da Plataforma Maskot Edu.',
@@ -39,7 +40,8 @@ export default async function LegalPage(props: { params: Promise<{ uid: string }
   let page: any;
 
   try {
-    page = await client.getByUID('legal_page', params.uid);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    page = await client.getByUID('legal_page' as any, params.uid);
   } catch {
     notFound();
   }

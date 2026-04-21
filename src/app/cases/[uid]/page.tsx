@@ -29,7 +29,8 @@ export async function generateMetadata(
   const params = await props.params;
   const client = createPrismicClient();
   try {
-    const page = await client.getByUID('success_case', params.uid);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const page: any = await client.getByUID('success_case' as any, params.uid);
     return {
       title: `${asText(page.data.title)} | Cases Maskot`,
       description: asText(page.data.challenge)?.substring(0, 160) || 'Case de sucesso Maskot',
@@ -48,7 +49,8 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
   let page: any;
 
   try {
-    page = await client.getByUID('success_case', params.uid);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    page = await client.getByUID('success_case' as any, params.uid);
   } catch {
     notFound();
   }
