@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Link from 'next/link'
-import { X, Check, Cookie, Shield, Activity } from 'lucide-react'
+import { X, Cookie, Shield, Activity } from 'lucide-react'
 
 const slideUp = keyframes`
   from {
@@ -344,7 +344,9 @@ export default function CookieConsent() {
   }, [])
 
   const updateConsentMode = (analyticsGranted: boolean) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (typeof window !== 'undefined' && (window as any).gtag) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).gtag('consent', 'update', {
         analytics_storage: analyticsGranted ? 'granted' : 'denied',
         ad_storage: analyticsGranted ? 'granted' : 'denied',
