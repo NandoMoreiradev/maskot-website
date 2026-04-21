@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import StyledComponentsRegistry from '@/lib/registry'
 import ThemeClientProvider from '@/providers/ThemeClientProvider'
+import CookieConsent from '@/components/legal/CookieConsent'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,6 +32,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <StyledComponentsRegistry>
           <ThemeClientProvider>
+            <Script id="google-consent" strategy="beforeInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                
+                gtag('consent', 'default', {
+                  'analytics_storage': 'denied',
+                  'ad_storage': 'denied',
+                  'ad_user_data': 'denied',
+                  'ad_personalization': 'denied',
+                  'wait_for_update': 500
+                });
+
+                if (typeof window !== 'undefined') {
+                  try {
+                    const consent = localStorage.getItem('maskot_analytics_consent');
+                    if (consent === 'true') {
+                      gtag('consent', 'update', {
+                        'analytics_storage': 'granted',
+                        'ad_storage': 'granted',
+                        'ad_user_data': 'granted',
+                        'ad_personalization': 'granted'
+                      });
+                    }
+                  } catch(e) {}
+                }
+              `}
+            </Script>
             <Script
               src="https://www.googletagmanager.com/gtag/js?id=G-9XNN6J8DYE"
               strategy="afterInteractive"
@@ -45,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               `}
             </Script>
             {children}
+            <CookieConsent />
           </ThemeClientProvider>
         </StyledComponentsRegistry>
       </body>

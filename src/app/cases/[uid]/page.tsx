@@ -34,7 +34,7 @@ export async function generateMetadata(
       title: `${asText(page.data.title)} | Cases Maskot`,
       description: asText(page.data.challenge)?.substring(0, 160) || 'Case de sucesso Maskot',
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Case de Sucesso | Maskot',
     };
@@ -44,20 +44,23 @@ export async function generateMetadata(
 export default async function CasePage(props: { params: Promise<{ uid: string }> }) {
   const params = await props.params;
   const client = createPrismicClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let page: any;
 
   try {
     page = await client.getByUID('success_case', params.uid);
-  } catch (error) {
+  } catch {
     notFound();
   }
 
   const { data } = page;
 
   // Format metrics from Prismic group
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const metrics = data.metrics?.map((m: any) => ({
     value: m.metric_value,
     label: m.metric_label,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   })).filter((m: any) => m.value && m.label) || [];
 
   return (

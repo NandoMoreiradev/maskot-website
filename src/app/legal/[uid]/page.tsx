@@ -25,7 +25,7 @@ export async function generateMetadata(
         follow: true,
       }
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Documento Legal | Maskot',
     };
@@ -35,11 +35,12 @@ export async function generateMetadata(
 export default async function LegalPage(props: { params: Promise<{ uid: string }> }) {
   const params = await props.params;
   const client = createPrismicClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let page: any;
 
   try {
     page = await client.getByUID('legal_page', params.uid);
-  } catch (error) {
+  } catch {
     notFound();
   }
 

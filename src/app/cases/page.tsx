@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: doc.data.meta_title || 'Cases de Sucesso | Maskot',
       description: doc.data.meta_description || 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Cases de Sucesso | Maskot',
       description: 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
@@ -29,7 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function CasesIndexPage() {
   const client = createPrismicClient();
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let indexData: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let cases: any[] = [];
 
   try {
