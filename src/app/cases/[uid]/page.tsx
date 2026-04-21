@@ -74,7 +74,7 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
             {data.client_name && (
               <ClientBadge>
                 {data.client_logo && data.client_logo.url && (
-                  <PrismicNextImage field={data.client_logo} fallbackAlt={data.client_name} />
+                  <PrismicNextImage field={data.client_logo} fallbackAlt="" />
                 )}
                 <span>{data.client_name}</span>
               </ClientBadge>
@@ -122,7 +122,7 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
               {(data.testimonial_author || data.testimonial_avatar?.url) && (
                 <TestimonialAuthor>
                   {data.testimonial_avatar?.url && (
-                    <PrismicNextImage field={data.testimonial_avatar} fallbackAlt={data.testimonial_author} />
+                    <PrismicNextImage field={data.testimonial_avatar} fallbackAlt="" />
                   )}
                   <span>{data.testimonial_author}</span>
                 </TestimonialAuthor>

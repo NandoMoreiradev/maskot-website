@@ -107,7 +107,7 @@ export default function CaseCard({ uid, title, clientName, clientLogo, summary }
     <Card>
       <CardHeader>
         {clientLogo && clientLogo.url ? (
-          <PrismicNextImage field={clientLogo} fallbackAlt={clientName} />
+          <PrismicNextImage field={clientLogo} fallbackAlt="" />
         ) : (
           <ClientName>{clientName}</ClientName>
         )}
