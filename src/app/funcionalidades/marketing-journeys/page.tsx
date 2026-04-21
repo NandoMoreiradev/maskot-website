@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import CTASection from '@/components/CTASection'
 import MarketingJourneysHero from '@/components/features/MarketingJourneysHero'
 import MarketingJourneysDeepDive from '@/components/features/MarketingJourneysDeepDive'
+import MarketingJourneysFeatures from '@/components/features/MarketingJourneysFeatures'
 
 export const metadata: Metadata = {
     title: 'Automação de Jornada de Marketing para Escolas | Maskot CRM',
@@ -20,6 +21,7 @@ export default function MarketingJourneysPage() {
             <main style={{ marginTop: '72px' }}>
                 <MarketingJourneysHero />
                 <MarketingJourneysDeepDive />
+                <MarketingJourneysFeatures />
                 <CTASection />
             </main>
             <Footer />

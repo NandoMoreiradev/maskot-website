@@ -405,7 +405,7 @@ export default function MarketingJourneysDeepDive() {
                     <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#333'}}>Casos de Uso Comuns</h3>
                 </div>
 
-                <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem'}}>
+                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
                     {/* CASE 1 */}
                     <div style={{
                         background: 'white',
@@ -461,6 +461,34 @@ export default function MarketingJourneysDeepDive() {
                         <p style={{color: '#666', fontSize: '0.95rem'}}>
                             Após a visita, espere 2 horas e envie um vídeo institucional. Aguarde 2 dias. Se não houver
                             matrícula, crie uma tarefa de Ligação de Fechamento.
+                        </p>
+                    </div>
+
+                    {/* CASE 3 */}
+                    <div style={{
+                        background: 'white',
+                        padding: '2rem',
+                        borderRadius: '16px',
+                        border: '1px solid #DEE2E6'
+                    }}>
+                        <h4 style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '1.2rem',
+                            marginBottom: '1rem',
+                            color: '#333'
+                        }}>
+                            <span style={{
+                                background: '#FEF3C7',
+                                color: '#D97706',
+                                padding: '6px',
+                                borderRadius: '8px'
+                            }}><TrendingUp size={18}/></span>
+                            Régua de Nutrição Ativa
+                        </h4>
+                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                            Envie conteúdos valiosos semanalmente para leads frios. Quando o sistema identificar que o lead atingiu uma alta pontuação (Lead Score), uma tarefa é criada para o comercial.
                         </p>
                     </div>
                 </div>
