@@ -1,0 +1,43 @@
+{
+  "format": "custom",
+  "id": "success_cases_index",
+  "label": "Success Cases Index",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Título da Página",
+          "placeholder": "Ex: Cases de Sucesso Maskot",
+          "allowTargetBlank": true,
+          "multi": "heading1"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Descrição / Subtítulo",
+          "placeholder": "Ex: Veja como escolas parceiras estão transformando seus resultados.",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em"
+        }
+      },
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Title (SEO)",
+          "placeholder": "Cases de Sucesso | Maskot"
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description (SEO)",
+          "placeholder": "Confira os cases de sucesso..."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "format": "custom",
+  "id": "legal_page",
+  "label": "Legal Page",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "URL / Slug (ex: termos, privacidade, cookies)"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Título do Documento",
+          "placeholder": "Ex: Termos e Condições de Uso",
+          "allowTargetBlank": true,
+          "multi": "heading1"
+        }
+      },
+      "last_updated": {
+        "type": "Text",
+        "config": {
+          "label": "Data da Última Atualização",
+          "placeholder": "Ex: 07 de Março de 2026"
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Conteúdo do Documento",
+          "placeholder": "Insira o texto legal aqui...",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Title (SEO)",
+          "placeholder": "Termos de Uso | Maskot"
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description (SEO)",
+          "placeholder": "Leia nossos termos..."
+        }
+      }
+    }
+  }
+}
