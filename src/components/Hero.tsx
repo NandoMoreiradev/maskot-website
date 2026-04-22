@@ -1,7 +1,7 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
-import { Rocket, CheckCircle, ShieldCheck, LayoutDashboard, ArrowRight } from 'lucide-react'
+import { Rocket, CheckCircle, ShieldCheck, LayoutDashboard, ArrowRight, Flame, Sparkles } from 'lucide-react'
 
 // Animação suave para o badge
 const float = keyframes`
@@ -250,7 +250,7 @@ const ChatInterface = styled.div`
     height: 320px;
 `
 
-const MessageBubble = styled.div<{ $type: 'in' | 'out' }>`
+const MessageBubble = styled.div<{ $type: 'in' | 'out', $delay?: string }>`
     align-self: ${props => props.$type === 'out' ? 'flex-end' : 'flex-start'};
     background: ${props => props.$type === 'out' ? '#DCF8C6' : '#FFFFFF'};
     padding: 0.75rem 1rem;
@@ -258,9 +258,17 @@ const MessageBubble = styled.div<{ $type: 'in' | 'out' }>`
     max-width: 85%;
     font-size: 0.9rem;
     color: ${props => props.theme.colors.textDark};
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
     position: relative;
     line-height: 1.4;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: ${props => props.$delay || '0s'};
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
     /* Triângulo do balão */
     &:after {
@@ -275,6 +283,24 @@ const MessageBubble = styled.div<{ $type: 'in' | 'out' }>`
         ${props => props.$type === 'out' ? 'border-right: 0' : 'border-left: 0'};
         margin-top: 8px;
     }
+`
+
+const AiSuggestionBadge = styled.div`
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    color: white;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+    white-space: nowrap;
+    z-index: 10;
 `
 
 const FloatingCard = styled.div`
@@ -309,6 +335,25 @@ const FloatingCard = styled.div`
         flex-direction: column;
         strong { font-size: 0.9rem; color: ${props => props.theme.colors.textDark}; margin-bottom: 2px;}
         span { font-size: 0.8rem; color: ${props => props.theme.colors.success}; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+    }
+`
+
+const TopFloatingCard = styled(FloatingCard)`
+    top: 15%;
+    left: auto;
+    right: -40px;
+    animation: ${float} 5s ease-in-out infinite;
+    padding: 0.75rem 1.25rem;
+    
+    .icon-box {
+        background: #FEF3C7;
+        color: #D97706;
+        width: 32px;
+        height: 32px;
+    }
+
+    div span {
+        color: #D97706;
     }
 `
 
@@ -358,20 +403,21 @@ export default function Hero() {
                                 </div>
                             </ChatHeader>
                             <ChatInterface>
-                                <MessageBubble $type="in">
+                                <MessageBubble $type="in" $delay="0.5s">
                                     Olá, gostaria de saber os valores para o Ensino Fundamental.
                                 </MessageBubble>
-                                <MessageBubble $type="out">
+                                <MessageBubble $type="out" $delay="1.5s">
                                     Olá! Tudo bem? 👋 Temos condições especiais para matrículas esta semana!
                                 </MessageBubble>
-                                <MessageBubble $type="out">
+                                <MessageBubble $type="out" $delay="2.5s">
                                     Para agilizar, qual seria a série do aluno?
                                 </MessageBubble>
-                                <MessageBubble $type="in">
+                                <MessageBubble $type="in" $delay="4.0s">
                                     Seria para o 6º ano.
                                 </MessageBubble>
-                                <MessageBubble $type="out">
+                                <MessageBubble $type="out" $delay="5.5s" style={{ marginBottom: '15px' }}>
                                     Perfeito! Vou te enviar nossa proposta pedagógica e agendar uma visita. 📅
+                                    <AiSuggestionBadge><Sparkles size={10} /> Gerado por IA</AiSuggestionBadge>
                                 </MessageBubble>
                             </ChatInterface>
                         </MainMockup>
@@ -381,10 +427,20 @@ export default function Hero() {
                                 <LayoutDashboard size={20} />
                             </div>
                             <div>
-                                <strong>Status do Lead Atualizado</strong>
+                                <strong>Status Atualizado</strong>
                                 <span><ArrowRight size={12}/> Agendamento de Visita</span>
                             </div>
                         </FloatingCard>
+
+                        <TopFloatingCard>
+                            <div className="icon-box">
+                                <Flame size={16} />
+                            </div>
+                            <div>
+                                <strong>Score do Lead</strong>
+                                <span>92% (Quente)</span>
+                            </div>
+                        </TopFloatingCard>
                     </VisualContent>
                 </HeroContent>
             </Container>
