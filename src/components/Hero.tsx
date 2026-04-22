@@ -235,7 +235,7 @@ const ChatHeader = styled.div`
     div {
         display: flex;
         flex-direction: column;
-        h4 { margin: 0; font-size: 0.95rem; }
+        h4 { margin: 0; font-size: 0.95rem; color: #FFFFFF; }
         span { font-size: 0.75rem; opacity: 0.8; }
     }
 `
