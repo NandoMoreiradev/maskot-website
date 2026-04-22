@@ -242,12 +242,13 @@ const ChatHeader = styled.div`
 
 const ChatInterface = styled.div`
     padding: 1.5rem;
+    padding-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
     background-size: 300px;
-    height: 320px;
+    height: 400px;
 `
 
 const MessageBubble = styled.div<{ $type: 'in' | 'out', $delay?: string }>`
