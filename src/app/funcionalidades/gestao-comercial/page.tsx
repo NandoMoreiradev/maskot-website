@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import CTASection from '@/components/CTASection'
 import CrmHero from '@/components/features/CrmHero'
 import CrmDeepDive from '@/components/features/CrmDeepDive'
+import CrmFeatures from '@/components/features/CrmFeatures'
 
 export const metadata: Metadata = {
     title: 'CRM e Gestão de Matrículas | Maskot',
@@ -20,6 +21,7 @@ export default function CrmPage() {
             <main style={{ marginTop: '72px' }}>
                 <CrmHero />
                 <CrmDeepDive />
+                <CrmFeatures />
                 <CTASection />
             </main>
             <Footer />

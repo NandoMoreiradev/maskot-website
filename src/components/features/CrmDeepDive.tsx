@@ -5,7 +5,7 @@ import {
     Kanban, List, Filter, UserCheck,
     TrendingUp, ArrowRight, CheckCircle, Users,
     Calendar, Bell, CheckSquare, Clock,
-    MessageCircle, Phone, FileText
+    MessageCircle, Phone, FileText, Flame
 } from 'lucide-react'
 
 // --- Animations ---
@@ -817,6 +817,69 @@ export default function CrmDeepDive() {
                             Distância, etc).</p>
                     </PowerCard>
                 </PowerGrid>
+
+                {/* --- EXEMPLOS DE USO (Use Cases) --- */}
+                <div style={{textAlign: 'center', marginBottom: '3rem', marginTop: '6rem'}}>
+                    <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#333'}}>O Dia a Dia do Comercial</h3>
+                </div>
+
+                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
+                    {/* CASE 1 */}
+                    <div style={{
+                        background: 'white',
+                        padding: '2rem',
+                        borderRadius: '16px',
+                        border: '1px solid #DEE2E6'
+                    }}>
+                        <h4 style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '1.2rem',
+                            marginBottom: '1rem',
+                            color: '#333'
+                        }}>
+                            <span style={{
+                                background: '#E0F2FE',
+                                color: '#007BFF',
+                                padding: '6px',
+                                borderRadius: '8px'
+                            }}><Users size={18}/></span>
+                            Negociação de Irmãos
+                        </h4>
+                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                            Uma mãe busca vaga para dois filhos de turmas diferentes. Você atende a família no mesmo ticket de WhatsApp, matricula um e perde o outro, e o sistema já calcula faturas e comissões do consultor automaticamente.
+                        </p>
+                    </div>
+
+                    {/* CASE 2 */}
+                    <div style={{
+                        background: 'white',
+                        padding: '2rem',
+                        borderRadius: '16px',
+                        border: '1px solid #DEE2E6'
+                    }}>
+                        <h4 style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '1.2rem',
+                            marginBottom: '1rem',
+                            color: '#333'
+                        }}>
+                            <span style={{
+                                background: '#FEF3C7',
+                                color: '#D97706',
+                                padding: '6px',
+                                borderRadius: '8px'
+                            }}><Flame size={18}/></span>
+                            O &quot;Piloto&quot; Matinal
+                        </h4>
+                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                            O vendedor chega de manhã, abre a Dashboard e foca direto nos &quot;Leads Quentes&quot; piscando no alerta. Ele liga apenas para quem o sistema identificou como SLA estourado ou com alto engajamento, multiplicando conversões.
+                        </p>
+                    </div>
+                </div>
 
             </Container>
         </Section>
