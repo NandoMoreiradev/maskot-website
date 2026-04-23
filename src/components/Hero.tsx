@@ -1,7 +1,7 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
-import { Rocket, CheckCircle, ShieldCheck, LayoutDashboard, ArrowRight, Flame, Sparkles } from 'lucide-react'
+import { Rocket, CheckCircle, ShieldCheck, LayoutDashboard, ArrowRight, Flame, Sparkles, BadgeCheck } from 'lucide-react'
 
 // Animação suave para o badge
 const float = keyframes`
@@ -380,6 +380,7 @@ export default function Hero() {
                         <TrustBadges>
                             <div><ShieldCheck /> API Oficial</div>
                             <div><CheckCircle /> CRM Educacional Completo</div>
+                            <div><BadgeCheck /> Provedor Oficial WhatsApp</div>
                         </TrustBadges>
 
                         <ButtonGroup>

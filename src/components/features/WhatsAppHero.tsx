@@ -1,6 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
+import { ShieldCheck, BadgeCheck } from 'lucide-react'
 
 const HeroWrapper = styled.section`
     background: linear-gradient(180deg, ${props => props.theme.colors.pageBackground} 0%, #fff 100%);
@@ -52,6 +53,29 @@ const Subtitle = styled.p`
     line-height: 1.6;
 `
 
+const TrustBadges = styled.div`
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: ${props => props.theme.colors.textMedium};
+
+        svg {
+            color: #00A884;
+            width: 16px;
+            height: 16px;
+        }
+    }
+`
+
 export default function WhatsAppHero() {
     return (
         <HeroWrapper>
@@ -59,9 +83,13 @@ export default function WhatsAppHero() {
                 <Tag>Módulo WhatsApp</Tag>
                 <Title>O WhatsApp da sua escola,<br/><span>turbinado com IA e CRM integrado</span></Title>
                 <Subtitle>
-                    Conecte departamentos, tenha dezenas de usuários no mesmo número e deixe nosso 
+                    Conecte departamentos, tenha dezenas de usuários no mesmo número e deixe nosso
                     Chatbot com Inteligência Artificial agendar visitas 24/7.
                 </Subtitle>
+                <TrustBadges>
+                    <div><ShieldCheck /> API Oficial</div>
+                    <div><BadgeCheck /> Provedor Oficial WhatsApp</div>
+                </TrustBadges>
             </HeroContainer>
         </HeroWrapper>
     )
