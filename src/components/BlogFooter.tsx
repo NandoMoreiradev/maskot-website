@@ -159,7 +159,7 @@ export default function BlogFooter() {
       <Container>
         <CompanySection>
           <Logo>
-            <Image src="/logo_maskot_website.png" alt="Maskot Edu" width={140} height={40} style={{ width: 'auto', height: '100%' }} />
+            <Image src="/maskot_crm_logo_branca.png" alt="Maskot Edu" width={140} height={40} style={{ width: 'auto', height: '100%' }} />
           </Logo>
           <Description>
             Transformando a gestão escolar através de conteúdo estratégico e tecnologia de ponta.
