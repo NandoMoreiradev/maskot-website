@@ -22,6 +22,10 @@ const MainBar = styled.div`
   backdrop-filter: blur(12px) saturate(180%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   padding: 0 2rem;
+
+  @media (max-width: 640px) {
+    padding: 0 1rem;
+  }
 `
 
 const MainBarInner = styled.div`
@@ -157,9 +161,8 @@ const CTABtn = styled(Link)`
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
   }
 
-  @media (max-width: 600px) { 
-    font-size: 0.8rem;
-    padding: 0.4rem 0.85rem;
+  @media (max-width: 640px) {
+    display: none;
   }
 `
 
