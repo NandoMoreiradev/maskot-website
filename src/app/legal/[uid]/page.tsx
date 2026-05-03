@@ -7,7 +7,15 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LegalDocument from '@/components/legal/LegalDocument';
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 60;
+
+export async function generateStaticParams(): Promise<{ uid: string }[]> {
+  const client = createPrismicClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pages = await client.getAllByType('legal_page' as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return pages.map((p: any) => ({ uid: p.uid }));
+}
 
 export async function generateMetadata(
   props: { params: Promise<{ uid: string }> }

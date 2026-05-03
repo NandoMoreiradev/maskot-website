@@ -23,6 +23,14 @@ import {
 
 export const revalidate = 60;
 
+export async function generateStaticParams(): Promise<{ uid: string }[]> {
+  const client = createPrismicClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const cases = await client.getAllByType('success_case' as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return cases.map((c: any) => ({ uid: c.uid }));
+}
+
 export async function generateMetadata(
   props: { params: Promise<{ uid: string }> }
 ): Promise<Metadata> {
