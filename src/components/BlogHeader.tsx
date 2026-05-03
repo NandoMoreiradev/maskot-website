@@ -293,11 +293,11 @@ export default function BlogHeader({ categories = [] }: BlogHeaderProps) {
               </span>
             </HeaderSearchBar>
 
-            <EnterBtn href="/login">
+            <EnterBtn href="https://app.maskotedu.com.br/login">
               <LogIn size={15} /> Entrar
             </EnterBtn>
 
-            <CTABtn href="/#demo">
+            <CTABtn href="https://www.maskotedu.com.br/">
               Conhecer o Maskot Edu
             </CTABtn>
           </MainBarRight>
