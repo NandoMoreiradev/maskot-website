@@ -261,6 +261,25 @@ const LegalLink = styled(Link)`
     }
 `
 
+const FooterLinkDisabled = styled.span`
+    color: #888888;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: default;
+`
+
+const ComingSoonBadge = styled.span`
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.primary}22;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+`
+
 export default function Footer() {
     return (
         <FooterWrapper>
@@ -319,16 +338,16 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="/#atualizacoes">
+                                <FooterLinkDisabled>
                                     Atualizações
-                                    <ExternalLink />
-                                </FooterLink>
+                                    <ComingSoonBadge>Em breve</ComingSoonBadge>
+                                </FooterLinkDisabled>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="/#roadmap">
+                                <FooterLinkDisabled>
                                     Roadmap
-                                    <ExternalLink />
-                                </FooterLink>
+                                    <ComingSoonBadge>Em breve</ComingSoonBadge>
+                                </FooterLinkDisabled>
                             </LinkItem>
                         </LinksList>
                     </FooterSection>
@@ -349,22 +368,22 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="/#central-ajuda">
+                                <FooterLink href="https://app.maskotedu.com.br/ajuda" target="_blank" rel="noopener noreferrer">
                                     Central de Ajuda
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="/#webinars">
+                                <FooterLinkDisabled>
                                     Webinars
-                                    <ExternalLink />
-                                </FooterLink>
+                                    <ComingSoonBadge>Em breve</ComingSoonBadge>
+                                </FooterLinkDisabled>
                             </LinkItem>
                             <LinkItem>
-                                <FooterLink href="/#ebooks">
+                                <FooterLinkDisabled>
                                     E-books Gratuitos
-                                    <ExternalLink />
-                                </FooterLink>
+                                    <ComingSoonBadge>Em breve</ComingSoonBadge>
+                                </FooterLinkDisabled>
                             </LinkItem>
                         </LinksList>
                     </FooterSection>

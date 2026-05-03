@@ -132,11 +132,19 @@ const MockupHeader = styled.div`
 const ChatLayout = styled.div`
     display: flex;
     height: 400px;
+
+    @media (max-width: 640px) {
+        height: auto;
+    }
 `
 const SidebarMock = styled.div`
     width: 30%;
     border-right: 1px solid ${props => props.theme.colors.backgroundMedium};
     padding: 10px;
+
+    @media (max-width: 640px) {
+        display: none;
+    }
 
     .item {
         padding: 10px;
@@ -181,6 +189,11 @@ const ChatAreaMock = styled.div`
     gap: 12px;
     background-image: radial-gradient(#00000008 1px, transparent 0);
     background-size: 12px 12px;
+
+    @media (max-width: 640px) {
+        min-height: 260px;
+        padding: 14px;
+    }
 `
 const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
     padding: 10px 14px;
@@ -278,19 +291,76 @@ const FlowBuilderMock = styled.div`
         background: #ccc;
         z-index: 1;
     }
+
+    .node-marketing-start {
+        top: 40px;
+        left: 30%;
+        width: 220px;
+    }
+
+    .node-marketing-action {
+        top: 160px;
+        left: 20%;
+        width: 260px;
+    }
+
+    @media (max-width: 640px) {
+        height: auto;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 16px;
+
+        .connection-line {
+            display: none;
+        }
+
+        .node,
+        .node-marketing-start,
+        .node-marketing-action {
+            position: relative;
+            top: auto;
+            left: auto;
+            width: 92%;
+            max-width: 320px;
+        }
+
+        .node-header { font-size: 10px; padding: 7px 10px; }
+        .node-body   { font-size: 11px; padding: 8px 10px; }
+    }
 `
 
 // --- MOCKUP 3: PROFILE PANE ---
 const ProfileLayout = styled.div`
     display: flex;
     height: 420px;
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+        height: auto;
+    }
 `
 const ChatSection = styled(ChatAreaMock)`
     width: 60%;
     border-right: 1px solid ${props => props.theme.colors.backgroundMedium};
+
+    @media (max-width: 640px) {
+        width: 100%;
+        min-height: 160px;
+        border-right: none;
+        border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    }
 `
 const ProfileSidebar = styled.div`
     width: 40%;
+
+    @media (max-width: 640px) {
+        width: 100%;
+
+        .content { max-height: 220px; overflow-y: auto; }
+    }
     background: white;
     display: flex;
     flex-direction: column;
@@ -430,6 +500,17 @@ const DashboardMock = styled.div`
         div {
             height: 20px;
             border-radius: 2px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+
+        .heatmap {
+            grid-template-columns: repeat(6, 1fr);
+
+            div { height: 16px; }
         }
     }
 `
@@ -751,15 +832,15 @@ export default function WhatsAppDeepDive() {
                             </div>
                         </MockupHeader>
                         <FlowBuilderMock>
-                            <div className="node start" style={{top: '40px', left: '30%', width: '220px'}}>
+                            <div className="node start node-marketing-start">
                                 <div className="node-header"><Filter size={12}/> Etapa do Funil: Proposta</div>
                                 <div className="node-body">Sem resposta há 2 dias.</div>
                             </div>
-                            
+
                             <div className="connection-line"
                                  style={{top: '90px', left: '50%', height: '70px', width: '2px'}}></div>
 
-                            <div className="node action" style={{top: '160px', left: '20%', width: '260px'}}>
+                            <div className="node action node-marketing-action">
                                 <div className="node-header"><Send size={12}/> Disparo WhatsApp Automático</div>
                                 <div className="node-body">Template: &quot;Olá [Nome], restou alguma dúvida...&quot;</div>
                             </div>

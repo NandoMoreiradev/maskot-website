@@ -134,12 +134,47 @@ const KanbanMock = styled.div`
     background: #f4f5f7;
     overflow-x: hidden;
 
+    @media (max-width: 640px) {
+        gap: 6px;
+        padding: 10px;
+        height: auto;
+        min-height: 240px;
+        overflow-x: hidden;
+    }
+
     .col {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 10px;
         min-width: 140px;
+
+        @media (max-width: 640px) {
+            min-width: 0;
+            flex: 1;
+            gap: 6px;
+
+            .header { font-size: 8px; }
+
+            .card {
+                padding: 7px;
+
+                h4 {
+                    font-size: 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                p { display: none; }
+
+                .tag {
+                    font-size: 7px;
+                    padding: 1px 4px;
+                    margin-top: 4px;
+                }
+            }
+        }
 
         .header {
             font-size: 12px;
@@ -215,6 +250,10 @@ const CalendarMock = styled.div`
         display: grid;
         grid-template-columns: 2fr 1fr;
         gap: 20px;
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+        }
     }
 
     .cal-grid {
@@ -299,6 +338,10 @@ const TimelineMock = styled.div`
     max-height: 400px;
     overflow: hidden;
 
+    @media (max-width: 640px) {
+        padding: 16px;
+    }
+
     .event {
         display: flex;
         gap: 15px;
@@ -345,6 +388,8 @@ const TimelineMock = styled.div`
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 5px;
+                flex-wrap: wrap;
+                gap: 2px;
             }
 
             h4 {
@@ -393,6 +438,7 @@ const ListMock = styled.div`
         border-bottom: 1px solid #eee;
         display: flex;
         gap: 10px;
+        flex-wrap: wrap;
 
         .btn {
             padding: 6px 12px;
@@ -403,6 +449,11 @@ const ListMock = styled.div`
             display: flex;
             gap: 6px;
             align-items: center;
+
+            @media (max-width: 640px) {
+                font-size: 11px;
+                padding: 5px 8px;
+            }
         }
 
         .btn.primary {
@@ -424,6 +475,14 @@ const ListMock = styled.div`
         color: #999;
         text-transform: uppercase;
         border-bottom: 1px solid #eee;
+
+        @media (max-width: 640px) {
+            padding: 10px 10px;
+        }
+
+        &:nth-child(3), &:nth-child(4) {
+            @media (max-width: 640px) { display: none; }
+        }
     }
 
     td {
@@ -431,6 +490,15 @@ const ListMock = styled.div`
         font-size: 13px;
         color: #333;
         border-bottom: 1px solid #f5f5f5;
+
+        @media (max-width: 640px) {
+            padding: 10px 10px;
+            font-size: 12px;
+        }
+
+        &:nth-child(3), &:nth-child(4) {
+            @media (max-width: 640px) { display: none; }
+        }
     }
 
     .status {
