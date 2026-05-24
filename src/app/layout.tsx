@@ -19,11 +19,23 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Maskot Edu',
-  description: 'CRM Educacional.',
+  title: {
+    default: 'Maskot | CRM Educacional para Captação de Alunos',
+    template: '%s | Maskot',
+  },
+  description: 'O Maskot é o CRM educacional que automatiza a captação de alunos, centraliza leads e ajuda escolas a crescerem. Experimente grátis.',
+  metadataBase: new URL('https://www.maskotedu.com.br'),
+  alternates: {
+    canonical: 'https://www.maskotedu.com.br',
+  },
+  openGraph: {
+    siteName: 'Maskot',
+    locale: 'pt_BR',
+    type: 'website',
+  },
   verification: {
     google: '4xC84Wrsi02_zzJgxnligksF3vNtmfbGympo8dYAEPA',
-  }
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

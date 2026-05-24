@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'onboarding', 'whatsapp'
   ].map(f => ({
     url: `https://www.maskotedu.com.br/funcionalidades/${f}`,
-    lastModified: new Date(),
+    lastModified: new Date('2026-05-03'),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }))
@@ -47,35 +47,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.3,
   }))
 
+  // Data do último deploy significativo do site
+  const SITE_LAST_UPDATED = new Date('2026-05-03')
+  // Data do último blog post publicado (atualizar quando publicar novo conteúdo)
+  const BLOG_LAST_UPDATED = posts.length > 0
+    ? new Date(posts[0].last_publication_date)
+    : SITE_LAST_UPDATED
+  // Data do último case publicado
+  const CASES_LAST_UPDATED = cases.length > 0
+    ? new Date(cases[0].last_publication_date)
+    : SITE_LAST_UPDATED
+
   return [
     {
       url: 'https://www.maskotedu.com.br',
-      lastModified: new Date(),
-      changeFrequency: 'daily',
+      lastModified: SITE_LAST_UPDATED,
+      changeFrequency: 'weekly' as const,
       priority: 1,
     },
     {
       url: 'https://www.maskotedu.com.br/blog',
-      lastModified: new Date(),
-      changeFrequency: 'daily',
+      lastModified: BLOG_LAST_UPDATED,
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
       url: 'https://www.maskotedu.com.br/sobre',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      lastModified: SITE_LAST_UPDATED,
+      changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
     {
       url: 'https://www.maskotedu.com.br/comparativo',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      lastModified: SITE_LAST_UPDATED,
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
       url: 'https://www.maskotedu.com.br/cases',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      lastModified: CASES_LAST_UPDATED,
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     ...blogPosts,

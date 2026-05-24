@@ -15,14 +15,34 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const doc: any = await client.getSingle('success_cases_index' as any);
+    const title = doc.data.meta_title || 'Cases de Sucesso | Maskot';
+    const description = doc.data.meta_description || 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.';
     return {
-      title: doc.data.meta_title || 'Cases de Sucesso | Maskot',
-      description: doc.data.meta_description || 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
+      title,
+      description,
+      alternates: {
+        canonical: 'https://www.maskotedu.com.br/cases',
+      },
+      openGraph: {
+        title,
+        description,
+        url: 'https://www.maskotedu.com.br/cases',
+        type: 'website',
+      },
     };
   } catch {
     return {
       title: 'Cases de Sucesso | Maskot',
       description: 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
+      alternates: {
+        canonical: 'https://www.maskotedu.com.br/cases',
+      },
+      openGraph: {
+        title: 'Cases de Sucesso | Maskot',
+        description: 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
+        url: 'https://www.maskotedu.com.br/cases',
+        type: 'website',
+      },
     };
   }
 }

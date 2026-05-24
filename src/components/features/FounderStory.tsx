@@ -91,26 +91,26 @@ export default function FounderStory() {
                     <ImageWrapper>
                         {/* Substitua por uma foto sua ou de ambiente escolar */}
                         <Image
-                            src="/founder-working.jpg"
-                            alt="Fundador trabalhando em escola"
+                            src="/fernando_moreira.png"
+                            alt="Fernando Moreira - Fundador do Maskot"
                             fill
-                            style={{objectFit: 'cover'}}
+                            style={{ objectFit: 'cover' }}
                         />
                         {/* Fallback visual se não tiver imagem ainda */}
-                        <div style={{position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)', opacity: 0.1}}></div>
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)', opacity: 0.1 }}></div>
                     </ImageWrapper>
 
                     <TextContent>
                         <h2>Eu sei o que é perder uma matrícula porque a mensagem ficou perdida no WhatsApp.</h2>
 
                         <p>
-                            Durante anos, atuei no setor de marketing de uma escola particular. Minha rotina? Um caos controlado.
+                            Durante anos, atuei no setor de marketing de uma escola particular. Minha rotina? Um caos.
                             Eu tinha 15 abas abertas no navegador: planilha de interessados, agenda do Google, WhatsApp Web travando, sistema financeiro e e-mail.
                         </p>
 
                         <p>
                             Eu via o esforço da equipe pedagógica, o carinho com os alunos, mas na hora da captação,
-                            <strong>nós falhávamos por falta de organização</strong>.
+                            <strong> nós falhávamos por falta de organização</strong>.
                         </p>
 
                         <p>
@@ -119,13 +119,13 @@ export default function FounderStory() {
                         </p>
 
                         <QuoteBox>
-                            <Quote size={32} color="#007BFF" style={{marginBottom: '10px'}} />
+                            <Quote size={32} color="#007BFF" style={{ marginBottom: '10px' }} />
                             <p>Procurei CRMs no mercado. Ou eram complexos demais (feitos para vender software, não matrícula) ou eram caros demais. A escola precisava de algo que falasse a nossa língua.</p>
-                            <span>— Fundador do Maskot</span>
+                            <span>— Fernando Moreira - Fundador do Maskot</span>
                         </QuoteBox>
 
                         <p>
-                            Foi aí que decidi criar o Maskot. Não como um programador que acha que sabe o que você precisa,
+                            Foi aí que decidi criar o Maskot EDU. Não como um programador que acha que sabe o que você precisa,
                             mas como <strong>alguém que já sentiu a sua dor de perder aluno</strong>.
                         </p>
 

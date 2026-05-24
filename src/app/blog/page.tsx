@@ -7,7 +7,16 @@ import { BlogPageInner, BlogPageHeader } from './blog-page-styles';
 
 export const metadata: Metadata = {
   title: 'Blog Educacional | Maskot',
-  description: 'Dicas de gestão escolar e retenção de alunos.',
+  description: 'Conteúdo estratégico sobre captação de alunos, gestão escolar e CRM educacional. Dicas práticas para escolas crescerem.',
+  alternates: {
+    canonical: 'https://www.maskotedu.com.br/blog',
+  },
+  openGraph: {
+    title: 'Blog Educacional | Maskot',
+    description: 'Conteúdo estratégico sobre captação de alunos, gestão escolar e CRM educacional. Dicas práticas para escolas crescerem.',
+    url: 'https://www.maskotedu.com.br/blog',
+    type: 'website',
+  },
 };
 
 export default async function BlogPage() {
