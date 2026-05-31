@@ -297,11 +297,11 @@ export default function Footer() {
                         <ContactInfo>
                             <ContactItem>
                                 <Mail />
-                                <a href="mailto:contato@maskotedu.com.br">contato@maskotedu.com.br</a>
+                                <a href="mailto:fernandomoreira@maskotedu.com.br">fernandomoreira@maskotedu.com.br</a>
                             </ContactItem>
                             <ContactItem>
                                 <Phone />
-                                <a href="tel:+5579996268858">(79) 99626-8858</a>
+                                <a href="tel:+5579996268858">(79) 99106-4405</a>
                             </ContactItem>
                             <ContactItem>
                                 <span style={{ fontWeight: 'bold' }}>CNPJ:</span> 55.188.948/0001-04
