@@ -1,7 +1,7 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
-import { Rocket, CheckCircle, ShieldCheck, LayoutDashboard, ArrowRight, Flame, Sparkles, BadgeCheck } from 'lucide-react'
+import { Rocket, CheckCircle, ShieldCheck, ArrowRight, BadgeCheck } from 'lucide-react'
 
 // Animação suave para o badge
 const float = keyframes`
@@ -20,12 +20,13 @@ const HeroSection = styled.section`
     );
     position: relative;
     overflow: hidden;
-    padding-top: 10rem;
+    padding-top: 12rem;
+    padding-bottom: 6rem;
 
     @media (max-width: 768px) {
         padding-top: 9rem;
         min-height: auto;
-        padding-bottom: 4em;
+        padding-bottom: 4rem;
     }
 `
 
@@ -37,54 +38,48 @@ const Container = styled.div`
 `
 
 const HeroContent = styled.div`
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto;
     width: 100%;
-
-    @media (max-width: 968px) {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        text-align: center;
-    }
 `
 
 const TextContent = styled.div`
     z-index: 2;
-
-    @media (max-width: 968px) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 `
 
 const TechBadge = styled.div`
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
     background: ${props => props.theme.colors.white};
-    border: 1px solid ${props => props.theme.colors.secondary}40;
+    border: 1px solid ${props => props.theme.colors.secondary}30;
     border-radius: 20px;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     animation: ${float} 3s ease-in-out infinite;
 
     span {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: ${props => props.theme.colors.secondary}; /* Verde para remeter a crescimento */
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: ${props => props.theme.colors.textMedium};
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 `
 
 const MainHeading = styled.h1`
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.05;
     margin-bottom: 1.5rem;
     color: ${props => props.theme.colors.textDark};
 
@@ -99,7 +94,7 @@ const MainHeading = styled.h1`
     }
 
     @media (max-width: 768px) {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
     }
 `
 
@@ -108,7 +103,9 @@ const Subtitle = styled.p`
     color: ${props => props.theme.colors.textMedium};
     margin-bottom: 2.5rem;
     line-height: 1.6;
-    max-width: 580px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
 
     @media (max-width: 768px) {
         font-size: 1.1rem;
@@ -118,7 +115,11 @@ const Subtitle = styled.p`
 const TrustBadges = styled.div`
     display: flex;
     gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    width: 100%;
 
     div {
         display: flex;
@@ -136,7 +137,6 @@ const TrustBadges = styled.div`
     }
 
     @media (max-width: 768px) {
-        justify-content: center;
         flex-wrap: wrap;
         gap: 1rem;
     }
@@ -145,6 +145,7 @@ const TrustBadges = styled.div`
 const ButtonGroup = styled.div`
     display: flex;
     gap: 1rem;
+    justify-content: center;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -203,160 +204,6 @@ const SecondaryButton = styled.button`
     }
 `
 
-// Visual Content: Interface Simulada
-const VisualContent = styled.div`
-    position: relative;
-
-    @media (max-width: 968px) {
-        display: none;
-    }
-`
-
-const MainMockup = styled.div`
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-    border: 1px solid ${props => props.theme.colors.borderLight};
-    overflow: hidden;
-    position: relative;
-    z-index: 2;
-    max-width: 400px;
-    margin-left: auto;
-`
-
-const ChatHeader = styled.div`
-    background: #075E54;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: white;
-
-    div {
-        display: flex;
-        flex-direction: column;
-        h4 { margin: 0; font-size: 0.95rem; color: #FFFFFF; }
-        span { font-size: 0.75rem; opacity: 0.8; }
-    }
-`
-
-const ChatInterface = styled.div`
-    padding: 1.5rem;
-    padding-bottom: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
-    background-size: 300px;
-    height: 400px;
-`
-
-const MessageBubble = styled.div<{ $type: 'in' | 'out', $delay?: string }>`
-    align-self: ${props => props.$type === 'out' ? 'flex-end' : 'flex-start'};
-    background: ${props => props.$type === 'out' ? '#DCF8C6' : '#FFFFFF'};
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    max-width: 85%;
-    font-size: 0.9rem;
-    color: ${props => props.theme.colors.textDark};
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    position: relative;
-    line-height: 1.4;
-    opacity: 0;
-    animation: fadeIn 0.5s ease forwards;
-    animation-delay: ${props => props.$delay || '0s'};
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Triângulo do balão */
-    &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        ${props => props.$type === 'out' ? 'right: -8px' : 'left: -8px'};
-        width: 0;
-        height: 0;
-        border: 8px solid transparent;
-        border-top-color: ${props => props.$type === 'out' ? '#DCF8C6' : '#FFFFFF'};
-        ${props => props.$type === 'out' ? 'border-right: 0' : 'border-left: 0'};
-        margin-top: 8px;
-    }
-`
-
-const AiSuggestionBadge = styled.div`
-    position: absolute;
-    bottom: -15px;
-    right: 0;
-    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-    color: white;
-    font-size: 0.65rem;
-    padding: 3px 8px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-weight: 700;
-    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
-    white-space: nowrap;
-    z-index: 10;
-`
-
-const FloatingCard = styled.div`
-    position: absolute;
-    top: 50%;
-    left: -40px;
-    transform: translateY(-50%);
-    background: white;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border: 1px solid ${props => props.theme.colors.borderLight};
-    animation: ${float} 4s ease-in-out infinite reverse;
-
-    .icon-box {
-        width: 40px;
-        height: 40px;
-        background: ${props => props.theme.colors.primary}15;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: ${props => props.theme.colors.primary};
-    }
-
-    div {
-        display: flex;
-        flex-direction: column;
-        strong { font-size: 0.9rem; color: ${props => props.theme.colors.textDark}; margin-bottom: 2px;}
-        span { font-size: 0.8rem; color: ${props => props.theme.colors.success}; font-weight: 700; display: flex; align-items: center; gap: 4px; }
-    }
-`
-
-const TopFloatingCard = styled(FloatingCard)`
-    top: 15%;
-    left: auto;
-    right: -40px;
-    animation: ${float} 5s ease-in-out infinite;
-    padding: 0.75rem 1.25rem;
-    
-    .icon-box {
-        background: #FEF3C7;
-        color: #D97706;
-        width: 32px;
-        height: 32px;
-    }
-
-    div span {
-        color: #D97706;
-    }
-`
 
 export default function Hero() {
     return (
@@ -365,7 +212,7 @@ export default function Hero() {
                 <HeroContent>
                     <TextContent>
                         <TechBadge>
-                            <Rocket size={18} />
+                            <Rocket size={13} />
                             <span>Especialistas em Crescimento Escolar</span>
                         </TechBadge>
 
@@ -374,14 +221,8 @@ export default function Hero() {
                         </MainHeading>
 
                         <Subtitle>
-                            Chega de perder leads em planilhas. Centralize o atendimento, organize seu <strong>Funil de Vendas</strong> e use a automação do Maskot para garantir que nenhum pai fique sem resposta.
+                            Chega de perder leads em planilhas. Centralize o atendimento, organize seu <strong>Funil de Matrículas</strong> e use a automação do Maskot para garantir que nenhuma família fique sem resposta.
                         </Subtitle>
-
-                        <TrustBadges>
-                            <div><ShieldCheck /> API Oficial</div>
-                            <div><CheckCircle /> CRM Educacional Completo</div>
-                            <div><BadgeCheck /> Provedor Oficial WhatsApp</div>
-                        </TrustBadges>
 
                         <ButtonGroup>
                             <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
@@ -391,59 +232,13 @@ export default function Hero() {
                                 Veja o CRM por dentro <ArrowRight size={18} />
                             </SecondaryButton>
                         </ButtonGroup>
+
+                        <TrustBadges>
+                            <div><ShieldCheck /> API Oficial</div>
+                            <div><CheckCircle /> CRM Educacional Completo</div>
+                            <div><BadgeCheck /> Provedor Oficial WhatsApp</div>
+                        </TrustBadges>
                     </TextContent>
-
-                    <VisualContent>
-                        <MainMockup>
-                            <ChatHeader>
-                                <div style={{width: 35, height: 35, borderRadius: '50%', background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#075E54'}}>
-                                    <Rocket size={20}/>
-                                </div>
-                                <div>
-                                    <h4>Comercial - Colégio Futuro</h4>
-                                    <span>Online agora</span>
-                                </div>
-                            </ChatHeader>
-                            <ChatInterface>
-                                <MessageBubble $type="in" $delay="0.5s">
-                                    Olá, gostaria de saber os valores para o Ensino Fundamental.
-                                </MessageBubble>
-                                <MessageBubble $type="out" $delay="1.5s">
-                                    Olá! Tudo bem? 👋 Temos condições especiais para matrículas esta semana!
-                                </MessageBubble>
-                                <MessageBubble $type="out" $delay="2.5s">
-                                    Para agilizar, qual seria a série do aluno?
-                                </MessageBubble>
-                                <MessageBubble $type="in" $delay="4.0s">
-                                    Seria para o 6º ano.
-                                </MessageBubble>
-                                <MessageBubble $type="out" $delay="5.5s" style={{ marginBottom: '15px' }}>
-                                    Perfeito! Vou te enviar nossa proposta pedagógica e agendar uma visita. 📅
-                                    <AiSuggestionBadge><Sparkles size={10} /> Gerado por IA</AiSuggestionBadge>
-                                </MessageBubble>
-                            </ChatInterface>
-                        </MainMockup>
-
-                        <FloatingCard>
-                            <div className="icon-box">
-                                <LayoutDashboard size={20} />
-                            </div>
-                            <div>
-                                <strong>Status Atualizado</strong>
-                                <span><ArrowRight size={12}/> Agendamento de Visita</span>
-                            </div>
-                        </FloatingCard>
-
-                        <TopFloatingCard>
-                            <div className="icon-box">
-                                <Flame size={16} />
-                            </div>
-                            <div>
-                                <strong>Score do Lead</strong>
-                                <span>92% (Quente)</span>
-                            </div>
-                        </TopFloatingCard>
-                    </VisualContent>
                 </HeroContent>
             </Container>
         </HeroSection>
