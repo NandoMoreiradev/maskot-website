@@ -6,7 +6,7 @@ import {
     Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip,
     Workflow, Bot, GitBranch, MessageSquare,
     Network, Sparkles, CalendarSync, FileHeart, UserPlus, FileDown, Route,
-    Instagram, Facebook, Inbox, MessagesSquare
+    Instagram, Facebook, Inbox
 } from 'lucide-react'
 
 // --- Animations ---

@@ -283,7 +283,7 @@ export default function CopilotMiaDeepDive() {
                         </p>
                         <ul>
                             <li><Wrench size={20}/> <strong>Invocação de Ferramentas:</strong> Consulta leads, agenda, tarefas e métricas em tempo real.</li>
-                            <li><Search size={20}/> <strong>Filtros Inteligentes:</strong> Ela entende intenções de tempo (ex: "esta semana", "mês passado").</li>
+                            <li><Search size={20}/> <strong>Filtros Inteligentes:</strong> Ela entende intenções de tempo (ex: &quot;esta semana&quot;, &quot;mês passado&quot;).</li>
                             <li><Activity size={20}/> <strong>Dados Estruturados:</strong> Formata as respostas em tabelas fáceis de ler e decidir.</li>
                         </ul>
                     </TextContent>
@@ -295,7 +295,7 @@ export default function CopilotMiaDeepDive() {
                         
                         <ToolCallIndicator>
                             <BrainCircuit size={16} />
-                            Mia está chamando: search_leads(&#123; status: "no_reply", timeframe: "this_week" &#125;)
+                            Mia está chamando: search_leads(&#123; status: &quot;no_reply&quot;, timeframe: &quot;this_week&quot; &#125;)
                         </ToolCallIndicator>
 
                         <MiaBubble>

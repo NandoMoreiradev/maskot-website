@@ -3,8 +3,8 @@
 import styled, { css, keyframes } from 'styled-components'
 import {
     LayoutTemplate, MousePointer2, Blocks, Palette,
-    Users, Link2, CalendarCheck, Megaphone,
-    Clock, Star, MessageCircleQuestion, Share2,
+    Users, CalendarCheck, Megaphone,
+    Clock, Star, MessageCircleQuestion,
     Smartphone, Zap, Search, ShieldCheck
 } from 'lucide-react'
 
@@ -466,8 +466,8 @@ export default function LandingPagesDeepDive() {
                             <Star fill="currentColor" />
                         </div>
                         <p style={{ fontSize: '1.2rem', fontStyle: 'italic', color: '#334155', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                            "A melhor escolha que fizemos para nosso filho. A estrutura da escola é impecável e o 
-                            atendimento da equipe nos passou muita segurança desde o primeiro dia."
+                            &quot;A melhor escolha que fizemos para nosso filho. A estrutura da escola é impecável e o 
+                            atendimento da equipe nos passou muita segurança desde o primeiro dia.&quot;
                         </p>
                         <strong style={{ color: '#0F172A' }}>Maria Silva</strong>
                         <div style={{ color: '#64748B', fontSize: '0.9rem' }}>Mãe do Pedro (2º Ano)</div>
