@@ -5,7 +5,8 @@ import {
     Users, ShieldCheck, Send, LineChart, Filter,
     Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip,
     Workflow, Bot, GitBranch, MessageSquare,
-    Network, Sparkles, CalendarSync, FileHeart, UserPlus, FileDown, Route
+    Network, Sparkles, CalendarSync, FileHeart, UserPlus, FileDown, Route,
+    Instagram, Facebook, Inbox, MessagesSquare
 } from 'lucide-react'
 
 // --- Animations ---
@@ -624,6 +625,63 @@ export default function WhatsAppDeepDive() {
                             </ChatAreaMock>
                         </ChatLayout>
                     </MockupCard>
+                </FeatureRow>
+
+                {/* 1.5 INBOX OMNICHANNEL */}
+                <FeatureRow $reverse>
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </MockupHeader>
+                        <ChatLayout>
+                            <SidebarMock>
+                                <div className="item active" style={{ borderLeft: '3px solid #E1306C' }}>
+                                    <div className="avatar" style={{ background: '#E1306C', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Instagram size={18}/></div>
+                                    <div className="lines">
+                                        <div style={{width: '70%', background: '#333'}}></div>
+                                        <div style={{width: '40%'}}></div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="avatar" style={{ background: '#0084FF', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Facebook size={18}/></div>
+                                    <div className="lines">
+                                        <div style={{width: '50%'}}></div>
+                                        <div style={{width: '30%'}}></div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="avatar" style={{ background: '#25D366', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><MessageSquare size={18}/></div>
+                                    <div className="lines">
+                                        <div style={{width: '60%'}}></div>
+                                        <div style={{width: '40%'}}></div>
+                                    </div>
+                                </div>
+                            </SidebarMock>
+                            <ChatAreaMock style={{ background: '#F8FAFC' }}>
+                                <Bubble>Vi o post de vocês no Instagram e amei! Como faço para visitar?</Bubble>
+                                <Bubble $sent style={{ background: '#E1306C', color: 'white' }}>Olá! Ficamos muito felizes. Você pode agendar direto por aqui!</Bubble>
+                            </ChatAreaMock>
+                        </ChatLayout>
+                    </MockupCard>
+
+                    <TextContent>
+                        <h3>Inbox Unificado: <br/>WhatsApp, Instagram e Messenger</h3>
+                        <p>
+                            Sua equipe não precisa mais pular entre abas e celulares. Conecte suas contas do Instagram e Facebook e responda a todas as DMs no mesmo lugar em que atende o WhatsApp.
+                        </p>
+                        <ul>
+                            <li><Inbox size={20}/> <strong>Tudo em um só lugar:</strong> Fila unificada. Não perca nenhum lead, independente de onde ele veio.
+                            </li>
+                            <li><Instagram size={20}/> <strong>Instagram Direct:</strong> Responda aos stories e mensagens diretas instantaneamente no CRM.
+                            </li>
+                            <li><Facebook size={20}/> <strong>Facebook Messenger:</strong> Integre sua página e centralize o atendimento comercial.
+                            </li>
+                        </ul>
+                    </TextContent>
                 </FeatureRow>
 
                 {/* 2. VISUAL FLOW BUILDER */}

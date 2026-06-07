@@ -6,7 +6,7 @@ import {
     // Ícones Antigos
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
-    BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare
+    BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -512,6 +512,24 @@ export default function Header() {
                                     <div className="text">
                                         <strong>Agendamento</strong>
                                         <span>Agenda de visitas</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Criador de Landing Pages (NOVO) */}
+                                <DropdownLink href="/funcionalidades/criador-de-landing-pages" onClick={handleLinkClick}>
+                                    <div className="icon-box"><LayoutTemplate size={18}/></div>
+                                    <div className="text">
+                                        <strong>Landing Pages</strong>
+                                        <span>Páginas de conversão</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Copilot IA Mia (NOVO) */}
+                                <DropdownLink href="/funcionalidades/copilot-mia" onClick={handleLinkClick}>
+                                    <div className="icon-box"><BrainCircuit size={18}/></div>
+                                    <div className="text">
+                                        <strong>Copilot IA (Mia)</strong>
+                                        <span>Sua assistente virtual</span>
                                     </div>
                                 </DropdownLink>
                             </DropdownContent>
