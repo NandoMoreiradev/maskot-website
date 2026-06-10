@@ -2,7 +2,6 @@
 
 import styled from 'styled-components'
 import Image from 'next/image'
-import Link from 'next/link'
 
 const HeroWrapper = styled.section`
     background: linear-gradient(180deg, ${props => props.theme.colors.pageBackground} 0%, #fff 100%);
@@ -72,7 +71,7 @@ const ImageWrapper = styled.div`
     }
 `
 
-const CTAButton = styled(Link)`
+const CTAButton = styled.button`
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -82,6 +81,8 @@ const CTAButton = styled(Link)`
     font-size: 1.1rem;
     padding: 1rem 2.5rem;
     border-radius: 50px;
+    border: none;
+    cursor: pointer;
     text-decoration: none;
     box-shadow: 0 8px 25px rgba(249, 115, 22, 0.35);
     transition: all 0.3s ease;
@@ -163,7 +164,7 @@ export default function CopilotMiaHero() {
                 <Subtitle>
                     A Mia não é apenas um chat. Ela entende o contexto da sua escola, age como uma verdadeira copilota — invocando ferramentas, analisando leads, criando mensagens e entregando o briefing do seu dia antes mesmo de você pedir.
                 </Subtitle>
-                <CTAButton href="/contato">
+                <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
                     Agendar uma demo
                 </CTAButton>
                 <StatsBar>

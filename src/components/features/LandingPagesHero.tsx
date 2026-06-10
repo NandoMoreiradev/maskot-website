@@ -1,7 +1,6 @@
 'use client'
 
 import styled from 'styled-components'
-import Link from 'next/link'
 
 const HeroWrapper = styled.section`
     background: linear-gradient(180deg, ${props => props.theme.colors.pageBackground} 0%, #fff 100%);
@@ -56,7 +55,7 @@ const Subtitle = styled.p`
     margin-bottom: 2.5rem;
 `
 
-const CTAButton = styled(Link)`
+const CTAButton = styled.button`
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -66,6 +65,8 @@ const CTAButton = styled(Link)`
     font-size: 1.1rem;
     padding: 1rem 2.5rem;
     border-radius: 50px;
+    border: none;
+    cursor: pointer;
     text-decoration: none;
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
     transition: all 0.3s ease;
@@ -139,7 +140,7 @@ export default function LandingPagesHero() {
                     Crie páginas de captura profissionais, com gatilhos de urgência, agendamento de visitas e formulários
                     conectados diretamente ao seu CRM Maskot Edu. Atraia mais alunos em poucos cliques.
                 </Subtitle>
-                <CTAButton href="/contato">
+                <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
                     Criar minha landing page
                 </CTAButton>
                 <StatsBar>
