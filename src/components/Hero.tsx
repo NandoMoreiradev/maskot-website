@@ -211,11 +211,6 @@ export default function Hero() {
             <Container>
                 <HeroContent>
                     <TextContent>
-                        <TechBadge>
-                            <Rocket size={13} />
-                            <span>Especialistas em Crescimento Escolar</span>
-                        </TechBadge>
-
                         <MainHeading>
                             Transforme conversas de WhatsApp em <strong>Matrículas Reais</strong>
                         </MainHeading>
