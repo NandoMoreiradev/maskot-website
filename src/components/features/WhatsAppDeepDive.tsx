@@ -6,7 +6,7 @@ import {
     Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip,
     Workflow, Bot, GitBranch, MessageSquare,
     Network, Sparkles, CalendarSync, FileHeart, UserPlus, FileDown, Route,
-    Instagram, Facebook, Inbox
+    Instagram, Facebook, Inbox, Star, CalendarClock
 } from 'lucide-react'
 
 // --- Animations ---
@@ -572,7 +572,7 @@ const PowerCard = styled.div`
 
 export default function WhatsAppDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* 1. INBOX & CHATBOT */}
@@ -1019,6 +1019,18 @@ export default function WhatsAppDeepDive() {
                         <div className="icon"><Clock size={24}/></div>
                         <h4>Histórico Vitalício</h4>
                         <p>Nunca perca o contexto. Acesse conversas de meses atrás para relembrar acordos ou informações trocadas com as famílias.</p>
+                    </PowerCard>
+
+                    <PowerCard>
+                        <div className="icon"><CalendarClock size={24}/></div>
+                        <h4>Agendamento de Mensagens</h4>
+                        <p>Programe o envio de mensagens para a hora certa — lembretes de visita, avisos e retornos saem sozinhos no melhor horário.</p>
+                    </PowerCard>
+
+                    <PowerCard>
+                        <div className="icon"><Star size={24}/></div>
+                        <h4>Pesquisa de Satisfação</h4>
+                        <p>Envie uma pesquisa de satisfação (CSAT) ao fim do atendimento e descubra, em números, como as famílias avaliam sua equipe.</p>
                     </PowerCard>
                 </PowerGrid>
 

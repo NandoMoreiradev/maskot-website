@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import Image from 'next/image'
+import { ArrowRight } from 'lucide-react'
 
 const HeroWrapper = styled.section`
     background: linear-gradient(180deg, ${props => props.theme.colors.pageBackground} 0%, #fff 100%);
@@ -71,9 +72,22 @@ const ImageWrapper = styled.div`
     }
 `
 
+const ButtonGroup = styled.div`
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+
+    @media (max-width: 560px) {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+    }
+`
+
 const CTAButton = styled.button`
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     background: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
     color: white;
@@ -86,13 +100,46 @@ const CTAButton = styled.button`
     text-decoration: none;
     box-shadow: 0 8px 25px rgba(249, 115, 22, 0.35);
     transition: all 0.3s ease;
-    margin-bottom: 3rem;
 
     &:hover {
         transform: translateY(-3px);
         box-shadow: 0 12px 35px rgba(249, 115, 22, 0.45);
     }
+
+    @media (max-width: 560px) {
+        width: 100%;
+    }
 `
+
+const SecondaryButton = styled.button`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: white;
+    color: ${props => props.theme.colors.textDark};
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    border: 1px solid ${props => props.theme.colors.borderLight};
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: #F97316;
+        color: #F97316;
+        background: ${props => props.theme.colors.lightGray};
+    }
+
+    @media (max-width: 560px) {
+        width: 100%;
+    }
+`
+
+function scrollToSection(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
 
 const StatsBar = styled.div`
     display: flex;
@@ -164,9 +211,14 @@ export default function CopilotMiaHero() {
                 <Subtitle>
                     A Mia não é apenas um chat. Ela entende o contexto da sua escola, age como uma verdadeira copilota — invocando ferramentas, analisando leads, criando mensagens e entregando o briefing do seu dia antes mesmo de você pedir.
                 </Subtitle>
-                <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
-                    Agendar uma demo
-                </CTAButton>
+                <ButtonGroup>
+                    <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
+                        Agendar uma demo
+                    </CTAButton>
+                    <SecondaryButton onClick={() => scrollToSection('recursos')}>
+                        Ver a Mia em ação <ArrowRight size={18} />
+                    </SecondaryButton>
+                </ButtonGroup>
                 <StatsBar>
                     <StatItem>
                         <span className="number">7</span>

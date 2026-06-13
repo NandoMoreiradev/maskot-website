@@ -62,7 +62,6 @@ const FeaturesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-bottom: 6rem;
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr;
@@ -156,195 +155,16 @@ const FeatureList = styled.ul`
     }
 `
 
-// --- BANNER DE INTEGRAÇÃO PREMIUM (GLASSMORPHISM) ---
-
-const IntegrationBanner = styled.div`
-    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-    border-radius: 24px;
-    padding: 4rem;
-    position: relative;
-    overflow: hidden;
-    color: white;
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    align-items: center;
-    gap: 4rem;
-    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-
-    /* Efeito de Luz de Fundo (Glow Principal) */
-    &::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, ${props => props.theme.colors.primary}40 0%, transparent 70%);
-        filter: blur(80px);
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    /* Ponto de luz secundário */
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -20%;
-        left: -10%;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, ${props => props.theme.colors.secondary}30 0%, transparent 70%);
-        filter: blur(60px);
-        opacity: 0.4;
-        pointer-events: none;
-    }
-
-    @media (max-width: 968px) {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 3rem 2rem;
-        gap: 3rem;
-    }
-`
-
-const BannerContent = styled.div`
-    position: relative;
-    z-index: 2;
-
-    h3 {
-        font-size: 2.25rem;
-        font-weight: 800;
-        margin-bottom: 1.5rem;
-        line-height: 1.1;
-        background: linear-gradient(90deg, #fff, #cbd5e1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    p {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 0;
-    }
-`
-
-const StepsWrapper = styled.div`
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
-
-    /* Linha conectora (Timeline) */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 40px;
-        right: 40px;
-        height: 2px;
-        background: linear-gradient(90deg,
-        rgba(255,255,255,0.05) 0%,
-        ${props => props.theme.colors.primary} 50%,
-        rgba(255,255,255,0.05) 100%
-        );
-        z-index: 0;
-        transform: translateY(-50%);
-    }
-
-    @media (max-width: 650px) {
-        flex-direction: column;
-        gap: 2rem;
-        padding: 0;
-
-        /* Linha Vertical no Mobile */
-        &::before {
-            width: 2px;
-            height: 100%;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(180deg,
-            rgba(255,255,255,0.05) 0%,
-            ${props => props.theme.colors.primary} 50%,
-            rgba(255,255,255,0.05) 100%
-            );
-        }
-    }
-`
-
-const StepCard = styled.div`
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    width: 110px;
-    height: 110px;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-
-    /* Ícone */
-    .icon {
-        color: ${props => props.theme.colors.primary};
-        filter: drop-shadow(0 0 8px ${props => props.theme.colors.primary}60);
-        transition: transform 0.3s ease;
-    }
-
-    span {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-        text-align: center;
-    }
-
-    &:hover {
-        transform: translateY(-5px) scale(1.05);
-        background: rgba(255, 255, 255, 0.08);
-        border-color: ${props => props.theme.colors.primary}60;
-        box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
-
-        .icon {
-            transform: scale(1.1);
-            color: white;
-        }
-    }
-
-    @media (max-width: 650px) {
-        width: 140px;
-        height: auto;
-        padding: 1rem;
-        flex-direction: row;
-        gap: 1rem;
-
-        span {
-            text-align: left;
-        }
-    }
-`
-
 export default function FeaturesSection() {
     return (
         <Section id="recursos">
             <Container>
                 <SectionHeader>
                     <SectionTitle>
-                        Foque em <Highlight>Vendas e Captação</Highlight>
+                        Tudo para focar em <Highlight>Vendas e Captação</Highlight>
                     </SectionTitle>
                     <SectionSubtitle>
-                        O Maskot é o CRM especializado em transformar interessados em alunos.
+                        Cada recurso do Maskot existe para uma só coisa: transformar interessados em alunos matriculados.
                         Organize o comercial, agilize o atendimento e nunca mais perca um lead.
                     </SectionSubtitle>
                 </SectionHeader>
@@ -446,38 +266,6 @@ export default function FeaturesSection() {
                         </FeatureList>
                     </FeatureCard>
                 </FeaturesGrid>
-
-                <IntegrationBanner>
-                    <BannerContent>
-                        <h3>Fluxo sem fricção</h3>
-                        <p>
-                            Enquanto seus concorrentes usam planilhas, sua escola opera em um fluxo contínuo.
-                            Os dados viajam da captação ao fechamento sem trabalho manual.
-                        </p>
-                    </BannerContent>
-
-                    <StepsWrapper>
-                        <StepCard>
-                            <MessageSquare className="icon" size={28} />
-                            <span>Captação</span>
-                        </StepCard>
-
-                        <StepCard>
-                            <LayoutDashboard className="icon" size={28} />
-                            <span>Qualificação</span>
-                        </StepCard>
-
-                        <StepCard>
-                            <Users className="icon" size={28} />
-                            <span>Visita</span>
-                        </StepCard>
-
-                        <StepCard>
-                            <Zap className="icon" size={28} />
-                            <span>Matrícula</span>
-                        </StepCard>
-                    </StepsWrapper>
-                </IntegrationBanner>
             </Container>
         </Section>
     )

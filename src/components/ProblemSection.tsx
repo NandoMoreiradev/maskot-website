@@ -9,9 +9,10 @@ import {
     SearchX,
     Zap,
     ShieldCheck,
-    Filter,
     MessageSquare,
-    ArrowRight
+    ArrowRight,
+    BarChart3,
+    Inbox
 } from 'lucide-react'
 
 const Section = styled.section`
@@ -272,31 +273,31 @@ export default function ProblemSection() {
                             <FeatureItem $type="problem">
                                 <Clock />
                                 <span>
-                                    <strong>Lead esfria:</strong> Demora de horas (ou dias) para responder um pai interessado.
+                                    <strong>O lead esfria:</strong> você demora horas (ou dias) para responder um pai interessado — e ele já fechou com a escola vizinha.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="problem">
                                 <FileWarning />
                                 <span>
-                                    <strong>Sem Follow-up:</strong> O pai para de responder e a equipe esquece de cobrar o retorno.
+                                    <strong>Ninguém faz follow-up:</strong> o pai para de responder e a equipe esquece de retomar o contato.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="problem">
                                 <SearchX />
                                 <span>
-                                    <strong>Cegueira Comercial:</strong> Você não sabe quantos leads chegaram nem o motivo da perda.
+                                    <strong>Cegueira comercial:</strong> você não sabe quantos leads chegaram, de onde vieram nem por que foram perdidos.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="problem">
                                 <Ban />
                                 <span>
-                                    <strong>Bloqueio de WhatsApp:</strong> Perda do chip em meio a uma campanha de matrículas.
+                                    <strong>WhatsApp bloqueado:</strong> o número trava bem no meio de uma campanha de rematrícula.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="problem">
                                 <UserX />
                                 <span>
-                                    <strong>Dados Perdidos:</strong> Telefones anotados em post-its ou Excel que ninguém atualiza.
+                                    <strong>Dados perdidos:</strong> telefones anotados em post-its e planilhas que ninguém atualiza.
                                 </span>
                             </FeatureItem>
                         </FeatureList>
@@ -316,31 +317,31 @@ export default function ProblemSection() {
                             <FeatureItem $type="solution">
                                 <MessageSquare />
                                 <span>
-                                    <strong>Resposta Imediata 24/7:</strong> O Chatbot acolhe, tira dúvidas e agenda a visita na hora.
-                                </span>
-                            </FeatureItem>
-                            <FeatureItem $type="solution">
-                                <Filter />
-                                <span>
-                                    <strong>CRM / Funil de Vendas:</strong> Visualize cada interessado e arraste cards até a matrícula.
+                                    <strong>Resposta imediata 24/7:</strong> o atendimento acolhe, tira dúvidas e agenda a visita na hora — a qualquer hora.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">
                                 <Zap />
                                 <span>
-                                    <strong>Régua de Follow-up:</strong> O sistema lembra o vendedor de ligar ou manda msg automática.
+                                    <strong>Régua de follow-up automática:</strong> o sistema cobra o retorno sozinho e lembra o consultor de ligar.
+                                </span>
+                            </FeatureItem>
+                            <FeatureItem $type="solution">
+                                <BarChart3 />
+                                <span>
+                                    <strong>Visão total do comercial:</strong> saiba quantos leads chegaram, de qual canal e o motivo de cada perda.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">
                                 <ShieldCheck />
                                 <span>
-                                    <strong>API Oficial Blindada:</strong> Dispare campanhas de rematrícula sem risco de bloqueio.
+                                    <strong>API Oficial blindada:</strong> dispare campanhas de rematrícula sem risco de bloqueio do número.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">
-                                <Zap />
+                                <Inbox />
                                 <span>
-                                    <strong>Centralização:</strong> WhatsApp, Instagram e Site caindo no mesmo funil organizado.
+                                    <strong>Tudo centralizado:</strong> WhatsApp, Instagram e site caindo no mesmo funil, com todo o histórico salvo.
                                 </span>
                             </FeatureItem>
                         </FeatureList>

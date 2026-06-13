@@ -773,7 +773,8 @@ export default function PricingSection() {
             Investimento que se paga com <Highlight>uma matrícula</Highlight>
           </SectionTitle>
           <SectionSubtitle>
-            Escolha entre nossa solução focada em Vendas, Gestão Escolar ou Add-ons de WhatsApp.
+            Comece pelo que sua escola precisa agora — o CRM de captação ou os add-ons de WhatsApp e IA.
+            Todos os planos incluem onboarding guiado.
           </SectionSubtitle>
 
           <MainToggleContainer>

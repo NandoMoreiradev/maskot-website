@@ -452,7 +452,7 @@ export default function ComparisonSection() {
           maskot: true
         },
         { 
-          name: 'Chatbot com IA (Gemini)', 
+          name: 'Chatbot com IA (Mia)',
           traditional: null,
           maskot: true
         },

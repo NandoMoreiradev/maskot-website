@@ -612,7 +612,7 @@ const SectionDivider = styled.div`
 
 export default function CopilotMiaDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
                 {/* BLOCO 1: TOOL CALLING E DADOS ESTRUTURADOS */}
                 <SplitLayout>
@@ -891,8 +891,8 @@ export default function CopilotMiaDeepDive() {
                 <FeatureGrid>
                     <FeatureCard>
                         <div className="icon"><BrainCircuit size={24}/></div>
-                        <h4>Modelos LLM Otimizados</h4>
-                        <p>Treinada especificamente para o nicho educacional, compreendendo as dores e jargões de escolas e cursos.</p>
+                        <h4>Especialista em Educação</h4>
+                        <p>Especializada no contexto educacional por design — instruções, ferramentas e base de conhecimento da sua escola — para entender as dores e o jargão de escolas e cursos.</p>
                     </FeatureCard>
 
                     <FeatureCard>

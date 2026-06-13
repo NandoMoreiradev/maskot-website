@@ -94,9 +94,9 @@ export default function CTASection() {
         <SectionWrapper>
             <CTACard>
                 <Content>
-                    <CTATitle>Pronto para transformar sua escola?</CTATitle>
+                    <CTATitle>Pronto para transformar conversas em matrículas?</CTATitle>
                     <CTASubtitle>
-                        Fale com nossos especialistas e veja como o Maskot pode escalar suas matrículas e levar agilidade para toda a sua gestão.
+                        Fale com um consultor e veja, na prática, como o Maskot organiza sua captação e garante que nenhuma família fique sem resposta.
                     </CTASubtitle>
                     <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
                         Fale com um Consultor

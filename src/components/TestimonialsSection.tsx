@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { TrendingUp, Zap, Target } from 'lucide-react'
+import { Zap, Archive, BellRing } from 'lucide-react'
 
 const Section = styled.section`
     padding: 6rem 0;
@@ -23,7 +23,7 @@ const Container = styled.div`
 const SectionHeader = styled.div`
     text-align: center;
     margin-bottom: 4rem;
-    max-width: 700px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
 `
@@ -56,7 +56,7 @@ const Highlight = styled.span`
     font-weight: 700;
 `
 
-const StatsGrid = styled.div`
+const BenefitsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
@@ -68,21 +68,30 @@ const StatsGrid = styled.div`
     }
 `
 
-const StatCard = styled.div`
+const BenefitCard = styled.div`
+    background: ${props => props.theme.colors.white};
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
     text-align: center;
-    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 35px -10px rgba(0,0,0,0.12);
+    }
 `
 
-const StatIcon = styled.div`
-    width: 60px;
-    height: 60px;
+const BenefitIcon = styled.div`
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: ${props => props.theme.colors.white};
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    background: ${props => props.theme.colors.primary}10;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
+    margin: 0 auto 1.25rem;
 
     svg {
         width: 28px;
@@ -91,31 +100,18 @@ const StatIcon = styled.div`
     }
 `
 
-const StatNumber = styled.div`
-    font-size: 2.5rem;
+const BenefitTitle = styled.h3`
+    font-size: 1.35rem;
     font-weight: 800;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.5rem;
-`
-
-const StatLabel = styled.h3`
-    font-size: 1.1rem;
-    font-weight: 700;
     color: ${props => props.theme.colors.textDark};
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.6rem 0;
 `
 
-const StatDescription = styled.p`
-    font-size: 0.9rem;
+const BenefitDescription = styled.p`
+    font-size: 0.95rem;
     color: ${props => props.theme.colors.textMedium};
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.5;
 `
 
 export default function TestimonialsSection() {
@@ -124,47 +120,67 @@ export default function TestimonialsSection() {
             <Container>
                 <SectionHeader>
                     <SectionTitle>
-                        O impacto do <Highlight>Maskot</Highlight> nas escolas
+                        O que muda na rotina da <Highlight>sua escola</Highlight>
                     </SectionTitle>
                     <SectionSubtitle>
-                        Veja os resultados médios que um CRM especializado pode trazer para a captação de alunos da sua instituição.
+                        Sem promessas de número mágico. O que o Maskot entrega é o fim do lead esquecido,
+                        do atendimento lento e da captação dependente de planilhas.
                     </SectionSubtitle>
                 </SectionHeader>
 
-                <StatsGrid>
-                    <StatCard>
-                        <StatIcon>
-                            <TrendingUp />
-                        </StatIcon>
-                        <StatNumber>+45%</StatNumber>
-                        <StatLabel>Aumento de Conversão</StatLabel>
-                        <StatDescription>
-                            Aumento médio na taxa de conversão ao utilizar um CRM especializado em vez de planilhas.
-                        </StatDescription>
-                    </StatCard>
-
-                    <StatCard>
-                        <StatIcon>
+                <BenefitsGrid>
+                    <BenefitCard>
+                        <BenefitIcon>
                             <Zap />
-                        </StatIcon>
-                        <StatNumber>3x</StatNumber>
-                        <StatLabel>Mais Rápido</StatLabel>
-                        <StatDescription>
-                            Agilidade no primeiro contato com os leads usando automações de WhatsApp e respostas rápidas.
-                        </StatDescription>
-                    </StatCard>
+                        </BenefitIcon>
+                        <BenefitTitle>Resposta em segundos</BenefitTitle>
+                        <BenefitDescription>
+                            Atendimento imediato 24/7, mesmo fora do horário comercial. O primeiro a responder
+                            é quem ganha a matrícula.
+                        </BenefitDescription>
+                    </BenefitCard>
 
-                    <StatCard>
-                        <StatIcon>
-                            <Target />
-                        </StatIcon>
-                        <StatNumber>100%</StatNumber>
-                        <StatLabel>Controle</StatLabel>
-                        <StatDescription>
-                            Visibilidade total da jornada da família, do primeiro contato até a matrícula, sem perdas no funil.
-                        </StatDescription>
-                    </StatCard>
-                </StatsGrid>
+                    <BenefitCard>
+                        <BenefitIcon>
+                            <Archive />
+                        </BenefitIcon>
+                        <BenefitTitle>100% do histórico salvo</BenefitTitle>
+                        <BenefitDescription>
+                            Cada conversa, visita e proposta fica registrada no funil — nada se perde quando
+                            um consultor sai da equipe.
+                        </BenefitDescription>
+                    </BenefitCard>
+
+                    <BenefitCard>
+                        <BenefitIcon>
+                            <BellRing />
+                        </BenefitIcon>
+                        <BenefitTitle>Zero lead sem follow-up</BenefitTitle>
+                        <BenefitDescription>
+                            A régua de automação cobra o retorno sozinha e lembra o consultor de agir — nenhuma
+                            família esfria por esquecimento.
+                        </BenefitDescription>
+                    </BenefitCard>
+                </BenefitsGrid>
+
+                {/*
+                  PROVA SOCIAL — DEPOIMENTOS REAIS (preencher quando disponível)
+                  Estrutura pronta: ao receber citações reais (nome, cargo, escola, foto/logo),
+                  trocar este bloco comentado por um grid de cards de depoimento.
+                  Não publicar depoimentos fictícios.
+
+                  Exemplo de card:
+                  <TestimonialCard>
+                    <Quote>"Desde que adotamos o Maskot, paramos de perder lead no WhatsApp."</Quote>
+                    <Author>
+                      <img src="/depoimentos/foto.jpg" alt="" />
+                      <div>
+                        <strong>Nome do Diretor(a)</strong>
+                        <span>Cargo • Nome da Escola</span>
+                      </div>
+                    </Author>
+                  </TestimonialCard>
+                */}
             </Container>
         </Section>
     )
