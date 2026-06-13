@@ -2,80 +2,227 @@
 
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { X, Send } from 'lucide-react'
+import { X, Send, CheckCircle2, ShieldCheck, BadgeCheck, Lock } from 'lucide-react'
 
 const Overlay = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(4px);
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(5px);
     z-index: 9999;
     display: ${props => props.$isOpen ? 'flex' : 'none'};
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    animation: fadeIn 0.2s ease-out;
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 `
 
 const ModalContainer = styled.div`
     background: white;
     width: 100%;
-    max-width: 480px;
-    max-height: 95vh; /* Allow a slightly taller modal if needed */
-    border-radius: 12px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    max-width: 860px;
+    max-height: 95vh;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
     animation: slideUp 0.3s ease-out;
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
 
-    &::-webkit-scrollbar {
-        width: 6px;
-    }
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 10px;
-    }
+    &::-webkit-scrollbar { width: 6px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
     @keyframes slideUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
+
+    @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+    }
 `
 
-const ModalHeader = styled.div`
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #f1f5f9;
+// --- PAINEL LATERAL (BRANDING) ---
+const AsidePanel = styled.div`
+    background: linear-gradient(150deg,
+        ${props => props.theme.colors.primary} 0%,
+        ${props => props.theme.colors.secondary} 100%
+    );
+    color: white;
+    padding: 2.5rem 2rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
 
-    h2 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #0f172a;
-        margin: 0;
+    /* brilho decorativo */
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -20%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+        pointer-events: none;
     }
-    
-    button {
-        background: transparent;
-        border: none;
-        color: #64748b;
-        cursor: pointer;
-        padding: 4px;
-        border-radius: 4px;
+
+    @media (max-width: 720px) {
+        padding: 2rem 1.75rem;
+    }
+`
+
+const Eyebrow = styled.span`
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 1;
+`
+
+const AsideTitle = styled.h2`
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 720px) {
+        font-size: 1.35rem;
+    }
+`
+
+const AsideSubtitle = styled.p`
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1.75rem;
+    position: relative;
+    z-index: 1;
+`
+
+const BenefitList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: relative;
+    z-index: 1;
+
+    li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.95);
+
+        svg {
+            flex-shrink: 0;
+            margin-top: 1px;
+            color: #fff;
+        }
+    }
+
+    @media (max-width: 720px) {
+        /* mantém só os 2 primeiros no mobile para não alongar demais */
+        li:nth-child(n+3) { display: none; }
+    }
+`
+
+const TrustRow = styled.div`
+    margin-top: auto;
+    padding-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+
+    div {
         display: flex;
         align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-        &:hover { background: #f1f5f9; color: #0f172a; }
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+
+        svg { width: 15px; height: 15px; }
+    }
+
+    @media (max-width: 720px) {
+        display: none;
     }
 `
 
-const ModalBody = styled.div`
-    padding: 1.5rem;
+// --- PAINEL DO FORMULÁRIO ---
+const FormPanel = styled.div`
+    padding: 2.25rem 2rem 2rem;
+    position: relative;
+
+    @media (max-width: 720px) {
+        padding: 1.75rem 1.5rem;
+    }
+`
+
+const CloseButton = styled.button`
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 2;
+
+    &:hover { background: #f1f5f9; color: #0f172a; }
+`
+
+const FormHeading = styled.div`
+    margin-bottom: 1.5rem;
+
+    h3 {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 0.35rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.45;
+    }
 `
 
 const Form = styled.form`
@@ -91,14 +238,14 @@ const FormGroup = styled.div`
 
     label {
         font-size: 0.8125rem;
-        font-weight: 500;
+        font-weight: 600;
         color: #475569;
     }
 
     input, select {
-        padding: 0.625rem 0.875rem;
+        padding: 0.7rem 0.875rem;
         border: 1px solid #e2e8f0;
-        border-radius: 6px;
+        border-radius: 8px;
         font-size: 0.875rem;
         color: #1e293b;
         outline: none;
@@ -107,13 +254,11 @@ const FormGroup = styled.div`
         width: 100%;
         background-color: #fff;
 
-        &::placeholder {
-            color: #94a3b8;
-        }
+        &::placeholder { color: #94a3b8; }
 
         &:focus {
             border-color: ${props => props.theme.colors.primary};
-            box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}15;
+            box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}1a;
         }
     }
 `
@@ -122,7 +267,7 @@ const Row = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    
+
     @media (max-width: 480px) {
         grid-template-columns: 1fr;
     }
@@ -130,24 +275,42 @@ const Row = styled.div`
 
 const SubmitButton = styled.button`
     margin-top: 0.5rem;
-    background: ${props => props.theme.colors.primary};
+    background: linear-gradient(135deg,
+        ${props => props.theme.colors.primary} 0%,
+        ${props => props.theme.colors.secondary} 100%
+    );
     color: white;
     border: none;
-    padding: 0.875rem;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.9375rem;
+    padding: 0.95rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     transition: all 0.2s;
+    box-shadow: 0 6px 16px ${props => props.theme.colors.primary}40;
 
     &:hover {
-        background: ${props => props.theme.colors.secondary};
         transform: translateY(-1px);
+        box-shadow: 0 10px 22px ${props => props.theme.colors.primary}55;
     }
+`
+
+const Footnote = styled.p`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 1rem 0 0;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-align: center;
+    line-height: 1.4;
+
+    svg { flex-shrink: 0; }
 `
 
 export default function ContactModal(): React.ReactElement | null {
@@ -167,15 +330,30 @@ export default function ContactModal(): React.ReactElement | null {
         return () => window.removeEventListener('open-contact-modal', handleOpen)
     }, [])
 
+    // Fecha com ESC e trava o scroll do body enquanto aberto
+    useEffect(() => {
+        if (!isOpen) return
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsOpen(false)
+        }
+        window.addEventListener('keydown', handleKey)
+        const previousOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        return () => {
+            window.removeEventListener('keydown', handleKey)
+            document.body.style.overflow = previousOverflow
+        }
+    }, [isOpen])
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        
+
         const message = `Olá! Gostaria de falar com um especialista sobre o Maskot CRM.
-        
+
 *Meus Dados:*
 - *Nome:* ${formData.name}
 - *E-mail:* ${formData.email}
@@ -188,7 +366,7 @@ export default function ContactModal(): React.ReactElement | null {
         const whatsappNumber = "5579991064405"
         const encodedMessage = encodeURIComponent(message)
         const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
-        
+
         window.open(url, '_blank')
         setIsOpen(false)
         setFormData({ name: '', email: '', phone: '', schoolName: '', role: '', studentsCount: '' })
@@ -198,12 +376,31 @@ export default function ContactModal(): React.ReactElement | null {
 
     return (
         <Overlay $isOpen={isOpen} onClick={() => setIsOpen(false)}>
-            <ModalContainer onClick={e => e.stopPropagation()}>
-                <ModalHeader>
-                    <h2>Fale com um Consultor</h2>
-                    <button onClick={() => setIsOpen(false)}><X size={20} /></button>
-                </ModalHeader>
-                <ModalBody>
+            <ModalContainer onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+                <AsidePanel>
+                    <Eyebrow>Demonstração gratuita</Eyebrow>
+                    <AsideTitle>Vamos escalar as matrículas da sua escola?</AsideTitle>
+                    <AsideSubtitle>
+                        Em uma conversa rápida, um especialista mostra o Maskot funcionando com a realidade da sua instituição.
+                    </AsideSubtitle>
+                    <BenefitList>
+                        <li><CheckCircle2 size={18} /> Demonstração personalizada para a sua escola</li>
+                        <li><CheckCircle2 size={18} /> Veja o CRM, o WhatsApp e a Mia na prática</li>
+                        <li><CheckCircle2 size={18} /> Diagnóstico do seu funil de matrículas</li>
+                        <li><CheckCircle2 size={18} /> Sem compromisso e sem custo</li>
+                    </BenefitList>
+                    <TrustRow>
+                        <div><ShieldCheck /> API Oficial do WhatsApp</div>
+                        <div><BadgeCheck /> Provedor Oficial Meta</div>
+                    </TrustRow>
+                </AsidePanel>
+
+                <FormPanel>
+                    <CloseButton onClick={() => setIsOpen(false)} aria-label="Fechar"><X size={20} /></CloseButton>
+                    <FormHeading>
+                        <h3 id="contact-modal-title">Fale com um Consultor</h3>
+                        <p>Preencha seus dados e nosso time entra em contato.</p>
+                    </FormHeading>
                     <Form onSubmit={handleSubmit}>
                         <FormGroup>
                             <label>Nome Completo</label>
@@ -251,8 +448,11 @@ export default function ContactModal(): React.ReactElement | null {
                         <SubmitButton type="submit">
                             Enviar <Send size={18} />
                         </SubmitButton>
+                        <Footnote>
+                            <Lock size={13} /> Seus dados estão seguros. Ao enviar, você fala direto com nosso time no WhatsApp.
+                        </Footnote>
                     </Form>
-                </ModalBody>
+                </FormPanel>
             </ModalContainer>
         </Overlay>
     )
