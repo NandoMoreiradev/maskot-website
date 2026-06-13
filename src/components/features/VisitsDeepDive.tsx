@@ -2,11 +2,12 @@
 
 import styled, {css, keyframes} from 'styled-components'
 import {
-    Calendar, // <--- ADICIONADO AQUI
+    Calendar,
     Clock, User, ArrowRight, MapPin,
     CheckCircle2, XCircle, Ban, RefreshCw,
     Smartphone, CalendarCheck, ShieldCheck,
-    Bell, MessageSquare, Users, Link as LinkIcon
+    Bell, MessageSquare, Users, Link as LinkIcon,
+    Palette, Shuffle, SlidersHorizontal, CalendarClock
 } from 'lucide-react'
 
 // --- ANIMATIONS ---
@@ -509,7 +510,7 @@ const FeatureCard = styled.div`
 
 export default function VisitsDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* --- BLOCO 1: PÁGINA PÚBLICA --- */}
@@ -518,7 +519,7 @@ export default function VisitsDeepDive() {
                         <h3>Experiência 5 Estrelas <br/> para os Pais</h3>
                         <p>
                             Uma página de agendamento moderna, rápida e que funciona perfeitamente no celular.
-                            O pai escolhe o horário, preenche os dados e recebe a confirmação no WhatsApp na hora.
+                            O pai escolhe o horário, preenche os dados e recebe a confirmação na hora.
                         </p>
                         <ul>
                             <li><Smartphone size={20}/> <strong>100% Mobile First:</strong> Pensado para quem usa
@@ -526,6 +527,9 @@ export default function VisitsDeepDive() {
                             </li>
                             <li><CalendarCheck size={20}/> <strong>Slots Reais:</strong> Mostra apenas horários vagos da
                                 sua equipe.
+                            </li>
+                            <li><Palette size={20}/> <strong>Com a Sua Marca:</strong> Logo, cores e página de sucesso
+                                personalizadas com a identidade da escola.
                             </li>
                             <li><MapPin size={20}/> <strong>Localização:</strong> Envia o endereço automaticamente.</li>
                         </ul>
@@ -622,8 +626,8 @@ export default function VisitsDeepDive() {
                             <li><ShieldCheck size={20}/> <strong>Check-in Rápido:</strong> Registre a visita assim que o
                                 pai chega.
                             </li>
-                            <li><RefreshCw size={20}/> <strong>Reagendamento Fácil:</strong> O pai ligou para mudar?
-                                Altere o horário em segundos.
+                            <li><RefreshCw size={20}/> <strong>Reagendamento pelo Pai:</strong> o próprio responsável
+                                remarca pelo link, sem ligar para a secretaria — e a equipe altera em segundos quando precisa.
                             </li>
                             <li><Ban size={20}/> <strong>Gestão de No-Show:</strong> Se o pai faltar, uma automação
                                 de &quot;Resgate&quot; pode ser disparada.
@@ -645,15 +649,15 @@ export default function VisitsDeepDive() {
                             <BenefitItem>
                                 <Bell className="icon"/>
                                 <div>
-                                    <h4>Lembrete 24h Antes</h4>
-                                    <p>Confirmação automática enviada no dia anterior.</p>
+                                    <h4>Lembrete na Antecedência que Você Definir</h4>
+                                    <p>Configure quando enviar (ex.: 24h antes) por WhatsApp e/ou e-mail, com a localização da escola.</p>
                                 </div>
                             </BenefitItem>
                             <BenefitItem>
-                                <Clock className="icon"/>
+                                <Users className="icon"/>
                                 <div>
-                                    <h4>Lembrete 1h Antes</h4>
-                                    <p>Envia a localização exata quando o pai está saindo de casa.</p>
+                                    <h4>Aviso Interno para a Equipe</h4>
+                                    <p>O anfitrião e a recepção também recebem um alerta antes de cada visita.</p>
                                 </div>
                             </BenefitItem>
                             <BenefitItem>
@@ -704,7 +708,7 @@ export default function VisitsDeepDive() {
                         <div className="icon"><Users size={24}/></div>
                         <h4>Múltiplos Anfitriões</h4>
                         <p>Gerencie agendas separadas para a Diretora, Coordenadora e Time Comercial. Cada um com seus
-                            horários.</p>
+                            horários de trabalho e folgas.</p>
                     </FeatureCard>
 
                     <FeatureCard>
@@ -715,10 +719,31 @@ export default function VisitsDeepDive() {
                     </FeatureCard>
 
                     <FeatureCard>
+                        <div className="icon"><Shuffle size={24}/></div>
+                        <h4>Distribuição Automática</h4>
+                        <p>Quem agenda pelo link já entra no funil e é atribuído ao consultor certo por rodízio
+                            (round-robin) ou para quem está menos ocupado.</p>
+                    </FeatureCard>
+
+                    <FeatureCard>
+                        <div className="icon"><CalendarClock size={24}/></div>
+                        <h4>Tipos de Visita</h4>
+                        <p>Crie eventos diferentes — tour, entrevista, reunião — cada um com sua própria duração, cor
+                            e disponibilidade.</p>
+                    </FeatureCard>
+
+                    <FeatureCard>
+                        <div className="icon"><SlidersHorizontal size={24}/></div>
+                        <h4>Regras de Disponibilidade</h4>
+                        <p>Defina intervalo entre visitas, antecedência mínima, limite de dias no futuro e bloqueie
+                            feriados e datas específicas.</p>
+                    </FeatureCard>
+
+                    <FeatureCard>
                         <div className="icon"><Calendar size={24}/></div>
-                        <h4>Sincronização de Agenda</h4>
-                        <p>Evite conflitos. O sistema bloqueia horários automaticamente quando o consultor tem outro
-                            compromisso.</p>
+                        <h4>Integração com Google Calendar</h4>
+                        <p>Cada visita agendada vira automaticamente um evento na agenda Google do consultor — e
+                            remarcações ou cancelamentos atualizam o evento sozinhos.</p>
                     </FeatureCard>
                 </FeatureGrid>
 

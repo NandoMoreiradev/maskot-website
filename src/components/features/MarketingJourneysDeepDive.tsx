@@ -4,7 +4,7 @@ import styled, {keyframes, css} from 'styled-components'
 import {
     Zap, Mail, MessageCircle, Clock, GitBranch,
     TrendingUp, Users, CheckCircle2,
-    BarChart3, Award
+    BarChart3, Award, FlaskConical, Send, Braces
 } from 'lucide-react'
 
 // --- ANIMATIONS ---
@@ -271,13 +271,13 @@ const FeatureCard = styled.div`
 
 export default function MarketingJourneysDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 <Header>
                     <h2>Não é só um fluxo, é uma <br/><span>Máquina de Vendas</span></h2>
-                    <p>Visualize exatamente onde cada lead está. O Maskot mostra em tempo real quantos pais abriram o
-                        e-mail, clicaram no link e avançaram para a matrícula.</p>
+                    <p>Visualize exatamente onde cada lead está. O Maskot mostra quantos pais entraram em cada etapa,
+                        abriram o e-mail, clicaram no link e avançaram para a matrícula.</p>
                 </Header>
 
                 {/* --- VISUAL BUILDER MOCKUP --- */}
@@ -380,23 +380,44 @@ export default function MarketingJourneysDeepDive() {
                 <FeatureGrid>
                     <FeatureCard>
                         <div className="icon"><GitBranch size={20}/></div>
-                        <h4>Ramificação Lógica</h4>
-                        <p>Crie caminhos diferentes baseados no comportamento. Se o pai clicou, ofereça desconto. Se não
-                            abriu, tente por WhatsApp.</p>
+                        <h4>Condições Avançadas (E / OU / NÃO)</h4>
+                        <p>Vá muito além do &quot;se/senão&quot;. Combine regras aninhadas com mais de 20 operadores
+                            (contém, maior que, entre, está vazio, data antes de…) sobre score, origem, tags e campos do lead.</p>
                     </FeatureCard>
 
                     <FeatureCard>
                         <div className="icon"><Award size={20}/></div>
                         <h4>Lead Scoring Automático</h4>
-                        <p>Configure regras para pontuar leads. <em>Abriu email: +5 pontos</em>. Quando chegar a 50,
-                            avise o consultor.</p>
+                        <p>A própria jornada pontua o lead conforme ele age. <em>Abriu o e-mail: +5</em>. Ao atingir o
+                            limite, o lead é atribuído a um consultor e a equipe é avisada.</p>
+                    </FeatureCard>
+
+                    <FeatureCard>
+                        <div className="icon"><FlaskConical size={20}/></div>
+                        <h4>Teste A/B Integrado</h4>
+                        <p>Não fique no achismo. Divida a audiência em caminhos diferentes (assunto, canal ou oferta)
+                            e deixe os dados mostrarem qual mensagem converte mais matrículas.</p>
+                    </FeatureCard>
+
+                    <FeatureCard>
+                        <div className="icon"><Send size={20}/></div>
+                        <h4>Omnichannel de Verdade</h4>
+                        <p>Combine <strong>e-mail, WhatsApp Oficial e SMS</strong> na mesma jornada — além de mudar
+                            estágio, aplicar tags, criar tarefas e notificar a equipe automaticamente.</p>
+                    </FeatureCard>
+
+                    <FeatureCard>
+                        <div className="icon"><Braces size={20}/></div>
+                        <h4>Personalização com Merge Tags</h4>
+                        <p>Cada mensagem sai com a cara da família: nome do responsável, aluno, escola e campos
+                            personalizados — com formatação automática de datas e valores.</p>
                     </FeatureCard>
 
                     <FeatureCard>
                         <div className="icon"><BarChart3 size={20}/></div>
-                        <h4>Analytics em Tempo Real</h4>
-                        <p>Veja os gargalos do funil. O card de cada etapa mostra quantos leads entraram, completaram ou
-                            falharam.</p>
+                        <h4>Analytics por Etapa</h4>
+                        <p>Veja os gargalos do funil em cada nó: quantos leads entraram, saíram, o tempo médio e a
+                            taxa de conversão — com linha do tempo de inscritos e concluídos.</p>
                     </FeatureCard>
                 </FeatureGrid>
 

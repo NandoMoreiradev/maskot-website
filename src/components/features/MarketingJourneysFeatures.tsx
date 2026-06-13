@@ -2,7 +2,8 @@
 
 import styled from 'styled-components'
 import {
-    Zap, Mail, MessageCircle, GitBranch, Play, RefreshCw, CheckSquare, Calendar, Filter, Users, Tag, Smartphone
+    Zap, Mail, MessageCircle, GitBranch, Play, RefreshCw, CheckSquare, Calendar, Filter, Users, Tag, Smartphone,
+    FileText, CalendarCheck, Activity, MessageSquare, FlaskConical, Clock
 } from 'lucide-react'
 
 const Section = styled.section`
@@ -130,7 +131,7 @@ export default function MarketingJourneysFeatures() {
             <Container>
                 <Header>
                     <h2>Recursos <span>Completos</span> da Jornada</h2>
-                    <p>O Maskot Edu oferece todas as ferramentas que sua equipe precisa para automatizar processos complexos de captação, sem precisar de código.</p>
+                    <p>São 18 gatilhos, ações em 3 canais e uma lógica condicional de nível profissional — tudo no modo arrastar e soltar, sem precisar de código.</p>
                 </Header>
 
                 <FeaturesGrid>
@@ -145,21 +146,42 @@ export default function MarketingJourneysFeatures() {
                                 <Zap size={18} />
                                 <div>
                                     <h4>Novo Lead Criado</h4>
-                                    <p>Inicie a jornada assim que um lead entrar no sistema (via site, Meta Ads, etc).</p>
+                                    <p>Inicie a jornada assim que um lead entra — via site, Meta Ads, importação ou indicação.</p>
+                                </div>
+                            </FeatureItem>
+                            <FeatureItem>
+                                <FileText size={18} />
+                                <div>
+                                    <h4>Formulário ou Landing Page</h4>
+                                    <p>Dispare quando um responsável envia um formulário público ou uma landing page do Maskot.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
                                 <RefreshCw size={18} />
                                 <div>
-                                    <h4>Mudança de Estágio</h4>
-                                    <p>Acione ações quando um lead for movido para &quot;Visita Agendada&quot; ou &quot;Matriculado&quot;.</p>
+                                    <h4>Estágio, Lead Ganho ou Perdido</h4>
+                                    <p>Acione ações quando o lead muda de etapa, é matriculado ou marcado como perdido.</p>
+                                </div>
+                            </FeatureItem>
+                            <FeatureItem>
+                                <CalendarCheck size={18} />
+                                <div>
+                                    <h4>Eventos de Visita</h4>
+                                    <p>Visita agendada, realizada, cancelada ou <strong>faltou (no-show)</strong> — reaja a cada cenário.</p>
+                                </div>
+                            </FeatureItem>
+                            <FeatureItem>
+                                <Activity size={18} />
+                                <div>
+                                    <h4>Comportamento do Lead</h4>
+                                    <p>Abriu o e-mail, clicou no link, concluiu uma tarefa ou entrou numa audiência.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
                                 <Calendar size={18} />
                                 <div>
-                                    <h4>Datas e Prazos</h4>
-                                    <p>Dispare lembretes baseados em datas importantes (aniversário, eventos).</p>
+                                    <h4>Datas e API Externa</h4>
+                                    <p>Aniversários e datas comemorativas, ou gatilhos disparados por sistemas externos via webhook.</p>
                                 </div>
                             </FeatureItem>
                         </FeatureList>
@@ -175,29 +197,36 @@ export default function MarketingJourneysFeatures() {
                             <FeatureItem>
                                 <Smartphone size={18} />
                                 <div>
-                                    <h4>WhatsApp Automático</h4>
-                                    <p>Envie mensagens ativas oficiais pela API do WhatsApp sem intervenção humana.</p>
+                                    <h4>WhatsApp Oficial</h4>
+                                    <p>Envie mensagens ativas pela API Oficial do WhatsApp, sem intervenção humana.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
                                 <Mail size={18} />
                                 <div>
                                     <h4>E-mail Marketing</h4>
-                                    <p>Dispare templates ricos com design atraente para nutrição e engajamento.</p>
+                                    <p>Dispare templates ricos e personalizados com merge tags para nutrição e engajamento.</p>
+                                </div>
+                            </FeatureItem>
+                            <FeatureItem>
+                                <MessageSquare size={18} />
+                                <div>
+                                    <h4>SMS</h4>
+                                    <p>Alcance o responsável direto no celular para lembretes e avisos urgentes.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
                                 <CheckSquare size={18} />
                                 <div>
-                                    <h4>Criação de Tarefas</h4>
-                                    <p>Aloque tarefas automáticas para a equipe (ex: ligar após o lead abrir o e-mail).</p>
+                                    <h4>Tarefas, Atribuição e Avisos</h4>
+                                    <p>Crie tarefas, atribua o lead a um consultor e notifique a equipe automaticamente.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
                                 <Tag size={18} />
                                 <div>
                                     <h4>Gestão do Funil</h4>
-                                    <p>Adicione/remova tags ou mova o lead de etapa conforme seu comportamento.</p>
+                                    <p>Adicione/remova tags, mude o estágio, atualize o score ou um campo personalizado do lead.</p>
                                 </div>
                             </FeatureItem>
                         </FeatureList>
@@ -213,22 +242,29 @@ export default function MarketingJourneysFeatures() {
                             <FeatureItem>
                                 <Filter size={18} />
                                 <div>
-                                    <h4>Divisão por Condição (Se/Senão)</h4>
-                                    <p>Segmente o caminho: &quot;Lead tem interesse no Ensino Médio?&quot; (Sim / Não).</p>
+                                    <h4>Condições E / OU / NÃO</h4>
+                                    <p>Regras aninhadas com mais de 20 operadores sobre score, origem, tags, datas e campos do lead.</p>
+                                </div>
+                            </FeatureItem>
+                            <FeatureItem>
+                                <FlaskConical size={18} />
+                                <div>
+                                    <h4>Teste A/B</h4>
+                                    <p>Divida a audiência em caminhos diferentes e descubra qual mensagem converte mais.</p>
+                                </div>
+                            </FeatureItem>
+                            <FeatureItem>
+                                <Clock size={18} />
+                                <div>
+                                    <h4>Esperar Tempo ou Condição</h4>
+                                    <p>Aguarde 2 dias, até o horário comercial, ou até o lead realizar uma ação esperada.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
                                 <Users size={18} />
                                 <div>
                                     <h4>Filtro de Engajamento</h4>
-                                    <p>Crie rotas específicas para leads que abriram e-mails ou responderam WhatsApp.</p>
-                                </div>
-                            </FeatureItem>
-                            <FeatureItem>
-                                <GitBranch size={18} />
-                                <div>
-                                    <h4>Delay e Atrasos</h4>
-                                    <p>Aguarde 2 dias ou até um horário comercial antes de enviar a próxima mensagem.</p>
+                                    <p>Crie rotas específicas para quem abriu o e-mail, clicou no link ou respondeu no WhatsApp.</p>
                                 </div>
                             </FeatureItem>
                         </FeatureList>

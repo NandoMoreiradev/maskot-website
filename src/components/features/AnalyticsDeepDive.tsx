@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import {
     BarChart2, TrendingUp, Filter, Target,
     Users, PieChart, ArrowUpRight, ArrowDownRight,
-    Trophy, Calendar, Download
+    Trophy, Calendar, Download, FileText
 } from 'lucide-react'
 
 // --- Animations ---
@@ -209,7 +209,7 @@ const PowerCard = styled.div`
 
 export default function AnalyticsDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* 1. FUNIL DE VENDAS */}
@@ -383,6 +383,11 @@ export default function AnalyticsDeepDive() {
                         <div className="icon"><TrendingUp size={24}/></div>
                         <h4>Tempo de Ciclo</h4>
                         <p>Média de dias que um pai leva desde o primeiro contato até assinar o contrato.</p>
+                    </PowerCard>
+                    <PowerCard>
+                        <div className="icon"><FileText size={24}/></div>
+                        <h4>Relatórios Personalizados</h4>
+                        <p>Monte seu próprio relatório: escolha as métricas, aplique filtros e gere o gráfico exato que a sua escola precisa.</p>
                     </PowerCard>
                 </PowerGrid>
 
