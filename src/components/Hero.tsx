@@ -120,6 +120,10 @@ const MainHeading = styled.h1`
     @media (max-width: 768px) {
         font-size: 2.5rem;
     }
+
+    @media (max-width: 400px) {
+        font-size: 2.15rem;
+    }
 `
 
 const Subtitle = styled.p`
@@ -263,6 +267,10 @@ const Visual = styled.div`
 
     @media (max-width: 968px) {
         min-height: 380px;
+    }
+
+    @media (max-width: 560px) {
+        min-height: 320px;
     }
 `
 
@@ -418,9 +426,20 @@ const FloatingTag = styled.div`
     &.top-right { top: 8%; right: -4%; }
     &.bottom-left { bottom: 10%; left: -6%; animation-delay: 1.5s; }
 
+    /* Em telas médias, encolhe e encosta nas bordas do visual */
+    @media (max-width: 600px) {
+        font-size: 0.72rem;
+        padding: 0.5rem 0.7rem;
+        gap: 0.4rem;
+        svg { width: 15px; height: 15px; }
+
+        &.top-right { top: 4%; right: 0; }
+        &.bottom-left { bottom: 6%; left: 0; }
+    }
+
+    /* Em telas pequenas, os selos cobririam o card — ocultamos */
     @media (max-width: 480px) {
-        &.top-right { right: 0; }
-        &.bottom-left { left: 0; }
+        display: none;
     }
 `
 
