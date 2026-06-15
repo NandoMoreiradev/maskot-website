@@ -41,6 +41,10 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 0 2rem;
     width: 100%;
+
+    @media (max-width: 768px) {
+        padding: 0 1.25rem;
+    }
 `
 
 const HeroContent = styled.div`
@@ -63,6 +67,7 @@ const TextContent = styled.div`
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    min-width: 0;
 
     @media (max-width: 968px) {
         align-items: center;
@@ -132,6 +137,8 @@ const Subtitle = styled.p`
     margin-bottom: 2.5rem;
     line-height: 1.6;
     max-width: 540px;
+    width: 100%;
+    overflow-wrap: break-word;
 
     strong {
         color: ${props => props.theme.colors.textDark};
@@ -144,7 +151,7 @@ const Subtitle = styled.p`
     }
 
     @media (max-width: 768px) {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 `
 
@@ -250,6 +257,8 @@ const Visual = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 420px;
+    min-width: 0;
+    overflow: hidden;
 
     /* Glow de fundo */
     &::before {
