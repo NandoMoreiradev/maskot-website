@@ -1,5 +1,19 @@
 import { MetadataRoute } from 'next'
+import { readdirSync, existsSync } from 'fs'
+import { join } from 'path'
 import { createPrismicClient } from '@/prismicio'
+
+// Lê dinamicamente as rotas estáticas dentro de src/app/funcionalidades.
+// Cada subpasta com um page.tsx vira uma URL do sitemap — evita manter
+// uma lista hardcoded que desatualiza quando novas funcionalidades são criadas.
+function getFuncionalidadesSlugs(): string[] {
+  const dir = join(process.cwd(), 'src', 'app', 'funcionalidades')
+  return readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith('[')) // ignora rotas dinâmicas
+    .filter((entry) => existsSync(join(dir, entry.name, 'page.tsx')))
+    .map((entry) => entry.name)
+    .sort()
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const client = createPrismicClient()
@@ -27,12 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  const funcionalidades = [
-    'agendamento', 'analytics', 'automacoes', 'campanhas',
-    'gestao-comercial', 'gestao-comissoes', 'gestao-tarefas',
-    'marketing', 'marketing-journeys', 'multi-escolas',
-    'onboarding', 'whatsapp'
-  ].map(f => ({
+  const funcionalidades = getFuncionalidadesSlugs().map(f => ({
     url: `https://www.maskotedu.com.br/funcionalidades/${f}`,
     lastModified: new Date('2026-05-03'),
     changeFrequency: 'monthly' as const,
