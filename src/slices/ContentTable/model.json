@@ -15,40 +15,69 @@
         "title": {
           "type": "Text",
           "config": {
-            "label": "title",
-            "placeholder": ""
+            "label": "Título da tabela",
+            "placeholder": "Ex: Comparativo de planos"
           }
         },
         "col1_header": {
           "type": "Text",
           "config": {
-            "label": "col1_header",
+            "label": "Cabeçalho coluna 1",
             "placeholder": ""
           }
         },
         "col2_header": {
           "type": "Text",
           "config": {
-            "label": "col2_header",
+            "label": "Cabeçalho coluna 2",
             "placeholder": ""
           }
         },
         "col3_header": {
           "type": "Text",
           "config": {
-            "label": "col3_header",
+            "label": "Cabeçalho coluna 3",
             "placeholder": ""
           }
         },
         "col4_header": {
           "type": "Text",
           "config": {
-            "label": "col4_header",
+            "label": "Cabeçalho coluna 4",
             "placeholder": ""
           }
         }
       },
-      "items": {}
+      "items": {
+        "cell_1": {
+          "type": "Text",
+          "config": {
+            "label": "Célula coluna 1",
+            "placeholder": ""
+          }
+        },
+        "cell_2": {
+          "type": "Text",
+          "config": {
+            "label": "Célula coluna 2",
+            "placeholder": ""
+          }
+        },
+        "cell_3": {
+          "type": "Text",
+          "config": {
+            "label": "Célula coluna 3",
+            "placeholder": ""
+          }
+        },
+        "cell_4": {
+          "type": "Text",
+          "config": {
+            "label": "Célula coluna 4",
+            "placeholder": ""
+          }
+        }
+      }
     }
   ]
 }

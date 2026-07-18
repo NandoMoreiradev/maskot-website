@@ -69,7 +69,12 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type BlogPostDocumentDataSlicesSlice = BannerAdSlice | RichTextSlice;
+type BlogPostDocumentDataSlicesSlice =
+  | BannerAdSlice
+  | RichTextSlice
+  | CalloutSlice
+  | ContentTableSlice
+  | QuoteSlice;
 
 /**
  * Content for Blog Post documents
@@ -132,6 +137,17 @@ interface BlogPostDocumentData {
   >;
 
   /**
+   * Autor field in *Blog Post*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.author
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  author: prismic.ContentRelationshipField<"author">;
+
+  /**
    * Slice Zone field in *Blog Post*
    *
    * - **Field Type**: Slice Zone
@@ -158,6 +174,71 @@ export type BlogPostDocument<Lang extends string = string> =
     "blog_post",
     Lang
   >;
+
+/**
+ * Content for Autor documents
+ */
+interface AuthorDocumentData {
+  /**
+   * Nome field in *Autor*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: author.name
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Foto field in *Autor*
+   *
+   * - **Field Type**: Image
+   * - **API ID Path**: author.photo
+   */
+  photo: prismic.ImageField<never>;
+
+  /**
+   * Cargo field in *Autor*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: author.role
+   */
+  role: prismic.KeyTextField;
+
+  /**
+   * Bio field in *Autor*
+   *
+   * - **Field Type**: Rich Text
+   * - **API ID Path**: author.bio
+   */
+  bio: prismic.RichTextField;
+
+  /**
+   * LinkedIn field in *Autor*
+   *
+   * - **Field Type**: Link
+   * - **API ID Path**: author.linkedin
+   */
+  linkedin: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Instagram field in *Autor*
+   *
+   * - **Field Type**: Link
+   * - **API ID Path**: author.instagram
+   */
+  instagram: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Autor document from Prismic
+ *
+ * - **API ID**: `author`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AuthorDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<AuthorDocumentData>, "author", Lang>;
 
 /**
  * Content for Blog Settings documents
@@ -208,7 +289,10 @@ export type BlogSettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = BlogPostDocument | BlogSettingsDocument;
+export type AllDocumentTypes =
+  | AuthorDocument
+  | BlogPostDocument
+  | BlogSettingsDocument;
 
 /**
  * Primary content in *BannerAd → Default → Primary*
@@ -331,6 +415,43 @@ export interface ContentTableSliceDefaultPrimary {
 }
 
 /**
+ * Primary content in *ContentTable → Default → Items*
+ */
+export interface ContentTableSliceDefaultItem {
+  /**
+   * cell_1 field in *ContentTable → Default → Items*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: content_table.default.items[].cell_1
+   */
+  cell_1: prismic.KeyTextField;
+
+  /**
+   * cell_2 field in *ContentTable → Default → Items*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: content_table.default.items[].cell_2
+   */
+  cell_2: prismic.KeyTextField;
+
+  /**
+   * cell_3 field in *ContentTable → Default → Items*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: content_table.default.items[].cell_3
+   */
+  cell_3: prismic.KeyTextField;
+
+  /**
+   * cell_4 field in *ContentTable → Default → Items*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: content_table.default.items[].cell_4
+   */
+  cell_4: prismic.KeyTextField;
+}
+
+/**
  * Default variation for ContentTable Slice
  *
  * - **API ID**: `default`
@@ -340,7 +461,7 @@ export interface ContentTableSliceDefaultPrimary {
 export type ContentTableSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<ContentTableSliceDefaultPrimary>,
-  never
+  Simplify<ContentTableSliceDefaultItem>
 >;
 
 /**
@@ -359,6 +480,119 @@ export type ContentTableSlice = prismic.SharedSlice<
   "content_table",
   ContentTableSliceVariation
 >;
+
+/**
+ * Primary content in *Callout → Default → Primary*
+ */
+export interface CalloutSliceDefaultPrimary {
+  /**
+   * Tipo field in *Callout → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Default Value**: Dica
+   * - **API ID Path**: callout.default.primary.variant
+   */
+  variant: prismic.SelectField<"Dica" | "Informação" | "Atenção" | "Sucesso", "filled">;
+
+  /**
+   * Título field in *Callout → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: callout.default.primary.title
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Conteúdo field in *Callout → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **API ID Path**: callout.default.primary.content
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Callout Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CalloutSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CalloutSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Callout*
+ */
+type CalloutSliceVariation = CalloutSliceDefault;
+
+/**
+ * Callout Shared Slice
+ *
+ * - **API ID**: `callout`
+ * - **Description**: Callout
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CalloutSlice = prismic.SharedSlice<"callout", CalloutSliceVariation>;
+
+/**
+ * Primary content in *Quote → Default → Primary*
+ */
+export interface QuoteSliceDefaultPrimary {
+  /**
+   * Citação field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **API ID Path**: quote.default.primary.quote
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Autor da citação field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: quote.default.primary.author
+   */
+  author: prismic.KeyTextField;
+
+  /**
+   * Cargo / contexto field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **API ID Path**: quote.default.primary.role
+   */
+  role: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Quote Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type QuoteSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<QuoteSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Quote*
+ */
+type QuoteSliceVariation = QuoteSliceDefault;
+
+/**
+ * Quote Shared Slice
+ *
+ * - **API ID**: `quote`
+ * - **Description**: Quote
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type QuoteSlice = prismic.SharedSlice<"quote", QuoteSliceVariation>;
 
 /**
  * Primary content in *RichText → Default → Primary*
@@ -426,6 +660,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AuthorDocument,
+      AuthorDocumentData,
       BlogPostDocument,
       BlogPostDocumentData,
       BlogPostDocumentDataSlicesSlice,
@@ -436,10 +672,19 @@ declare module "@prismicio/client" {
       BannerAdSliceDefaultPrimary,
       BannerAdSliceVariation,
       BannerAdSliceDefault,
+      CalloutSlice,
+      CalloutSliceDefaultPrimary,
+      CalloutSliceVariation,
+      CalloutSliceDefault,
       ContentTableSlice,
       ContentTableSliceDefaultPrimary,
+      ContentTableSliceDefaultItem,
       ContentTableSliceVariation,
       ContentTableSliceDefault,
+      QuoteSlice,
+      QuoteSliceDefaultPrimary,
+      QuoteSliceVariation,
+      QuoteSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,

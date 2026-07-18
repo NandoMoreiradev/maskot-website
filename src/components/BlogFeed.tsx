@@ -3,14 +3,18 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Search, Clock, Calendar, ArrowRight, X } from 'lucide-react'
+import { Search, Clock, Calendar, ArrowRight } from 'lucide-react'
 import { asText } from '@prismicio/client'
 import styled from 'styled-components'
 import type { Content } from '@prismicio/client'
-import { useSearchParams, useRouter } from 'next/navigation'
+import PostListCard from '@/components/PostListCard'
+import { calculateReadingTime } from '@/lib/readingTime'
+import { categorySlug } from '@/lib/categories'
 
 // ==================== TYPES ====================
 type BlogPostDocument = Content.BlogPostDocument
+
+const PAGE_SIZE = 6
 
 // ==================== STYLES ====================
 const BlogWrapper = styled.div`
@@ -141,85 +145,23 @@ const SectionTitle = styled.h2`
   letter-spacing: -0.01em;
 `
 
-const PostCard = styled.article`
+const LoadMoreButton = styled.button`
+  align-self: center;
+  margin-top: 1.5rem;
+  padding: 0.85rem 2rem;
   background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  border: 1px solid ${props => props.theme.colors.borderLight}50;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  transition: all 0.25s ease;
-  min-height: 140px;
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
+  color: ${props => props.theme.colors.primary};
+  border: 2px solid ${props => props.theme.colors.primary};
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
 
   &:hover {
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    background: ${props => props.theme.colors.primary};
+    color: white;
     transform: translateY(-2px);
-    border-color: ${props => props.theme.colors.primary}20;
-  }
-
-  &:hover h3 { color: ${props => props.theme.colors.primary}; }
-`
-
-const ThumbArea = styled.div`
-  position: relative;
-  overflow: hidden;
-  @media (max-width: 640px) { aspect-ratio: 16/9; }
-
-  img { transition: transform 0.4s ease; }
-  ${PostCard}:hover img { transform: scale(1.06); }
-`
-
-const PostInfo = styled.div`
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-
-  .category {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: ${props => props.theme.colors.primary};
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-
-  h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: ${props => props.theme.colors.textDark};
-    line-height: 1.35;
-    transition: color 0.2s;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  p {
-    font-size: 0.875rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .meta {
-    display: flex;
-    gap: 1rem;
-    font-size: 0.78rem;
-    color: ${props => props.theme.colors.textMedium}70;
-    margin-top: 0.25rem;
-    align-items: center;
-    div { display: flex; align-items: center; gap: 0.3rem; }
   }
 `
 
@@ -274,14 +216,13 @@ const SearchBox = styled.div`
   }
 `
 
-const CategoryItem = styled.div<{ $active: boolean }>`
+const CategoryLink = styled(Link)`
   padding: 0.65rem 1rem;
   border-radius: 8px;
-  cursor: pointer;
   font-size: 0.88rem;
-  font-weight: ${props => props.$active ? '700' : '500'};
-  color: ${props => props.$active ? props.theme.colors.primary : props.theme.colors.textMedium};
-  background: ${props => props.$active ? props.theme.colors.primary + '10' : 'transparent'};
+  font-weight: 500;
+  color: ${props => props.theme.colors.textMedium};
+  text-decoration: none;
   transition: all 0.2s;
   display: flex;
   align-items: center;
@@ -291,6 +232,8 @@ const CategoryItem = styled.div<{ $active: boolean }>`
     background: ${props => props.theme.colors.primary}08;
     color: ${props => props.theme.colors.primary};
   }
+
+  .count { font-size: 0.75rem; opacity: 0.6; }
 `
 
 const EmptyState = styled.div`
@@ -305,60 +248,31 @@ const EmptyState = styled.div`
   p { color: ${props => props.theme.colors.textMedium}; font-size: 0.95rem; }
 `
 
-const ActiveFilterBadge = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: ${props => props.theme.colors.primary}10;
-  color: ${props => props.theme.colors.primary};
-  border: 1.5px solid ${props => props.theme.colors.primary}30;
-  padding: 0.4rem 0.9rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  &:hover { background: ${props => props.theme.colors.primary}20; }
-`
-
 // ==================== COMPONENT ====================
 export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const urlCategory = searchParams.get('category')
-
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(urlCategory)
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
-  // Sync URL category to state
+  // Ao mudar a busca, volta a exibição para a primeira "página".
   useEffect(() => {
-    setSelectedCategory(urlCategory)
-  }, [urlCategory])
+    setVisibleCount(PAGE_SIZE)
+  }, [searchTerm])
 
   const categories = Array.from(new Set(posts.map(p => p.data.category).filter(Boolean) as string[]))
 
   const filteredPosts = posts.filter(post => {
+    if (!searchTerm) return true
     const title = asText(post.data.title).toLowerCase()
     const content = asText(post.data.excerpt).toLowerCase()
-    const category = post.data.category || 'Geral'
-    const matchesSearch = !searchTerm || title.includes(searchTerm.toLowerCase()) || content.includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory ? category === selectedCategory : true
-    return matchesSearch && matchesCategory
+    const term = searchTerm.toLowerCase()
+    return title.includes(term) || content.includes(term)
   })
 
-  const showFeatured = !searchTerm && !selectedCategory && filteredPosts.length > 0
+  const showFeatured = !searchTerm && filteredPosts.length > 0
   const featuredPost = showFeatured ? filteredPosts[0] : null
   const regularPosts = showFeatured ? filteredPosts.slice(1) : filteredPosts
-
-  const handleCategorySelect = (cat: string | null) => {
-    setSelectedCategory(cat)
-    if (cat) {
-      router.push(`/blog?category=${encodeURIComponent(cat)}`, { scroll: false })
-    } else {
-      router.push('/blog', { scroll: false })
-    }
-  }
+  const visiblePosts = regularPosts.slice(0, visibleCount)
+  const hasMore = regularPosts.length > visibleCount
 
   return (
     <BlogWrapper>
@@ -382,7 +296,7 @@ export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
                 <p>{asText(featuredPost.data.excerpt)}</p>
                 <div className="meta">
                   <div><Calendar size={14}/> {new Date(featuredPost.first_publication_date).toLocaleDateString('pt-BR')}</div>
-                  <div><Clock size={14}/> 5 min</div>
+                  <div><Clock size={14}/> {calculateReadingTime(featuredPost.data.slices)} min</div>
                 </div>
                 <ReadMoreBtn>
                   Ler artigo completo <ArrowRight size={16} />
@@ -397,52 +311,27 @@ export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
       <MainGrid>
         {/* Left: Article List */}
         <div>
-          {/* Active filter badge */}
-          {selectedCategory && (
-            <ActiveFilterBadge onClick={() => handleCategorySelect(null)}>
-              {selectedCategory} <X size={14} />
-            </ActiveFilterBadge>
-          )}
-
           <SectionTitle>
-            {searchTerm
-              ? `Resultados para "${searchTerm}"`
-              : selectedCategory
-              ? `Categoria: ${selectedCategory}`
-              : 'Artigos Recentes'}
+            {searchTerm ? `Resultados para "${searchTerm}"` : 'Artigos Recentes'}
           </SectionTitle>
 
           <PostsList>
-            {regularPosts.map(post => (
-              <Link key={post.id} href={`/blog/${post.uid}`} style={{ textDecoration: 'none' }}>
-                <PostCard>
-                  <ThumbArea>
-                    <Image
-                      src={post.data.featured_image.url || ''}
-                      alt={asText(post.data.title)}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </ThumbArea>
-                  <PostInfo>
-                    <span className="category">{post.data.category || 'Artigo'}</span>
-                    <h3>{asText(post.data.title)}</h3>
-                    <p>{asText(post.data.excerpt)}</p>
-                    <div className="meta">
-                      <div><Calendar size={12}/> {new Date(post.first_publication_date).toLocaleDateString('pt-BR')}</div>
-                      <div><Clock size={12}/> 4 min</div>
-                    </div>
-                  </PostInfo>
-                </PostCard>
-              </Link>
+            {visiblePosts.map(post => (
+              <PostListCard key={post.id} post={post} />
             ))}
 
             {filteredPosts.length === 0 && (
               <EmptyState>
                 <Search size={48} />
                 <h3>Nenhum post encontrado</h3>
-                <p>Tente outros termos ou selecione outra categoria.</p>
+                <p>Tente outros termos de busca.</p>
               </EmptyState>
+            )}
+
+            {hasMore && (
+              <LoadMoreButton onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}>
+                Ver mais artigos
+              </LoadMoreButton>
             )}
           </PostsList>
         </div>
@@ -465,29 +354,21 @@ export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
           <Widget>
             <h4>Categorias</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-              <CategoryItem
-                $active={selectedCategory === null && !searchTerm}
-                onClick={() => handleCategorySelect(null)}
-              >
+              <CategoryLink href="/blog">
                 <span>Todas</span>
-                <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>{posts.length}</span>
-              </CategoryItem>
+                <span className="count">{posts.length}</span>
+              </CategoryLink>
               {categories.map(cat => {
                 const count = posts.filter(p => p.data.category === cat).length
                 return (
-                  <CategoryItem
-                    key={cat}
-                    $active={selectedCategory === cat}
-                    onClick={() => handleCategorySelect(cat)}
-                  >
+                  <CategoryLink key={cat} href={`/blog/categoria/${categorySlug(cat)}`}>
                     <span>{cat}</span>
-                    <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>{count}</span>
-                  </CategoryItem>
+                    <span className="count">{count}</span>
+                  </CategoryLink>
                 )
               })}
             </div>
           </Widget>
-
         </Sidebar>
       </MainGrid>
     </BlogWrapper>

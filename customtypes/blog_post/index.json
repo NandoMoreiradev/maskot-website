@@ -57,6 +57,15 @@
           "default_value": "Gestão Escolar"
         }
       },
+      "author": {
+        "type": "Link",
+        "config": {
+          "label": "Autor",
+          "placeholder": "",
+          "select": "document",
+          "customtypes": ["author"]
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
@@ -66,6 +75,15 @@
               "type": "SharedSlice"
             },
             "rich_text": {
+              "type": "SharedSlice"
+            },
+            "callout": {
+              "type": "SharedSlice"
+            },
+            "content_table": {
+              "type": "SharedSlice"
+            },
+            "quote": {
               "type": "SharedSlice"
             }
           }

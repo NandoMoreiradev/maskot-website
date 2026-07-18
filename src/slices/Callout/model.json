@@ -1,0 +1,44 @@
+{
+  "id": "callout",
+  "type": "SharedSlice",
+  "name": "Callout",
+  "description": "Caixa de destaque (dica, informação, atenção ou sucesso)",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "variant": {
+          "type": "Select",
+          "config": {
+            "label": "Tipo",
+            "placeholder": "",
+            "options": ["Dica", "Informação", "Atenção", "Sucesso"],
+            "default_value": "Dica"
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Título (opcional)",
+            "placeholder": ""
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Conteúdo",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

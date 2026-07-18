@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { readdirSync, existsSync } from 'fs'
 import { join } from 'path'
 import { createPrismicClient } from '@/prismicio'
+import { categorySlug } from '@/lib/categories'
 
 // Lê dinamicamente as rotas estáticas dentro de src/app/funcionalidades.
 // Cada subpasta com um page.tsx vira uma URL do sitemap — evita manter
@@ -67,6 +68,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ? new Date(cases[0].last_publication_date)
     : SITE_LAST_UPDATED
 
+  // Páginas de categoria (apenas categorias que têm ao menos um post)
+  const presentCategories = Array.from(
+    new Set(posts.map((p) => p.data.category).filter(Boolean) as string[])
+  )
+  const categoryPages = presentCategories.map((c) => ({
+    url: `https://www.maskotedu.com.br/blog/categoria/${categorySlug(c)}`,
+    lastModified: BLOG_LAST_UPDATED,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }))
+
   return [
     {
       url: 'https://www.maskotedu.com.br',
@@ -99,6 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     ...blogPosts,
+    ...categoryPages,
     ...casePages,
     ...funcionalidades,
     ...legal,

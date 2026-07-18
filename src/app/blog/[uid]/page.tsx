@@ -9,8 +9,12 @@ import BlogSidebar from "@/components/BlogSidebar";
 import DisqusComments from "@/components/DisqusComments";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import TableOfContents from "@/components/TableOfContents";
+import AuthorBio, { BlogAuthor } from "@/components/AuthorBio";
+import Link from "next/link";
 import { extractHeadings } from "@/lib/toc";
-import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter } from "lucide-react";
+import { calculateReadingTime } from "@/lib/readingTime";
+import { categorySlug } from "@/lib/categories";
+import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter, User } from "lucide-react";
 import { 
   PageWrapper, Container, ArticleContent, PostHeader, 
   FeaturedImage, RichTextWrapper, AuthorBox, CTAButton,
@@ -28,6 +32,7 @@ interface BlogPostData {
     url?: string;
     alt?: string | null;
   };
+  author?: { id?: string; link_type?: string } | null;
   slices: unknown[];
 }
 
@@ -89,25 +94,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-// ==================== CALCULAR TEMPO DE LEITURA ====================
-function calculateReadingTime(slices: unknown[]): number {
-  let totalWords = 0;
-  slices.forEach((slice) => {
-    if (
-      typeof slice === 'object' && 
-      slice !== null && 
-      'slice_type' in slice && 
-      slice.slice_type === 'rich_text' &&
-      'primary' in slice
-    ) {
-       const s = slice as { primary: { text: RichTextField } };
-       const text = asText(s.primary.text);
-       if (text) totalWords += text.split(/\s+/).filter(w => w.length > 0).length;
-    }
-  });
-  return Math.max(1, Math.ceil(totalWords / 200));
-}
-
 // ==================== COMPONENTE PRINCIPAL ====================
 export default async function BlogPost({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
@@ -146,6 +132,19 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   const postUrl = `https://www.maskotedu.com.br/blog/${uid}`;
   const headings = extractHeadings(page.data.slices);
 
+  // ==================== AUTOR (content relationship) ====================
+  let author: BlogAuthor | null = null;
+  const authorRel = page.data.author;
+  if (authorRel && 'id' in authorRel && authorRel.id) {
+    const authorDoc = await client.getByID(authorRel.id, {
+      fetchOptions: { next: { tags: ['prismic'] } },
+    }).catch(() => null);
+    if (authorDoc && authorDoc.type === 'author') {
+      author = authorDoc as unknown as BlogAuthor;
+    }
+  }
+  const authorName = author?.data?.name || undefined;
+
   // ==================== STRUCTURED DATA (JSON-LD) ====================
   const category = page.data.category || 'Gestão Escolar';
   const imageUrl = page.data.featured_image?.url ?? 'https://www.maskotedu.com.br/default-og-image.jpg';
@@ -160,7 +159,9 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
         datePublished: page.first_publication_date,
         dateModified: page.last_publication_date,
         articleSection: category,
-        author: { '@type': 'Organization', name: 'Maskot', url: 'https://www.maskotedu.com.br' },
+        author: authorName
+          ? { '@type': 'Person', name: authorName }
+          : { '@type': 'Organization', name: 'Maskot', url: 'https://www.maskotedu.com.br' },
         publisher: {
           '@type': 'Organization',
           name: 'Maskot',
@@ -208,13 +209,20 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
         <Container>
           <ArticleContent>
             <PostHeader>
-              <span className="category">{page.data.category || 'Gestão Escolar'}</span>
+              <Link className="category" href={`/blog/categoria/${categorySlug(category)}`} style={{ textDecoration: 'none' }}>
+                {category}
+              </Link>
               <h1>{postTitle}</h1>
               <div className="excerpt">{asText(page.data.excerpt)}</div>
               
               <MetaInfo>
+                {authorName && (
+                  <span>
+                    <User size={18} color="#007BFF" /> Por {authorName}
+                  </span>
+                )}
                 <span>
-                  <Calendar size={18} color="#007BFF" /> 
+                  <Calendar size={18} color="#007BFF" />
                   {new Date(page.first_publication_date).toLocaleDateString('pt-BR', {
                     day: '2-digit',
                     month: 'long',
@@ -222,7 +230,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                   })}
                 </span>
                 <span>
-                  <Clock size={18} color="#007BFF" /> 
+                  <Clock size={18} color="#007BFF" />
                   {readingTime} min de leitura
                 </span>
               </MetaInfo>
@@ -264,6 +272,8 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                 </a>
               </div>
             </ShareButtons>
+
+            <AuthorBio author={author} />
 
             <DisqusComments
               pageIdentifier={uid}

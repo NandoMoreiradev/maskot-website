@@ -1,0 +1,64 @@
+{
+  "format": "custom",
+  "id": "author",
+  "label": "Autor",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Nome",
+          "placeholder": "Ex: Fernando Moreira"
+        }
+      },
+      "photo": {
+        "type": "Image",
+        "config": {
+          "label": "Foto",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "role": {
+        "type": "Text",
+        "config": {
+          "label": "Cargo",
+          "placeholder": "Ex: Especialista em Gestão Escolar"
+        }
+      },
+      "bio": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Bio",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "linkedin": {
+        "type": "Link",
+        "config": {
+          "label": "LinkedIn",
+          "placeholder": "",
+          "allowTargetBlank": true
+        }
+      },
+      "instagram": {
+        "type": "Link",
+        "config": {
+          "label": "Instagram",
+          "placeholder": "",
+          "allowTargetBlank": true
+        }
+      }
+    }
+  }
+}
