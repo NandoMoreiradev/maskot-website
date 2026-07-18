@@ -140,6 +140,7 @@ export const RichTextWrapper = styled.div`
     margin-bottom: 1.5rem;
     line-height: 1.2;
     letter-spacing: -0.01em;
+    scroll-margin-top: 140px; /* âncora do índice não fica sob o header fixo */
 
     @media (max-width: 600px) {
       font-size: 1.5rem;
@@ -153,6 +154,7 @@ export const RichTextWrapper = styled.div`
     color: ${props => props.theme.colors.textDark};
     margin-top: 3rem;
     margin-bottom: 1.25rem;
+    scroll-margin-top: 140px;
 
     @media (max-width: 600px) {
       font-size: 1.25rem;

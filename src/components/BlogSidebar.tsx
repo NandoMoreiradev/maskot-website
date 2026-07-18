@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
 import { asText, RichTextField } from '@prismicio/client'
-import { ArrowRight, Mail, Users } from 'lucide-react'
+import { ArrowRight, Users } from 'lucide-react'
 import StickyBannerAd from './StickyBannerAd'
 
 // ==================== TYPES ====================
@@ -133,77 +133,6 @@ const MiniContent = styled.div`
   }
 `
 
-const NewsletterWidget = styled.div`
-  background: #f8fbff;
-  padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid ${props => props.theme.colors.primary}15;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  
-  .icon-box {
-    width: 48px;
-    height: 48px;
-    background: ${props => props.theme.colors.primary}10;
-    color: ${props => props.theme.colors.primary};
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  h5 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: ${props => props.theme.colors.textDark};
-    line-height: 1.2;
-  }
-
-  p {
-    font-size: 0.95rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.5;
-  }
-`
-
-const NewsForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  
-  input {
-    padding: 0.9rem 1rem;
-    border: 1px solid ${props => props.theme.colors.borderLight};
-    border-radius: 10px;
-    font-size: 0.9rem;
-    outline: none;
-    transition: all 0.2s;
-    
-    &:focus {
-      border-color: ${props => props.theme.colors.primary};
-      box-shadow: 0 0 0 4px ${props => props.theme.colors.primary}10;
-    }
-  }
-  
-  button {
-    padding: 0.9rem;
-    background: ${props => props.theme.colors.primary};
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    
-    &:hover {
-      background: #0056b3;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
-    }
-  }
-`
-
 const ExpertWidget = styled.div`
   background: white;
   padding: 2rem;
@@ -265,12 +194,7 @@ const SidebarButton = styled.button`
 // ==================== COMPONENT ====================
 export default function BlogSidebar({ recentPosts, currentPostId, sidebarBanner }: Props) {
   const filteredPosts = recentPosts.filter(post => post.id !== currentPostId).slice(0, 3)
-  
-  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    alert('Inscrição realizada! Fique de olho no seu e-mail. 🎉')
-  }
-  
+
   return (
     <Sidebar>
       {/* Sticky banner from Prismic Blog Settings */}
@@ -309,18 +233,6 @@ export default function BlogSidebar({ recentPosts, currentPostId, sidebarBanner 
             );
           })}
         </PostList>
-      </Widget>
-      
-      <Widget>
-        <NewsletterWidget>
-          <div className="icon-box"><Mail size={24} /></div>
-          <h5>Gestão Escolar na sua caixa de entrada</h5>
-          <p>Receba semanalmente nossas melhores estratégias para sua escola.</p>
-          <NewsForm onSubmit={handleNewsletterSubmit}>
-            <input type="email" placeholder="Seu e-mail profissional" required />
-            <button type="submit">Inscrever-se Grátis</button>
-          </NewsForm>
-        </NewsletterWidget>
       </Widget>
       
       <Widget>

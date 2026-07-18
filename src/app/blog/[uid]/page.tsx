@@ -8,6 +8,8 @@ import Image from "next/image";
 import BlogSidebar from "@/components/BlogSidebar";
 import DisqusComments from "@/components/DisqusComments";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
+import TableOfContents from "@/components/TableOfContents";
+import { extractHeadings } from "@/lib/toc";
 import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter } from "lucide-react";
 import { 
   PageWrapper, Container, ArticleContent, PostHeader, 
@@ -142,6 +144,40 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
   const readingTime = calculateReadingTime(page.data.slices);
   const postTitle = asText(page.data.title) || 'Post do Blog';
   const postUrl = `https://www.maskotedu.com.br/blog/${uid}`;
+  const headings = extractHeadings(page.data.slices);
+
+  // ==================== STRUCTURED DATA (JSON-LD) ====================
+  const category = page.data.category || 'Gestão Escolar';
+  const imageUrl = page.data.featured_image?.url ?? 'https://www.maskotedu.com.br/default-og-image.jpg';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        headline: postTitle,
+        description: asText(page.data.excerpt),
+        image: [imageUrl],
+        datePublished: page.first_publication_date,
+        dateModified: page.last_publication_date,
+        articleSection: category,
+        author: { '@type': 'Organization', name: 'Maskot', url: 'https://www.maskotedu.com.br' },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Maskot',
+          logo: { '@type': 'ImageObject', url: 'https://www.maskotedu.com.br/logo_maskot_website.png' },
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.maskotedu.com.br' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.maskotedu.com.br/blog' },
+          { '@type': 'ListItem', position: 3, name: postTitle, item: postUrl },
+        ],
+      },
+    ],
+  };
 
   // Fetch sidebar banner from Prismic Blog Settings
   let sidebarBanner: { imageUrl: string; imageAlt?: string; linkUrl: string } | null = null;
@@ -162,6 +198,10 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ReadingProgressBar />
       
       <PageWrapper>
@@ -198,6 +238,8 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                 />
               </FeaturedImage>
             )}
+
+            <TableOfContents headings={headings} />
 
             <RichTextWrapper>
               <SliceZone slices={page.data.slices as never} components={components} />

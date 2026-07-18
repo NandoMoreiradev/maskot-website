@@ -1,8 +1,17 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText, JSXMapSerializer } from "@prismicio/react";
 import Image from "next/image";
+import { slugify } from "@/lib/slug";
 
 const components: JSXMapSerializer = {
+  // Headings recebem `id` (slug do texto) para servir de âncora ao índice do artigo.
+  heading2: ({ children, node }) => (
+    <h2 id={slugify("text" in node ? node.text : "")}>{children}</h2>
+  ),
+  heading3: ({ children, node }) => (
+    <h3 id={slugify("text" in node ? node.text : "")}>{children}</h3>
+  ),
+
   image: ({ node }) => (
     <div style={{ margin: '2rem 0', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
       <Image
@@ -19,15 +28,15 @@ const components: JSXMapSerializer = {
       )}
     </div>
   ),
-  
+
   hyperlink: ({ children, node }) => {
     const url = 'url' in node.data ? node.data.url : '#';
-    
+
     return (
-      <a 
-        href={url || '#'} 
-        target="_blank" 
-        rel="noopener noreferrer" 
+      <a
+        href={url || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
         style={{ color: '#007BFF', textDecoration: 'underline' }}
       >
         {children}

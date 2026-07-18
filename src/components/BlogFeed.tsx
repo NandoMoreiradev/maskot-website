@@ -293,55 +293,6 @@ const CategoryItem = styled.div<{ $active: boolean }>`
   }
 `
 
-const NewsletterWidget = styled.div`
-  background: linear-gradient(135deg, ${props => props.theme.colors.primary} 0%, #0056b3 100%);
-  border-radius: 16px;
-  padding: 1.75rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  h4 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 0;
-    letter-spacing: 0;
-    text-transform: none;
-  }
-
-  p {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    line-height: 1.5;
-  }
-
-  input {
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    border: none;
-    font-size: 0.9rem;
-    outline: none;
-    width: 100%;
-    &::placeholder { color: #999; }
-  }
-
-  button {
-    padding: 0.75rem;
-    border-radius: 8px;
-    border: none;
-    background: #1a1a2e;
-    color: white;
-    font-weight: 700;
-    font-size: 0.875rem;
-    cursor: pointer;
-    width: 100%;
-    transition: background 0.2s;
-    &:hover { background: #000; }
-  }
-`
-
 const EmptyState = styled.div`
   text-align: center;
   padding: 3rem 2rem;
@@ -537,12 +488,6 @@ export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
             </div>
           </Widget>
 
-          <NewsletterWidget>
-            <h4>📩 Fique por dentro</h4>
-            <p>Receba os melhores conteúdos de gestão escolar toda semana.</p>
-            <input type="email" placeholder="Seu e-mail" />
-            <button>Assinar agora</button>
-          </NewsletterWidget>
         </Sidebar>
       </MainGrid>
     </BlogWrapper>
