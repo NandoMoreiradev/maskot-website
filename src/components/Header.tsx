@@ -6,7 +6,8 @@ import {
     // Ícones Antigos
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
-    BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit
+    BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit,
+    ClipboardList
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -476,6 +477,15 @@ export default function Header() {
                                     <div className="text">
                                         <strong>Analytics & BI</strong>
                                         <span>Relatórios avançados</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Pesquisas (NOVO) */}
+                                <DropdownLink href="/funcionalidades/pesquisas" onClick={handleLinkClick}>
+                                    <div className="icon-box"><ClipboardList size={18}/></div>
+                                    <div className="text">
+                                        <strong>Pesquisas & NPS</strong>
+                                        <span>Satisfação de alunos</span>
                                     </div>
                                 </DropdownLink>
 
