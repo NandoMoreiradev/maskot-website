@@ -258,7 +258,11 @@ const Visual = styled.div`
     align-items: center;
     min-height: 420px;
     min-width: 0;
-    overflow: hidden;
+
+    /* Sem overflow:hidden aqui: os FloatingTag (badges do canto) usam
+       posicionamento negativo de propósito para "vazar" da borda do card.
+       O overflow:hidden do HeroSection (elemento pai) já contém qualquer
+       sangramento no nível da página. */
 
     /* Glow de fundo */
     &::before {

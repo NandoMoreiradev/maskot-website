@@ -2,8 +2,8 @@
 
 import styled from 'styled-components'
 import {
-    DollarSign, PieChart, Target, Link as LinkIcon, 
-    Ticket, ClipboardList, Image as ImageIcon, 
+    DollarSign, PieChart, Target, Link as LinkIcon,
+    Radar, ClipboardList, Image as ImageIcon,
     CheckCircle2, Sparkles, Activity, Layers, PenTool
 } from 'lucide-react'
 
@@ -175,10 +175,10 @@ export default function CampaignFeatures() {
                         </CategoryHeader>
                         <FeatureList>
                             <FeatureItem>
-                                <Ticket size={18} />
+                                <Radar size={18} />
                                 <div>
-                                    <h4>Cupons Associados</h4>
-                                    <p>Gere códigos de desconto para campanhas específicas e vincule ao lead no CRM.</p>
+                                    <h4>Atribuição de Anúncios no WhatsApp</h4>
+                                    <p>Lead veio de um anúncio &quot;clique para conversar&quot;? O sistema identifica o anúncio automaticamente e já vincula o contato à campanha e ao canal certo.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>
@@ -208,8 +208,8 @@ export default function CampaignFeatures() {
                             <FeatureItem>
                                 <PenTool size={18} />
                                 <div>
-                                    <h4>Estúdio IA Multicanal</h4>
-                                    <p>Peça para a IA redigir um texto adaptado para o Instagram, e-mail ou roteiro de vídeo.</p>
+                                    <h4>Estúdio IA com Brand Kit</h4>
+                                    <p>Cadastre o nome, o slogan e os diferenciais da sua escola uma vez no Brand Kit — a IA usa isso para gerar textos consistentes em 9 canais diferentes.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>

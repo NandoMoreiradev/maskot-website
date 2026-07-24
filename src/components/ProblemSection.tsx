@@ -100,6 +100,17 @@ const SolutionCard = styled.div`
         transform: translateY(-5px);
         box-shadow: 0 15px 35px -10px rgba(0, 123, 255, 0.25);
     }
+`
+
+/* Máscara com o mesmo border-radius do card: recorta a barra de destaque
+   exatamente no contorno arredondado, em vez de deixar a própria barra
+   tentar (e falhar em) reproduzir a curva com um raio menor. */
+const AccentBarMask = styled.div`
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    pointer-events: none;
 
     &:before {
         content: '';
@@ -291,7 +302,7 @@ export default function ProblemSection() {
                             <FeatureItem $type="problem">
                                 <Ban />
                                 <span>
-                                    <strong>WhatsApp bloqueado:</strong> o número trava bem no meio de uma campanha de rematrícula.
+                                    <strong>WhatsApp bloqueado:</strong> o número trava bem no meio de uma campanha.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="problem">
@@ -309,6 +320,7 @@ export default function ProblemSection() {
 
                     {/* LADO DA SOLUÇÃO (CRM Maskot) */}
                     <SolutionCard>
+                        <AccentBarMask />
                         <IconHeader $type="solution">
                             <Zap />
                         </IconHeader>
@@ -335,7 +347,7 @@ export default function ProblemSection() {
                             <FeatureItem $type="solution">
                                 <ShieldCheck />
                                 <span>
-                                    <strong>API Oficial blindada:</strong> dispare campanhas de rematrícula sem risco de bloqueio do número.
+                                    <strong>API Oficial blindada:</strong> monitoramento automático de qualidade protege seu número contra bloqueio nas campanhas.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">

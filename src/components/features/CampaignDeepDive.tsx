@@ -416,13 +416,14 @@ export default function CampaignDeepDive() {
                     <TextContent>
                         <h3>Estúdio Criativo com IA:<br/>Sua agência de bolso</h3>
                         <p>
-                            Sem tempo para criar textos? Nossa Inteligência Artificial redige copys persuasivas para 
-                            cada canal, adaptando o tom de voz para Instagram, WhatsApp ou E-mail.
+                            Sem tempo para criar textos? Nossa Inteligência Artificial redige copys persuasivas
+                            para cada canal — já considerando o tom de voz, os diferenciais e o público-alvo
+                            da sua escola, cadastrados uma única vez no Brand Kit.
                         </p>
                         <ul>
-                            <li><PenTool size={20}/> <strong>Múltiplos Tons:</strong> Escolha entre amigável, urgente, formal ou direto.</li>
-                            <li><LayoutTemplate size={20}/> <strong>Formatos Adaptados:</strong> A IA já cria o texto no limite de caracteres e com emojis da rede social.</li>
-                            <li><Sparkles size={20}/> <strong>Bloqueio Criativo Zero:</strong> Gere infinitas variações em segundos.</li>
+                            <li><PenTool size={20}/> <strong>9 Tons de Voz:</strong> De amigável e urgente a storytelling, prova social e escassez.</li>
+                            <li><LayoutTemplate size={20}/> <strong>9 Canais Prontos:</strong> Instagram, WhatsApp, E-mail, Facebook Ads, Google Ads, LinkedIn, SMS, TikTok e Outdoor.</li>
+                            <li><Sparkles size={20}/> <strong>Bloqueio Criativo Zero:</strong> Gere várias variações por pedido, em segundos, sem travar no texto em branco.</li>
                         </ul>
                     </TextContent>
                 </FeatureRow>
@@ -438,7 +439,7 @@ export default function CampaignDeepDive() {
                         <ul>
                             <li><Globe size={20}/> <strong>Meta & Google Ads:</strong> Compare o custo de aquisição (CAC) em tempo real.</li>
                             <li><Users size={20}/> <strong>Parceiros Estratégicos:</strong> Saiba exatamente quantas matrículas vieram da escola parceira.</li>
-                            <li><Layers size={20}/> <strong>Tracking Automático:</strong> Os leads caem no CRM com a origem <code>UTM</code> já preenchida.</li>
+                            <li><Layers size={20}/> <strong>Tracking Automático:</strong> Os leads caem no CRM com a origem já preenchida — via <code>UTM</code> ou, em anúncios de WhatsApp, identificação automática do anúncio de origem.</li>
                         </ul>
                     </TextContent>
 
@@ -572,7 +573,7 @@ export default function CampaignDeepDive() {
                             Captação Antecipada (Bolsões)
                         </h4>
                         <p style={{color: '#666', fontSize: '0.95rem'}}>
-                            Gere uma Landing Page pública, associe cupons de desconto limitados e acompanhe o batimento da sua Meta de Inscrições em tempo real.
+                            Gere uma Landing Page pública vinculada à campanha, rastreie de qual canal veio cada inscrição via UTM e acompanhe o batimento da sua Meta de Inscrições em tempo real.
                         </p>
                     </div>
 
