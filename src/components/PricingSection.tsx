@@ -1,46 +1,41 @@
 'use client'
 
-import React from 'react'
-
-import { useState } from 'react'
+import React, { useId, useState } from 'react'
 import styled, { css } from 'styled-components'
-import { Check, X, Zap, Crown, Building2, Bot, ArrowRight, MessageCircle, Cpu } from 'lucide-react'
+import { Check, X, ArrowRight, ChevronDown, Sparkles, MessageCircle, Bot } from 'lucide-react'
 
-// ─── SHARED ────────────────────────────────────────────────────────────────
+// ─── SHELL ──────────────────────────────────────────────────────────────────
 
 const Section = styled.section`
-  padding: 6rem 0;
+  padding: 4.5rem 0;
   background: ${props => props.theme.colors.pageBackground};
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+  }
 `
 
 const BackgroundBlur = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, ${props => props.theme.colors.primary}10 0%, transparent 70%);
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, ${props => props.theme.colors.primary}10 0%, transparent 60%);
   pointer-events: none;
-  z-index: 0;
 `
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   position: relative;
   z-index: 1;
 `
 
 const SectionHeader = styled.div`
   text-align: center;
-  margin-bottom: 3rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 680px;
+  margin: 0 auto 1.75rem;
 `
 
 const Badge = styled.span`
@@ -49,9 +44,9 @@ const Badge = styled.span`
   color: ${props => props.theme.colors.primary};
   font-size: ${props => props.theme.typography.fontSize.xs};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 0.85rem;
   border-radius: ${props => props.theme.borderRadius.full};
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 `
@@ -59,9 +54,10 @@ const Badge = styled.span`
 const SectionTitle = styled.h2`
   font-size: ${props => props.theme.typography.fontSize['4xl']};
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
-  margin-bottom: 1rem;
   color: ${props => props.theme.colors.textDark};
   letter-spacing: -0.02em;
+  line-height: ${props => props.theme.typography.lineHeight.tight};
+  margin-bottom: 0.6rem;
 
   @media (max-width: 768px) {
     font-size: ${props => props.theme.typography.fontSize['2xl']};
@@ -79,693 +75,589 @@ const Highlight = styled.span`
 `
 
 const SectionSubtitle = styled.p`
-  font-size: ${props => props.theme.typography.fontSize.lg};
+  font-size: ${props => props.theme.typography.fontSize.base};
   color: ${props => props.theme.colors.textMedium};
-  line-height: ${props => props.theme.typography.lineHeight.relaxed};
-  margin-bottom: 2rem;
+  line-height: ${props => props.theme.typography.lineHeight.normal};
 `
 
-// ─── TOGGLES ───────────────────────────────────────────────────────────────
+// ─── TABS ───────────────────────────────────────────────────────────────────
 
-const MainToggleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  gap: 1rem;
-  flex-wrap: wrap;
-
-  @media (max-width: 640px) {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-  }
-`
-
-const ToggleButton = styled.button<{ $isActive: boolean }>`
-  background: ${props => props.$isActive ? props.theme.colors.primary : props.theme.colors.white};
-  color: ${props => props.$isActive ? props.theme.colors.white : props.theme.colors.textMedium};
-  padding: 0.75rem 2rem;
-  border-radius: ${props => props.theme.borderRadius.full};
-  border: 1px solid ${props => props.$isActive ? props.theme.colors.primary : props.theme.colors.borderLight};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  font-size: ${props => props.theme.typography.fontSize.sm};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: ${props => props.$isActive ? props.theme.shadows.md : 'none'};
-
-  &:hover {
-    border-color: ${props => props.theme.colors.primary};
-    color: ${props => !props.$isActive && props.theme.colors.primary};
-  }
-`
-
-const SubToggleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
-  background: ${props => props.theme.colors.lightGray};
-  padding: 0.25rem;
-  border-radius: 8px;
+const TabList = styled.div`
   display: inline-flex;
-  position: relative;
+  gap: 0.25rem;
+  background: ${props => props.theme.colors.backgroundMedium};
+  padding: 0.25rem;
+  border-radius: ${props => props.theme.borderRadius.full};
+  margin: 0 auto 2rem;
   left: 50%;
+  position: relative;
   transform: translateX(-50%);
 
-  @media (max-width: 640px) {
+  @media (max-width: 560px) {
+    display: flex;
     width: 100%;
     left: 0;
     transform: none;
   }
 `
 
-const SubToggleButton = styled.button<{ $isActive: boolean }>`
+const Tab = styled.button<{ $isActive: boolean }>`
   background: ${props => props.$isActive ? props.theme.colors.white : 'transparent'};
   color: ${props => props.$isActive ? props.theme.colors.textDark : props.theme.colors.textMedium};
-  padding: 0.5rem 1.5rem;
-  border-radius: 6px;
+  padding: 0.55rem 1.5rem;
+  border-radius: ${props => props.theme.borderRadius.full};
   border: none;
-  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
   font-size: ${props => props.theme.typography.fontSize.sm};
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: ${props => props.$isActive ? props.theme.shadows.sm : 'none'};
   white-space: nowrap;
+  transition: all ${props => props.theme.transitions.fast};
+  box-shadow: ${props => props.$isActive ? props.theme.shadows.sm : 'none'};
 
-  @media (max-width: 640px) {
+  &:hover {
+    color: ${props => props.theme.colors.textDark};
+  }
+
+  @media (max-width: 560px) {
     flex: 1;
-    padding: 0.5rem 0.5rem;
-    font-size: ${props => props.theme.typography.fontSize.xs};
+    padding: 0.55rem 0.5rem;
   }
 `
 
-// ─── COMPARISON TABLE ───────────────────────────────────────────────────────
+// ─── PLAN CARDS ─────────────────────────────────────────────────────────────
+
+const CardGrid = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const Card = styled.div<{ $isPopular?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  background: ${props => props.theme.colors.white};
+  border-radius: ${props => props.theme.borderRadius.xl};
+  padding: 1.5rem 1.25rem 1.25rem;
+  position: relative;
+  border: 1px solid ${props => props.theme.colors.borderLight};
+  transition: box-shadow ${props => props.theme.transitions.base},
+              transform ${props => props.theme.transitions.base};
+
+  ${props => props.$isPopular && css`
+    border-color: ${props.theme.colors.primary};
+    box-shadow: 0 0 0 3px ${props.theme.colors.primary}1F, ${props.theme.shadows.lg};
+  `}
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: ${props => props.theme.shadows.lg};
+  }
+`
+
+const PopularTag = styled.span`
+  position: absolute;
+  top: -0.7rem;
+  left: 1.25rem;
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white};
+  padding: 0.2rem 0.7rem;
+  border-radius: ${props => props.theme.borderRadius.full};
+  font-size: 0.68rem;
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+`
+
+const PlanName = styled.h3`
+  font-size: ${props => props.theme.typography.fontSize.lg};
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+  color: ${props => props.theme.colors.textDark};
+`
+
+const PlanFor = styled.p`
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  color: ${props => props.theme.colors.textMedium};
+  margin-bottom: 0.9rem;
+`
+
+const Metric = styled.p`
+  font-size: ${props => props.theme.typography.fontSize['2xl']};
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+  color: ${props => props.theme.colors.textDark};
+  line-height: 1.15;
+  margin-bottom: 0.1rem;
+`
+
+const MetricLabel = styled.p`
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  color: ${props => props.theme.colors.textMedium};
+  line-height: 1.3;
+  margin-bottom: 1rem;
+`
+
+const InheritLine = styled.p`
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  color: ${props => props.theme.colors.primary};
+  margin-bottom: 0.5rem;
+`
+
+const Bullets = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+`
+
+const Bullet = styled.li`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  color: ${props => props.theme.colors.text};
+  line-height: 1.4;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: ${props => props.theme.colors.success};
+  }
+`
+
+const CardCTA = styled.button<{ $primary: boolean }>`
+  width: 100%;
+  padding: 0.7rem 0.75rem;
+  border-radius: ${props => props.theme.borderRadius.md};
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all ${props => props.theme.transitions.fast};
+
+  ${props => props.$primary ? css`
+    background: ${props.theme.colors.primary};
+    color: ${props.theme.colors.white};
+    border: 1px solid ${props.theme.colors.primary};
+    &:hover { background: #0069d9; }
+  ` : css`
+    background: transparent;
+    color: ${props.theme.colors.text};
+    border: 1px solid ${props.theme.colors.borderLight};
+    &:hover {
+      border-color: ${props.theme.colors.primary};
+      color: ${props.theme.colors.primary};
+    }
+  `}
+`
+
+// ─── "INCLUSO EM TODOS" STRIP ───────────────────────────────────────────────
+
+const IncludedStrip = styled.div`
+  margin-top: 1.25rem;
+  padding: 0.9rem 1.1rem;
+  background: ${props => props.theme.colors.white};
+  border: 1px dashed ${props => props.theme.colors.borderLight};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.1rem;
+`
+
+const StripTitle = styled.span`
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: ${props => props.theme.colors.textMedium};
+`
+
+const StripItem = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  color: ${props => props.theme.colors.text};
+
+  svg {
+    width: 14px;
+    height: 14px;
+    color: ${props => props.theme.colors.success};
+    flex-shrink: 0;
+  }
+`
+
+// ─── COMPARISON DISCLOSURE ──────────────────────────────────────────────────
+
+const DisclosureButton = styled.button<{ $open: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 1.25rem auto 0;
+  padding: 0.6rem 1.1rem;
+  background: transparent;
+  border: 1px solid ${props => props.theme.colors.borderLight};
+  border-radius: ${props => props.theme.borderRadius.full};
+  color: ${props => props.theme.colors.text};
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  cursor: pointer;
+  transition: all ${props => props.theme.transitions.fast};
+
+  &:hover {
+    border-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
+  }
+
+  svg {
+    transition: transform ${props => props.theme.transitions.fast};
+    transform: rotate(${props => props.$open ? '180deg' : '0deg'});
+  }
+`
 
 const TableWrapper = styled.div`
+  margin-top: 1.25rem;
   overflow-x: auto;
-  border-radius: 20px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
-  margin-bottom: 2rem;
+  border: 1px solid ${props => props.theme.colors.borderLight};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  background: ${props => props.theme.colors.white};
   -webkit-overflow-scrolling: touch;
 `
 
 const Table = styled.table`
   width: 100%;
-  min-width: 680px;
+  min-width: 660px;
   border-collapse: collapse;
-  background: #fff;
 `
 
-// Popular column index = 1 (Crescimento)
+// Coluna destacada = Crescimento
 const POPULAR_IDX = 1
 
-const Th = styled.th<{ $idx: number }>`
-  padding: 0;
-  vertical-align: top;
-  background: ${props => props.$idx === POPULAR_IDX ? '#EEF5FF' : '#fff'};
-  border-bottom: 2px solid ${props => props.$idx === POPULAR_IDX ? '#007BFF' : '#f0f0f0'};
+const Th = styled.th<{ $isPopular?: boolean }>`
+  padding: 0.75rem 0.75rem;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+  color: ${props => props.theme.colors.textDark};
+  text-align: center;
+  background: ${props => props.$isPopular ? `${props.theme.colors.primary}0D` : props.theme.colors.white};
+  border-bottom: 1px solid ${props => props.theme.colors.borderLight};
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
 `
 
-const PlanHeaderCell = styled.div<{ $isPopular: boolean }>`
-  padding: 1.75rem 1.25rem 1.5rem;
+const RowHeadTh = styled.th`
+  padding: 0.6rem 1rem;
+  min-width: 200px;
+  text-align: left;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  color: ${props => props.theme.colors.text};
+  background: ${props => props.theme.colors.white};
+  border-bottom: 1px solid ${props => props.theme.colors.lightGray};
+`
+
+const Td = styled.td<{ $isPopular: boolean }>`
+  padding: 0.6rem 0.75rem;
   text-align: center;
-  position: relative;
-  background: ${props => props.$isPopular ? '#EEF5FF' : '#fff'};
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  color: ${props => props.theme.colors.textDark};
+  background: ${props => props.$isPopular ? `${props.theme.colors.primary}0D` : props.theme.colors.white};
+  border-bottom: 1px solid ${props => props.theme.colors.lightGray};
 `
 
-const PopularBadge = styled.div`
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #007BFF;
-  color: white;
-  padding: 0.2rem 0.9rem;
-  border-radius: 0 0 10px 10px;
+const GroupTh = styled.th`
+  padding: 0.5rem 1rem;
+  text-align: left;
   font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  white-space: nowrap;
-`
-
-const PlanIconWrapper = styled.div<{ $color: string }>`
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: ${props => props.$color}18;
-  color: ${props => props.$color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0.75rem auto 0.6rem;
-  svg { width: 22px; height: 22px; }
-`
-
-const PlanName = styled.div`
-  font-size: 1rem;
-  font-weight: 800;
-  color: #1a1a2e;
-  margin-bottom: 0.25rem;
-`
-
-const PlanDesc = styled.div`
-  font-size: 0.75rem;
-  color: #888;
-  line-height: 1.4;
-  min-height: 36px;
-  margin-bottom: 1rem;
-`
-
-const PriceLabel = styled.div`
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #1a1a2e;
-  margin-bottom: 0.75rem;
-`
-
-const CTABtn = styled.button<{ $primary: boolean }>`
-  width: 100%;
-  padding: 0.65rem 0.75rem;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 0.8rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  transition: all 0.2s ease;
-
-  ${props => props.$primary ? css`
-    background: #007BFF;
-    color: white;
-    border: none;
-    box-shadow: 0 4px 14px #007BFF40;
-    &:hover { background: #0056b3; transform: translateY(-1px); }
-  ` : css`
-    background: transparent;
-    color: #444;
-    border: 2px solid #e0e0e0;
-    &:hover { border-color: #007BFF; color: #007BFF; }
-  `}
-`
-
-// ─── TABLE ROWS ────────────────────────────────────────────────────────────
-
-const FeatureLabelTd = styled.td`
-  padding: 0.85rem 1.25rem;
-  font-size: 0.875rem;
-  color: #444;
-  background: #fff;
-  border-bottom: 1px solid #f4f4f6;
-  white-space: nowrap;
-  font-weight: 500;
-  min-width: 190px;
-`
-
-const FeatureValueTd = styled.td<{ $isPopular: boolean }>`
-  padding: 0.85rem 0.75rem;
-  text-align: center;
-  border-bottom: 1px solid #f4f4f6;
-  background: ${props => props.$isPopular ? '#EEF5FF' : '#fff'};
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #1a1a2e;
-  vertical-align: middle;
-`
-
-const CategoryTr = styled.tr`
-  background: #f8f9fc;
-`
-
-const CategoryTd = styled.td`
-  padding: 0.6rem 1.25rem;
-  font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #888;
-  border-bottom: 1px solid #eee;
+  color: ${props => props.theme.colors.textMedium};
+  background: ${props => props.theme.colors.lightGray};
+  border-bottom: 1px solid ${props => props.theme.colors.borderLight};
 `
 
-const CategoryValueTd = styled.td<{ $isPopular: boolean }>`
-  background: ${props => props.$isPopular ? '#E8F0FE' : '#f8f9fc'};
-  border-bottom: 1px solid #eee;
+const HiddenCaption = styled.caption`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 `
 
-const CheckIcon = styled(Check)`
-  color: #28A745;
-  width: 18px;
-  height: 18px;
-  margin: 0 auto;
+const YesIcon = styled(Check)`
+  color: ${props => props.theme.colors.success};
+  width: 17px;
+  height: 17px;
   display: block;
+  margin: 0 auto;
 `
 
-const XIcon = styled(X)`
-  color: #d0d0d0;
-  width: 18px;
-  height: 18px;
-  margin: 0 auto;
+const NoIcon = styled(X)`
+  color: ${props => props.theme.colors.borderLight};
+  width: 17px;
+  height: 17px;
   display: block;
+  margin: 0 auto;
 `
 
 const Disclaimer = styled.p`
   text-align: center;
   color: ${props => props.theme.colors.textMedium};
-  font-size: ${props => props.theme.typography.fontSize.sm};
-  margin-top: 1rem;
-  margin-bottom: -1rem;
-
-  a {
-    color: ${props => props.theme.colors.primary};
-    text-decoration: none;
-    font-weight: 600;
-    &:hover { text-decoration: underline; }
-  }
-`
-
-// ─── ORIGINAL CARD COMPONENTS (WA tabs) ────────────────────────────────────
-
-const PricingGrid = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-  align-items: stretch;
-  width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-
-  > div {
-    flex: 1;
-    min-width: 220px;
-    max-width: 280px;
-  }
-
-  @media (max-width: 968px) {
-    flex-direction: column;
-    align-items: center;
-    > div {
-      width: 100%;
-      max-width: 400px;
-    }
-  }
-`
-
-const PricingCard = styled.div<{ $isPopular?: boolean }>`
-  background: ${props => props.theme.colors.white};
-  border-radius: ${props => props.theme.borderRadius.xl};
-  padding: 1.25rem;
-  position: relative;
-  transition: all ${props => props.theme.transitions.base};
-  border: 1px solid ${props => props.$isPopular ? props.theme.colors.primary : props.theme.colors.borderLight};
-
-  ${props => props.$isPopular && css`
-    transform: scale(1.05);
-    box-shadow: ${props.theme.shadows['2xl']};
-    z-index: 2;
-
-    @media (max-width: 968px) {
-      transform: scale(1);
-    }
-  `}
-
-  &:hover {
-    transform: ${props => props.$isPopular ? 'scale(1.08)' : 'translateY(-5px)'};
-  }
-`
-
-const CardPopularBadge = styled.div`
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: ${props => props.theme.colors.primary};
-  color: white;
-  padding: 0.25rem 1rem;
-  border-radius: 20px;
   font-size: ${props => props.theme.typography.fontSize.xs};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  line-height: ${props => props.theme.typography.lineHeight.normal};
+  margin: 1.5rem auto 0;
+  max-width: 720px;
 `
 
-const CardHeader = styled.div`
-  margin-bottom: 1rem;
-  text-align: center;
-`
+// ─── DATA: CRM ──────────────────────────────────────────────────────────────
+// Fonte de verdade: maskotCrmEdu/backend/prisma/seed.ts (PLANS),
+// ai-plan-limits.config.ts e data-import/config/import-plan-capabilities.ts.
 
-const CardPlanIconWrapper = styled.div<{ $color: string }>`
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  background: ${props => props.$color}15;
-  color: ${props => props.$color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 0.75rem;
-  svg { width: 24px; height: 24px; }
-`
+interface CrmPlan {
+  name: string
+  for: string
+  metric: string
+  metricLabel: string
+  inherits?: string
+  bullets: string[]
+  cta: string
+  primary: boolean
+  isPopular?: boolean
+}
 
-const PlanCardName = styled.h3`
-  font-size: ${props => props.theme.typography.fontSize.lg};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.theme.colors.textDark};
-  margin-bottom: 0.25rem;
-`
+const CRM_PLANS: CrmPlan[] = [
+  {
+    name: 'Essencial',
+    for: 'Pequenas escolas e cursos',
+    metric: '1.000',
+    metricLabel: 'leads ativos',
+    bullets: [
+      'Funil de matrículas completo',
+      'Resumo de leads com IA',
+      'Suporte por e-mail',
+    ],
+    cta: 'Começar agora',
+    primary: false,
+  },
+  {
+    name: 'Crescimento',
+    for: 'Colégios de médio porte',
+    metric: '5.000',
+    metricLabel: 'leads ativos',
+    inherits: 'Tudo do Essencial +',
+    bullets: [
+      'Automações e jornadas de funil',
+      'Copilota Mia com IA',
+      'Domínio de e-mail próprio',
+    ],
+    cta: 'Começar agora',
+    primary: true,
+    isPopular: true,
+  },
+  {
+    name: 'Escala',
+    for: 'Grandes colégios',
+    metric: 'Ilimitados',
+    metricLabel: 'leads ativos',
+    inherits: 'Tudo do Crescimento +',
+    bullets: [
+      'Importação via API e webhook',
+      'Gerente de sucesso',
+      'Suporte prioritário',
+    ],
+    cta: 'Falar com consultor',
+    primary: false,
+  },
+  {
+    name: 'Rede',
+    for: 'Grupos multi-unidades',
+    metric: 'Ilimitadas',
+    metricLabel: 'unidades',
+    inherits: 'Tudo do Escala +',
+    bullets: [
+      'Painel consolidado do grupo',
+      'Relatórios comparativos por unidade',
+      'Suporte dedicado',
+    ],
+    cta: 'Cotar para rede',
+    primary: false,
+  },
+]
 
-const PlanCardDescription = styled.p`
-  font-size: 0.8rem;
-  color: ${props => props.theme.colors.textMedium};
-  min-height: 48px;
-  line-height: 1.4;
-`
-
-const PriceWrapper = styled.div`
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 4px;
-`
-
-const PriceValue = styled.span`
-  font-size: 1.5rem;
-  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
-  color: ${props => props.theme.colors.textDark};
-  line-height: 1.2;
-`
-
-const FeaturesList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem 0;
-  text-align: left;
-`
-
-const FeatureItem = styled.li`
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-  font-size: ${props => props.theme.typography.fontSize.sm};
-  color: ${props => props.theme.colors.text};
-
-  svg {
-    width: 18px;
-    height: 18px;
-    color: ${props => props.theme.colors.success};
-    margin-right: 0.75rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-`
-
-const ActionButton = styled.button<{ $variant: 'primary' | 'outline' }>`
-  width: 100%;
-  padding: 1rem;
-  border-radius: ${props => props.theme.borderRadius.lg};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  font-size: ${props => props.theme.typography.fontSize.base};
-  cursor: pointer;
-  transition: all ${props => props.theme.transitions.base};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  ${props => props.$variant === 'primary' ? css`
-    background: ${props.theme.colors.primary};
-    color: ${props.theme.colors.white};
-    border: none;
-    box-shadow: ${props.theme.shadows.lg};
-
-    &:hover {
-      background: ${props.theme.colors.secondary};
-      transform: translateY(-2px);
-    }
-  ` : css`
-    background: transparent;
-    color: ${props.theme.colors.textDark};
-    border: 2px solid ${props.theme.colors.borderLight};
-
-    &:hover {
-      border-color: ${props.theme.colors.primary};
-      color: ${props.theme.colors.primary};
-      background: ${props.theme.colors.white};
-    }
-  `}
-`
-
-// ─── DATA ───────────────────────────────────────────────────────────────────
-
-const CRM_PLANS = [
-  { name: 'Essencial',         description: 'Para pequenas escolas que precisam organizar o comercial.', color: '#28A745', icon: Zap,       cta: 'Começar Agora',        primary: false },
-  { name: 'Crescimento',       description: 'A máquina de matrículas com automação para escalar.',       color: '#007BFF', icon: Crown,     cta: 'Começar Agora',        primary: true  },
-  { name: 'Escala',            description: 'Para grandes operações que precisam de inteligência.',      color: '#FD7E14', icon: Building2, cta: 'Falar com Consultor',  primary: false },
-  { name: 'Rede Educacional',  description: 'Gestão multi-unidades centralizada para grupos.',           color: '#17a2b8', icon: Building2, cta: 'Cotar para Rede',      primary: false },
+// Recursos presentes em todos os planos CRM — evitam 4 linhas sempre-verdes na tabela.
+const INCLUDED_IN_ALL = [
+  'Usuários ilimitados',
+  'Kanban de matrículas',
+  'Calendário de visitas',
+  'Analytics de captação',
+  'Onboarding guiado',
 ]
 
 type CellValue = boolean | string
 
-interface FeatureRow {
-  label: string
-  values: CellValue[]
-}
-
 interface FeatureGroup {
   category: string
-  features: FeatureRow[]
+  features: { label: string; values: CellValue[] }[]
 }
 
 const FEATURE_GROUPS: FeatureGroup[] = [
   {
-    category: 'Usuários & Leads',
+    category: 'Captação e funil',
     features: [
-      { label: 'Usuários',      values: ['2', '5', '15', 'Ilimitados'] },
-      { label: 'Leads Ativos',  values: ['1.000', '5.000', 'Ilimitados', 'Ilimitados'] },
-    ]
+      { label: 'Leads ativos',                 values: ['1.000', '5.000', 'Ilimitados', 'Ilimitados'] },
+      { label: 'Automações de funil (régua)',  values: [false, 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Jornadas automatizadas',       values: [false, true, true, true] },
+      { label: 'Campanhas de matrícula',       values: [false, true, true, true] },
+      { label: 'E-mails de marketing / mês',   values: ['5.000', '15.000', '25.000', '35.000'] },
+      { label: 'Domínio de e-mail próprio',    values: [false, '1 domínio', '5 domínios', '5 domínios'] },
+    ],
   },
   {
-    category: 'Funil & CRM',
+    category: 'Inteligência artificial',
     features: [
-      { label: 'Kanban Visual de Matrículas', values: [true, true, true, true] },
-      { label: 'Calendário de Visitas',        values: [true, true, true, true] },
-      { label: 'Automações de Funil (Régua)',  values: [false, true, true, true] },
-      { label: 'Jornadas Automatizadas',       values: [false, true, true, true] },
-      { label: 'Campanhas de Matrícula',       values: [false, true, true, true] },
-    ]
+      { label: 'Resumo de lead com IA',        values: ['100/mês', '200/mês', '300/mês', '2.000/mês'] },
+      { label: 'Estúdio criativo com IA',      values: ['5/mês', '20/mês', '50/mês', 'Ilimitado'] },
+      { label: 'Mensagens de resgate com IA',  values: ['20/mês', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Copilota Mia (IA do consultor)', values: [false, '200/mês', '500/mês', 'Ilimitado'] },
+    ],
   },
   {
-    category: 'Comunicação',
+    category: 'Dados, escala e suporte',
     features: [
-      { label: 'Disparos em Massa (E-mail)', values: [false, true, true, true] },
-      { label: 'Domínio de E-mail Próprio',  values: [false, true, true, true] },
-    ]
-  },
-  {
-    category: 'Inteligência & Analytics',
-    features: [
-      { label: 'Analytics Avançado de Captação',  values: [false, true, true, true] },
-      { label: 'IA Preditiva de Risco de Evasão', values: [false, false, true, true] },
-      { label: 'Relatórios Customizados',          values: [false, false, true, true] },
-    ]
-  },
-  {
-    category: 'Suporte',
-    features: [
-      { label: 'Canal de Suporte',    values: ['E-mail', 'E-mail', 'Prioritário', 'Dedicado'] },
-      { label: 'Gerente de Sucesso',  values: [false, false, true, true] },
-      { label: 'Upload de Arquivos',  values: ['—', '—', 'até 200 MB', 'Ilimitado'] },
-    ]
-  },
-  {
-    category: 'Rede Educacional',
-    features: [
-      { label: 'Unidades Inclusas',           values: ['1', '1', '1', '2+'] },
-      { label: 'Painel Consolidado do Grupo', values: [false, false, false, true] },
-      { label: 'Relatórios por Unidade',      values: [false, false, false, true] },
-      { label: 'Faturamento Consolidado',     values: [false, false, false, true] },
-    ]
+      { label: 'Importação de dados',          values: ['500 linhas', '5.000 linhas', 'Ilimitada + API', 'Ilimitada + API'] },
+      { label: 'Relatórios customizados',      values: [false, true, true, true] },
+      { label: 'Upload de arquivos',           values: ['25 MB', '150 MB', '200 MB', '200 MB'] },
+      { label: 'Unidades adicionais',          values: [false, false, false, 'Ilimitadas'] },
+      { label: 'Painel consolidado do grupo',  values: [false, false, false, true] },
+      { label: 'Gerente de sucesso',           values: [false, false, true, true] },
+      { label: 'Canal de suporte',             values: ['E-mail', 'E-mail', 'Prioritário', 'Dedicado'] },
+    ],
   },
 ]
 
-// ─── WA DATA (cards) ────────────────────────────────────────────────────────
+// ─── DATA: WHATSAPP & IA ────────────────────────────────────────────────────
 
-const PLANS_WA_INBOX = [
+interface WaPlan {
+  id: string
+  name: string
+  for: string
+  metric: string
+  metricLabel: string
+  icon: typeof MessageCircle
+  bullets: string[]
+  isPopular?: boolean
+  primary: boolean
+}
+
+const WA_PLANS: WaPlan[] = [
   {
     id: 'wa_inbox',
-    name: 'Maskot Inbox',
-    description: 'Atendimento humano profissional via WhatsApp Oficial (API Meta). Centralize todas as conversas com atendentes ilimitados.',
-    price: 'Sob Consulta',
-    color: '#28A745',
+    name: 'Inbox',
+    for: 'Atendimento humano centralizado',
+    metric: 'Ilimitados',
+    metricLabel: 'atendentes',
     icon: MessageCircle,
-    isPopular: true,
-    features: [
-      'Atendentes Ilimitados',
-      'WhatsApp Oficial (API Meta)',
-      'Departamentos e Filas de Atendimento',
-      'Histórico Centralizado de Conversas',
-      'Dashboard de Performance',
-      'Regras de Distribuição Automática',
-      'Tags de Conversas',
-      'Chatbot no Modelo If/Else',
-      'Integração com CRM'
+    bullets: [
+      'WhatsApp oficial (API Meta)',
+      'Filas, departamentos e distribuição',
+      'Chatbot de regras (if/else)',
     ],
-    cta: 'Falar com um Consultor',
-    variant: 'primary' as const
-  }
-]
-
-const PLANS_WA_AI = [
+    primary: false,
+  },
   {
     id: 'wa_ai_std',
     name: 'AI Standard',
-    description: 'Sua secretaria digital funcionando 24/7. Ideal para começar com inteligência artificial.',
-    price: 'Sob Consulta',
-    color: '#007BFF',
+    for: 'Primeira secretaria digital 24/7',
+    metric: '2.000',
+    metricLabel: 'mensagens de IA / mês',
     icon: Bot,
-    isPopular: false,
-    features: [
-      'Módulo Inbox Incluso',
-      'IA Treinada na sua Escola',
-      'Agendamento de Visitas Automático',
-      'Respostas Automáticas 24/7',
-      'Até 2.000 interações/mês'
+    bullets: [
+      'Inbox incluso (atendentes ilimitados)',
+      'IA treinada na sua escola',
+      'Agendamento automático de visitas',
     ],
-    cta: 'Falar com um Consultor',
-    variant: 'outline' as const
+    primary: false,
   },
   {
     id: 'wa_ai_adv',
     name: 'AI Advanced',
-    description: 'Para escolas em expansão com foco em matrículas. Maior volume e inteligência de qualificação.',
-    price: 'Sob Consulta',
-    color: '#007BFF',
-    icon: Cpu,
-    isPopular: true,
-    features: [
-      'Módulo Inbox Incluso',
-      'Qualificação Automática de Leads',
-      'Transbordo Inteligente para Humano',
-      'Personalidade da Marca Customizável',
-      'Até 5.000 interações/mês'
+    for: 'Escolas em expansão',
+    metric: '5.000',
+    metricLabel: 'mensagens de IA / mês',
+    icon: Bot,
+    bullets: [
+      'Tudo do AI Standard',
+      'Qualificação automática de leads',
+      'Transbordo inteligente para humano',
     ],
-    cta: 'Falar com um Consultor',
-    variant: 'primary' as const
+    isPopular: true,
+    primary: true,
   },
   {
     id: 'wa_ai_elite',
     name: 'AI Elite',
-    description: 'Alta capacidade para redes e grandes colégios com volume massivo de atendimento.',
-    price: 'Sob Consulta',
-    color: '#007BFF',
-    icon: Cpu,
-    isPopular: false,
-    features: [
-      'Módulo Inbox Incluso',
-      'IA Generativa de Alta Performance',
-      'Qualificação e Triagem Avançada',
-      'Relatórios de Conversação e Sentimento',
-      'Até 10.000 interações/mês'
+    for: 'Redes e grandes colégios',
+    metric: '10.000',
+    metricLabel: 'mensagens de IA / mês',
+    icon: Sparkles,
+    bullets: [
+      'Tudo do AI Advanced',
+      'Capacidade máxima de interações',
+      'Relatórios de conversas e sentimento',
     ],
-    cta: 'Falar com Consultor',
-    variant: 'outline' as const
-  }
+    primary: false,
+  },
 ]
 
-// ─── CELL RENDERER ──────────────────────────────────────────────────────────
+// ─── HELPERS ────────────────────────────────────────────────────────────────
 
-function CellValue({ value }: { value: CellValue }) {
-  if (value === true)  return <CheckIcon />
-  if (value === false) return <XIcon />
+const openContact = () => window.dispatchEvent(new Event('open-contact-modal'))
+
+function Cell({ value }: { value: CellValue }) {
+  if (value === true) return <YesIcon aria-label="Incluído" />
+  if (value === false) return <NoIcon aria-label="Não incluído" />
   return <>{value}</>
 }
 
-// ─── COMPARISON TABLE COMPONENT ─────────────────────────────────────────────
-
-function CrmComparisonTable() {
-  const openContact = () => window.dispatchEvent(new Event('open-contact-modal'))
-
-  return (
-    <TableWrapper>
-      <Table>
-        <thead>
-          <tr>
-            {/* empty first column */}
-            <Th $idx={-1} style={{ background: '#fff', borderBottom: '2px solid #f0f0f0', minWidth: 190 }} />
-            {CRM_PLANS.map((plan, idx) => (
-              <Th key={plan.name} $idx={idx}>
-                <PlanHeaderCell $isPopular={idx === POPULAR_IDX}>
-                  {idx === POPULAR_IDX && <PopularBadge>Mais Escolhido</PopularBadge>}
-                  <PlanIconWrapper $color={plan.color}>
-                    <plan.icon />
-                  </PlanIconWrapper>
-                  <PlanName>{plan.name}</PlanName>
-                  <PlanDesc>{plan.description}</PlanDesc>
-                  <PriceLabel>Sob Consulta</PriceLabel>
-                  <CTABtn $primary={idx === POPULAR_IDX} onClick={openContact}>
-                    {plan.cta} <ArrowRight size={14} />
-                  </CTABtn>
-                </PlanHeaderCell>
-              </Th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {FEATURE_GROUPS.map(group => (
-            <React.Fragment key={group.category}>
-              <CategoryTr>
-                <CategoryTd colSpan={1}>{group.category}</CategoryTd>
-                {CRM_PLANS.map((_, idx) => (
-                  <CategoryValueTd key={idx} $isPopular={idx === POPULAR_IDX} />
-                ))}
-              </CategoryTr>
-              {group.features.map(feature => (
-                <tr key={feature.label}>
-                  <FeatureLabelTd>{feature.label}</FeatureLabelTd>
-                  {feature.values.map((val, idx) => (
-                    <FeatureValueTd key={idx} $isPopular={idx === POPULAR_IDX}>
-                      <CellValue value={val} />
-                    </FeatureValueTd>
-                  ))}
-                </tr>
-              ))}
-            </React.Fragment>
-          ))}
-          {/* Bottom CTA row */}
-          <tr>
-            <FeatureLabelTd style={{ borderBottom: 'none' }} />
-            {CRM_PLANS.map((plan, idx) => (
-              <FeatureValueTd key={idx} $isPopular={idx === POPULAR_IDX} style={{ borderBottom: 'none', paddingTop: '1.25rem', paddingBottom: '1.25rem' }}>
-                <CTABtn $primary={idx === POPULAR_IDX} onClick={openContact}>
-                  {plan.cta} <ArrowRight size={14} />
-                </CTABtn>
-              </FeatureValueTd>
-            ))}
-          </tr>
-        </tbody>
-      </Table>
-    </TableWrapper>
-  )
-}
-
-// ─── MAIN EXPORT ─────────────────────────────────────────────────────────────
+// ─── MAIN ───────────────────────────────────────────────────────────────────
 
 export default function PricingSection() {
   const [activeTab, setActiveTab] = useState<'CRM' | 'WA'>('CRM')
-  const [waMode, setWaMode] = useState<'INBOX' | 'AI'>('INBOX')
+  const [compareOpen, setCompareOpen] = useState(false)
+  const baseId = useId()
+  const tableId = `${baseId}-compare`
 
-  const waPlans = waMode === 'INBOX' ? PLANS_WA_INBOX : PLANS_WA_AI
+  const tabId = (key: string) => `${baseId}-tab-${key}`
+  const panelId = (key: string) => `${baseId}-panel-${key}`
 
   return (
     <Section id="precos">
-      <BackgroundBlur />
+      <BackgroundBlur aria-hidden="true" />
       <Container>
         <SectionHeader>
           <Badge>Planos Flexíveis</Badge>
@@ -773,77 +665,165 @@ export default function PricingSection() {
             Investimento que se paga com <Highlight>uma matrícula</Highlight>
           </SectionTitle>
           <SectionSubtitle>
-            Comece pelo que sua escola precisa agora — o CRM de captação ou os add-ons de WhatsApp e IA.
-            Todos os planos incluem onboarding guiado.
+            Escolha o CRM de captação e some WhatsApp e IA quando fizer sentido.
           </SectionSubtitle>
-
-          <MainToggleContainer>
-            <ToggleButton $isActive={activeTab === 'CRM'} onClick={() => setActiveTab('CRM')}>
-              Maskot CRM
-            </ToggleButton>
-            <ToggleButton $isActive={activeTab === 'WA'} onClick={() => setActiveTab('WA')}>
-              WhatsApp &amp; IA
-            </ToggleButton>
-          </MainToggleContainer>
-
-          {activeTab === 'WA' && (
-            <SubToggleContainer>
-              <SubToggleButton $isActive={waMode === 'INBOX'} onClick={() => setWaMode('INBOX')}>
-                Chatbot Tradicional
-              </SubToggleButton>
-              <SubToggleButton $isActive={waMode === 'AI'} onClick={() => setWaMode('AI')}>
-                Chatbot com IA
-              </SubToggleButton>
-            </SubToggleContainer>
-          )}
         </SectionHeader>
 
-        {/* ── CRM: comparison table ── */}
-        {activeTab === 'CRM' && <CrmComparisonTable />}
+        <TabList role="tablist" aria-label="Categorias de planos">
+          <Tab
+            role="tab"
+            id={tabId('CRM')}
+            aria-selected={activeTab === 'CRM'}
+            aria-controls={panelId('CRM')}
+            $isActive={activeTab === 'CRM'}
+            onClick={() => setActiveTab('CRM')}
+          >
+            Maskot CRM
+          </Tab>
+          <Tab
+            role="tab"
+            id={tabId('WA')}
+            aria-selected={activeTab === 'WA'}
+            aria-controls={panelId('WA')}
+            $isActive={activeTab === 'WA'}
+            onClick={() => setActiveTab('WA')}
+          >
+            WhatsApp &amp; IA
+          </Tab>
+        </TabList>
 
-        {/* ── WhatsApp: original cards ── */}
-        {activeTab === 'WA' && (
-          <PricingGrid>
-            {waPlans.map((plan) => (
-              <PricingCard key={plan.id} $isPopular={plan.isPopular}>
-                {plan.isPopular && <CardPopularBadge>Mais Escolhido</CardPopularBadge>}
+        {/* ── CRM ── */}
+        {activeTab === 'CRM' && (
+          <div role="tabpanel" id={panelId('CRM')} aria-labelledby={tabId('CRM')}>
+            <CardGrid>
+              {CRM_PLANS.map(plan => (
+                <Card key={plan.name} $isPopular={plan.isPopular}>
+                  {plan.isPopular && <PopularTag>Mais escolhido</PopularTag>}
+                  <PlanName>{plan.name}</PlanName>
+                  <PlanFor>{plan.for}</PlanFor>
+                  <Metric>{plan.metric}</Metric>
+                  <MetricLabel>{plan.metricLabel}</MetricLabel>
+                  {plan.inherits && <InheritLine>{plan.inherits}</InheritLine>}
+                  <Bullets>
+                    {plan.bullets.map(bullet => (
+                      <Bullet key={bullet}>
+                        <Check aria-hidden="true" /> {bullet}
+                      </Bullet>
+                    ))}
+                  </Bullets>
+                  <CardCTA $primary={plan.primary} onClick={openContact}>
+                    {plan.cta} <ArrowRight size={15} aria-hidden="true" />
+                  </CardCTA>
+                </Card>
+              ))}
+            </CardGrid>
 
-                <CardHeader>
-                  <CardPlanIconWrapper $color={plan.color}>
-                    <plan.icon />
-                  </CardPlanIconWrapper>
-                  <PlanCardName>{plan.name}</PlanCardName>
-                  <PlanCardDescription>{plan.description}</PlanCardDescription>
-                </CardHeader>
+            <IncludedStrip>
+              <StripTitle>Em todos os planos</StripTitle>
+              {INCLUDED_IN_ALL.map(item => (
+                <StripItem key={item}>
+                  <Check aria-hidden="true" /> {item}
+                </StripItem>
+              ))}
+            </IncludedStrip>
 
-                <PriceWrapper>
-                  <PriceValue>{plan.price}</PriceValue>
-                </PriceWrapper>
+            <DisclosureButton
+              $open={compareOpen}
+              aria-expanded={compareOpen}
+              aria-controls={tableId}
+              onClick={() => setCompareOpen(open => !open)}
+            >
+              {compareOpen ? 'Ocultar comparação' : 'Comparar todos os recursos'}
+              <ChevronDown size={16} aria-hidden="true" />
+            </DisclosureButton>
 
-                <FeaturesList>
-                  {plan.features.map((feature, idx) => (
-                    <FeatureItem key={idx}>
-                      <Check /> {feature}
-                    </FeatureItem>
-                  ))}
-                </FeaturesList>
+            <div id={tableId} hidden={!compareOpen}>
+              {compareOpen && (
+                <TableWrapper>
+                  <Table>
+                    <HiddenCaption>
+                      Comparação de recursos entre os planos do Maskot CRM
+                    </HiddenCaption>
+                    <thead>
+                      <tr>
+                        <Th scope="col" style={{ textAlign: 'left', minWidth: 200 }}>Recurso</Th>
+                        {CRM_PLANS.map((plan, idx) => (
+                          <Th key={plan.name} scope="col" $isPopular={idx === POPULAR_IDX}>
+                            {plan.name}
+                          </Th>
+                        ))}
+                      </tr>
+                    </thead>
+                    {FEATURE_GROUPS.map(group => (
+                      <tbody key={group.category}>
+                        <tr>
+                          <GroupTh scope="colgroup" colSpan={CRM_PLANS.length + 1}>
+                            {group.category}
+                          </GroupTh>
+                        </tr>
+                        {group.features.map(feature => (
+                          <tr key={feature.label}>
+                            <RowHeadTh scope="row">{feature.label}</RowHeadTh>
+                            {feature.values.map((value, idx) => (
+                              <Td key={idx} $isPopular={idx === POPULAR_IDX}>
+                                <Cell value={value} />
+                              </Td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    ))}
+                  </Table>
+                </TableWrapper>
+              )}
+            </div>
 
-                <ActionButton
-                  $variant={plan.variant}
-                  onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}
-                >
-                  {plan.cta} <ArrowRight size={18} />
-                </ActionButton>
-              </PricingCard>
-            ))}
-          </PricingGrid>
+            <Disclaimer>
+              Usuários ilimitados em todos os planos. Onboarding guiado incluso — pode haver taxa
+              de migração se a escola quiser trazer os dados de um CRM anterior.
+            </Disclaimer>
+          </div>
         )}
 
-        <Disclaimer>
-          {activeTab === 'CRM' && '* Todos os planos incluem onboarding guiado e suporte para configuração inicial. Pode ser cobrada uma taxa de migração de dados se a escola tiver CRM antigo e desejar migrar os dados.'}
-          {activeTab === 'WA' && '* Valores adicionais ao plano base. Franquia de conversas.'}
-        </Disclaimer>
+        {/* ── WhatsApp & IA ── */}
+        {activeTab === 'WA' && (
+          <div role="tabpanel" id={panelId('WA')} aria-labelledby={tabId('WA')}>
+            <CardGrid>
+              {WA_PLANS.map(plan => (
+                <Card key={plan.id} $isPopular={plan.isPopular}>
+                  {plan.isPopular && <PopularTag>Mais escolhido</PopularTag>}
+                  <PlanName>{plan.name}</PlanName>
+                  <PlanFor>{plan.for}</PlanFor>
+                  <Metric>{plan.metric}</Metric>
+                  <MetricLabel>{plan.metricLabel}</MetricLabel>
+                  <Bullets>
+                    {plan.bullets.map(bullet => (
+                      <Bullet key={bullet}>
+                        <Check aria-hidden="true" /> {bullet}
+                      </Bullet>
+                    ))}
+                  </Bullets>
+                  <CardCTA $primary={plan.primary} onClick={openContact}>
+                    Falar com consultor <ArrowRight size={15} aria-hidden="true" />
+                  </CardCTA>
+                </Card>
+              ))}
+            </CardGrid>
 
+            <IncludedStrip>
+              <StripTitle>Em todos os módulos</StripTitle>
+              <StripItem><Check aria-hidden="true" /> WhatsApp oficial (API Meta)</StripItem>
+              <StripItem><Check aria-hidden="true" /> Atendentes ilimitados</StripItem>
+              <StripItem><Check aria-hidden="true" /> Histórico integrado ao CRM</StripItem>
+              <StripItem><Check aria-hidden="true" /> Dashboard de performance</StripItem>
+            </IncludedStrip>
+
+            <Disclaimer>
+              Módulos adicionais ao plano de CRM. As mensagens de IA seguem franquia mensal;
+              as conversas cobradas pela Meta são faturadas direto pelo WhatsApp.
+            </Disclaimer>
+          </div>
+        )}
       </Container>
     </Section>
   )
