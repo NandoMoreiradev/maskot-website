@@ -9,6 +9,15 @@ declare module 'styled-components' {
       accent: string;
       borderLight: string; // <--- CORREÇÃO AQUI
 
+      // Paleta da seção Mia (copiloto de IA)
+      mia: {
+        from: string;
+        to: string;
+        tagBg: string;
+        tagBorder: string;
+        soft: string;
+      };
+
       // Neutrals
       white: string;
       lightGray: string;
@@ -20,6 +29,8 @@ declare module 'styled-components' {
       // Status Colors
       success: string;
       danger: string;
+      dangerSoft: string;
+      dangerBorder: string;
       warning: string;
       info: string;
 

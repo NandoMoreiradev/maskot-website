@@ -3,51 +3,12 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Plus, Minus } from 'lucide-react'
+import { Container } from '@/components/ui/Container'
+import { SectionHeader, Eyebrow, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
 
 const Section = styled.section`
     padding: 6rem 0;
     background: ${props => props.theme.colors.white};
-`
-
-const Container = styled.div`
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 2rem;
-`
-
-const SectionHeader = styled.div`
-    text-align: center;
-    margin-bottom: 3.5rem;
-`
-
-const Eyebrow = styled.div`
-    display: inline-block;
-    background: ${props => props.theme.colors.primary}12;
-    color: ${props => props.theme.colors.primary};
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.4rem 0.9rem;
-    border-radius: 100px;
-    margin-bottom: 1rem;
-`
-
-const SectionTitle = styled.h2`
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: ${props => props.theme.colors.textDark};
-    margin-bottom: 1rem;
-
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
-`
-
-const SectionSubtitle = styled.p`
-    font-size: 1.1rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.6;
 `
 
 const List = styled.div`
@@ -147,8 +108,8 @@ export default function FaqSection() {
 
     return (
         <Section id="faq">
-            <Container>
-                <SectionHeader>
+            <Container $maxWidth="820px">
+                <SectionHeader $maxWidth="100%" $marginBottom="3.5rem">
                     <Eyebrow>Dúvidas frequentes</Eyebrow>
                     <SectionTitle>Ainda com dúvidas?</SectionTitle>
                     <SectionSubtitle>

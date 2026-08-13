@@ -2,57 +2,14 @@
 
 import styled from 'styled-components'
 import { MessageSquare, Zap, CalendarCheck, GraduationCap } from 'lucide-react'
+import { Container } from '@/components/ui/Container'
+import { SectionHeader, Eyebrow, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
 
 const Section = styled.section`
     padding: 6rem 0;
     background: ${props => props.theme.colors.white};
     position: relative;
     overflow: hidden;
-`
-
-const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-`
-
-const SectionHeader = styled.div`
-    text-align: center;
-    margin-bottom: 4.5rem;
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
-`
-
-const Eyebrow = styled.div`
-    display: inline-block;
-    background: ${props => props.theme.colors.primary}12;
-    color: ${props => props.theme.colors.primary};
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.4rem 0.9rem;
-    border-radius: 100px;
-    margin-bottom: 1rem;
-`
-
-const SectionTitle = styled.h2`
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.textDark};
-    line-height: 1.2;
-
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
-`
-
-const SectionSubtitle = styled.p`
-    font-size: 1.1rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.6;
 `
 
 const Steps = styled.div`
@@ -175,7 +132,7 @@ export default function HowItWorksSection() {
     return (
         <Section id="como-funciona">
             <Container>
-                <SectionHeader>
+                <SectionHeader $maxWidth="760px" $marginBottom="4.5rem">
                     <Eyebrow>Como funciona</Eyebrow>
                     <SectionTitle>
                         Da primeira mensagem à matrícula, em um fluxo só

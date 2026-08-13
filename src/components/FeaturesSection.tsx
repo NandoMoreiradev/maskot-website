@@ -1,14 +1,19 @@
 'use client'
 
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import {
     LayoutDashboard,
     MessageSquare,
     Megaphone,
     Zap,
     Users,
-    BarChart3
+    BarChart3,
+    BrainCircuit,
+    Smartphone,
+    CalendarCheck
 } from 'lucide-react'
+import { Container } from '@/components/ui/Container'
+import { SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
 
 // --- ESTILOS GERAIS DA SEÇÃO ---
 
@@ -17,38 +22,6 @@ const Section = styled.section`
     background: ${props => props.theme.colors.pageBackground};
     position: relative;
     overflow: hidden;
-`
-
-const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-`
-
-const SectionHeader = styled.div`
-    text-align: center;
-    margin-bottom: 5rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-`
-
-const SectionTitle = styled.h2`
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.textDark};
-    line-height: 1.2;
-
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
-`
-
-const SectionSubtitle = styled.p`
-    font-size: 1.1rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.6;
 `
 
 const Highlight = styled.span`
@@ -156,10 +129,12 @@ const FeatureList = styled.ul`
 `
 
 export default function FeaturesSection() {
+    const theme = useTheme()
+
     return (
         <Section id="recursos">
             <Container>
-                <SectionHeader>
+                <SectionHeader $maxWidth="800px" $marginBottom="5rem">
                     <SectionTitle>
                         Tudo para focar em <Highlight>Vendas e Captação</Highlight>
                     </SectionTitle>
@@ -263,6 +238,54 @@ export default function FeaturesSection() {
                             <li>Origem dos leads (Rastreamento)</li>
                             <li>Taxa de conversão por canal</li>
                             <li>Motivos de perda de venda</li>
+                        </FeatureList>
+                    </FeatureCard>
+
+                    {/* CARD 7: MIA (COPILOTO IA) */}
+                    <FeatureCard $gradient={`linear-gradient(to right, ${theme.colors.mia.from}, ${theme.colors.mia.to})`}>
+                        <IconWrapper $color={theme.colors.mia.from}>
+                            <BrainCircuit />
+                        </IconWrapper>
+                        <FeatureTitle>Mia, a Copilota de IA</FeatureTitle>
+                        <FeatureDescription>
+                            Sua copilota de IA prepara o briefing do dia, analisa cada lead e sugere a próxima ação — para o consultor focar em fechar a matrícula.
+                        </FeatureDescription>
+                        <FeatureList>
+                            <li>Briefing diário do funil</li>
+                            <li>Diagnóstico de risco por lead</li>
+                            <li>Mensagens no tom da escola</li>
+                        </FeatureList>
+                    </FeatureCard>
+
+                    {/* CARD 8: APP MOBILE */}
+                    <FeatureCard $gradient="linear-gradient(to right, #6366F1, #4338CA)">
+                        <IconWrapper $color="#4338CA">
+                            <Smartphone />
+                        </IconWrapper>
+                        <FeatureTitle>App Mobile</FeatureTitle>
+                        <FeatureDescription>
+                            Gerencie comercial, visitas e relacionamento com os pais em tempo real, de qualquer lugar — direto do celular.
+                        </FeatureDescription>
+                        <FeatureList>
+                            <li>Funil de leads no bolso</li>
+                            <li>Agenda de visitas</li>
+                            <li>WhatsApp nativo mobile</li>
+                        </FeatureList>
+                    </FeatureCard>
+
+                    {/* CARD 9: AGENDAMENTO DE VISITAS */}
+                    <FeatureCard $gradient="linear-gradient(to right, #06B6D4, #0E7490)">
+                        <IconWrapper $color="#06B6D4">
+                            <CalendarCheck />
+                        </IconWrapper>
+                        <FeatureTitle>Agendamento de Visitas</FeatureTitle>
+                        <FeatureDescription>
+                            Confirme e gerencie visitas direto pelo funil — sem ida e volta manual de mensagens pra fechar horário.
+                        </FeatureDescription>
+                        <FeatureList>
+                            <li>Confirmação automática por WhatsApp</li>
+                            <li>Lembretes pra não faltar</li>
+                            <li>Calendário integrado ao funil</li>
                         </FeatureList>
                     </FeatureCard>
                 </FeaturesGrid>

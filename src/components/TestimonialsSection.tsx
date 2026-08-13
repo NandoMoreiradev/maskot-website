@@ -2,6 +2,8 @@
 
 import styled from 'styled-components'
 import { Zap, Archive, BellRing } from 'lucide-react'
+import { Container } from '@/components/ui/Container'
+import { SectionHeader, SectionTitle, SectionSubtitle, GradientText } from '@/components/ui/SectionHeading'
 
 const Section = styled.section`
     padding: 6rem 0;
@@ -14,45 +16,7 @@ const Section = styled.section`
     overflow: hidden;
 `
 
-const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-`
-
-const SectionHeader = styled.div`
-    text-align: center;
-    margin-bottom: 4rem;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-`
-
-const SectionTitle = styled.h2`
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.textDark};
-
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
-`
-
-const SectionSubtitle = styled.p`
-    font-size: 1.1rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.6;
-`
-
-const Highlight = styled.span`
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+const Highlight = styled(GradientText)`
     font-weight: 700;
 `
 
@@ -118,7 +82,7 @@ export default function TestimonialsSection() {
     return (
         <Section id="impacto"> {/* ID ESSENCIAL PARA O MENU */}
             <Container>
-                <SectionHeader>
+                <SectionHeader $maxWidth="720px">
                     <SectionTitle>
                         O que muda na rotina da <Highlight>sua escola</Highlight>
                     </SectionTitle>

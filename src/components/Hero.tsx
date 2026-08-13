@@ -2,6 +2,7 @@
 
 import styled, { keyframes } from 'styled-components'
 import { CheckCircle, ShieldCheck, ArrowRight, BadgeCheck, GraduationCap } from 'lucide-react'
+import { Container as BaseContainer } from '@/components/ui/Container'
 
 // Animação suave para o badge
 const float = keyframes`
@@ -16,8 +17,19 @@ const floatSlow = keyframes`
     100% { transform: translateY(0px); }
 `
 
+// Entrada em stagger: badge → título → subtítulo → CTAs → selos → card do WhatsApp → tags flutuantes
+const fadeIn = keyframes`
+    from { opacity: 0; }
+    to { opacity: 1; }
+`
+
+const fadeUp = keyframes`
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+`
+
 const HeroSection = styled.section`
-    min-height: 100vh;
+    min-height: 88vh;
     display: flex;
     align-items: center;
     background: radial-gradient(circle at 50% 50%,
@@ -26,22 +38,24 @@ const HeroSection = styled.section`
     );
     position: relative;
     overflow: hidden;
-    padding-top: 12rem;
-    padding-bottom: 6rem;
+    padding-top: 9rem;
+    padding-bottom: 5rem;
 
     @media (max-width: 768px) {
-        padding-top: 9rem;
+        padding-top: 7rem;
         min-height: auto;
-        padding-bottom: 4rem;
+        padding-bottom: 3.5rem;
+    }
+
+    /* A entrada em stagger é só polimento — quem pede menos movimento não deveria vê-la */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+        }
     }
 `
 
-const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    width: 100%;
-
+const Container = styled(BaseContainer)`
     @media (max-width: 768px) {
         padding: 0 1.25rem;
     }
@@ -84,7 +98,12 @@ const TechBadge = styled.div`
     border-radius: 20px;
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    animation: ${float} 3s ease-in-out infinite;
+    animation-name: ${fadeIn}, ${float};
+    animation-duration: 0.4s, 3s;
+    animation-timing-function: ease-out, ease-in-out;
+    animation-delay: 0s, 0s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
 
     svg {
         width: 14px;
@@ -107,6 +126,7 @@ const MainHeading = styled.h1`
     line-height: 1.05;
     margin-bottom: 1.5rem;
     color: ${props => props.theme.colors.textDark};
+    animation: ${fadeUp} 0.55s ease-out 0.08s both;
 
     strong {
         background: linear-gradient(135deg,
@@ -139,6 +159,7 @@ const Subtitle = styled.p`
     max-width: 540px;
     width: 100%;
     overflow-wrap: break-word;
+    animation: ${fadeUp} 0.55s ease-out 0.16s both;
 
     strong {
         color: ${props => props.theme.colors.textDark};
@@ -163,6 +184,7 @@ const TrustBadges = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.07);
     width: 100%;
     flex-wrap: wrap;
+    animation: ${fadeUp} 0.5s ease-out 0.32s both;
 
     div {
         display: flex;
@@ -191,6 +213,7 @@ const TrustBadges = styled.div`
 const ButtonGroup = styled.div`
     display: flex;
     gap: 1rem;
+    animation: ${fadeUp} 0.5s ease-out 0.24s both;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -297,7 +320,12 @@ const ChatCard = styled.div`
     padding: 1.25rem;
     width: 340px;
     max-width: 90%;
-    animation: ${floatSlow} 6s ease-in-out infinite;
+    animation-name: ${fadeUp}, ${floatSlow};
+    animation-duration: 0.6s, 6s;
+    animation-timing-function: ease-out, ease-in-out;
+    animation-delay: 0.15s, 0s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
 `
 
 const ChatHeader = styled.div`
@@ -432,12 +460,17 @@ const FloatingTag = styled.div`
     font-size: 0.8rem;
     font-weight: 700;
     color: ${props => props.theme.colors.textDark};
-    animation: ${float} 4s ease-in-out infinite;
+    animation-name: ${fadeIn}, ${float};
+    animation-duration: 0.4s, 4s;
+    animation-timing-function: ease-out, ease-in-out;
+    animation-delay: 0.55s, 0s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
 
     svg { color: ${props => props.theme.colors.secondary}; width: 18px; height: 18px; }
 
     &.top-right { top: 8%; right: -4%; }
-    &.bottom-left { bottom: 10%; left: -6%; animation-delay: 1.5s; }
+    &.bottom-left { bottom: 10%; left: -6%; animation-delay: 0.8s, 1.5s; }
 
     /* Em telas médias, encolhe e encosta nas bordas do visual */
     @media (max-width: 600px) {
@@ -537,7 +570,7 @@ export default function Hero() {
                             <CheckCircle /> Respondido em segundos
                         </FloatingTag>
                         <FloatingTag className="bottom-left">
-                            <BadgeCheck /> Visita agendada
+                            <GraduationCap /> Matrícula confirmada
                         </FloatingTag>
                     </Visual>
                 </HeroContent>

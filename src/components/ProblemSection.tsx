@@ -12,46 +12,17 @@ import {
     MessageSquare,
     ArrowRight,
     BarChart3,
-    Inbox
+    Inbox,
+    TrendingUp
 } from 'lucide-react'
+import { Container } from '@/components/ui/Container'
+import { SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
 
 const Section = styled.section`
     padding: 6rem 0;
     background: ${props => props.theme.colors.white};
     position: relative;
     overflow: hidden;
-`
-
-const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-`
-
-const SectionHeader = styled.div`
-    text-align: center;
-    margin-bottom: 4rem;
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-`
-
-const SectionTitle = styled.h2`
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.textDark};
-    line-height: 1.2;
-
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
-`
-
-const SectionSubtitle = styled.p`
-    font-size: 1.1rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.6;
 `
 
 // --- Grid de Comparação ---
@@ -70,8 +41,8 @@ const ComparisonGrid = styled.div`
 `
 
 const ProblemCard = styled.div`
-    background: #FFF5F5;
-    border: 1px solid #FEB2B2;
+    background: ${props => props.theme.colors.dangerSoft};
+    border: 1px solid ${props => props.theme.colors.dangerBorder};
     border-radius: 20px;
     padding: 2.5rem 2rem;
     position: relative;
@@ -139,7 +110,7 @@ const IconHeader = styled.div<{ $type: 'problem' | 'solution' }>`
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    border: 1px solid ${props => props.$type === 'problem' ? '#FEB2B2' : props.theme.colors.borderLight};
+    border: 1px solid ${props => props.$type === 'problem' ? props.theme.colors.dangerBorder : props.theme.colors.borderLight};
     z-index: 2;
 
     svg {
@@ -232,18 +203,21 @@ const ResultCard = styled.div`
     padding: 1rem;
 `
 
-const ResultNumber = styled.div`
-    font-size: 2.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
+const ResultIcon = styled.div`
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: ${props => props.theme.colors.primary}12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+
+    svg {
+        width: 26px;
+        height: 26px;
+        color: ${props => props.theme.colors.primary};
+    }
 `
 
 const ResultLabel = styled.p`
@@ -362,7 +336,7 @@ export default function ProblemSection() {
 
                 <ResultsGrid>
                     <ResultCard>
-                        <ResultNumber>+Velocidade</ResultNumber>
+                        <ResultIcon><Zap /></ResultIcon>
                         <ResultLabel>Zero Lead Esperando</ResultLabel>
                         <ResultDescription>
                             O primeiro a responder é quem ganha a matrícula. O Maskot garante atendimento em segundos.
@@ -370,7 +344,7 @@ export default function ProblemSection() {
                     </ResultCard>
 
                     <ResultCard>
-                        <ResultNumber>+Controle</ResultNumber>
+                        <ResultIcon><BarChart3 /></ResultIcon>
                         <ResultLabel>Gestão do Comercial</ResultLabel>
                         <ResultDescription>
                             Saiba exatamente como sua equipe está atendendo e onde estão os gargalos do funil.
@@ -378,7 +352,7 @@ export default function ProblemSection() {
                     </ResultCard>
 
                     <ResultCard>
-                        <ResultNumber>+Conversão</ResultNumber>
+                        <ResultIcon><TrendingUp /></ResultIcon>
                         <ResultLabel>Nutrição Automática</ResultLabel>
                         <ResultDescription>
                             Não deixe o lead esquecer de você. Automações mantêm a escola na mente dos pais.

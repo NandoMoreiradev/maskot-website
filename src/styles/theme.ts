@@ -5,7 +5,16 @@ export const theme = {
     secondary: '#28A745',
     accent: '#FD7E14',
     borderLight: '#DEE2E6',
-    
+
+    // Paleta da seção Mia (copiloto de IA) — antes hardcoded em HomeMiaSection
+    mia: {
+      from: '#F97316',
+      to: '#F59E0B',
+      tagBg: '#FFF0F5',
+      tagBorder: '#FFEDD5',
+      soft: '#FFF7ED',
+    },
+
     // Neutrals (Escala Completa)
     white: '#FFFFFF',
     lightGray: '#F8F9FA',
@@ -17,6 +26,8 @@ export const theme = {
     // Status Colors
     success: '#28A745',
     danger: '#DC3545',
+    dangerSoft: '#FFF5F5',
+    dangerBorder: '#FEB2B2',
     warning: '#FFC107',
     info: '#17A2B8',
     

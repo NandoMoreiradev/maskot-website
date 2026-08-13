@@ -3,6 +3,8 @@
 import React, { useId, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Check, X, ArrowRight, ChevronDown, Sparkles, MessageCircle, Bot } from 'lucide-react'
+import { Container as BaseContainer } from '@/components/ui/Container'
+import { SectionHeader as BaseSectionHeader, GradientText } from '@/components/ui/SectionHeading'
 
 // ─── SHELL ──────────────────────────────────────────────────────────────────
 
@@ -24,19 +26,14 @@ const BackgroundBlur = styled.div`
   pointer-events: none;
 `
 
-const Container = styled.div`
-  max-width: 1140px;
-  margin: 0 auto;
+// Largura e padding próprios da seção de preços (mais estreita que o padrão de 1200px/2rem)
+const Container = styled(BaseContainer).attrs({ $maxWidth: '1140px' })`
   padding: 0 1.5rem;
   position: relative;
   z-index: 1;
 `
 
-const SectionHeader = styled.div`
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 1.75rem;
-`
+const SectionHeader = styled(BaseSectionHeader).attrs({ $maxWidth: '680px', $marginBottom: '1.75rem' })``
 
 const Badge = styled.span`
   display: inline-block;
@@ -51,6 +48,9 @@ const Badge = styled.span`
   letter-spacing: 1px;
 `
 
+// Escala tipográfica própria (baseada em theme.typography, não nos valores fixos
+// em rem do restante da home) — mantida deliberadamente diferente do SectionTitle
+// padrão porque essa seção já usa os tokens de tipografia diretamente.
 const SectionTitle = styled.h2`
   font-size: ${props => props.theme.typography.fontSize['4xl']};
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
@@ -64,15 +64,7 @@ const SectionTitle = styled.h2`
   }
 `
 
-const Highlight = styled.span`
-  background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.accent} 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`
+const Highlight = styled(GradientText).attrs({ $to: 'accent' })``
 
 const SectionSubtitle = styled.p`
   font-size: ${props => props.theme.typography.fontSize.base};
