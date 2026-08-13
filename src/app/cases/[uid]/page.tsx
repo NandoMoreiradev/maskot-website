@@ -21,6 +21,19 @@ import {
   TestimonialAuthor
 } from '../styles';
 
+const richTextComponents = {
+  hyperlink: ({ children, node }: { children: React.ReactNode; node: { data: { url?: string } } }) => (
+    <a
+      href={node.data.url || '#'}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: '#007BFF', textDecoration: 'underline' }}
+    >
+      {children}
+    </a>
+  ),
+};
+
 export const revalidate = 60;
 
 export async function generateStaticParams(): Promise<{ uid: string }[]> {
@@ -101,7 +114,7 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
             <Section>
               <h2>O Desafio</h2>
               <RichTextContainer>
-                <PrismicRichText field={data.challenge} />
+                <PrismicRichText field={data.challenge} components={richTextComponents} />
               </RichTextContainer>
             </Section>
           )}
@@ -110,7 +123,7 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
             <Section>
               <h2>A Solução</h2>
               <RichTextContainer>
-                <PrismicRichText field={data.solution} />
+                <PrismicRichText field={data.solution} components={richTextComponents} />
               </RichTextContainer>
             </Section>
           )}
@@ -119,14 +132,14 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
             <Section>
               <h2>Os Resultados</h2>
               <RichTextContainer>
-                <PrismicRichText field={data.result} />
+                <PrismicRichText field={data.result} components={richTextComponents} />
               </RichTextContainer>
             </Section>
           )}
 
           {data.testimonial_text && data.testimonial_text.length > 0 && (
             <TestimonialBox>
-              <PrismicRichText field={data.testimonial_text} />
+              <PrismicRichText field={data.testimonial_text} components={richTextComponents} />
               {(data.testimonial_author || data.testimonial_avatar?.url) && (
                 <TestimonialAuthor>
                   {data.testimonial_avatar?.url && (

@@ -54,9 +54,9 @@ const LogoLink = styled(Link)`
 const Nav = styled.nav<{ $isOpen: boolean }>`
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.25rem;
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         position: fixed;
         top: 72px;
         left: 0;
@@ -79,9 +79,9 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
 const NavLinks = styled.div`
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.25rem;
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         flex-direction: column;
         align-items: flex-start;
         gap: 0;
@@ -112,7 +112,7 @@ const DropdownContent = styled.div<{ $isMobileOpen?: boolean }>`
     grid-template-columns: 1fr 1fr;
     gap: 8px;
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         /* Reset para Mobile */
         position: relative;
         top: 0;
@@ -139,7 +139,7 @@ const NavItem = styled.div`
     padding: 10px 0;
 
     /* Desktop Hover Logic */
-    @media (min-width: 969px) {
+    @media (min-width: 1181px) {
         &:hover ${DropdownContent} {
             opacity: 1;
             visibility: visible;
@@ -147,7 +147,7 @@ const NavItem = styled.div`
         }
     }
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         width: 100%;
         padding: 10px 0;
     }
@@ -161,6 +161,7 @@ const DropdownTrigger = styled.div<{ $isActive?: boolean }>`
     font-weight: 500;
     color: ${props => props.theme.colors.textDark};
     cursor: pointer;
+    white-space: nowrap;
     transition: color 0.2s ease;
 
     &:hover {
@@ -177,13 +178,13 @@ const DropdownTrigger = styled.div<{ $isActive?: boolean }>`
     }
 
     /* Rotação no hover desktop */
-    @media (min-width: 969px) {
+    @media (min-width: 1181px) {
         ${NavItem}:hover & svg {
             transform: rotate(180deg);
         }
     }
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         font-size: 1.1rem;
         width: 100%;
         justify-content: space-between;
@@ -246,13 +247,14 @@ const SimpleLink = styled(Link)`
     color: ${props => props.theme.colors.textDark};
     text-decoration: none;
     position: relative;
+    white-space: nowrap;
     transition: color 0.2s ease;
 
     &:hover {
         color: ${props => props.theme.colors.primary};
     }
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         font-size: 1.1rem;
         padding: 10px 0;
         width: 100%;
@@ -266,9 +268,9 @@ const SimpleLink = styled(Link)`
 const CTAButtons = styled.div`
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         flex-direction: column;
         width: 100%;
         gap: 1rem;
@@ -289,6 +291,7 @@ const LoginButton = styled.a`
     cursor: pointer;
     border-radius: 8px;
     text-decoration: none;
+    white-space: nowrap;
     transition: all 0.2s ease;
 
     &:hover {
@@ -296,7 +299,7 @@ const LoginButton = styled.a`
         background: rgba(0, 123, 255, 0.08);
     }
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         width: 100%;
         padding: 1rem;
         border: 1px solid #eee;
@@ -319,6 +322,7 @@ const TrialButton = styled.button`
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
 
@@ -333,7 +337,7 @@ const TrialButton = styled.button`
         box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
     }
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         width: 100%;
         padding: 1rem;
     }
@@ -354,7 +358,7 @@ const MobileMenuButton = styled.button`
         background: ${props => props.theme.colors.lightGray};
     }
 
-    @media (max-width: 968px) {
+    @media (max-width: 1180px) {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -556,6 +560,10 @@ export default function Header() {
 
                         <SimpleLink href="/#impacto" onClick={handleLinkClick}>
                             Impacto
+                        </SimpleLink>
+
+                        <SimpleLink href="/cases" onClick={handleLinkClick}>
+                            Cases
                         </SimpleLink>
 
                         <SimpleLink href="/sobre" onClick={handleLinkClick}>

@@ -42,7 +42,7 @@
           "label": "O Desafio",
           "placeholder": "Descreva o problema que a escola enfrentava antes do Maskot",
           "allowTargetBlank": true,
-          "multi": "paragraph,strong,em"
+          "multi": "paragraph,strong,em,hyperlink"
         }
       },
       "solution": {
@@ -51,7 +51,7 @@
           "label": "A Solução",
           "placeholder": "Como o Maskot foi utilizado para resolver o desafio",
           "allowTargetBlank": true,
-          "multi": "paragraph,strong,em"
+          "multi": "paragraph,strong,em,hyperlink"
         }
       },
       "result": {
@@ -60,7 +60,7 @@
           "label": "O Resultado",
           "placeholder": "Os resultados gerais alcançados",
           "allowTargetBlank": true,
-          "multi": "paragraph,strong,em"
+          "multi": "paragraph,strong,em,hyperlink"
         }
       },
       "metrics": {
@@ -91,7 +91,7 @@
           "label": "Texto do Depoimento",
           "placeholder": "Citação do cliente",
           "allowTargetBlank": true,
-          "multi": "paragraph,strong,em"
+          "multi": "paragraph,strong,em,hyperlink"
         }
       },
       "testimonial_author": {
