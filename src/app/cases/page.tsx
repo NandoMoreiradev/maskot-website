@@ -68,7 +68,7 @@ export default async function CasesIndexPage() {
   }
 
   const title = indexData?.data?.title ? asText(indexData.data.title) : 'Cases de Sucesso';
-  const description = indexData?.data?.description ? asText(indexData.data.description) : 'Descubra como instituições de ensino estão revolucionando suas captações e retenção de alunos utilizando o CRM da Maskot.';
+  const description = indexData?.data?.description ? asText(indexData.data.description) : 'Descubra como instituições de ensino estão revolucionando suas captações e retenção de alunos utilizando o Maskot EDU.';
 
   return (
     <>

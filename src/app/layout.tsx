@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Maskot | CRM Educacional para Captação de Alunos',
+    default: 'Maskot Edu | CRM Educacional para Captação de Alunos',
     template: '%s | Maskot',
   },
   description: 'O Maskot é o CRM educacional que automatiza a captação de alunos, centraliza leads e ajuda escolas a crescerem. Experimente grátis.',
