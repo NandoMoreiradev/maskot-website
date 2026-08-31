@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { asText, RichTextField } from '@prismicio/client'
 import { ArrowRight, Users } from 'lucide-react'
 import StickyBannerAd from './StickyBannerAd'
+import TableOfContents from './TableOfContents'
+import type { TocHeading } from '@/lib/toc'
 
 // ==================== TYPES ====================
 type BlogPost = {
@@ -26,6 +28,7 @@ type BlogPost = {
 type Props = {
   recentPosts: BlogPost[]
   currentPostId?: string
+  headings?: TocHeading[]
   sidebarBanner?: {
     imageUrl: string
     imageAlt?: string
@@ -192,11 +195,13 @@ const SidebarButton = styled.button`
 `
 
 // ==================== COMPONENT ====================
-export default function BlogSidebar({ recentPosts, currentPostId, sidebarBanner }: Props) {
+export default function BlogSidebar({ recentPosts, currentPostId, headings, sidebarBanner }: Props) {
   const filteredPosts = recentPosts.filter(post => post.id !== currentPostId).slice(0, 3)
 
   return (
     <Sidebar>
+      {headings && <TableOfContents headings={headings} />}
+
       {/* Sticky banner from Prismic Blog Settings */}
       {sidebarBanner?.imageUrl && (
         <StickyBannerAd

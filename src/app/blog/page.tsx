@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import { isFilled } from '@prismicio/client';
 import { createPrismicClient } from '@/prismicio';
 import BlogFeed from '@/components/BlogFeed';
 import { PageWrapper } from './styles';
@@ -27,6 +28,23 @@ export default async function BlogPage() {
     fetchOptions: { next: { tags: ['prismic'] } },
   });
 
+  // Sidebar banner from Prismic Blog Settings
+  let sidebarBanner: { imageUrl: string; imageAlt?: string; linkUrl: string } | null = null;
+  try {
+    const settings = await client.getSingle('blog_settings', {
+      fetchOptions: { next: { tags: ['prismic'] } },
+    });
+    const img = settings.data.sidebar_banner_image;
+    const lnk = settings.data.sidebar_banner_link;
+    if (isFilled.image(img) && isFilled.link(lnk)) {
+      sidebarBanner = {
+        imageUrl: img.url!,
+        imageAlt: img.alt ?? undefined,
+        linkUrl: (lnk as { url: string }).url,
+      };
+    }
+  } catch { /* blog_settings not yet published — banner simply won't show */ }
+
   return (
     <PageWrapper>
       <BlogPageInner>
@@ -37,7 +55,7 @@ export default async function BlogPage() {
 
         {/* BlogFeed uses useSearchParams → must be wrapped in Suspense */}
         <Suspense fallback={<div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Carregando...</div>}>
-          <BlogFeed posts={posts} />
+          <BlogFeed posts={posts} sidebarBanner={sidebarBanner} />
         </Suspense>
       </BlogPageInner>
     </PageWrapper>

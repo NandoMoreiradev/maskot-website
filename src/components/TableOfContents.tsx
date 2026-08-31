@@ -10,11 +10,11 @@ const Wrapper = styled.nav`
   border: 1px solid ${props => props.theme.colors.primary}18;
   border-radius: 16px;
   padding: 1.5rem 1.75rem;
-  margin-bottom: 3.5rem;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
 
   @media (max-width: 600px) {
     padding: 1.25rem;
-    margin-bottom: 2.5rem;
   }
 `
 

@@ -8,7 +8,6 @@ import Image from "next/image";
 import BlogSidebar from "@/components/BlogSidebar";
 import DisqusComments from "@/components/DisqusComments";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
-import TableOfContents from "@/components/TableOfContents";
 import AuthorBio, { BlogAuthor } from "@/components/AuthorBio";
 import Link from "next/link";
 import { extractHeadings } from "@/lib/toc";
@@ -247,8 +246,6 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
               </FeaturedImage>
             )}
 
-            <TableOfContents headings={headings} />
-
             <RichTextWrapper>
               <SliceZone slices={page.data.slices as never} components={components} />
             </RichTextWrapper>
@@ -313,7 +310,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             )}
           </ArticleContent>
 
-          <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} sidebarBanner={sidebarBanner} />
+          <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} headings={headings} sidebarBanner={sidebarBanner} />
         </Container>
       </PageWrapper>
     </>

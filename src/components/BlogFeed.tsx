@@ -8,6 +8,7 @@ import { asText } from '@prismicio/client'
 import styled from 'styled-components'
 import type { Content } from '@prismicio/client'
 import PostListCard from '@/components/PostListCard'
+import StickyBannerAd from '@/components/StickyBannerAd'
 import { calculateReadingTime } from '@/lib/readingTime'
 import { categorySlug } from '@/lib/categories'
 
@@ -170,6 +171,12 @@ const Sidebar = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (min-width: 968px) {
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+  }
 `
 
 const Widget = styled.div`
@@ -249,7 +256,14 @@ const EmptyState = styled.div`
 `
 
 // ==================== COMPONENT ====================
-export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
+type SidebarBanner = {
+  imageUrl: string
+  imageAlt?: string
+  linkUrl: string
+  ctaText?: string
+} | null
+
+export default function BlogFeed({ posts, sidebarBanner }: { posts: BlogPostDocument[]; sidebarBanner?: SidebarBanner }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
@@ -338,6 +352,15 @@ export default function BlogFeed({ posts }: { posts: BlogPostDocument[] }) {
 
         {/* Right: Sidebar */}
         <Sidebar>
+          {sidebarBanner?.imageUrl && (
+            <StickyBannerAd
+              imageUrl={sidebarBanner.imageUrl}
+              imageAlt={sidebarBanner.imageAlt}
+              linkUrl={sidebarBanner.linkUrl}
+              ctaText={sidebarBanner.ctaText}
+            />
+          )}
+
           <Widget>
             <h4>Buscar</h4>
             <SearchBox>
