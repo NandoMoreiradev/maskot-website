@@ -1,7 +1,8 @@
 'use client'
 
 import styled from 'styled-components'
-import { Zap, Archive, BellRing } from 'lucide-react'
+import Image from 'next/image'
+import { Zap, Archive, BellRing, Quote } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeader, SectionTitle, SectionSubtitle, GradientText } from '@/components/ui/SectionHeading'
 
@@ -78,6 +79,85 @@ const BenefitDescription = styled.p`
     line-height: 1.5;
 `
 
+const TestimonialCard = styled.div`
+    position: relative;
+    max-width: 860px;
+    margin: 4rem auto 0;
+    background: ${props => props.theme.colors.white};
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+
+    @media (max-width: 768px) {
+        padding: 2rem 1.5rem;
+    }
+`
+
+const QuoteIcon = styled(Quote)`
+    width: 36px;
+    height: 36px;
+    color: ${props => props.theme.colors.primary};
+    opacity: 0.25;
+    margin-bottom: 1rem;
+`
+
+const TestimonialText = styled.p`
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: ${props => props.theme.colors.textDark};
+    margin: 0 0 2rem 0;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
+`
+
+const TestimonialFooter = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+`
+
+const TestimonialAuthor = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+`
+
+const AuthorAvatar = styled(Image)`
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+`
+
+const AuthorInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    strong {
+        font-size: 1rem;
+        color: ${props => props.theme.colors.textDark};
+    }
+
+    span {
+        font-size: 0.85rem;
+        color: ${props => props.theme.colors.textMedium};
+    }
+`
+
+const SchoolLogoLink = styled.a`
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+`
+
+const SchoolLogo = styled(Image)`
+    object-fit: contain;
+`
+
 export default function TestimonialsSection() {
     return (
         <Section id="impacto"> {/* ID ESSENCIAL PARA O MENU */}
@@ -127,24 +207,49 @@ export default function TestimonialsSection() {
                     </BenefitCard>
                 </BenefitsGrid>
 
-                {/*
-                  PROVA SOCIAL — DEPOIMENTOS REAIS (preencher quando disponível)
-                  Estrutura pronta: ao receber citações reais (nome, cargo, escola, foto/logo),
-                  trocar este bloco comentado por um grid de cards de depoimento.
-                  Não publicar depoimentos fictícios.
-
-                  Exemplo de card:
-                  <TestimonialCard>
-                    <Quote>"Desde que adotamos o Maskot, paramos de perder lead no WhatsApp."</Quote>
-                    <Author>
-                      <img src="/depoimentos/foto.jpg" alt="" />
-                      <div>
-                        <strong>Nome do Diretor(a)</strong>
-                        <span>Cargo • Nome da Escola</span>
-                      </div>
-                    </Author>
-                  </TestimonialCard>
-                */}
+                <TestimonialCard>
+                    <QuoteIcon />
+                    <TestimonialText>
+                        Estamos muito satisfeitos com o Maskot Edu. Ele é muito completo e atende muito bem às
+                        necessidades do Colégio Intellectus.
+                        <br /><br />
+                        Com ele conseguimos realizar um atendimento mais acolhedor e estratégico, tendo ao nosso
+                        alcance todas as informações importantes para oferecer um atendimento de qualidade às
+                        famílias. Também temos acesso aos dados dos leads, às negociações e a todo o histórico
+                        necessário para acompanhar cada oportunidade de forma mais organizada.
+                        <br /><br />
+                        Além disso, é intuitivo, prático e fácil de utilizar no dia a dia. Estamos gostando bastante
+                        da experiência e percebemos que o Maskot Edu tem contribuído muito para tornar nossos
+                        processos de atendimento, análise de dados e gestão de leads mais eficientes.
+                    </TestimonialText>
+                    <TestimonialFooter>
+                        <TestimonialAuthor>
+                            <AuthorAvatar
+                                src="/depoimento-maria-helena.png"
+                                alt="Maria Helena"
+                                width={56}
+                                height={56}
+                            />
+                            <AuthorInfo>
+                                <strong>Maria Helena</strong>
+                                <span>Colégio Intellectus</span>
+                            </AuthorInfo>
+                        </TestimonialAuthor>
+                        <SchoolLogoLink
+                            href="https://www.colegiointellectus.com.br/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Site do Colégio Intellectus"
+                        >
+                            <SchoolLogo
+                                src="/logo-colegio-intellectus.png"
+                                alt="Colégio Intellectus"
+                                width={140}
+                                height={48}
+                            />
+                        </SchoolLogoLink>
+                    </TestimonialFooter>
+                </TestimonialCard>
             </Container>
         </Section>
     )
