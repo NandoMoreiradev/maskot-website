@@ -357,14 +357,14 @@ export default function SocialMediaDeepDive() {
                                 <div className="node-icon" style={{background: '#DB2777'}}><Instagram size={15}/></div>
                                 <div className="node-text">
                                     <div className="node-title">Palavra-chave na DM</div>
-                                    <div className="node-sub">Gatilho · "matrícula"</div>
+                                    <div className="node-sub">Gatilho · &quot;matrícula&quot;</div>
                                 </div>
                             </div>
                             <div className="connector" />
                             <div className="node">
                                 <div className="node-icon" style={{background: '#8B5CF6'}}><GitBranch size={15}/></div>
                                 <div className="node-text">
-                                    <div className="node-title">Tem a tag "Lead quente"?</div>
+                                    <div className="node-title">Tem a tag &quot;Lead quente&quot;?</div>
                                     <div className="node-sub">Condição</div>
                                 </div>
                             </div>
@@ -414,7 +414,7 @@ export default function SocialMediaDeepDive() {
                         <ul>
                             <li><BarChart3 size={20}/> <strong>Ranking automático:</strong> veja os melhores e piores posts do período, sem montar planilha.</li>
                             <li><TrendingUp size={20}/> <strong>Seguidores ao longo do tempo:</strong> gráfico de evolução por rede conectada.</li>
-                            <li><History size={20}/> <strong>Histórico importado:</strong> posts antigos entram no relatório marcados como "Importado".</li>
+                            <li><History size={20}/> <strong>Histórico importado:</strong> posts antigos entram no relatório marcados como &quot;Importado&quot;.</li>
                         </ul>
                     </TextContent>
                 </FeatureRow>
