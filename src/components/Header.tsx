@@ -7,7 +7,7 @@ import {
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
     BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit,
-    ClipboardList
+    ClipboardList, Instagram
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -463,6 +463,15 @@ export default function Header() {
                                     <div className="text">
                                         <strong>Campanhas</strong>
                                         <span>Atração e ROI</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Redes Sociais (NOVO) */}
+                                <DropdownLink href="/funcionalidades/social-media" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Instagram size={18}/></div>
+                                    <div className="text">
+                                        <strong>Redes Sociais</strong>
+                                        <span>Posts e automação de DM</span>
                                     </div>
                                 </DropdownLink>
 
