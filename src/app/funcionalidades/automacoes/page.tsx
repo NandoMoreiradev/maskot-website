@@ -23,7 +23,7 @@ export default function AutomationsPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main>
                 <AutomationsHero />
                 <AutomationsDeepDive />
                 <CTASection />

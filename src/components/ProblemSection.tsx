@@ -15,71 +15,74 @@ import {
     Inbox,
     TrendingUp
 } from 'lucide-react'
-import { Container } from '@/components/ui/Container'
-import { SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
+import { Container as BaseContainer } from '@/components/ui/Container'
+import { SectionHeader, SectionTitle, SectionSubtitle, GradientText } from '@/components/ui/SectionHeading'
+import SectionDecor from '@/components/ui/SectionDecor'
 
-const Section = styled.section`
-    padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+const Container = styled(BaseContainer)`
     position: relative;
-    overflow: hidden;
+    z-index: 1;
 `
 
-// --- Grid de Comparação ---
+const Section = styled.section`
+    padding: 4.5rem 0;
+    background: #F8FAFC;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        padding: 3rem 0;
+    }
+`
 
 const ComparisonGrid = styled.div`
     display: grid;
-    grid-template-columns: 1fr 80px 1fr;
-    gap: 2rem;
-    align-items: stretch;
-    margin-bottom: 5rem;
+    grid-template-columns: 1fr 44px 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 1.25rem;
     }
 `
 
-const ProblemCard = styled.div`
-    background: ${props => props.theme.colors.dangerSoft};
-    border: 1px solid ${props => props.theme.colors.dangerBorder};
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
+const CardBase = styled.div`
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 1.5rem 1.5rem 1.25rem;
     position: relative;
     height: 100%;
-    transition: transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+`
+
+const ProblemCard = styled(CardBase)`
+    border: 1px solid #FEE2E2;
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.04);
 
     &:hover {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px -8px rgba(239, 68, 68, 0.12);
     }
 `
 
-const SolutionCard = styled.div`
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.pageBackground} 0%,
-    ${props => props.theme.colors.white} 100%
-    );
-    border: 1px solid ${props => props.theme.colors.primary}40;
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
-    position: relative;
-    height: 100%;
-    box-shadow: 0 10px 30px -10px rgba(0, 123, 255, 0.15);
-    transition: transform 0.3s ease;
+const SolutionCard = styled(CardBase)`
+    border: 1px solid #DBEAFE;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.06);
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px -10px rgba(0, 123, 255, 0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.16);
     }
 `
 
-/* Máscara com o mesmo border-radius do card: recorta a barra de destaque
-   exatamente no contorno arredondado, em vez de deixar a própria barra
-   tentar (e falhar em) reproduzir a curva com um raio menor. */
 const AccentBarMask = styled.div`
     position: absolute;
     inset: 0;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     pointer-events: none;
 
@@ -89,43 +92,35 @@ const AccentBarMask = styled.div`
         top: 0;
         left: 0;
         right: 0;
-        height: 6px;
-        background: linear-gradient(90deg,
-        ${props => props.theme.colors.primary},
-        ${props => props.theme.colors.secondary}
-        );
+        height: 3px;
+        background: linear-gradient(90deg, #2563EB, #06B6D4);
     }
 `
 
 const IconHeader = styled.div<{ $type: 'problem' | 'solution' }>`
-    position: absolute;
-    top: -24px;
-    left: 2rem;
-    background: white;
-    padding: 0.75rem;
-    border-radius: 16px;
-    width: 56px;
-    height: 56px;
+    background: ${props => props.$type === 'problem' ? '#FEF2F2' : '#EFF6FF'};
+    border: 1px solid ${props => props.$type === 'problem' ? '#FEE2E2' : '#DBEAFE'};
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    border: 1px solid ${props => props.$type === 'problem' ? props.theme.colors.dangerBorder : props.theme.colors.borderLight};
-    z-index: 2;
+    margin-bottom: 0.9rem;
 
     svg {
-        width: 28px;
-        height: 28px;
-        color: ${props => props.$type === 'problem' ? props.theme.colors.danger : props.theme.colors.primary};
+        width: 20px;
+        height: 20px;
+        color: ${props => props.$type === 'problem' ? '#EF4444' : '#2563EB'};
     }
 `
 
 const CardTitle = styled.h3`
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    margin-top: 1rem;
-    color: ${props => props.theme.colors.textDark};
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #0F172A;
+    letter-spacing: -0.02em;
 `
 
 const FeatureList = styled.ul`
@@ -137,25 +132,29 @@ const FeatureList = styled.ul`
 const FeatureItem = styled.li<{ $type: 'problem' | 'solution' }>`
     display: flex;
     align-items: flex-start;
-    margin-bottom: 1.25rem;
-    font-size: 0.95rem;
-    color: ${props => props.$type === 'problem' ? props.theme.colors.textMedium : props.theme.colors.textDark};
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: ${props => props.$type === 'problem' ? '#64748B' : '#334155'};
     line-height: 1.5;
 
+    &:last-child {
+        margin-bottom: 0;
+    }
+
     svg {
-        width: 20px;
-        height: 20px;
-        margin-right: 1rem;
+        width: 16px;
+        height: 16px;
+        margin-right: 0.65rem;
         flex-shrink: 0;
-        margin-top: 3px;
-        color: ${props => props.$type === 'problem' ? props.theme.colors.danger : props.theme.colors.success};
-        opacity: ${props => props.$type === 'problem' ? 0.8 : 1};
+        margin-top: 2px;
+        color: ${props => props.$type === 'problem' ? '#EF4444' : '#10B981'};
+        opacity: ${props => props.$type === 'problem' ? 0.7 : 1};
     }
 
     span {
         flex: 1;
         strong {
-            color: ${props => props.$type === 'problem' ? props.theme.colors.danger : props.theme.colors.textDark};
+            color: ${props => props.$type === 'problem' ? '#991B1B' : '#0F172A'};
             font-weight: 700;
         }
     }
@@ -165,85 +164,111 @@ const VsDivider = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 3;
 
     div {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
-        background: ${props => props.theme.colors.lightGray};
+        background: #FFFFFF;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: ${props => props.theme.colors.textMedium};
-        border: 4px solid ${props => props.theme.colors.white};
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        color: #2563EB;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
 
         @media (max-width: 968px) {
             transform: rotate(90deg);
-            margin: 1rem 0;
         }
     }
 `
-
 const ResultsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid ${props => props.theme.colors.borderLight};
+    gap: 1.25rem;
+    position: relative;
+    z-index: 2;
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
-        gap: 2rem;
     }
 `
 
 const ResultCard = styled.div`
-    text-align: center;
-    padding: 1rem;
-`
-
-const ResultIcon = styled.div`
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: ${props => props.theme.colors.primary}12;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
+    align-items: flex-start;
+    gap: 0.9rem;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03);
+    transition: all 0.3s ease;
 
-    svg {
-        width: 26px;
-        height: 26px;
-        color: ${props => props.theme.colors.primary};
+    &:hover {
+        transform: translateY(-3px);
+        border-color: #BFDBFE;
+        box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.15);
     }
 `
 
+const ResultIcon = styled.div`
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 22px;
+        height: 22px;
+        color: #2563EB;
+    }
+`
+
+const ResultText = styled.div`
+    display: block;
+    flex: 1;
+    min-width: 0;
+`
+
 const ResultLabel = styled.p`
-    font-size: 1.1rem;
-    color: ${props => props.theme.colors.textDark};
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #0F172A;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
 `
 
 const ResultDescription = styled.p`
-    font-size: 0.9rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.4;
+    font-size: 0.85rem;
+    color: #64748B;
+    line-height: 1.5;
+    margin: 0;
 `
 
 export default function ProblemSection() {
     return (
         <Section>
+            <SectionDecor $variant="right" />
             <Container>
                 <SectionHeader>
                     <SectionTitle>
-                        Onde sua escola está perdendo matrículas?
+                        Onde sua escola está <GradientText>perdendo matrículas?</GradientText>
                     </SectionTitle>
-                    <SectionSubtitle>
-                        A captação de alunos mudou. Pais esperam respostas imediatas no WhatsApp.
-                        Processos manuais e caderninhos estão matando sua taxa de conversão.
+                    <SectionSubtitle style={{ color: '#64748B' }}>
+                        Leads perdidos no WhatsApp, dados descentralizados entre marketing e vendas, e gestores sem visibilidade do processo. O resultado? Muito esforço para atrair, pouca conversão na matrícula.
                     </SectionSubtitle>
                 </SectionHeader>
 
@@ -276,58 +301,46 @@ export default function ProblemSection() {
                             <FeatureItem $type="problem">
                                 <Ban />
                                 <span>
-                                    <strong>WhatsApp bloqueado:</strong> o número trava bem no meio de uma campanha.
-                                </span>
-                            </FeatureItem>
-                            <FeatureItem $type="problem">
-                                <UserX />
-                                <span>
-                                    <strong>Dados perdidos:</strong> telefones anotados em post-its e planilhas que ninguém atualiza.
+                                    <strong>WhatsApp bloqueado:</strong> o número trava bem no meio de uma campanha importante.
                                 </span>
                             </FeatureItem>
                         </FeatureList>
                     </ProblemCard>
 
                     <VsDivider>
-                        <div><ArrowRight size={24} /></div>
+                        <div><ArrowRight size={28} /></div>
                     </VsDivider>
 
                     {/* LADO DA SOLUÇÃO (CRM Maskot) */}
                     <SolutionCard>
                         <AccentBarMask />
                         <IconHeader $type="solution">
-                            <Zap />
+                            <ShieldCheck />
                         </IconHeader>
                         <CardTitle>Máquina de Matrículas</CardTitle>
                         <FeatureList>
                             <FeatureItem $type="solution">
                                 <MessageSquare />
                                 <span>
-                                    <strong>Resposta imediata 24/7:</strong> o atendimento acolhe, tira dúvidas e agenda a visita na hora — a qualquer hora.
+                                    <strong>Resposta imediata 24/7:</strong> o atendimento acolhe, tira dúvidas e agenda a visita na hora.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">
                                 <Zap />
                                 <span>
-                                    <strong>Régua de follow-up automática:</strong> o sistema cobra o retorno sozinho e lembra o consultor de ligar.
+                                    <strong>Régua de follow-up:</strong> o sistema cobra o retorno sozinho e lembra o consultor de ligar.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">
                                 <BarChart3 />
                                 <span>
-                                    <strong>Visão total do comercial:</strong> saiba quantos leads chegaram, de qual canal e o motivo de cada perda.
-                                </span>
-                            </FeatureItem>
-                            <FeatureItem $type="solution">
-                                <ShieldCheck />
-                                <span>
-                                    <strong>API Oficial blindada:</strong> monitoramento automático de qualidade protege seu número contra bloqueio nas campanhas.
+                                    <strong>Visão total:</strong> saiba quantos leads chegaram, de qual canal e o motivo de cada perda.
                                 </span>
                             </FeatureItem>
                             <FeatureItem $type="solution">
                                 <Inbox />
                                 <span>
-                                    <strong>Tudo centralizado:</strong> WhatsApp, Instagram e site caindo no mesmo funil, com todo o histórico salvo.
+                                    <strong>Tudo centralizado:</strong> WhatsApp, Instagram e site caindo no mesmo funil seguro.
                                 </span>
                             </FeatureItem>
                         </FeatureList>
@@ -337,26 +350,32 @@ export default function ProblemSection() {
                 <ResultsGrid>
                     <ResultCard>
                         <ResultIcon><Zap /></ResultIcon>
-                        <ResultLabel>Zero Lead Esperando</ResultLabel>
-                        <ResultDescription>
-                            O primeiro a responder é quem ganha a matrícula. O Maskot garante atendimento em segundos.
-                        </ResultDescription>
+                        <ResultText>
+                            <ResultLabel>Zero Lead Esperando</ResultLabel>
+                            <ResultDescription>
+                                O primeiro a responder é quem ganha a matrícula. O Maskot garante atendimento em segundos.
+                            </ResultDescription>
+                        </ResultText>
                     </ResultCard>
 
                     <ResultCard>
                         <ResultIcon><BarChart3 /></ResultIcon>
-                        <ResultLabel>Gestão do Comercial</ResultLabel>
-                        <ResultDescription>
-                            Saiba exatamente como sua equipe está atendendo e onde estão os gargalos do funil.
-                        </ResultDescription>
+                        <ResultText>
+                            <ResultLabel>Gestão do Comercial</ResultLabel>
+                            <ResultDescription>
+                                Saiba exatamente como sua equipe está atendendo e onde estão os gargalos do funil.
+                            </ResultDescription>
+                        </ResultText>
                     </ResultCard>
 
                     <ResultCard>
                         <ResultIcon><TrendingUp /></ResultIcon>
-                        <ResultLabel>Nutrição Automática</ResultLabel>
-                        <ResultDescription>
-                            Não deixe o lead esquecer de você. Automações mantêm a escola na mente dos pais.
-                        </ResultDescription>
+                        <ResultText>
+                            <ResultLabel>Nutrição Automática</ResultLabel>
+                            <ResultDescription>
+                                Não deixe o lead esquecer de você. Automações mantêm a escola na mente dos pais.
+                            </ResultDescription>
+                        </ResultText>
                     </ResultCard>
                 </ResultsGrid>
             </Container>

@@ -14,26 +14,31 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ContactModal from './ContactModal'
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.header<{ $scrolled: boolean }>`
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: ${props => props.$scrolled ? '1rem' : '0'};
+    left: 50%;
+    transform: translateX(-50%);
+    width: ${props => props.$scrolled ? 'calc(100% - 2rem)' : '100%'};
+    max-width: 1200px;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.90);
-    backdrop-filter: blur(12px) saturate(180%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    padding-top: ${props => props.$scrolled ? '0' : '1.5rem'};
+    background: ${props => props.$scrolled ? 'rgba(255, 255, 255, 0.85)' : 'transparent'};
+    backdrop-filter: ${props => props.$scrolled ? 'blur(20px) saturate(180%)' : 'none'};
+    border: ${props => props.$scrolled ? '1px solid rgba(255,255,255,0.4)' : '1px solid transparent'};
+    border-radius: ${props => props.$scrolled ? '100px' : '0'};
+    box-shadow: ${props => props.$scrolled ? '0 8px 32px rgba(0, 0, 0, 0.08)' : 'none'};
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 `
 
-const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
+const Container = styled.div<{ $scrolled: boolean }>`
+    width: 100%;
     padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: ${props => props.$scrolled ? '64px' : '72px'};
+    transition: height 0.4s ease;
 `
 
 const LogoLink = styled(Link)`
@@ -42,19 +47,25 @@ const LogoLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     position: relative;
-    height: 50px;
-    width: auto;
+    height: 45px;
+    width: 180px; /* Tamanho adequado para não empurrar o menu */
+    flex-shrink: 0; /* Impede que a logo seja espremida pelo menu */
     transition: opacity 0.2s ease;
 
     &:hover {
         opacity: 0.8;
+    }
+
+    img {
+        object-fit: contain;
+        object-position: left center;
     }
 `
 
 const Nav = styled.nav<{ $isOpen: boolean }>`
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.75rem;
 
     @media (max-width: 1180px) {
         position: fixed;
@@ -79,7 +90,7 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
 const NavLinks = styled.div`
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.5rem;
 
     @media (max-width: 1180px) {
         flex-direction: column;
@@ -92,15 +103,18 @@ const NavLinks = styled.div`
 
 // --- DROPDOWN LOGIC ---
 
-const DropdownContent = styled.div<{ $isMobileOpen?: boolean }>`
+interface DropdownContentProps {
+    $isMobileOpen?: boolean;
+}
+const DropdownContent = styled.div<DropdownContentProps>`
     position: absolute;
     top: 100%;
-    left: -100px; /* Centralizando melhor o menu grande */
-    width: 650px; /* Largura maior para 2 colunas */
+    left: -100px; /* Ajuste para o menu */
+    width: 660px; /* Mais compacto */
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-    padding: 16px;
+    padding: 12px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -109,8 +123,8 @@ const DropdownContent = styled.div<{ $isMobileOpen?: boolean }>`
 
     /* Grid Layout para Desktop */
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    gap: 2px; /* Gap menor entre itens */
 
     @media (max-width: 1180px) {
         /* Reset para Mobile */
@@ -153,18 +167,24 @@ const NavItem = styled.div`
     }
 `
 
-const DropdownTrigger = styled.div<{ $isActive?: boolean }>`
+interface DropdownTriggerProps {
+    $isActive?: boolean;
+}
+const DropdownTrigger = styled.div<DropdownTriggerProps>`
     display: flex;
     align-items: center;
     gap: 4px;
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     color: ${props => props.theme.colors.textDark};
     cursor: pointer;
     white-space: nowrap;
-    transition: color 0.2s ease;
+    padding: 0.5rem 0.75rem;
+    border-radius: 100px;
+    transition: all 0.2s ease;
 
     &:hover {
+        background: rgba(255, 255, 255, 0.15);
         color: ${props => props.theme.colors.primary};
     }
 
@@ -172,15 +192,16 @@ const DropdownTrigger = styled.div<{ $isActive?: boolean }>`
         width: 16px;
         height: 16px;
         transition: transform 0.2s ease;
-        opacity: 0.6;
-        /* Rotação condicional no mobile */
+        opacity: 0.8;
         transform: ${props => props.$isActive ? 'rotate(180deg)' : 'rotate(0deg)'};
     }
 
-    /* Rotação no hover desktop */
     @media (min-width: 1181px) {
         ${NavItem}:hover & svg {
             transform: rotate(180deg);
+        }
+        ${NavItem}:hover & {
+            background: rgba(255, 255, 255, 0.15);
         }
     }
 
@@ -189,38 +210,47 @@ const DropdownTrigger = styled.div<{ $isActive?: boolean }>`
         width: 100%;
         justify-content: space-between;
         padding: 10px 0;
+        border-radius: 0;
+        &:hover { background: transparent; }
     }
 `
 
 const DropdownLink = styled(Link)`
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px;
+    gap: 10px; /* Menor espaço entre ícone e texto */
+    padding: 8px 10px; /* Mais compacto */
     text-decoration: none;
     border-radius: 8px;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
 
     &:hover {
         background: ${props => props.theme.colors.lightGray};
+        transform: translateX(2px); /* Movimento mais sutil */
     }
 
     .icon-box {
-        width: 32px;
+        width: 32px; /* Ícone menor */
         height: 32px;
         border-radius: 8px;
-        background: #f0f2f5;
+        background: rgba(37, 99, 235, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
         color: ${props => props.theme.colors.primary};
         transition: all 0.2s ease;
         flex-shrink: 0;
+        
+        svg {
+            width: 16px;
+            height: 16px;
+        }
     }
 
     &:hover .icon-box {
         background: ${props => props.theme.colors.primary};
         color: white;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
     }
 
     .text {
@@ -228,13 +258,13 @@ const DropdownLink = styled(Link)`
         flex-direction: column;
 
         strong {
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* Título menor */
             color: ${props => props.theme.colors.textDark};
-            font-weight: 600;
+            font-weight: 700;
         }
 
         span {
-            font-size: 0.7rem;
+            font-size: 0.7rem; /* Subtítulo bem menor */
             color: ${props => props.theme.colors.textMedium};
             line-height: 1.2;
         }
@@ -243,14 +273,17 @@ const DropdownLink = styled(Link)`
 
 const SimpleLink = styled(Link)`
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     color: ${props => props.theme.colors.textDark};
     text-decoration: none;
     position: relative;
     white-space: nowrap;
-    transition: color 0.2s ease;
+    padding: 0.5rem 0.75rem;
+    border-radius: 100px;
+    transition: all 0.2s ease;
 
     &:hover {
+        background: rgba(255, 255, 255, 0.15);
         color: ${props => props.theme.colors.primary};
     }
 
@@ -260,6 +293,8 @@ const SimpleLink = styled(Link)`
         width: 100%;
         display: block;
         border-bottom: 1px solid #f0f0f0;
+        border-radius: 0;
+        &:hover { background: transparent; }
     }
 `
 
@@ -310,38 +345,23 @@ const TrialButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
-    );
+    background: ${props => props.theme.gradients.primary};
     color: white;
     border: none;
     padding: 0.65rem 1.5rem;
     font-size: 0.95rem;
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 100px;
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
-
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 123, 255, 0.35);
-        filter: brightness(1.05);
-    }
-
-    &:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
-    }
-
-    @media (max-width: 1180px) {
-        width: 100%;
-        padding: 1rem;
-    }
-`
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+    }`
 
 const MobileMenuButton = styled.button`
     display: none;
@@ -365,8 +385,19 @@ const MobileMenuButton = styled.button`
     }
 `
 
+import { useEffect } from 'react'
+
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [scrolled, setScrolled] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
     // Novo estado para controlar o acordeão de funcionalidades no mobile
     const [isFeaturesOpen, setIsFeaturesOpen] = useState(false)
 
@@ -387,16 +418,15 @@ export default function Header() {
 
     return (
         <>
-        <HeaderWrapper>
-            <Container>
+        <HeaderWrapper $scrolled={scrolled}>
+            <Container $scrolled={scrolled}>
                 <LogoLink href="/" aria-label="Maskot Home">
                     <Image
                         src="/logo_maskot_website.png"
                         alt="Maskot CRM"
-                        width={140}
-                        height={40}
+                        fill
+                        sizes="220px"
                         priority
-                        style={{width: 'auto', height: '100%'}}
                     />
                 </LogoLink>
 
@@ -405,7 +435,7 @@ export default function Header() {
                         {/* ITEM COM DROPDOWN - FUNCIONALIDADES */}
                         <NavItem>
                             {/* Adicionado onClick para toggle mobile */}
-                            <DropdownTrigger onClick={toggleFeaturesMenu} $isActive={isFeaturesOpen}>
+                            <DropdownTrigger className="top-level-link" onClick={toggleFeaturesMenu} $isActive={isFeaturesOpen}>
                                 Funcionalidades
                                 <ChevronDown/>
                             </DropdownTrigger>
@@ -559,33 +589,34 @@ export default function Header() {
                         </NavItem>
 
                         {/* LINKS SIMPLES */}
-                        <SimpleLink href="/#precos" onClick={handleLinkClick}>
+                        <SimpleLink className="top-level-link" href="/#precos" onClick={handleLinkClick}>
                             Preços
                         </SimpleLink>
 
-                        <SimpleLink href="/#recursos" onClick={handleLinkClick}>
+                        <SimpleLink className="top-level-link" href="/#recursos" onClick={handleLinkClick}>
                             Recursos
                         </SimpleLink>
 
-                        <SimpleLink href="/#impacto" onClick={handleLinkClick}>
+                        <SimpleLink className="top-level-link" href="/#impacto" onClick={handleLinkClick}>
                             Impacto
                         </SimpleLink>
 
-                        <SimpleLink href="/cases" onClick={handleLinkClick}>
+                        <SimpleLink className="top-level-link" href="/cases" onClick={handleLinkClick}>
                             Cases
                         </SimpleLink>
 
-                        <SimpleLink href="/sobre" onClick={handleLinkClick}>
+                        <SimpleLink className="top-level-link" href="/sobre" onClick={handleLinkClick}>
                             Sobre
                         </SimpleLink>
 
-                        <SimpleLink href="/blog" onClick={handleLinkClick}>
+                        <SimpleLink className="top-level-link" href="/blog" onClick={handleLinkClick}>
                             Blog
                         </SimpleLink>
                     </NavLinks>
 
                     <CTAButtons>
                         <LoginButton
+                            className="top-level-link"
                             href="https://app.maskotedu.com.br/login"
                             onClick={handleLinkClick}
                         >
@@ -604,6 +635,7 @@ export default function Header() {
                 </Nav>
 
                 <MobileMenuButton
+                    className="top-level-link"
                     onClick={toggleMobileMenu}
                     aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
                 >

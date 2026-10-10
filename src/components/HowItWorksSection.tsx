@@ -2,42 +2,34 @@
 
 import styled from 'styled-components'
 import { MessageSquare, Zap, CalendarCheck, GraduationCap } from 'lucide-react'
-import { Container } from '@/components/ui/Container'
-import { SectionHeader, Eyebrow, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
+import { Container as BaseContainer } from '@/components/ui/Container'
+import { SectionHeader, Eyebrow, SectionTitle, SectionSubtitle, GradientText } from '@/components/ui/SectionHeading'
+import SectionDecor from '@/components/ui/SectionDecor'
 
 const Section = styled.section`
-    padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    padding: 4.5rem 0;
+    background: #FFFFFF;
     position: relative;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+        padding: 3rem 0;
+    }
+`
+
+const Container = styled(BaseContainer)`
+    position: relative;
+    z-index: 1;
 `
 
 const Steps = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 1.25rem;
     position: relative;
-
-    /* Linha conectora */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 36px;
-        left: 12%;
-        right: 12%;
-        height: 2px;
-        background: linear-gradient(90deg,
-        ${props => props.theme.colors.primary},
-        ${props => props.theme.colors.secondary}
-        );
-        z-index: 0;
-    }
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr 1fr;
-        gap: 2.5rem 1.5rem;
-
-        &::before { display: none; }
     }
 
     @media (max-width: 560px) {
@@ -47,108 +39,126 @@ const Steps = styled.div`
 
 const Step = styled.div`
     position: relative;
-    z-index: 1;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+        transform: translateY(-3px);
+        border-color: #BFDBFE;
+        box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.15);
+    }
+
+    /* Conector entre os passos (apenas desktop) */
+    &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 2.35rem;
+        left: calc(100% + 1px);
+        width: 1.25rem;
+        height: 1px;
+        background: linear-gradient(90deg, #2563EB, #06B6D4);
+        opacity: 0.35;
+    }
+
+    @media (max-width: 968px) {
+        &:not(:last-child)::after { display: none; }
+    }
 `
 
-const IconCircle = styled.div`
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: ${props => props.theme.colors.white};
-    border: 2px solid ${props => props.theme.colors.primary}20;
-    box-shadow: 0 8px 20px -6px rgba(0, 123, 255, 0.25);
+const IconRow = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+`
+
+const IconBox = styled.div`
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    position: relative;
 
     svg {
-        width: 30px;
-        height: 30px;
-        color: ${props => props.theme.colors.primary};
+        width: 22px;
+        height: 22px;
+        color: #2563EB;
     }
+`
 
-    .num {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
-        color: white;
-        font-size: 0.8rem;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+const StepNumber = styled.span`
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #94A3B8;
 `
 
 const StepTitle = styled.h3`
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: ${props => props.theme.colors.textDark};
-    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
 `
 
 const StepText = styled.p`
-    font-size: 0.95rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.5;
+    font-size: 0.875rem;
+    color: #64748B;
+    line-height: 1.55;
     margin: 0;
-    max-width: 240px;
 `
 
 const steps = [
     {
         icon: <MessageSquare />,
-        title: 'Captou',
-        text: 'Lead do WhatsApp, Instagram, site ou indicação cai automaticamente no seu funil.',
+        title: 'Atraiu',
+        text: 'Automação de campanhas e integração com RD, Facebook e site. Gere leads qualificados.',
     },
     {
         icon: <Zap />,
-        title: 'Atendeu na hora',
-        text: 'Resposta imediata 24/7 e distribuição automática para o consultor certo.',
+        title: 'Atendeu',
+        text: 'WhatsApp centralizado. A Mia (IA Copilot) ou sua equipe acolhem a família em segundos.',
     },
     {
         icon: <CalendarCheck />,
-        title: 'Acompanhou',
-        text: 'Régua de follow-up e lembretes garantem que nenhuma família esfria pelo caminho.',
+        title: 'Negociou',
+        text: 'CRM Kanban com régua de follow-up. Agende a visita e não deixe nenhum negócio esfriar.',
     },
     {
         icon: <GraduationCap />,
         title: 'Matriculou',
-        text: 'Visita agendada, proposta enviada e o card arrastado até a matrícula.',
+        text: 'Análise de conversão, NPS ativado e uma visão clara de onde focar para crescer mais.',
     },
 ]
 
 export default function HowItWorksSection() {
     return (
         <Section id="como-funciona">
+            <SectionDecor $variant="left" />
             <Container>
-                <SectionHeader $maxWidth="760px" $marginBottom="4.5rem">
+                <SectionHeader $maxWidth="720px">
                     <Eyebrow>Como funciona</Eyebrow>
                     <SectionTitle>
-                        Da primeira mensagem à matrícula, em um fluxo só
-                    </SectionTitle>
+                        Das campanhas de Marketing à <GradientText>matrícula</GradientText>, em um fluxo só</SectionTitle>
                     <SectionSubtitle>
-                        Cada interessado entra, é atendido e avança no funil sem trabalho manual — você acompanha tudo em um só lugar.
+                        Seu marketing atrai, seu atendimento acolhe e o comercial converte. Tudo orquestrado de forma automática e integrada no Maskot.
                     </SectionSubtitle>
                 </SectionHeader>
 
                 <Steps>
                     {steps.map((step, i) => (
                         <Step key={step.title}>
-                            <IconCircle>
-                                {step.icon}
-                                <span className="num">{i + 1}</span>
-                            </IconCircle>
+                            <IconRow>
+                                <IconBox>{step.icon}</IconBox>
+                                <StepNumber>0{i + 1}</StepNumber>
+                            </IconRow>
                             <StepTitle>{step.title}</StepTitle>
                             <StepText>{step.text}</StepText>
                         </Step>

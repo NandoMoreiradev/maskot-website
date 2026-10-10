@@ -17,7 +17,7 @@ export default function LandingPagesPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <LandingPagesHero />
                 <LandingPagesDeepDive />
                 <CTASection />

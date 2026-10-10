@@ -94,49 +94,49 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e0e0e0;
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
 `
 
 const MockupHeader = styled.div`
-    height: 40px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #eee;
+    height: 48px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     gap: 0.5rem;
 
     .dots {
         display: flex;
-        gap: 6px;
+        gap: 8px;
 
         div {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #ccc;
+            background: #CBD5E1;
         }
     }
 `
 
 // --- MOCKUP 1: KANBAN BOARD ---
 const KanbanMock = styled.div`
-    padding: 20px;
+    padding: 24px;
     display: flex;
-    gap: 15px;
+    gap: 16px;
     height: 380px;
-    background: #f4f5f7;
+    background: #FFFFFF;
     overflow-x: hidden;
 
     @media (max-width: 640px) {
-        gap: 6px;
-        padding: 10px;
+        gap: 8px;
+        padding: 12px;
         height: auto;
         min-height: 240px;
         overflow-x: hidden;
@@ -146,21 +146,21 @@ const KanbanMock = styled.div`
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
         min-width: 140px;
 
         @media (max-width: 640px) {
             min-width: 0;
             flex: 1;
-            gap: 6px;
+            gap: 8px;
 
-            .header { font-size: 8px; }
+            .header { font-size: 9px; }
 
             .card {
-                padding: 7px;
+                padding: 8px;
 
                 h4 {
-                    font-size: 10px;
+                    font-size: 11px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -169,39 +169,41 @@ const KanbanMock = styled.div`
                 p { display: none; }
 
                 .tag {
-                    font-size: 7px;
-                    padding: 1px 4px;
+                    font-size: 8px;
+                    padding: 2px 6px;
                     margin-top: 4px;
                 }
             }
         }
 
         .header {
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 700;
             text-transform: uppercase;
-            color: #5e6c84;
-            margin-bottom: 5px;
+            color: #64748B;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
         }
 
         .card {
-            background: #fff;
-            padding: 12px;
-            border-radius: 6px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid transparent;
+            background: #FFFFFF;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid #E2E8F0; /* Default border */
 
             h4 {
-                font-size: 13px;
-                margin: 0 0 5px 0;
-                color: #333;
+                font-size: 14px;
+                margin: 0 0 6px 0;
+                color: #0F172A;
+                font-weight: 600;
             }
 
             p {
-                font-size: 11px;
-                color: #666;
+                font-size: 12px;
+                color: #64748B;
                 margin: 0;
                 display: flex;
                 align-items: center;
@@ -210,12 +212,14 @@ const KanbanMock = styled.div`
 
             .tag {
                 display: inline-block;
-                font-size: 9px;
-                padding: 2px 6px;
-                background: #e9f5ff;
-                color: #007bff;
-                border-radius: 4px;
-                margin-top: 8px;
+                font-size: 10px;
+                font-weight: 600;
+                padding: 4px 8px;
+                background: #F8FAFC;
+                color: #475569;
+                border: 1px solid #E2E8F0;
+                border-radius: 6px;
+                margin-top: 10px;
             }
         }
     }
@@ -223,33 +227,36 @@ const KanbanMock = styled.div`
 
 // --- MOCKUP 2: CALENDAR & AGENDA ---
 const CalendarMock = styled.div`
-    padding: 20px;
-    background: #fff;
+    padding: 24px;
+    background: #FFFFFF;
 
     .view-switch {
         display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
+        gap: 12px;
+        margin-bottom: 24px;
 
         .btn {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-            color: #666;
-            background: #f0f2f5;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748B;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
         }
 
         .btn.active {
-            background: #fff3cd;
-            color: #d97706;
+            background: #FFFFFF;
+            color: #0F172A;
+            border-color: #2563EB;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
     }
 
     .layout {
         display: grid;
         grid-template-columns: 2fr 1fr;
-        gap: 20px;
+        gap: 24px;
 
         @media (max-width: 640px) {
             grid-template-columns: 1fr;
@@ -259,44 +266,47 @@ const CalendarMock = styled.div`
     .cal-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
+        gap: 8px;
 
         .day-header {
-            font-size: 10px;
-            color: #999;
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748B;
             text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .day {
             aspect-ratio: 1;
-            border: 1px solid #eee;
-            border-radius: 6px;
-            font-size: 10px;
-            padding: 4px;
-            color: #333;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 6px;
+            color: #334155;
             position: relative;
+            background: #F8FAFC;
 
             &.has-event:after {
                 content: '';
                 position: absolute;
-                bottom: 4px;
+                bottom: 6px;
                 left: 50%;
                 transform: translateX(-50%);
                 width: 4px;
                 height: 4px;
-                background: #f59e0b;
+                background: #2563EB;
                 border-radius: 50%;
             }
 
             &.today {
-                background: #f59e0b;
-                color: white;
-                font-weight: bold;
+                background: #2563EB;
+                color: #FFFFFF;
+                font-weight: 700;
                 border: none;
 
                 &.has-event:after {
-                    background: white;
+                    background: #FFFFFF;
                 }
             }
         }
@@ -305,27 +315,29 @@ const CalendarMock = styled.div`
     .task-list {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
 
         .task {
-            padding: 10px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            border-left: 3px solid #f59e0b;
+            padding: 12px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            background: #F8FAFC;
+            border-left: 4px solid #E2E8F0;
 
             h4 {
                 margin: 0;
-                font-size: 12px;
-                color: #333;
+                font-size: 13px;
+                color: #0F172A;
+                font-weight: 600;
             }
 
             span {
-                font-size: 10px;
-                color: #888;
+                font-size: 11px;
+                color: #64748B;
                 display: flex;
                 align-items: center;
-                gap: 4px;
-                margin-top: 4px;
+                gap: 6px;
+                margin-top: 6px;
             }
         }
     }
@@ -333,19 +345,19 @@ const CalendarMock = styled.div`
 
 // --- MOCKUP 3: UNIFIED TIMELINE ---
 const TimelineMock = styled.div`
-    padding: 25px;
-    background: #fff;
+    padding: 32px;
+    background: #FFFFFF;
     max-height: 400px;
     overflow: hidden;
 
     @media (max-width: 640px) {
-        padding: 16px;
+        padding: 24px;
     }
 
     .event {
         display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
+        gap: 20px;
+        margin-bottom: 24px;
         position: relative;
 
         &:last-child {
@@ -357,73 +369,75 @@ const TimelineMock = styled.div`
         &:not(:last-child):before {
             content: '';
             position: absolute;
-            top: 35px;
-            left: 16px;
-            bottom: -25px;
+            top: 40px;
+            left: 20px;
+            bottom: -24px;
             width: 2px;
-            background: #f0f2f5;
+            background: #E2E8F0;
         }
 
         .icon-box {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: #f0f2f5;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             z-index: 1;
-            color: #666;
+            color: #475569;
         }
 
         .content {
             flex: 1;
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #eee;
+            background: #F8FAFC;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
 
             .header {
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: 5px;
+                margin-bottom: 8px;
                 flex-wrap: wrap;
-                gap: 2px;
+                gap: 4px;
             }
 
             h4 {
                 margin: 0;
-                font-size: 13px;
-                color: #333;
+                font-size: 14px;
+                color: #0F172A;
+                font-weight: 600;
             }
 
             .date {
-                font-size: 10px;
-                color: #999;
+                font-size: 11px;
+                color: #64748B;
             }
 
             p {
                 margin: 0;
-                font-size: 12px;
-                color: #666;
-                line-height: 1.4;
+                font-size: 13px;
+                color: #475569;
+                line-height: 1.5;
             }
         }
 
         &.whatsapp .icon-box {
-            background: #e6fffa;
-            color: #00a884;
+            background: #FFFFFF;
+            color: #2563EB;
         }
 
         &.call .icon-box {
-            background: #e9f5ff;
-            color: #007bff;
+            background: #FFFFFF;
+            color: #2563EB;
         }
 
         &.visit .icon-box {
-            background: #fff3cd;
-            color: #f59e0b;
+            background: #FFFFFF;
+            color: #2563EB;
         }
     }
 `
@@ -431,35 +445,38 @@ const TimelineMock = styled.div`
 // --- MOCKUP 4: LIST VIEW ---
 const ListMock = styled.div`
     padding: 0;
-    background: white;
+    background: #FFFFFF;
 
     .toolbar {
-        padding: 15px;
-        border-bottom: 1px solid #eee;
+        padding: 20px;
+        border-bottom: 1px solid #E2E8F0;
         display: flex;
-        gap: 10px;
+        gap: 12px;
         flex-wrap: wrap;
+        background: #F8FAFC;
 
         .btn {
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #555;
+            padding: 8px 16px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
 
             @media (max-width: 640px) {
-                font-size: 11px;
-                padding: 5px 8px;
+                font-size: 12px;
+                padding: 6px 10px;
             }
         }
 
         .btn.primary {
-            background: ${props => props.theme.colors.primary};
-            color: white;
-            border-color: ${props => props.theme.colors.primary};
+            background: #2563EB;
+            color: #FFFFFF;
+            border-color: #2563EB;
         }
     }
 
@@ -470,14 +487,15 @@ const ListMock = styled.div`
 
     th {
         text-align: left;
-        padding: 12px 15px;
-        font-size: 11px;
-        color: #999;
+        padding: 16px 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #64748B;
         text-transform: uppercase;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #E2E8F0;
 
         @media (max-width: 640px) {
-            padding: 10px 10px;
+            padding: 12px;
         }
 
         &:nth-child(3), &:nth-child(4) {
@@ -486,14 +504,15 @@ const ListMock = styled.div`
     }
 
     td {
-        padding: 12px 15px;
-        font-size: 13px;
-        color: #333;
-        border-bottom: 1px solid #f5f5f5;
+        padding: 16px 20px;
+        font-size: 14px;
+        color: #0F172A;
+        border-bottom: 1px solid #E2E8F0;
+        background: #FFFFFF;
 
         @media (max-width: 640px) {
-            padding: 10px 10px;
-            font-size: 12px;
+            padding: 12px;
+            font-size: 13px;
         }
 
         &:nth-child(3), &:nth-child(4) {
@@ -502,25 +521,25 @@ const ListMock = styled.div`
     }
 
     .status {
-        padding: 4px 8px;
-        border-radius: 12px;
-        font-size: 10px;
-        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        background: #F8FAFC;
+        color: #475569;
+        border: 1px solid #E2E8F0;
     }
 
     .status.new {
-        background: #e3f2fd;
-        color: #1976d2;
+        color: #2563EB;
     }
 
     .status.visit {
-        background: #fff3e0;
-        color: #f57c00;
+        color: #F59E0B;
     }
 
     .status.won {
-        background: #e8f5e9;
-        color: #388e3c;
+        color: #10B981;
     }
 `
 
@@ -536,43 +555,44 @@ const PowerGrid = styled.div`
 `
 
 const PowerCard = styled.div`
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid #eee;
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
 
     &:hover {
         transform: translateY(-5px);
-        background: white;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        border-color: ${props => props.theme.colors.primary}40;
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+        border-color: #CBD5E1;
     }
 
     .icon {
         width: 48px;
         height: 48px;
         border-radius: 12px;
-        background: white;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
         display: flex;
         align-items: center;
-        justifyContent: center;
-        color: ${props => props.theme.colors.primary};
+        justify-content: center;
+        color: #2563EB;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     h4 {
         font-size: 1.25rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        color: #333;
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
 
     p {
         font-size: 1rem;
-        color: #666;
-        line-height: 1.5;
+        color: #475569;
+        line-height: 1.6;
         margin: 0;
     }
 `
@@ -614,12 +634,12 @@ export default function CrmDeepDive() {
                         <KanbanMock>
                             <div className="col">
                                 <div className="header">Novos (12)</div>
-                                <div className="card" style={{borderLeftColor: '#3498db'}}>
+                                <div className="card" style={{borderLeftColor: '#2563EB'}}>
                                     <h4>Mãe do Pedro</h4>
                                     <p>Fundamental 1 • Manhã</p>
                                     <span className="tag">WhatsApp</span>
                                 </div>
-                                <div className="card" style={{borderLeftColor: '#3498db'}}>
+                                <div className="card" style={{borderLeftColor: '#2563EB'}}>
                                     <h4>Pai da Júlia</h4>
                                     <p>Infantil • Tarde</p>
                                     <span className="tag">Site</span>
@@ -627,7 +647,7 @@ export default function CrmDeepDive() {
                             </div>
                             <div className="col">
                                 <div className="header">Visita (5)</div>
-                                <div className="card" style={{borderLeftColor: '#f1c40f'}}>
+                                <div className="card" style={{borderLeftColor: '#F59E0B'}}>
                                     <h4>Lucas Silva</h4>
                                     <p>Visita: Amanhã 14h</p>
                                     <span className="tag">Indicação</span>
@@ -635,7 +655,7 @@ export default function CrmDeepDive() {
                             </div>
                             <div className="col">
                                 <div className="header">Matriculado (8)</div>
-                                <div className="card" style={{borderLeftColor: '#2ecc71'}}>
+                                <div className="card" style={{borderLeftColor: '#10B981'}}>
                                     <h4>Ana Clara</h4>
                                     <p>Contrato Assinado</p>
                                     <span className="tag">Bolsa 10%</span>
@@ -686,15 +706,15 @@ export default function CrmDeepDive() {
                                     <div className="day">12</div>
                                 </div>
                                 <div className="task-list">
-                                    <div className="task">
+                                    <div className="task" style={{borderLeftColor: '#F59E0B'}}>
                                         <h4>Ligar: Mãe do Pedro</h4>
                                         <span><Clock size={10}/> 10:00 • Follow-up</span>
                                     </div>
-                                    <div className="task" style={{borderLeftColor: '#007bff'}}>
+                                    <div className="task" style={{borderLeftColor: '#2563EB'}}>
                                         <h4>Visita: Família Silva</h4>
                                         <span><Users size={10}/> 14:30 • Apresentação</span>
                                     </div>
-                                    <div className="task" style={{borderLeftColor: '#28a745'}}>
+                                    <div className="task" style={{borderLeftColor: '#10B981'}}>
                                         <h4>WhatsApp: Enviar Contrato</h4>
                                         <span><MessageCircle size={10}/> 16:00 • Fechamento</span>
                                     </div>
@@ -858,10 +878,10 @@ export default function CrmDeepDive() {
                 </FeatureRow>
 
                 {/* 5. POWER FEATURES */}
-                <div style={{textAlign: 'center', marginBottom: '3rem'}}>
-                    <h3 style={{fontSize: '2rem', fontWeight: 800, color: '#333'}}>Gestão Completa do Ciclo de
+                <div style={{textAlign: 'center', marginBottom: '4rem'}}>
+                    <h3 style={{fontSize: '2rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em'}}>Gestão Completa do Ciclo de
                         Matrícula</h3>
-                    <p style={{color: '#666'}}>Ferramentas que garantem que nenhum aluno seja esquecido.</p>
+                    <p style={{color: '#475569', fontSize: '1.125rem'}}>Ferramentas que garantem que nenhum aluno seja esquecido.</p>
                 </div>
 
                 <PowerGrid>
@@ -888,62 +908,68 @@ export default function CrmDeepDive() {
 
                 {/* --- EXEMPLOS DE USO (Use Cases) --- */}
                 <div style={{textAlign: 'center', marginBottom: '3rem', marginTop: '6rem'}}>
-                    <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#333'}}>O Dia a Dia do Comercial</h3>
+                    <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em'}}>O Dia a Dia do Comercial</h3>
                 </div>
 
                 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
                     {/* CASE 1 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
-                        borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        borderRadius: '24px',
+                        border: '1px solid #E2E8F0'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
-                            fontSize: '1.2rem',
+                            gap: '12px',
+                            fontSize: '1.25rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A'
                         }}>
                             <span style={{
-                                background: '#E0F2FE',
-                                color: '#007BFF',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                background: '#F8FAFC',
+                                color: '#2563EB',
+                                padding: '8px',
+                                borderRadius: '10px',
+                                border: '1px solid #E2E8F0',
+                                display: 'flex'
                             }}><Users size={18}/></span>
                             Negociação de Irmãos
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                        <p style={{color: '#475569', fontSize: '1rem', lineHeight: 1.6, margin: 0}}>
                             Uma mãe busca vaga para dois filhos de turmas diferentes. Você atende a família no mesmo ticket de WhatsApp, matricula um e perde o outro, e o sistema já calcula faturas e comissões do consultor automaticamente.
                         </p>
                     </div>
 
                     {/* CASE 2 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
-                        borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        borderRadius: '24px',
+                        border: '1px solid #E2E8F0'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
-                            fontSize: '1.2rem',
+                            gap: '12px',
+                            fontSize: '1.25rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A'
                         }}>
                             <span style={{
-                                background: '#FEF3C7',
-                                color: '#D97706',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                background: '#F8FAFC',
+                                color: '#F97316',
+                                padding: '8px',
+                                borderRadius: '10px',
+                                border: '1px solid #E2E8F0',
+                                display: 'flex'
                             }}><Flame size={18}/></span>
                             O &quot;Piloto&quot; Matinal
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                        <p style={{color: '#475569', fontSize: '1rem', lineHeight: 1.6, margin: 0}}>
                             O vendedor chega de manhã, abre a Dashboard e foca direto nos &quot;Leads Quentes&quot; piscando no alerta. Ele liga apenas para quem o sistema identificou como SLA estourado ou com alto engajamento, multiplicando conversões.
                         </p>
                     </div>

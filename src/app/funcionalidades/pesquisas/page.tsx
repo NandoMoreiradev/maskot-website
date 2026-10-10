@@ -24,7 +24,7 @@ export default function SurveysPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <SurveysHero />
                 <SurveysDeepDive />
                 <CTASection />

@@ -18,8 +18,8 @@ const float = keyframes`
 `
 
 const Section = styled.section`
-    padding: 4rem 0 6rem;
-    background: ${props => props.theme.colors.pageBackground};
+    padding: 6rem 0;
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -47,36 +47,43 @@ const SplitLayout = styled.div<{ $reverse?: boolean }>`
 
 const TextContent = styled.div`
     h3 {
-        font-size: 2rem;
-        font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
-        margin-bottom: 1rem;
+        font-family: ${props => props.theme.typography.fontFamily.main};
+        font-size: ${props => props.theme.typography.fontSize['3xl']};
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
         line-height: 1.2;
+        color: #0F172A;
     }
 
     p {
-        font-size: 1.1rem;
-        color: ${props => props.theme.colors.textMedium};
+        font-family: ${props => props.theme.typography.fontFamily.main};
+        font-size: ${props => props.theme.typography.fontSize.lg};
+        color: #475569;
         line-height: 1.6;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
     }
 
     ul {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.25rem;
+        list-style: none;
+        padding: 0;
     }
 
     li {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 1rem;
+        font-size: ${props => props.theme.typography.fontSize.base};
         font-weight: 500;
-        color: ${props => props.theme.colors.textDark};
+        color: #334155;
 
         svg {
-            color: #F97316;
+            color: #64748B;
             flex-shrink: 0;
+            margin-top: 2px;
         }
     }
 `
@@ -85,33 +92,34 @@ const SectionLabel = styled.div`
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #FFF7ED;
-    color: #C2410C;
+    background: transparent;
+    color: #475569;
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.4rem 0.8rem;
-    border-radius: 20px;
+    border-radius: 999px;
     margin-bottom: 1rem;
+    border: 1px solid #E2E8F0;
 `
 
 // --- MOCKUP DE CHAT / TOOL CALLING ---
 const ChatMockup = styled.div`
-    background: #1E293B;
-    border-radius: 20px;
-    border: 8px solid #0F172A;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: #FFFFFF;
+    border-radius: 1rem;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     padding: 1.5rem;
     max-width: 450px;
     margin: 0 auto;
     position: relative;
-    animation: ${float} 6s ease-in-out infinite;
+    animation: ${float} 8s ease-in-out infinite;
 `
 
 const UserBubble = styled.div`
-    background: #334155;
-    color: white;
+    background: #F1F5F9;
+    color: #0F172A;
     padding: 1rem;
     border-radius: 12px 12px 0 12px;
     margin-bottom: 1rem;
@@ -119,12 +127,13 @@ const UserBubble = styled.div`
     width: fit-content;
     margin-left: auto;
     font-size: 0.95rem;
+    border: 1px solid #E2E8F0;
 `
 
 const ToolCallIndicator = styled.div`
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    color: #FDBA74;
+    background: #F8FAFC;
+    border: 1px dashed #CBD5E1;
+    color: #64748B;
     padding: 0.75rem;
     border-radius: 8px;
     font-size: 0.8rem;
@@ -155,7 +164,7 @@ const MiaBubble = styled.div`
 
     .data-table {
         margin-top: 10px;
-        background: rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.15);
         border-radius: 6px;
         padding: 8px;
         font-size: 0.85rem;
@@ -165,7 +174,7 @@ const MiaBubble = styled.div`
 const FeatureGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
 
     @media (max-width: ${props => props.theme.breakpoints.md}) {
         grid-template-columns: 1fr;
@@ -173,42 +182,40 @@ const FeatureGrid = styled.div`
 `
 
 const FeatureCard = styled.div`
-    background: #F8F9FA;
+    background: #FFFFFF;
     padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid #DEE2E6;
-    transition: all 0.3s ease;
+    border-radius: 1rem;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s;
 
     &:hover {
-        background: #fff;
-        box-shadow: 0 10px 30px rgba(249, 115, 22, 0.1);
-        transform: translateY(-5px);
-        border-color: #F97316;
+        border-color: #CBD5E1;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     }
 
     .icon {
-        width: 48px;
-        height: 48px;
-        background: #fff;
-        border-radius: 12px;
+        width: 40px;
+        height: 40px;
+        background: #F8FAFC;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #F97316;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1.5rem;
+        color: #475569;
+        border: 1px solid #E2E8F0;
+        margin-bottom: 1.25rem;
     }
 
     h4 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
-        margin-bottom: 0.75rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #0F172A;
+        margin-bottom: 0.5rem;
     }
 
     p {
-        font-size: 1rem;
-        color: ${props => props.theme.colors.textMedium};
+        font-size: 0.875rem;
+        color: #64748B;
         line-height: 1.5;
         margin: 0;
     }
@@ -216,9 +223,9 @@ const FeatureCard = styled.div`
 
 // --- CARD DE NEXT BEST ACTION ---
 const NbaCard = styled.div`
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    background: #FFFFFF;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     padding: 1.5rem;
     border: 1px solid #E2E8F0;
     position: relative;
@@ -234,33 +241,35 @@ const NbaCard = styled.div`
         .avatar {
             width: 40px;
             height: 40px;
-            background: #E0F2FE;
-            color: #0284C7;
+            background: #F8FAFC;
+            color: #475569;
+            border: 1px solid #E2E8F0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .info {
-            h5 { margin: 0; color: #0F172A; font-size: 1rem; }
-            span { font-size: 0.8rem; color: #64748B; }
+            h5 { margin: 0; color: #0F172A; font-size: 1rem; font-weight: 600; }
+            span { font-size: 0.8rem; color: #64748B; font-weight: 500; }
         }
     }
 
     .mia-insight {
-        background: #FFF7ED;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
         border-left: 4px solid #F97316;
         padding: 1rem;
-        border-radius: 0 8px 8px 0;
+        border-radius: 8px;
 
         .title {
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #C2410C;
-            font-weight: 800;
+            color: #0F172A;
+            font-weight: 700;
             font-size: 0.85rem;
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -268,32 +277,38 @@ const NbaCard = styled.div`
 
         p {
             font-size: 0.95rem;
-            color: #431407;
+            color: #334155;
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .action-btn {
-            background: #F97316;
+            background: #0F172A;
             color: white;
-            padding: 8px 12px;
+            padding: 8px 16px;
             border-radius: 6px;
             font-size: 0.85rem;
-            font-weight: bold;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             margin-top: 12px;
             cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+
+            &:hover {
+                background: #1E293B;
+            }
         }
     }
 `
 
 // --- BRIEFING DIÁRIO ---
 const BriefingCard = styled.div`
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: #FFFFFF;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     padding: 1.5rem;
     border: 1px solid #E2E8F0;
     max-width: 420px;
@@ -304,38 +319,38 @@ const BriefingCard = styled.div`
 const BriefingHeader = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 1.25rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #F1F5F9;
 
     .avatar-mia {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
         background: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .greeting {
-        h5 { margin: 0; font-size: 0.95rem; font-weight: 700; color: #0F172A; }
-        span { font-size: 0.75rem; color: #64748B; }
+        h5 { margin: 0; font-size: 0.95rem; font-weight: 600; color: #0F172A; }
+        span { font-size: 0.75rem; color: #64748B; font-weight: 500; }
     }
 `
 
 const BriefingSection = styled.div`
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 
     .section-title {
         font-size: 0.75rem;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #94A3B8;
+        color: #64748B;
         margin-bottom: 0.5rem;
     }
 
@@ -343,11 +358,11 @@ const BriefingSection = styled.div`
         display: flex;
         justify-content: space-between;
         font-size: 0.9rem;
-        color: #334155;
-        padding: 0.4rem 0;
+        color: #475569;
+        padding: 0.5rem 0;
         border-bottom: 1px solid #F8FAFC;
 
-        strong { color: #0F172A; }
+        strong { color: #0F172A; font-weight: 600; }
     }
 
     .alert-row {
@@ -355,10 +370,11 @@ const BriefingSection = styled.div`
         align-items: center;
         gap: 8px;
         font-size: 0.9rem;
-        color: #DC2626;
-        padding: 0.4rem 0;
+        color: #0F172A;
+        font-weight: 500;
+        padding: 0.5rem 0;
 
-        svg { flex-shrink: 0; }
+        svg { flex-shrink: 0; color: #EF4444; }
     }
 
     .ok-row {
@@ -366,28 +382,32 @@ const BriefingSection = styled.div`
         align-items: center;
         gap: 8px;
         font-size: 0.9rem;
-        color: #16A34A;
-        padding: 0.4rem 0;
+        color: #0F172A;
+        font-weight: 500;
+        padding: 0.5rem 0;
+
+        svg { flex-shrink: 0; color: #10B981; }
     }
 `
 
 const BriefingSuggestion = styled.div`
-    background: #FFF7ED;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-left: 4px solid #F97316;
-    padding: 0.75rem 1rem;
-    border-radius: 0 8px 8px 0;
+    padding: 1rem;
+    border-radius: 8px;
     font-size: 0.9rem;
-    color: #431407;
-    line-height: 1.4;
+    color: #334155;
+    line-height: 1.5;
 
-    strong { display: block; margin-bottom: 4px; color: #C2410C; font-size: 0.8rem; text-transform: uppercase; }
+    strong { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; color: #0F172A; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
 `
 
 // --- ANÁLISE DE LEAD ---
 const LeadAnalysisCard = styled.div`
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: #FFFFFF;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     padding: 1.5rem;
     border: 1px solid #E2E8F0;
     max-width: 420px;
@@ -406,19 +426,20 @@ const LeadHeader = styled.div`
     .avatar {
         width: 44px;
         height: 44px;
-        background: #E0F2FE;
-        color: #0284C7;
+        background: #F8FAFC;
+        color: #475569;
+        border: 1px solid #E2E8F0;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 1rem;
     }
 
     .lead-info {
         flex: 1;
-        h5 { margin: 0; font-size: 1rem; font-weight: 700; color: #0F172A; }
+        h5 { margin: 0; font-size: 1rem; font-weight: 600; color: #0F172A; }
 
         .tags {
             display: flex;
@@ -429,28 +450,30 @@ const LeadHeader = styled.div`
         .tag {
             font-size: 0.7rem;
             padding: 2px 8px;
-            border-radius: 20px;
-            font-weight: 600;
+            border-radius: 999px;
+            font-weight: 500;
+            border: 1px solid #E2E8F0;
         }
 
-        .tag-hot { background: #FEE2E2; color: #DC2626; }
-        .tag-stage { background: #E0F2FE; color: #0369A1; }
+        .tag-hot { background: #FFFFFF; color: #0F172A; }
+        .tag-stage { background: #F8FAFC; color: #475569; }
     }
 `
 
 const AnalysisBlock = styled.div`
-    background: #F8FAFC;
-    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
     padding: 1rem;
     margin-bottom: 0.75rem;
 
     .block-title {
         font-size: 0.75rem;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #64748B;
-        margin-bottom: 0.5rem;
+        color: #0F172A;
+        margin-bottom: 0.75rem;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -464,44 +487,46 @@ const AnalysisBlock = styled.div`
 
         li {
             font-size: 0.9rem;
-            color: #334155;
+            color: #475569;
             line-height: 1.5;
+            margin-bottom: 0.25rem;
         }
     }
 `
 
 // --- REDIGIR MENSAGEM ---
 const ComposeCard = styled.div`
-    background: #1E293B;
-    border-radius: 20px;
-    border: 8px solid #0F172A;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: #FFFFFF;
+    border-radius: 1rem;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     padding: 1.5rem;
     max-width: 450px;
     margin: 0 auto;
-    animation: ${float} 6s ease-in-out infinite;
+    animation: ${float} 8s ease-in-out infinite;
 `
 
 const ComposeInput = styled.div`
-    background: #334155;
-    border-radius: 10px;
+    background: #F8FAFC;
+    border-radius: 8px;
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
-    color: #CBD5E1;
+    color: #475569;
     margin-bottom: 1rem;
-    border: 1px solid #475569;
+    border: 1px dashed #CBD5E1;
 
-    .label { font-size: 0.75rem; color: #94A3B8; margin-bottom: 4px; }
+    .label { font-size: 0.75rem; color: #64748B; margin-bottom: 4px; font-weight: 500; }
 `
 
 const ComposedMessage = styled.div`
-    background: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
+    background: #F1F5F9;
     border-radius: 12px 12px 12px 0;
     padding: 1rem;
-    color: white;
+    color: #0F172A;
     font-size: 0.9rem;
     line-height: 1.6;
     margin-bottom: 1rem;
+    border: 1px solid #E2E8F0;
 `
 
 const CopyButton = styled.div`
@@ -509,15 +534,17 @@ const CopyButton = styled.div`
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background: #334155;
-    color: #94A3B8;
+    background: #F8FAFC;
+    color: #475569;
+    border: 1px solid #E2E8F0;
     border-radius: 8px;
     padding: 0.6rem;
     font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
 
-    &:hover { background: #475569; color: white; }
+    &:hover { background: #E2E8F0; color: #0F172A; }
 `
 
 // --- ONDE A MIA ESTÁ PRESENTE ---
@@ -530,22 +557,25 @@ const PresenceSectionHeader = styled.div`
     margin-bottom: 3rem;
 
     h3 {
+        font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: 2rem;
-        font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 700;
+        color: #0F172A;
         margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
     }
 
     p {
-        font-size: 1.1rem;
-        color: ${props => props.theme.colors.textMedium};
+        font-family: ${props => props.theme.typography.fontFamily.main};
+        font-size: 1.125rem;
+        color: #475569;
     }
 `
 
 const PresenceGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
 
     @media (max-width: ${props => props.theme.breakpoints.md}) {
         grid-template-columns: 1fr;
@@ -553,41 +583,42 @@ const PresenceGrid = styled.div`
 `
 
 const PresenceCard = styled.div`
-    background: white;
+    background: #FFFFFF;
     border: 1px solid #E2E8F0;
-    border-radius: 20px;
+    border-radius: 1rem;
     padding: 2rem;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
 
     &:hover {
-        box-shadow: 0 15px 40px rgba(249, 115, 22, 0.12);
+        border-color: #CBD5E1;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         transform: translateY(-4px);
-        border-color: #FDBA74;
     }
 
     .icon-wrapper {
-        width: 64px;
-        height: 64px;
-        background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-        border-radius: 18px;
+        width: 48px;
+        height: 48px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1.5rem;
-        color: #F97316;
+        margin: 0 auto 1.25rem;
+        color: #475569;
     }
 
     h4 {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #0F172A;
         margin-bottom: 0.75rem;
     }
 
     p {
-        font-size: 0.95rem;
-        color: ${props => props.theme.colors.textMedium};
+        font-size: 0.875rem;
+        color: #64748B;
         line-height: 1.5;
         margin: 0;
     }
@@ -598,15 +629,18 @@ const SectionDivider = styled.div`
     margin-bottom: 3rem;
 
     h3 {
+        font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: 2rem;
-        font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 700;
+        color: #0F172A;
         margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
     }
 
     p {
-        color: ${props => props.theme.colors.textMedium};
-        font-size: 1.05rem;
+        font-family: ${props => props.theme.typography.fontFamily.main};
+        color: #475569;
+        font-size: 1.125rem;
     }
 `
 
@@ -698,7 +732,7 @@ export default function CopilotMiaDeepDive() {
                         </ul>
                     </TextContent>
 
-                    <div style={{ background: '#F8FAFC', padding: '3rem', borderRadius: '24px', border: '1px solid #E2E8F0' }}>
+                    <div style={{ background: '#FFFFFF', padding: '3rem', borderRadius: '24px', border: '1px solid #E2E8F0' }}>
                         <div style={{ color: '#64748B', fontWeight: 600, marginBottom: '1rem', display: 'flex', gap: '8px' }}>
                             <FileText size={20} /> Resumo Gerado pela Mia
                         </div>
@@ -707,8 +741,8 @@ export default function CopilotMiaDeepDive() {
                             - Ela tem preocupações com a adaptação <br/>
                             - Perguntou sobre descontos para irmãos
                         </p>
-                        <div style={{ background: '#E0F2FE', color: '#0369A1', padding: '1rem', borderRadius: '8px', marginTop: '1rem', fontSize: '0.9rem' }}>
-                            <strong>Sugestão de Resposta:</strong> Olá Juliana! Compreendo sua preocupação com a adaptação. Temos um programa de acolhimento excelente. Sobre o valor, para dois filhos conseguimos oferecer 15% de desconto na mensalidade do caçula. Vamos agendar uma visita?
+                        <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', color: '#334155', padding: '1rem', borderRadius: '8px', marginTop: '1rem', fontSize: '0.9rem' }}>
+                            <strong style={{ color: '#0F172A' }}>Sugestão de Resposta:</strong> Olá Juliana! Compreendo sua preocupação com a adaptação. Temos um programa de acolhimento excelente. Sobre o valor, para dois filhos conseguimos oferecer 15% de desconto na mensalidade do caçula. Vamos agendar uma visita?
                         </div>
                     </div>
                 </SplitLayout>
@@ -802,8 +836,8 @@ export default function CopilotMiaDeepDive() {
                             </ul>
                         </AnalysisBlock>
 
-                        <div style={{ background: '#F0FDF4', borderLeft: '4px solid #16A34A', padding: '0.75rem 1rem', borderRadius: '0 8px 8px 0', fontSize: '0.9rem', color: '#14532D' }}>
-                            <strong style={{ display: 'block', marginBottom: 4, color: '#15803D', fontSize: '0.75rem', textTransform: 'uppercase' }}>✅ Ação Sugerida</strong>
+                        <div style={{ background: '#F8FAFC', borderLeft: '4px solid #F97316', border: '1px solid #E2E8F0', borderLeftWidth: '4px', padding: '0.75rem 1rem', borderRadius: '0 8px 8px 0', fontSize: '0.9rem', color: '#334155' }}>
+                            <strong style={{ display: 'block', marginBottom: 4, color: '#F97316', fontSize: '0.75rem', textTransform: 'uppercase' }}>✅ Ação Sugerida</strong>
                             Ligue hoje à tarde e ofereça parcelamento do material didático. Alta chance de fechar.
                         </div>
                     </LeadAnalysisCard>

@@ -1,44 +1,100 @@
 'use client'
 
-import styled from 'styled-components'
-import { ShieldCheck, BadgeCheck, Clock, ArrowRight } from 'lucide-react'
+import styled, { keyframes } from 'styled-components'
+import { ArrowRight, ShieldCheck, BadgeCheck, Clock, MessageCircle, Bot, Zap } from 'lucide-react'
+import { Container as BaseContainer } from '@/components/ui/Container'
+import AuroraBackground from '@/components/AuroraBackground'
 
-const HeroWrapper = styled.section`
-    background: linear-gradient(180deg, ${props => props.theme.colors.pageBackground} 0%, #fff 100%);
-    padding: 6rem 2rem 4rem;
-    text-align: center;
+const float = keyframes`
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 `
 
-const HeroContainer = styled.div`
-    max-width: 900px;
-    margin: 0 auto;
+const floatSlow = keyframes`
+    0% { transform: translateY(0px) rotateZ(-2deg); }
+    50% { transform: translateY(-15px) rotateZ(2deg); }
+    100% { transform: translateY(0px) rotateZ(-2deg); }
+`
+
+const fadeUp = keyframes`
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+`
+
+const HeroSection = styled.section`
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    position: relative;
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+    z-index: 1;
+    overflow: hidden;
+`
+
+const Container = styled(BaseContainer)`
+    position: relative;
+    z-index: 2;
+`
+
+const HeroContent = styled.div`
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        text-align: center;
+    }
+`
+
+const TextContent = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 1.25rem;
+
+    @media (max-width: 1024px) {
+        align-items: center;
+    }
+`
+
+const Tag = styled.div`
+    display: inline-flex;
     align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    color: #475569;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid #E2E8F0;
+    animation: ${fadeUp} 0.8s ease-out forwards;
+    width: fit-content;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+
+    svg {
+        color: #16A34A;
+        width: 14px;
+        height: 14px;
+    }
 `
 
-const Tag = styled.span`
-    background: #e6fffa;
-    color: #00A884;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid #b2f5ea;
-`
-
-const Title = styled.h1`
-    font-size: 3.5rem;
+const MainHeading = styled.h1`
+    font-size: 3rem;
     font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: ${props => props.theme.colors.textDark};
+    line-height: 1.15;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+    animation: ${fadeUp} 0.8s ease-out 0.1s forwards;
+    opacity: 0;
 
-    span {
-        background: linear-gradient(135deg, #00A884 0%, #20c997 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    strong {
+        color: #16A34A;
     }
 
     @media (max-width: 768px) {
@@ -47,47 +103,50 @@ const Title = styled.h1`
 `
 
 const Subtitle = styled.p`
-    font-size: 1.25rem;
-    color: ${props => props.theme.colors.textMedium};
-    max-width: 700px;
+    font-size: 1.1rem;
     line-height: 1.6;
-    margin-bottom: 2.5rem;
+    color: #475569;
+    max-width: 520px;
+    animation: ${fadeUp} 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+
+    @media (max-width: 1024px) {
+        margin: 0 auto;
+    }
 `
 
 const ButtonGroup = styled.div`
     display: flex;
     gap: 1rem;
+    margin-top: 0.5rem;
+    animation: ${fadeUp} 0.8s ease-out 0.3s forwards;
+    opacity: 0;
 
-    @media (max-width: 560px) {
+    @media (max-width: 640px) {
         flex-direction: column;
         width: 100%;
-        max-width: 320px;
     }
 `
 
-const PrimaryButton = styled.button`
+const CTAButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, #00A884 0%, #20c997 100%);
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 1rem 2.5rem;
-    border: none;
-    border-radius: 8px;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 168, 132, 0.3);
+    border: none;
+    background: #16A34A;
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(22, 163, 74, 0.3);
     transition: all 0.3s ease;
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 28px rgba(0, 168, 132, 0.4);
-    }
-
-    @media (max-width: 560px) {
-        width: 100%;
+        box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
     }
 `
 
@@ -96,51 +155,176 @@ const SecondaryButton = styled.button`
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: white;
-    color: ${props => props.theme.colors.textDark};
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-size: 1rem;
     font-weight: 600;
-    font-size: 1.1rem;
-    padding: 1rem 2.5rem;
-    border: 1px solid ${props => props.theme.colors.borderLight};
-    border-radius: 8px;
     cursor: pointer;
+    background: #FFFFFF;
+    color: #0F172A;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
     transition: all 0.3s ease;
-
+    
     &:hover {
-        border-color: #00A884;
-        color: #00A884;
-        background: ${props => props.theme.colors.lightGray};
-    }
-
-    @media (max-width: 560px) {
-        width: 100%;
+        background: #F8FAFC;
+        border-color: #CBD5E1;
+        transform: translateY(-2px);
     }
 `
 
 const TrustBadges = styled.div`
     display: flex;
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
     flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    max-width: 640px;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    animation: ${fadeUp} 0.8s ease-out 0.4s forwards;
+    opacity: 0;
 
     div {
         display: flex;
         align-items: center;
-        gap: 0.4rem;
-        font-size: 0.875rem;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: #64748B;
         font-weight: 600;
-        color: ${props => props.theme.colors.textMedium};
 
         svg {
-            color: #00A884;
-            width: 16px;
-            height: 16px;
+            color: #16A34A;
+            width: 18px;
+            height: 18px;
         }
+    }
+
+    @media (max-width: 1024px) {
+        justify-content: center;
+    }
+`
+
+const Visual = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    animation: ${fadeUp} 1s ease-out 0.2s forwards;
+    opacity: 0;
+`
+
+const ChatCard = styled.div`
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    transform: rotateY(-5deg) rotateX(2deg);
+    animation: ${floatSlow} 7s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &:hover {
+        transform: rotateY(0deg) rotateX(0deg);
+        transition: transform 0.5s ease;
+    }
+`
+
+const ChatHeader = styled.div`
+    background: #F8FAFC;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #16A34A;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        
+        strong {
+            font-size: 0.95rem;
+            color: #0F172A;
+        }
+        span {
+            font-size: 0.75rem;
+            color: #16A34A;
+            font-weight: 600;
+        }
+    }
+`
+
+const ChatBody = styled.div`
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #FFFFFF;
+`
+
+const MessageBubble = styled.div<{ $isUser?: boolean }>`
+    background: ${props => props.$isUser ? '#16A34A' : '#F1F5F9'};
+    color: ${props => props.$isUser ? 'white' : '#0F172A'};
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border-bottom-right-radius: ${props => props.$isUser ? '4px' : '12px'};
+    border-bottom-left-radius: ${props => !props.$isUser ? '4px' : '12px'};
+    font-size: 0.85rem;
+    line-height: 1.4;
+    max-width: 85%;
+    align-self: ${props => props.$isUser ? 'flex-end' : 'flex-start'};
+`
+
+const FloatingTag = styled.div`
+    position: absolute;
+    background: #FFFFFF;
+    padding: 0.6rem 1rem;
+    border-radius: 100px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #0F172A;
+    z-index: 10;
+    border: 1px solid #E2E8F0;
+    animation: ${float} 4s ease-in-out infinite;
+
+    svg {
+        color: #16A34A;
+        width: 16px;
+        height: 16px;
+    }
+
+    &.top-right {
+        top: 10%;
+        right: -10%;
+        animation-delay: 1s;
+    }
+
+    &.bottom-left {
+        bottom: 10%;
+        left: -5%;
+        animation-delay: 2s;
+    }
+
+    @media (max-width: 640px) {
+        display: none;
     }
 `
 
@@ -150,30 +334,73 @@ function scrollToSection(id: string) {
 
 export default function WhatsAppHero() {
     return (
-        <HeroWrapper>
-            <HeroContainer>
-                <Tag>Módulo WhatsApp</Tag>
-                <Title>O WhatsApp da sua escola,<br/><span>turbinado com IA e CRM integrado</span></Title>
-                <Subtitle>
-                    Centralize todo o atendimento em um único número oficial, com vários atendentes,
-                    chatbot e IA respondendo na hora — para que nenhuma família fique esperando, nem de madrugada.
-                </Subtitle>
+        <HeroSection>
+            <AuroraBackground />
+            <Container>
+                <HeroContent>
+                    <TextContent>
+                        <Tag>
+                            <MessageCircle /> Módulo WhatsApp
+                        </Tag>
+                        
+                        <MainHeading>
+                            O WhatsApp da sua escola, <strong>turbinado com IA</strong>
+                        </MainHeading>
 
-                <ButtonGroup>
-                    <PrimaryButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
-                        Fale com um Consultor
-                    </PrimaryButton>
-                    <SecondaryButton onClick={() => scrollToSection('recursos')}>
-                        Ver recursos <ArrowRight size={18} />
-                    </SecondaryButton>
-                </ButtonGroup>
+                        <Subtitle>
+                            Centralize todo o atendimento em um único número oficial, com vários atendentes, chatbot e IA respondendo na hora — para que nenhuma família fique esperando.
+                        </Subtitle>
 
-                <TrustBadges>
-                    <div><ShieldCheck /> API Oficial do WhatsApp</div>
-                    <div><BadgeCheck /> Provedor Oficial Meta</div>
-                    <div><Clock /> Atendimento 24/7</div>
-                </TrustBadges>
-            </HeroContainer>
-        </HeroWrapper>
+                        <ButtonGroup>
+                            <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
+                                Fale com um Consultor
+                            </CTAButton>
+                            <SecondaryButton onClick={() => scrollToSection('recursos')}>
+                                Ver recursos <ArrowRight size={18} />
+                            </SecondaryButton>
+                        </ButtonGroup>
+
+                        <TrustBadges>
+                            <div><ShieldCheck /> API Oficial</div>
+                            <div><BadgeCheck /> Provedor Oficial Meta</div>
+                            <div><Clock /> Atendimento 24/7</div>
+                        </TrustBadges>
+                    </TextContent>
+
+                    <Visual>
+                        <ChatCard>
+                            <ChatHeader>
+                                <div className="avatar"><Bot size={20} /></div>
+                                <div className="info">
+                                    <strong>Maskot IA</strong>
+                                    <span>Online agora</span>
+                                </div>
+                            </ChatHeader>
+                            <ChatBody>
+                                <MessageBubble>
+                                    Olá! Sou o assistente virtual do Colégio. Como posso ajudar com a matrícula do seu filho hoje?
+                                </MessageBubble>
+                                <MessageBubble $isUser>
+                                    Gostaria de saber o valor da mensalidade para o 6º ano, por favor.
+                                </MessageBubble>
+                                <MessageBubble>
+                                    Claro! Para o 6º ano, a mensalidade é de R$ 1.250,00. Gostaria de agendar uma visita para conhecer nossa estrutura? 🏫
+                                </MessageBubble>
+                            </ChatBody>
+                        </ChatCard>
+                        
+                        <FloatingTag className="top-right">
+                            <Zap />
+                            Respostas em 3s
+                        </FloatingTag>
+
+                        <FloatingTag className="bottom-left">
+                            <ShieldCheck />
+                            1 Único Número Oficial
+                        </FloatingTag>
+                    </Visual>
+                </HeroContent>
+            </Container>
+        </HeroSection>
     )
 }

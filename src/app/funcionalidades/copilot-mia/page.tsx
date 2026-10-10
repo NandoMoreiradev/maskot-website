@@ -17,7 +17,7 @@ export default function CopilotMiaPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <CopilotMiaHero />
                 <CopilotMiaDeepDive />
                 <CTASection />

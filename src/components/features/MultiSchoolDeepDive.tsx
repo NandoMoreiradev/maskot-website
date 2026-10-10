@@ -16,7 +16,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -47,17 +47,18 @@ const TextContent = styled.div`
     h3 {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-weight: 700;
         margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
     }
     p {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
     }
     ul {
         list-style: none;
@@ -71,10 +72,10 @@ const TextContent = styled.div`
         align-items: flex-start;
         gap: 1rem;
         font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 500;
+        color: #334155;
         svg {
-            color: #1E40AF; /* Azul Royal */
+            color: #64748B;
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -82,30 +83,29 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 1rem;
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
-    animation: ${float} 8s ease-in-out infinite;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 `
 
 const MockupHeader = styled.div`
-    height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    height: 48px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     gap: 0.5rem;
-    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; } }
+    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; } }
 `
 
 // --- MOCKUP 1: SWITCHER DE ESCOLAS ---
 const SwitcherMock = styled.div`
     padding: 40px;
-    background: #111827; /* Fundo escuro simulando header */
+    background: #FFFFFF;
     height: 300px;
     display: flex;
     justify-content: center;
@@ -116,75 +116,76 @@ const Dropdown = styled.div`
     width: 280px;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 
     .item {
         display: flex; align-items: center; gap: 12px; padding: 12px 15px;
-        border-bottom: 1px solid #F3F4F6; cursor: pointer; transition: background 0.2s;
-        &:hover { background: #F9FAFB; }
+        border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.2s;
+        &:hover { background: #F8FAFC; }
         &:last-child { border: none; }
 
-        &.active { border-left: 3px solid #1E40AF; background: #EFF6FF; }
+        &.active { background: #F8FAFC; }
     }
 
     .info {
         display: flex; flex-direction: column;
-        strong { font-size: 13px; color: #1F2937; }
-        span { font-size: 11px; color: #6B7280; }
+        strong { font-size: 13px; color: #0F172A; font-weight: 500; }
+        span { font-size: 11px; color: #64748B; }
     }
 
-    .icon { color: #6B7280; }
-    .active .icon { color: #1E40AF; }
+    .icon { color: #94A3B8; }
+    .active .icon { color: #475569; }
 `
 
 // --- MOCKUP 2: DASHBOARD CONSOLIDADO ---
 const ConsolidatedMock = styled.div`
-    padding: 20px;
-    background: #F3F4F6;
+    padding: 24px;
+    background: #FFFFFF;
 
-    .kpi-row { display: flex; gap: 15px; margin-bottom: 20px; }
+    .kpi-row { display: flex; gap: 16px; margin-bottom: 24px; }
     .kpi {
-        flex: 1; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        small { display: block; font-size: 11px; color: #6B7280; margin-bottom: 5px; text-transform: uppercase; }
-        strong { font-size: 20px; color: #111827; }
-        .trend { font-size: 10px; color: #10B981; margin-left: 5px; }
+        flex: 1; background: #FFFFFF; padding: 16px; border-radius: 8px; border: 1px solid #E2E8F0;
+        small { display: block; font-size: 11px; color: #64748B; margin-bottom: 6px; font-weight: 500; text-transform: uppercase; }
+        strong { font-size: 20px; color: #0F172A; font-weight: 600; }
+        .trend { font-size: 10px; color: #475569; margin-left: 6px; font-weight: 500; }
     }
 
     .chart-box {
-        background: white; padding: 20px; border-radius: 8px;
-        h4 { margin: 0 0 15px 0; font-size: 14px; color: #374151; }
+        background: #FFFFFF; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0;
+        h4 { margin: 0 0 16px 0; font-size: 13px; color: #0F172A; font-weight: 500; }
 
-        .bars { display: flex; align-items: flex-end; gap: 15px; height: 120px; padding-bottom: 10px; border-bottom: 1px solid #E5E7EB; }
-        .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .bar { width: 30px; background: #3B82F6; border-radius: 4px 4px 0 0; }
-        .label { font-size: 10px; color: #6B7280; }
+        .bars { display: flex; align-items: flex-end; gap: 16px; height: 120px; padding-bottom: 12px; border-bottom: 1px dashed #E2E8F0; }
+        .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .bar { width: 32px; background: #94A3B8; border-radius: 4px 4px 0 0; }
+        .label { font-size: 11px; color: #64748B; font-weight: 500; }
     }
 `
 
 // --- MOCKUP 3: GESTÃO DE UNIDADES ---
 const UnitsMock = styled.div`
-    padding: 20px;
+    padding: 24px;
     background: white;
 
     .header-table {
-        display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #E5E7EB; padding-bottom: 10px;
-        strong { font-size: 14px; color: #1F2937; }
-        span { font-size: 12px; color: #1E40AF; font-weight: bold; cursor: pointer; }
+        display: flex; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid #E2E8F0; padding-bottom: 12px;
+        strong { font-size: 14px; color: #0F172A; font-weight: 600; }
+        span { font-size: 12px; color: #475569; font-weight: 500; cursor: pointer; }
     }
 
     .unit-row {
-        display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F3F4F6;
+        display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F1F5F9;
         &:last-child { border: none; }
 
-        .left { display: flex; gap: 10px; align-items: center; }
-        .pin { color: #9CA3AF; }
-        .pin.main { color: #F59E0B; }
+        .left { display: flex; gap: 12px; align-items: center; }
+        .pin { color: #94A3B8; }
+        .pin.main { color: #475569; }
 
-        .name { font-size: 13px; font-weight: 600; color: #374151; }
-        .code { font-size: 11px; color: #9CA3AF; margin-left: 5px; }
+        .name { font-size: 13px; font-weight: 500; color: #0F172A; }
+        .code { font-size: 11px; color: #64748B; margin-left: 6px; }
 
         .status {
-            font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #DCFCE7; color: #166534; font-weight: bold;
+            font-size: 11px; padding: 4px 10px; border-radius: 999px; background: #F8FAFC; color: #475569; font-weight: 500; border: 1px solid #E2E8F0;
         }
     }
 `
@@ -193,31 +194,28 @@ const UnitsMock = styled.div`
 const PowerGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 4rem;
     @media (max-width: ${props => props.theme.breakpoints.md}) { grid-template-columns: 1fr; }
 `
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #FFFFFF;
     padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border-radius: 1rem;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s;
     &:hover {
-        transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: #1E40AF;
-        .icon { background: #1E40AF; color: white; }
+        border-color: #CBD5E1;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     }
     .icon {
-        width: 48px; height: 48px; border-radius: 12px;
-        background: white; display: flex; align-items: center; justify-content: center;
-        color: #1E40AF; margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        width: 40px; height: 40px; border-radius: 8px;
+        background: #F8FAFC; display: flex; align-items: center; justify-content: center;
+        color: #475569; margin-bottom: 1.25rem;
+        border: 1px solid #E2E8F0;
     }
-    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: ${props => props.theme.colors.textDark}; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+    h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; color: #0F172A; }
+    p { font-size: 0.875rem; color: #64748B; line-height: 1.5; margin: 0; }
 `
 
 export default function MultiSchoolDeepDive() {
@@ -382,11 +380,12 @@ export default function MultiSchoolDeepDive() {
                 <div style={{textAlign: 'center', marginBottom: '3rem'}}>
                     <h3 style={{
                         fontSize: '2rem',
-                        fontWeight: 800,
-                        color: '#333',
-                        fontFamily: 'var(--font-inter)'
+                        fontWeight: 700,
+                        color: '#0F172A',
+                        fontFamily: 'var(--font-inter)',
+                        letterSpacing: '-0.02em'
                     }}>Arquitetura Enterprise</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Tecnologia robusta para grandes operações.</p>
+                    <p style={{color: '#475569', marginTop: '0.75rem', fontSize: '1.125rem'}}>Tecnologia robusta para grandes operações.</p>
                 </div>
 
                 <PowerGrid>

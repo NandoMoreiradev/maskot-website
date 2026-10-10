@@ -1,41 +1,59 @@
 'use client'
 
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import AuroraBackground from '@/components/AuroraBackground'
+
+const fadeUp = keyframes`
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+`
 
 const HeroWrapper = styled.section`
-    background: linear-gradient(180deg, ${props => props.theme.colors.pageBackground} 0%, #fff 100%);
-    padding: 6rem 2rem 4rem;
-    text-align: center;
+    position: relative;
+    padding: 6rem 0 4rem;
+    overflow: hidden;
+    background: transparent;
 `
 
 const HeroContainer = styled.div`
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    animation: ${fadeUp} 0.8s ease-out forwards;
+
+    @media (min-width: ${props => props.theme.breakpoints.lg}) {
+        padding: 4rem 2rem;
+    }
 `
 
 const Tag = styled.span`
-    background: #FFF0F5;
-    color: #F97316;
+    background: transparent;
+    color: #475569;
     padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 700;
+    border-radius: 999px;
+    font-weight: 500;
     font-size: 0.875rem;
     margin-bottom: 1.5rem;
-    border: 1px solid #FFEDD5;
+    border: 1px solid #E2E8F0;
+    display: inline-block;
 `
 
 const Title = styled.h1`
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-family: ${props => props.theme.typography.fontFamily.main};
+    font-size: 3rem;
+    font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    color: ${props => props.theme.colors.textDark};
-    font-family: ${props => props.theme.typography.fontFamily.main};
+    color: #0F172A;
+    letter-spacing: -0.02em;
+    text-align: center;
 
     span {
         background: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
@@ -43,24 +61,25 @@ const Title = styled.h1`
         -webkit-text-fill-color: transparent;
     }
 
-    @media (max-width: ${props => props.theme.breakpoints.md}) {
-        font-size: 2.25rem;
+    @media (min-width: ${props => props.theme.breakpoints.md}) {
+        font-size: 4rem;
     }
 `
 
 const Subtitle = styled.p`
+    font-family: ${props => props.theme.typography.fontFamily.main};
     font-size: 1.25rem;
-    color: ${props => props.theme.colors.textMedium};
+    color: #475569;
     max-width: 760px;
     line-height: 1.6;
-    font-family: ${props => props.theme.typography.fontFamily.main};
     margin-bottom: 2.5rem;
+    text-align: center;
 `
 
 const ImageWrapper = styled.div`
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     margin-bottom: 2rem;
     filter: drop-shadow(0 20px 30px rgba(249, 115, 22, 0.2));
     animation: float 6s ease-in-out infinite;
@@ -89,21 +108,20 @@ const CTAButton = styled.button`
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
+    background: #0F172A;
     color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
     border: none;
     cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.35);
+    box-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.3);
     transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 35px rgba(249, 115, 22, 0.45);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.4);
     }
 
     @media (max-width: 560px) {
@@ -117,19 +135,19 @@ const SecondaryButton = styled.button`
     justify-content: center;
     gap: 0.5rem;
     background: white;
-    color: ${props => props.theme.colors.textDark};
+    color: #0F172A;
     font-weight: 600;
-    font-size: 1.1rem;
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    border: 1px solid ${props => props.theme.colors.borderLight};
+    font-size: 1rem;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    border: 1px solid #E2E8F0;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-        border-color: #F97316;
-        color: #F97316;
-        background: ${props => props.theme.colors.lightGray};
+        background: #F8FAFC;
+        border-color: #CBD5E1;
+        transform: translateY(-2px);
     }
 
     @media (max-width: 560px) {
@@ -147,10 +165,10 @@ const StatsBar = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     padding: 2rem 3rem;
-    background: white;
-    border-radius: 20px;
-    border: 1px solid #F1F5F9;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    background: #FFFFFF;
+    border-radius: 1rem;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     width: 100%;
     max-width: 700px;
 
@@ -196,6 +214,7 @@ const StatDivider = styled.div`
 export default function CopilotMiaHero() {
     return (
         <HeroWrapper>
+            <AuroraBackground />
             <HeroContainer>
                 <ImageWrapper>
                     <Image

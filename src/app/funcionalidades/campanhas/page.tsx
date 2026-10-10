@@ -18,7 +18,7 @@ export default function CampaignsPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <CampaignHero />
                 <CampaignDeepDive />
                 <CampaignFeatures />

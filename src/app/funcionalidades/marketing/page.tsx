@@ -18,7 +18,7 @@ export default function MarketingPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <MarketingHero />
                 <MarketingDeepDive />
                 <CTASection />

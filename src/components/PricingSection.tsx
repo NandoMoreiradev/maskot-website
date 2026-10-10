@@ -10,7 +10,7 @@ import { SectionHeader as BaseSectionHeader, GradientText } from '@/components/u
 
 const Section = styled.section`
   padding: 4.5rem 0;
-  background: ${props => props.theme.colors.pageBackground};
+  background: ${props => props.theme.colors.white};
   position: relative;
   overflow: hidden;
 
@@ -19,11 +19,72 @@ const Section = styled.section`
   }
 `
 
-const BackgroundBlur = styled.div`
+const GeometricAccents = styled.div`
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, ${props => props.theme.colors.primary}10 0%, transparent 60%);
   pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% -20%, ${props => props.theme.colors.primary}08 0%, transparent 60%);
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border: 1px solid ${props => props.theme.colors.borderLight};
+    border-radius: 50%;
+  }
+
+  &::before {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    left: -250px;
+    opacity: 0.7;
+  }
+
+  &::after {
+    width: 400px;
+    height: 400px;
+    bottom: -100px;
+    right: -150px;
+    opacity: 0.5;
+  }
+`
+
+interface CrossProps {
+  $top: string;
+  $left?: string;
+  $right?: string;
+}
+
+const Cross = styled.div<CrossProps>`
+  position: absolute;
+  top: ${props => props.$top};
+  left: ${props => props.$left || 'auto'};
+  right: ${props => props.$right || 'auto'};
+  width: 16px;
+  height: 16px;
+  opacity: 0.4;
+  z-index: 0;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    background: ${props => props.theme.colors.primary};
+  }
+
+  &::before {
+    top: 7px;
+    left: 0;
+    width: 16px;
+    height: 1px;
+  }
+
+  &::after {
+    top: 0;
+    left: 7px;
+    width: 1px;
+    height: 16px;
+  }
 `
 
 // Largura e padding próprios da seção de preços (mais estreita que o padrão de 1200px/2rem)
@@ -64,7 +125,7 @@ const SectionTitle = styled.h2`
   }
 `
 
-const Highlight = styled(GradientText).attrs({ $to: 'accent' })``
+const Highlight = styled(GradientText)``
 
 const SectionSubtitle = styled.p`
   font-size: ${props => props.theme.typography.fontSize.base};
@@ -120,9 +181,9 @@ const Tab = styled.button<{ $isActive: boolean }>`
 
 const CardGrid = styled.div`
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: stretch;
+  align-items: center;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -133,52 +194,69 @@ const CardGrid = styled.div`
   }
 `
 
-const Card = styled.div<{ $isPopular?: boolean }>`
+interface CardProps {
+  $isPopular?: boolean;
+}
+
+const Card = styled.div<CardProps>`
   display: flex;
   flex-direction: column;
   background: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.borderRadius.xl};
-  padding: 1.5rem 1.25rem 1.25rem;
+  padding: 1.5rem 1.25rem;
   position: relative;
-  border: 1px solid ${props => props.theme.colors.borderLight};
-  transition: box-shadow ${props => props.theme.transitions.base},
-              transform ${props => props.theme.transitions.base};
+  border: ${props => props.$isPopular ? `2px solid ${props.theme.colors.primary}` : `1px solid ${props.theme.colors.borderLight}`};
+  transition: all 0.3s ease;
+  box-shadow: ${props => props.theme.shadows.sm};
+  
+  transform: ${props => props.$isPopular ? 'scale(1.02)' : 'scale(1)'};
+  z-index: ${props => props.$isPopular ? 2 : 1};
 
   ${props => props.$isPopular && css`
-    border-color: ${props.theme.colors.primary};
-    box-shadow: 0 0 0 3px ${props.theme.colors.primary}1F, ${props.theme.shadows.lg};
+    background: linear-gradient(180deg, #F4FAFF 0%, #FFFFFF 30%);
+    box-shadow: 0 15px 30px -5px ${props => props.theme.colors.primary}20, 0 0 0 1px ${props => props.theme.colors.primary}20;
   `}
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: ${props => props.theme.shadows.lg};
+    transform: ${props => props.$isPopular ? 'scale(1.02) translateY(-3px)' : 'scale(1) translateY(-3px)'};
+    box-shadow: ${props => props.theme.shadows.md};
+    
+    ${props => props.$isPopular && css`
+      box-shadow: 0 20px 40px -10px ${props => props.theme.colors.primary}30, 0 0 0 1px ${props.theme.colors.primary}40;
+    `}
   }
 `
 
 const PopularTag = styled.span`
   position: absolute;
-  top: -0.7rem;
-  left: 1.25rem;
-  background: ${props => props.theme.colors.primary};
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: ${props => props.theme.gradients.primary};
   color: ${props => props.theme.colors.white};
-  padding: 0.2rem 0.7rem;
+  padding: 0.25rem 0.85rem;
   border-radius: ${props => props.theme.borderRadius.full};
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 12px ${props => props.theme.colors.primary}50;
+  white-space: nowrap;
 `
 
 const PlanName = styled.h3`
   font-size: ${props => props.theme.typography.fontSize.lg};
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   color: ${props => props.theme.colors.textDark};
+  text-align: center;
 `
 
 const PlanFor = styled.p`
   font-size: ${props => props.theme.typography.fontSize.xs};
   color: ${props => props.theme.colors.textMedium};
   margin-bottom: 0.9rem;
+  text-align: center;
+  min-height: 2rem;
 `
 
 const Metric = styled.p`
@@ -186,14 +264,21 @@ const Metric = styled.p`
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   color: ${props => props.theme.colors.textDark};
   line-height: 1.15;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.15rem;
+  text-align: center;
 `
 
 const MetricLabel = styled.p`
   font-size: ${props => props.theme.typography.fontSize.xs};
   color: ${props => props.theme.colors.textMedium};
   line-height: 1.3;
-  margin-bottom: 1rem;
+  text-align: center;
+`
+
+const CardDivider = styled.hr`
+  border: 0;
+  border-top: 1px solid ${props => props.theme.colors.borderLight};
+  margin: 1.25rem 0;
 `
 
 const InheritLine = styled.p`
@@ -209,7 +294,7 @@ const Bullets = styled.ul`
   margin: 0 0 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.5rem;
   flex: 1;
 `
 
@@ -232,29 +317,37 @@ const Bullet = styled.li`
 
 const CardCTA = styled.button<{ $primary: boolean }>`
   width: 100%;
-  padding: 0.7rem 0.75rem;
+  padding: 0.75rem 1rem;
   border-radius: ${props => props.theme.borderRadius.md};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
   font-size: ${props => props.theme.typography.fontSize.sm};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  transition: all ${props => props.theme.transitions.fast};
+  gap: 0.5rem;
+  transition: all ${props => props.theme.transitions.base};
 
   ${props => props.$primary ? css`
     background: ${props.theme.colors.primary};
     color: ${props.theme.colors.white};
-    border: 1px solid ${props.theme.colors.primary};
-    &:hover { background: #0069d9; }
+    border: none;
+    box-shadow: 0 4px 12px ${props.theme.colors.primary}40;
+    
+    &:hover { 
+      background: #0056b3; 
+      box-shadow: 0 6px 16px ${props.theme.colors.primary}60;
+      transform: translateY(-2px);
+    }
   ` : css`
     background: transparent;
-    color: ${props.theme.colors.text};
+    color: ${props.theme.colors.textDark};
     border: 1px solid ${props.theme.colors.borderLight};
+    
     &:hover {
       border-color: ${props.theme.colors.primary};
       color: ${props.theme.colors.primary};
+      transform: translateY(-2px);
     }
   `}
 `
@@ -264,8 +357,8 @@ const CardCTA = styled.button<{ $primary: boolean }>`
 const IncludedStrip = styled.div`
   margin-top: 1.25rem;
   padding: 0.9rem 1.1rem;
-  background: ${props => props.theme.colors.white};
-  border: 1px dashed ${props => props.theme.colors.borderLight};
+  background: #F8FAFC;
+  border: 1px solid ${props => props.theme.colors.borderLight};
   border-radius: ${props => props.theme.borderRadius.lg};
   display: flex;
   flex-wrap: wrap;
@@ -343,7 +436,11 @@ const Table = styled.table`
 // Coluna destacada = Crescimento
 const POPULAR_IDX = 1
 
-const Th = styled.th<{ $isPopular?: boolean }>`
+interface ThProps {
+  $isPopular?: boolean;
+}
+
+const Th = styled.th<ThProps>`
   padding: 0.75rem 0.75rem;
   font-size: ${props => props.theme.typography.fontSize.sm};
   font-weight: ${props => props.theme.typography.fontWeight.extrabold};
@@ -649,7 +746,10 @@ export default function PricingSection() {
 
   return (
     <Section id="precos">
-      <BackgroundBlur aria-hidden="true" />
+      <GeometricAccents aria-hidden="true" />
+      <Cross $top="15%" $left="10%" />
+      <Cross $top="65%" $right="8%" />
+      
       <Container>
         <SectionHeader>
           <Badge>Planos Flexíveis</Badge>
@@ -657,7 +757,7 @@ export default function PricingSection() {
             Investimento que se paga com <Highlight>uma matrícula</Highlight>
           </SectionTitle>
           <SectionSubtitle>
-            Escolha o CRM de captação e some WhatsApp e IA quando fizer sentido.
+            Escolha o plano ideal da plataforma e adicione WhatsApp e IA quando fizer sentido.
           </SectionSubtitle>
         </SectionHeader>
 
@@ -669,9 +769,7 @@ export default function PricingSection() {
             aria-controls={panelId('CRM')}
             $isActive={activeTab === 'CRM'}
             onClick={() => setActiveTab('CRM')}
-          >
-            Maskot CRM
-          </Tab>
+          >Plataforma Maskot</Tab>
           <Tab
             role="tab"
             id={tabId('WA')}
@@ -695,6 +793,7 @@ export default function PricingSection() {
                   <PlanFor>{plan.for}</PlanFor>
                   <Metric>{plan.metric}</Metric>
                   <MetricLabel>{plan.metricLabel}</MetricLabel>
+                  <CardDivider />
                   {plan.inherits && <InheritLine>{plan.inherits}</InheritLine>}
                   <Bullets>
                     {plan.bullets.map(bullet => (
@@ -734,7 +833,7 @@ export default function PricingSection() {
                 <TableWrapper>
                   <Table>
                     <HiddenCaption>
-                      Comparação de recursos entre os planos do Maskot CRM
+                      Comparação de recursos entre os planos da Plataforma Maskot
                     </HiddenCaption>
                     <thead>
                       <tr>
@@ -788,6 +887,7 @@ export default function PricingSection() {
                   <PlanFor>{plan.for}</PlanFor>
                   <Metric>{plan.metric}</Metric>
                   <MetricLabel>{plan.metricLabel}</MetricLabel>
+                  <CardDivider />
                   <Bullets>
                     {plan.bullets.map(bullet => (
                       <Bullet key={bullet}>

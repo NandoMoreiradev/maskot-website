@@ -7,22 +7,23 @@ import { Container } from '@/components/ui/Container'
 import { SectionHeader, Eyebrow, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
 
 const Section = styled.section`
-    padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    padding: 4.5rem 0;
+    background: #F8FAFC;
 `
 
 const List = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
 `
 
 const Item = styled.div<{ $open: boolean }>`
     border: 1px solid ${props => props.$open ? props.theme.colors.primary + '40' : props.theme.colors.borderLight};
-    border-radius: 14px;
-    background: ${props => props.$open ? props.theme.colors.lightGray : props.theme.colors.white};
+    border-radius: 12px;
+    background: ${props => props.theme.colors.white};
+    box-shadow: ${props => props.$open ? props.theme.shadows.sm : 'none'};
     overflow: hidden;
-    transition: border-color 0.25s ease, background 0.25s ease;
+    transition: all 0.25s ease;
 `
 
 const Question = styled.button`
@@ -35,22 +36,27 @@ const Question = styled.button`
     background: none;
     border: none;
     cursor: pointer;
-    padding: 1.35rem 1.5rem;
-    font-size: 1.05rem;
+    padding: 1.15rem 1.25rem;
+    font-size: 1rem;
     font-weight: 700;
     color: ${props => props.theme.colors.textDark};
     font-family: inherit;
 
     .icon {
         flex-shrink: 0;
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
-        background: ${props => props.theme.colors.primary}12;
+        background: ${props => props.theme.colors.primary}10;
         color: ${props => props.theme.colors.primary};
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    &:hover .icon {
+        background: ${props => props.theme.colors.primary}20;
     }
 `
 
@@ -64,11 +70,11 @@ const Answer = styled.div<{ $open: boolean }>`
     }
 
     p {
-        padding: 0 1.5rem 1.4rem;
+        padding: 0 1.25rem 1.15rem;
         margin: 0;
-        font-size: 0.98rem;
+        font-size: 0.95rem;
         color: ${props => props.theme.colors.textMedium};
-        line-height: 1.65;
+        line-height: 1.6;
     }
 `
 
@@ -99,7 +105,7 @@ const faqs = [
     },
     {
         q: 'Como funciona a cobrança? Tem fidelidade?',
-        a: 'Os planos são flexíveis e pensados para se pagarem com poucas matrículas. Fale com um consultor para montar a combinação ideal de CRM e add-ons de WhatsApp e IA para o tamanho da sua escola.',
+        a: 'Os planos são flexíveis e pensados para se pagarem com poucas matrículas. Fale com um consultor para montar a combinação ideal da plataforma e add-ons de WhatsApp e IA para o tamanho da sua escola.',
     },
 ]
 

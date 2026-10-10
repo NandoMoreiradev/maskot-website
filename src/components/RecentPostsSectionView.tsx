@@ -7,8 +7,8 @@ import { Container } from '@/components/ui/Container'
 import RecentPostsCarousel from './RecentPostsCarousel'
 
 const Section = styled.section`
-    padding: 4rem 0;
-    background: ${props => props.theme.colors.pageBackground};
+    padding: 4.5rem 0;
+    background: ${props => props.theme.colors.white};
     overflow: hidden;
 `
 

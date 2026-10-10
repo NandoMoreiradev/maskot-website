@@ -5,28 +5,24 @@ import { ShieldCheck } from 'lucide-react'
 
 
 const SectionWrapper = styled.section`
-    padding: 4rem 1rem;
-    background-color: ${props => props.theme.colors.pageBackground};
+    padding: 4.5rem 1rem;
+    background-color: #F8FAFC;
     display: flex;
     justify-content: center;
 `
 
-
 const CTACard = styled.div`
     width: 100%;
-    max-width: 1000px;
-    background: linear-gradient(135deg,
-        ${props => props.theme.colors.white} 0%,
-        ${props => props.theme.colors.pageBackground} 100%
-    );
-    border: 1px solid ${props => props.theme.colors.primary}30;
+    max-width: 900px;
+    background: ${props => props.theme.colors.white};
+    border: 1px solid ${props => props.theme.colors.borderLight};
     border-radius: 16px;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
+    box-shadow: ${props => props.theme.shadows.md};
 
-    /* Wash de marca bem sutil, coerente com os cards de destaque do resto da página */
     &:before {
         content: '';
         position: absolute;
@@ -34,10 +30,8 @@ const CTACard = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg,
-            ${props => props.theme.colors.primary}0D 0%,
-            ${props => props.theme.colors.secondary}0D 100%
-        );
+        background: radial-gradient(circle at top right, ${props => props.theme.colors.primary}0D 0%, transparent 50%),
+                    radial-gradient(circle at bottom left, ${props => props.theme.colors.accent}0D 0%, transparent 50%);
         pointer-events: none;
     }
 `
@@ -48,10 +42,10 @@ const Content = styled.div`
 `
 
 const CTATitle = styled.h3`
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
     color: ${props => props.theme.colors.textDark};
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 
     @media (max-width: 768px) {
         font-size: 1.5rem;
@@ -59,7 +53,7 @@ const CTATitle = styled.h3`
 `
 
 const CTASubtitle = styled.p`
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: ${props => props.theme.colors.textMedium};
     margin-bottom: 2rem;
     max-width: 600px;
@@ -70,23 +64,21 @@ const CTASubtitle = styled.p`
 const CTAButton = styled.button`
     border: none;
     display: inline-block;
-    background: linear-gradient(135deg,
-        ${props => props.theme.colors.primary} 0%,
-        ${props => props.theme.colors.secondary} 100%
-    );
+    background: ${props => props.theme.colors.primary};
     color: white;
     text-decoration: none;
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px ${props => props.theme.colors.primary}40;
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(0, 123, 255, 0.4);
+        box-shadow: 0 6px 16px ${props => props.theme.colors.primary}60;
+        background: ${props => props.theme.colors.primary};
     }
 `
 
@@ -112,9 +104,9 @@ export default function CTASection() {
         <SectionWrapper>
             <CTACard>
                 <Content>
-                    <CTATitle>Pronto para transformar conversas em matrículas?</CTATitle>
+                    <CTATitle>Pronto para escalar a captação da sua escola?</CTATitle>
                     <CTASubtitle>
-                        Fale com um consultor e veja, na prática, como o Maskot organiza sua captação e garante que nenhuma família fique sem resposta.
+                        Fale com um especialista e veja como o Maskot integra seu marketing, comercial e atendimento em uma única plataforma.
                     </CTASubtitle>
                     <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
                         Fale com um Consultor

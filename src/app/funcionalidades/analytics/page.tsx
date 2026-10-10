@@ -18,7 +18,7 @@ export default function AnalyticsPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <AnalyticsHero />
                 <AnalyticsDeepDive />
                 <CTASection />

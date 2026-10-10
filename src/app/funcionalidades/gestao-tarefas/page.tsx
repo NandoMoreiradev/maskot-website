@@ -18,7 +18,7 @@ export default function TasksPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <TasksHero />
                 <TasksDeepDive />
                 <CTASection />

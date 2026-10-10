@@ -78,7 +78,7 @@ const FeatureItem = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        color: ${props => props.theme.colors.primary};
+        color: #9333EA;
         // Cast seguro para TS
         border: 1px solid ${props => (props.theme.colors as unknown as {
             borderLight?: string
@@ -89,12 +89,12 @@ const FeatureItem = styled.div`
     h4 {
         font-size: 1.1rem;
         font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
         margin-bottom: 0.25rem;
     }
 
     p {
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.5;
         font-size: 0.95rem;
     }
@@ -103,20 +103,20 @@ const FeatureItem = styled.div`
 // --- ELEMENTOS DO MOCKUP (Builder) ---
 const MockupWindow = styled.div`
     background: ${props => props.theme.colors.white};
-    border-radius: 16px;
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => (props.theme.colors as unknown as { borderLight?: string }).borderLight || '#DEE2E6'};
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${slideUp} 0.8s ease-out;
 `
 const WindowHeader = styled.div`
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid #E9ECEF;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #FAFAFA;
+    background: #F8FAFC;
 
     .title-group {
         display: flex;
@@ -128,18 +128,23 @@ const WindowHeader = styled.div`
         align-items: center;
         gap: 6px;
         font-size: 0.75rem;
-        font-weight: 700;
-        color: #28A745;
-        background: #DCFCE7;
+        font-weight: 600;
+        color: #475569;
+        background: transparent;
         padding: 4px 10px;
         border-radius: 20px;
+        border: 1px solid #E2E8F0;
         text-transform: uppercase;
+        
+        svg {
+            color: #16A34A;
+        }
     }
 `
 const BuilderCanvas = styled.div`
     padding: 2rem;
-    background: #F8F9FA;
-    background-image: radial-gradient(#E5E7EB 1px, transparent 0);
+    background: #FFFFFF;
+    background-image: radial-gradient(rgba(147, 51, 234, 0.08) 1px, transparent 0);
     background-size: 20px 20px;
     min-height: 520px;
     display: flex;
@@ -149,9 +154,8 @@ const BuilderCanvas = styled.div`
 const NodeCard = styled.div<{ $type: 'trigger' | 'action' }>`
     width: 100%;
     max-width: 380px;
-    background: #fff;
-    border: 1px solid ${props => props.$type === 'trigger' ? props.theme.colors.secondary : '#DEE2E6'};
-    border-left: 4px solid ${props => props.$type === 'trigger' ? props.theme.colors.secondary : props.theme.colors.primary};
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 8px;
     padding: 1rem;
     display: flex;
@@ -161,41 +165,56 @@ const NodeCard = styled.div<{ $type: 'trigger' | 'action' }>`
     position: relative;
     z-index: 2;
     ${props => props.$type === 'trigger' && css`
-        &::before { content: 'GATILHO'; position: absolute; top: -10px; left: 12px; background: ${props.theme.colors.secondary}; color: white; font-size: 0.6rem; font-weight: bold; padding: 2px 8px; border-radius: 4px; }
+        &::before { 
+            content: 'GATILHO'; 
+            position: absolute; 
+            top: -10px; 
+            left: 12px; 
+            background: #FFFFFF; 
+            color: #64748B; 
+            font-size: 0.65rem; 
+            font-weight: 600; 
+            padding: 2px 8px; 
+            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+        }
     `}
 `
 const ConnectorLine = styled.div` height: 24px;
     width: 2px;
-    background: #CBD5E1;
+    background: #E2E8F0;
     margin: 4px 0;
     animation: ${flowLineAnim} 0.5s ease forwards; `
-const NodeIcon = styled.div<{ $color: string }>` width: 36px;
+const NodeIcon = styled.div<{ $color: string }>` 
+    width: 36px;
     height: 36px;
     border-radius: 8px;
-    background: ${props => props.$color}15;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
     color: ${props => props.$color};
     display: flex;
     align-items: center;
-    justify-content: center; `
+    justify-content: center; 
+`
 const NodeContent = styled.div` flex: 1;
 
     h5 {
         font-size: 0.9rem;
         font-weight: 600;
         margin: 0 0 2px 0;
-        color: #333;
+        color: #0F172A;
     }
 
     p {
         font-size: 0.75rem;
-        color: #666;
+        color: #475569;
         margin: 0;
     } `
 const AddNodeButton = styled.div` width: 32px;
     height: 32px;
     border-radius: 50%;
     background: white;
-    border: 1px dashed #94A3B8;
+    border: 1px dashed #CBD5E1;
     color: #94A3B8;
     display: flex;
     align-items: center;
@@ -203,10 +222,12 @@ const AddNodeButton = styled.div` width: 32px;
     margin-top: 4px; `
 const TagChip = styled.span` display: inline-block;
     font-size: 0.7rem;
-    padding: 2px 6px;
-    background: #E0F2F1;
-    color: #00695C;
-    border-radius: 4px;
+    padding: 2px 8px;
+    background: transparent;
+    color: #475569;
+    border: 1px solid #E2E8F0;
+    font-weight: 600;
+    border-radius: 100px;
     margin-top: 4px; `
 
 
@@ -219,12 +240,12 @@ const UseCasesHeader = styled.div`
     h3 {
         font-size: 2rem;
         font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
         margin-bottom: 1rem;
     }
 
     p {
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         font-size: 1.1rem;
     }
 `
@@ -243,9 +264,9 @@ const UseCasesGrid = styled.div`
 `
 
 const RecipeCard = styled.div`
-    background: #fff;
-    border: 1px solid ${(props) => (props.theme.colors as unknown as { borderLight?: string }).borderLight || '#DEE2E6'};
-    border-radius: 16px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 24px;
     padding: 2rem;
     transition: all 0.3s ease;
     display: flex;
@@ -262,8 +283,9 @@ const IconHeader = styled.div`
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: #F0F7FF;
-    color: ${props => props.theme.colors.primary};
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #9333EA;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,13 +295,13 @@ const IconHeader = styled.div`
 const Title = styled.h4`
     font-size: 1.25rem;
     font-weight: 700;
-    color: ${props => props.theme.colors.textDark};
+    color: #0F172A;
     margin-bottom: 0.5rem;
 `
 
 const Description = styled.p`
     font-size: 0.9rem;
-    color: ${props => props.theme.colors.textMedium};
+    color: #475569;
     margin-bottom: 2rem;
     flex: 1;
     line-height: 1.5;
@@ -289,7 +311,7 @@ const WorkflowList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    background: #F8F9FA;
+    background: #FFFFFF;
     padding: 1rem;
     border-radius: 8px;
     border: 1px solid #E9ECEF;
@@ -301,14 +323,14 @@ const Step = styled.div`
     gap: 0.75rem;
     font-size: 0.8rem;
     font-weight: 500;
-    color: ${props => props.theme.colors.textDark};
+    color: #0F172A;
 
     svg {
         flex-shrink: 0;
     }
     
     &.trigger { color: ${props => props.theme.colors.secondary}; }
-    &.action { color: ${props => props.theme.colors.textDark}; }
+    &.action { color: #0F172A; }
 `
 
 // Ícone helper
@@ -384,7 +406,7 @@ export default function AutomationsDeepDive() {
                         <BuilderCanvas>
                             {/* Trigger */}
                             <NodeCard $type="trigger">
-                                <NodeIcon $color="#28A745"><UserPlus size={20}/></NodeIcon>
+                                <NodeIcon $color="#9333EA"><UserPlus size={20}/></NodeIcon>
                                 <NodeContent>
                                     <h5>Novo Lead Cadastrado</h5>
                                     <p>Origem: Site ou Landing Page</p>
@@ -396,7 +418,7 @@ export default function AutomationsDeepDive() {
                             {/* Action 1 */}
                             <NodeCard $type="action">
                                 <GripVertical size={16} color="#ccc" style={{marginRight: -4}}/>
-                                <NodeIcon $color="#00A884"><MessageSquare size={20}/></NodeIcon>
+                                <NodeIcon $color="#16A34A"><MessageSquare size={20}/></NodeIcon>
                                 <NodeContent>
                                     <h5>Enviar WhatsApp</h5>
                                     <p>Template: <em>Oi! Vi seu interesse...</em></p>
@@ -406,18 +428,18 @@ export default function AutomationsDeepDive() {
 
                             {/* Action 2 */}
                             <div style={{
-                                padding: '4px 12px', background: '#E9ECEF', borderRadius: '12px',
-                                fontSize: '0.75rem', color: '#495057', border: '1px solid #DEE2E6',
-                                display: 'flex', alignItems: 'center', gap: '6px'
+                                padding: '4px 12px', background: '#FFFFFF', borderRadius: '100px',
+                                fontSize: '0.75rem', color: '#475569', border: '1px solid #E2E8F0',
+                                display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600
                             }}>
-                                <Clock size={12}/> Aguardar 10 minutos
+                                <Clock size={12} color="#94A3B8"/> Aguardar 10 minutos
                             </div>
                             <ConnectorLine/>
 
                             {/* Action 3 */}
                             <NodeCard $type="action">
                                 <GripVertical size={16} color="#ccc" style={{marginRight: -4}}/>
-                                <NodeIcon $color="#6C757D"><CheckCircle2 size={20}/></NodeIcon>
+                                <NodeIcon $color="#3B82F6"><CheckCircle2 size={20}/></NodeIcon>
                                 <NodeContent>
                                     <h5>Adicionar Tag</h5>
                                     <TagChip>Em Atendimento</TagChip>

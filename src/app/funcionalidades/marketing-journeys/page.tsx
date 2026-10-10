@@ -18,7 +18,7 @@ export default function MarketingJourneysPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <MarketingJourneysHero />
                 <MarketingJourneysDeepDive />
                 <MarketingJourneysFeatures />

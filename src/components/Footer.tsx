@@ -6,13 +6,11 @@ import Image from 'next/image'
 import { Mail, Phone, ExternalLink, Instagram, Facebook } from 'lucide-react'
 
 const FooterWrapper = styled.footer`
-    background: linear-gradient(135deg,
-    ${props => props.theme.colors.textDark} 0%,
-    #1a1a1a 100%
-    );
-    color: white;
+    background: #F8FAFC;
+    color: #0F172A;
     position: relative;
     overflow: hidden;
+    border-top: 1px solid #E2E8F0;
 
     &:before {
         content: '';
@@ -20,26 +18,22 @@ const FooterWrapper = styled.footer`
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: linear-gradient(90deg,
-        ${props => props.theme.colors.primary} 0%,
-        ${props => props.theme.colors.secondary} 50%,
-        ${props => props.theme.colors.accent} 100%
-        );
+        height: 3px;
+        background: ${props => props.theme.gradients.primary};
     }
 `
 
 const Container = styled.div`
     max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 2rem 2rem;
+    padding: 3rem 2rem 1.5rem;
 `
 
 const FooterContent = styled.div`
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
 
     @media (max-width: 968px) {
         grid-template-columns: repeat(2, 1fr);
@@ -63,12 +57,12 @@ const Logo = styled.div`
     align-items: center;
     font-size: 1.5rem;
     font-weight: 800;
-    color: white;
+    color: #0F172A;
     margin-bottom: 1rem;
     gap: 0.75rem;
 
     img {
-        height: 60px;
+        height: 48px;
         width: auto;
     }
 
@@ -82,7 +76,7 @@ const Logo = styled.div`
 const CompanyDescription = styled.p`
     font-size: 1rem;
     line-height: 1.6;
-    color: #cccccc;
+    color: #64748B;
     margin-bottom: 1.5rem;
     max-width: 400px;
 `
@@ -98,7 +92,7 @@ const ContactItem = styled.div`
     align-items: center;
     gap: 0.75rem;
     font-size: 0.95rem;
-    color: #cccccc;
+    color: #64748B;
 
     svg {
         width: 18px;
@@ -108,7 +102,7 @@ const ContactItem = styled.div`
     }
 
     a {
-        color: #cccccc;
+        color: #64748B;
         text-decoration: none;
         transition: color 0.3s ease;
 
@@ -123,8 +117,8 @@ const FooterSection = styled.div``
 const SectionTitle = styled.h4`
     font-size: 1.1rem;
     font-weight: 700;
-    color: white;
-    margin-bottom: 1.5rem;
+    color: #0F172A;
+    margin-bottom: 1.25rem;
     position: relative;
 
     &:after {
@@ -150,7 +144,7 @@ const LinkItem = styled.li`
 
 // ATUALIZADO: styled(Link) para navegação SPA
 const FooterLink = styled(Link)`
-    color: #cccccc;
+    color: #64748B;
     text-decoration: none;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -194,10 +188,11 @@ const SocialLinks = styled.div`
 
 // SocialLink permanece como 'a' pois são links externos
 const SocialLink = styled.a`
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,7 +201,7 @@ const SocialLink = styled.a`
     svg {
         width: 20px;
         height: 20px;
-        color: #cccccc;
+        color: #64748B;
         transition: color 0.3s ease;
     }
 
@@ -221,8 +216,8 @@ const SocialLink = styled.a`
 `
 
 const FooterBottom = styled.div`
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -236,7 +231,7 @@ const FooterBottom = styled.div`
 
 const Copyright = styled.p`
     font-size: 0.875rem;
-    color: #999999;
+    color: #94A3B8;
     margin: 0;
 `
 
@@ -252,7 +247,7 @@ const LegalLinks = styled.div`
 // ATUALIZADO: styled(Link) para navegação SPA
 const LegalLink = styled(Link)`
     font-size: 0.875rem;
-    color: #999999;
+    color: #94A3B8;
     text-decoration: none;
     transition: color 0.3s ease;
 
@@ -262,7 +257,7 @@ const LegalLink = styled(Link)`
 `
 
 const FooterLinkDisabled = styled.span`
-    color: #888888;
+    color: #94A3B8;
     font-size: 0.95rem;
     display: flex;
     align-items: center;
@@ -287,7 +282,7 @@ export default function Footer() {
                 <FooterContent>
                     <CompanySection>
                         <Logo>
-                            <Image src="/maskot_crm_logo_branca.png" alt="Maskot Edu" width={180} height={50} />
+                            <Image src="/logo_maskot_website.png" alt="Maskot Edu" width={180} height={50} />
                         </Logo>
                         <CompanyDescription>
                             O CRM que realmente entende escolas. Centralize toda a gestão de leads,
@@ -406,7 +401,7 @@ export default function Footer() {
 
                 <FooterBottom>
                     <Copyright>
-                        © 2026 Maskot CRM. Todos os direitos reservados.
+                        © 2026 Maskot. Todos os direitos reservados.
                     </Copyright>
                     <LegalLinks>
                         {/* Links integrados com as novas páginas */}

@@ -17,7 +17,7 @@ export default function WhatsAppPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main>
                 <WhatsAppHero />
                 <WhatsAppDeepDive />
                 <CTASection />

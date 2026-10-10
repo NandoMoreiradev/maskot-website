@@ -25,7 +25,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 4rem 0 6rem;
-    background: ${props => props.theme.colors.pageBackground};
+    background: #F8FAFC;
     overflow: hidden;
 `
 
@@ -42,7 +42,7 @@ const SplitLayout = styled.div<{ $reverse?: boolean }>`
     align-items: center;
     margin-bottom: 8rem;
 
-    @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    @media (max-width: 1024px) {
         grid-template-columns: 1fr;
         gap: 3rem;
         display: flex;
@@ -55,14 +55,15 @@ const TextContent = styled.div`
     h3 {
         font-size: 2rem;
         font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
         margin-bottom: 1rem;
         line-height: 1.2;
+        letter-spacing: -0.02em;
     }
 
     p {
         font-size: 1.1rem;
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -70,18 +71,18 @@ const TextContent = styled.div`
     ul {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.25rem;
     }
 
     li {
         display: flex;
         align-items: center;
         gap: 1rem;
-        font-weight: 500;
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 600;
+        color: #0F172A;
 
         svg {
-            color: ${props => props.theme.colors.primary};
+            color: #2563EB;
             flex-shrink: 0;
         }
     }
@@ -90,36 +91,38 @@ const TextContent = styled.div`
 // --- MOCKUP 1: PÁGINA PÚBLICA (MOBILE STYLE) ---
 const PhoneFrame = styled.div`
     width: 320px;
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 32px;
-    border: 8px solid #1E293B;
-    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.2);
+    border: 8px solid #0F172A;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     margin: 0 auto;
     position: relative;
 `
 
 const PublicHeader = styled.div`
-    background: ${props => props.theme.colors.primary};
+    background: #2563EB;
     padding: 2rem 1.5rem 1.5rem;
     color: white;
     text-align: center;
 
     .logo {
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
         background: white;
         border-radius: 50%;
-        margin: 0 auto 10px;
+        margin: 0 auto 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     h4 {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        font-weight: 700;
         margin-bottom: 4px;
     }
 
     span {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         opacity: 0.9;
     }
 `
@@ -130,7 +133,7 @@ const BookingBody = styled.div`
 
 const StepIndicator = styled.div`
     display: flex;
-    gap: 4px;
+    gap: 6px;
     margin-bottom: 1.5rem;
 
     div {
@@ -141,7 +144,7 @@ const StepIndicator = styled.div`
     }
 
     div.active {
-        background: ${props => props.theme.colors.primary};
+        background: #2563EB;
     }
 `
 
@@ -159,28 +162,28 @@ const TimeSlot = styled.div<{ $selected?: boolean }>`
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    border: 1px solid ${props => props.$selected ? props.theme.colors.primary : '#E2E8F0'};
-    background: ${props => props.$selected ? props.theme.colors.primary : '#fff'};
-    color: ${props => props.$selected ? '#fff' : props.theme.colors.text};
+    border: 1px solid ${props => props.$selected ? '#2563EB' : '#E2E8F0'};
+    background: ${props => props.$selected ? '#2563EB' : '#FFFFFF'};
+    color: ${props => props.$selected ? '#FFFFFF' : '#475569'};
 `
 
 const InputMock = styled.div`
-    height: 40px;
-    background: #F8F9FA;
+    height: 44px;
+    background: #F8FAFC;
     border: 1px solid #E2E8F0;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    font-size: 0.8rem;
+    padding: 0 12px;
+    font-size: 0.85rem;
     color: #94A3B8;
 `
 
 const PrimaryButton = styled.div`
-    background: ${props => props.theme.colors.primary};
+    background: #2563EB;
     color: white;
-    padding: 0.8rem;
+    padding: 1rem;
     border-radius: 8px;
     text-align: center;
     font-weight: 600;
@@ -189,19 +192,15 @@ const PrimaryButton = styled.div`
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 `
 
 // --- MOCKUP 2: CARD INTERNO ---
 const InternalCard = styled.div`
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-
-    border: 1px solid ${(props) => (props.theme.colors as unknown as {
-        borderLight?: string
-    }).borderLight || '#DEE2E6'};
-
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     max-width: 400px;
     margin: 0 auto;
@@ -210,31 +209,34 @@ const InternalCard = styled.div`
 const DetailHeader = styled.div`
     padding: 1.5rem;
     display: flex;
-    gap: 1rem;
-    border-bottom: 1px solid #F1F3F5;
-    background: #F8F9FA;
+    gap: 1.25rem;
+    border-bottom: 1px solid #E2E8F0;
+    background: #F8FAFC;
 `
 
 const DateBox = styled.div`
-    background: #fff;
-    border: 1px solid #DEE2E6;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 
     .day {
         display: block;
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 800;
-        color: #343A40;
+        color: #0F172A;
         line-height: 1;
     }
 
     .month {
         font-size: 0.75rem;
         font-weight: 700;
-        color: #868E96;
+        color: #64748B;
         text-transform: uppercase;
+        margin-top: 4px;
+        display: block;
     }
 `
 
@@ -242,27 +244,31 @@ const InfoCol = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 4px;
+    gap: 6px;
 
     .time {
         display: flex;
         align-items: center;
         gap: 6px;
         font-weight: 700;
-        color: #343A40;
-        font-size: 1.1rem;
+        color: #0F172A;
+        font-size: 1.15rem;
     }
 
     .host {
-        font-size: 0.8rem;
-        color: #6C757D;
+        font-size: 0.85rem;
+        color: #64748B;
+        
+        strong {
+            color: #334155;
+        }
     }
 `
 
 const ActionGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
     padding: 1.5rem;
 `
 
@@ -271,37 +277,40 @@ const ActionBtn = styled.div<{ $variant: 'success' | 'neutral' | 'danger' }>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     padding: 1rem 0.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     border: 1px solid transparent;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
     transition: all 0.2s;
 
     ${props => props.$variant === 'success' && css`
-        color: #28A745;
-        border-color: #28A745;
+        color: #10B981;
+        background: #F0FDF4;
+        border-color: #A7F3D0;
 
         &:hover {
-            background: #E6FCF5;
+            background: #D1FAE5;
         }
     `}
     ${props => props.$variant === 'neutral' && css`
-        color: #6C757D;
-        border-color: #6C757D;
+        color: #64748B;
+        background: #F8FAFC;
+        border-color: #E2E8F0;
 
         &:hover {
-            background: #F8F9FA;
+            background: #F1F5F9;
         }
     `}
     ${props => props.$variant === 'danger' && css`
-        color: #DC3545;
-        border-color: #DC3545;
+        color: #EF4444;
+        background: #FEF2F2;
+        border-color: #FECACA;
 
         &:hover {
-            background: #FFF5F5;
+            background: #FEE2E2;
         }
     `}
 `
@@ -312,56 +321,58 @@ const LeadInfo = styled.div`
     .label {
         font-size: 0.75rem;
         font-weight: 700;
-        color: #ADB5BD;
+        color: #94A3B8;
         text-transform: uppercase;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
 
     .parent {
         display: flex;
         align-items: center;
         gap: 10px;
-        font-weight: 600;
-        color: #495057;
-        margin-bottom: 4px;
+        font-weight: 700;
+        color: #0F172A;
+        margin-bottom: 8px;
     }
 
     .student {
-        background: #F1F3F5;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        color: #495057;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        color: #475569;
+        font-weight: 600;
     }
 `
 
 // --- MOCKUP 3: WHATSAPP CHAT ---
 const ChatMockup = styled.div`
-    background: #F0F2F5;
+    background: #FFFFFF;
     border-radius: 24px;
     padding: 1.5rem;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.08);
     max-width: 380px;
     margin: 0 auto;
-    border: 8px solid #fff;
+    border: 1px solid #E2E8F0;
     animation: ${float} 6s ease-in-out infinite;
 `
 
 const ChatHeader = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #E4E6EB;
+    border-bottom: 1px solid #E2E8F0;
 
     .avatar {
-        width: 40px;
-        height: 40px;
-        background: ${props => props.theme.colors.primary};
+        width: 44px;
+        height: 44px;
+        background: #2563EB;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -371,47 +382,47 @@ const ChatHeader = styled.div`
 
     .info {
         h5 {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            color: #050505;
+            color: #0F172A;
             margin: 0;
         }
 
         span {
-            font-size: 0.8rem;
-            color: #65676B;
+            font-size: 0.85rem;
+            color: #64748B;
         }
     }
 `
 
 const MessageBubble = styled.div<{ $isSystem?: boolean }>`
-    background: ${props => props.$isSystem ? '#FFF9C4' : '#fff'};
+    background: ${props => props.$isSystem ? '#F8FAFC' : '#EFF6FF'};
     padding: 1rem;
-    border-radius: 0 12px 12px 12px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 0 16px 16px 16px;
     margin-bottom: 1rem;
     position: relative;
+    border: 1px solid ${props => props.$isSystem ? '#E2E8F0' : '#BFDBFE'};
 
     ${props => props.$isSystem && `
         border-radius: 12px;
         text-align: center;
-        border: 1px dashed #FBC02D;
-        color: #555;
+        color: #475569;
         font-size: 0.85rem;
         width: 100%;
+        padding: 0.75rem;
     `}
     p {
-        font-size: 0.9rem;
-        color: #050505;
-        line-height: 1.4;
+        font-size: 0.95rem;
+        color: #0F172A;
+        line-height: 1.5;
         margin: 0;
     }
 
     .time {
-        font-size: 0.7rem;
-        color: #65676B;
+        font-size: 0.75rem;
+        color: #64748B;
         text-align: right;
-        margin-top: 4px;
+        margin-top: 6px;
         display: block;
     }
 `
@@ -424,29 +435,30 @@ const BenefitList = styled.div`
 
 const BenefitItem = styled.div`
     display: flex;
-    gap: 1rem;
+    gap: 1.25rem;
     align-items: flex-start;
 
     .icon {
-        width: 24px;
-        height: 24px;
-        color: ${props => props.theme.colors.success};
+        width: 28px;
+        height: 28px;
+        color: #10B981;
         flex-shrink: 0;
         margin-top: 2px;
     }
 
     div {
         h4 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            color: ${props => props.theme.colors.textDark};
+            color: #0F172A;
             margin-bottom: 0.25rem;
         }
 
         p {
             font-size: 0.95rem;
-            color: ${props => props.theme.colors.textMedium};
+            color: #475569;
             margin: 0;
+            line-height: 1.5;
         }
     }
 `
@@ -457,53 +469,53 @@ const FeatureGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 
-    @media (max-width: ${props => props.theme.breakpoints.md}) {
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 640px) {
         grid-template-columns: 1fr;
     }
 `
 
 const FeatureCard = styled.div`
-    background: #F8F9FA;
-    padding: 2rem;
-    border-radius: 16px;
-
-    border: 1px solid ${(props) => (props.theme.colors as unknown as {
-        borderLight?: string
-    }).borderLight || '#DEE2E6'};
-
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
 
     &:hover {
-        background: #fff;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         transform: translateY(-5px);
-        border-color: ${props => props.theme.colors.primary}40;
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+        border-color: #CBD5E1;
     }
 
     .icon {
-        width: 48px;
-        height: 48px;
-        background: #fff;
-        border-radius: 12px;
+        width: 56px;
+        height: 56px;
+        background: #F8FAFC;
+        border-radius: 14px;
+        border: 1px solid #E2E8F0;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: ${props => props.theme.colors.primary};
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        color: #2563EB;
         margin-bottom: 1.5rem;
     }
 
     h4 {
         font-size: 1.25rem;
         font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
         margin-bottom: 0.75rem;
+        letter-spacing: -0.01em;
     }
 
     p {
         font-size: 1rem;
-        color: ${props => props.theme.colors.textMedium};
-        line-height: 1.5;
+        color: #475569;
+        line-height: 1.6;
         margin: 0;
     }
 `

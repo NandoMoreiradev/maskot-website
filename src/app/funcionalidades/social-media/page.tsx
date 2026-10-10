@@ -24,7 +24,7 @@ export default function SocialMediaPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main>
                 <SocialMediaHero />
                 <SocialMediaDeepDive />
                 <CTASection />

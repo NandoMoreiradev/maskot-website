@@ -18,7 +18,7 @@ export default function CommissionsPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <CommissionsHero />
                 <CommissionsDeepDive />
                 <CTASection />

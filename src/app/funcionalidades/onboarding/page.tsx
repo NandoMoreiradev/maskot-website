@@ -18,7 +18,7 @@ export default function OnboardingPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <OnboardingHero />
                 <OnboardingDeepDive />
                 <CTASection />

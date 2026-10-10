@@ -17,7 +17,7 @@ export default function VisitsPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <VisitsHero />
                 <VisitsDeepDive />
                 <CTASection />

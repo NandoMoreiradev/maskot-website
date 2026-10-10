@@ -56,18 +56,18 @@ const FeatureRow = styled.div<{ $reverse?: boolean }>`
 
 const TextContent = styled.div`
     h3 {
-        font-family: ${props => props.theme.typography.fontFamily.main};
-        font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        
+        font-size: 2.25rem;
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
     }
 
     p {
-        font-family: ${props => props.theme.typography.fontFamily.main};
-        font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        
+        font-size: 1.1rem;
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -84,12 +84,12 @@ const TextContent = styled.div`
         display: flex;
         align-items: flex-start;
         gap: 1rem;
-        font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-size: 1rem;
+        font-weight: 600;
+        color: #0F172A;
 
         svg {
-            color: ${props => props.theme.colors.secondary};
+            color: #16A34A;
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -98,10 +98,10 @@ const TextContent = styled.div`
 
 // --- UI MOCKUPS BASE ---
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -109,8 +109,8 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
@@ -124,7 +124,7 @@ const MockupHeader = styled.div`
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #ccc;
+            background: #CBD5E1;
         }
     }
 `
@@ -140,7 +140,7 @@ const ChatLayout = styled.div`
 `
 const SidebarMock = styled.div`
     width: 30%;
-    border-right: 1px solid ${props => props.theme.colors.backgroundMedium};
+    border-right: 1px solid #E2E8F0;
     padding: 10px;
 
     @media (max-width: 640px) {
@@ -150,7 +150,7 @@ const SidebarMock = styled.div`
     .item {
         padding: 10px;
         margin-bottom: 5px;
-        border-radius: 6px;
+        border-radius: 100px;
         display: flex;
         gap: 10px;
         align-items: center;
@@ -176,7 +176,7 @@ const SidebarMock = styled.div`
 
         div {
             height: 8px;
-            background: #eee;
+            background: #E2E8F0;
             border-radius: 4px;
         }
     }
@@ -199,7 +199,7 @@ const ChatAreaMock = styled.div`
 const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
     padding: 10px 14px;
     border-radius: 8px;
-    background: ${props => props.$sent ? props.theme.colors.whatsapp.outboundMessage : props.theme.colors.whatsapp.inboundMessage};
+    background: ${props => props.$sent ? '#DCFCE7' : '#FFFFFF'};
     align-self: ${props => props.$sent ? 'flex-end' : 'flex-start'};
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     font-size: 13px;
@@ -208,11 +208,11 @@ const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
     line-height: 1.4;
 
     ${props => props.$bot && css`
-        border-left: 3px solid ${props.theme.colors.primary};
+        border-left: 3px solid #16A34A;
         &::before {
             content: '🤖 Bot';
             font-size: 9px;
-            color: ${props.theme.colors.primary};
+            color: #16A34A;
             font-weight: bold;
             display: block;
             margin-bottom: 4px;
@@ -225,7 +225,7 @@ const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
         align-self: center;
         width: 90%;
         max-width: 100%;
-        color: #555;
+        color: #475569;
         font-style: italic;
         font-size: 12px;
         text-align: center;
@@ -247,26 +247,26 @@ const FlowBuilderMock = styled.div`
         border-radius: 8px;
         width: 200px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border: 1px solid #ddd;
+        border: 1px solid #E2E8F0;
         position: absolute;
         z-index: 2;
 
         &.start {
             top: 40px;
             left: 40%;
-            border-top: 4px solid ${props => props.theme.colors.secondary};
+            border-top: 4px solid #16A34A;
         }
 
         &.question {
             top: 160px;
             left: 20%;
-            border-top: 4px solid ${props => props.theme.colors.primary};
+            border-top: 4px solid #F59E0B;
         }
 
         &.action {
             top: 160px;
             left: 60%;
-            border-top: 4px solid ${props => props.theme.colors.accent};
+            border-top: 4px solid #3B82F6;
         }
     }
 
@@ -274,7 +274,7 @@ const FlowBuilderMock = styled.div`
         padding: 8px 12px;
         font-size: 11px;
         font-weight: bold;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #E2E8F0;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -283,13 +283,13 @@ const FlowBuilderMock = styled.div`
     .node-body {
         padding: 10px;
         font-size: 12px;
-        color: #555;
+        color: #475569;
     }
 
     .connection-line {
         position: absolute;
         height: 2px;
-        background: #ccc;
+        background: #CBD5E1;
         z-index: 1;
     }
 
@@ -345,13 +345,13 @@ const ProfileLayout = styled.div`
 `
 const ChatSection = styled(ChatAreaMock)`
     width: 60%;
-    border-right: 1px solid ${props => props.theme.colors.backgroundMedium};
+    border-right: 1px solid #E2E8F0;
 
     @media (max-width: 640px) {
         width: 100%;
         min-height: 160px;
         border-right: none;
-        border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+        border-bottom: 1px solid #E2E8F0;
     }
 `
 const ProfileSidebar = styled.div`
@@ -369,14 +369,14 @@ const ProfileSidebar = styled.div`
     .profile-header {
         padding: 20px;
         text-align: center;
-        border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
-        background: ${props => props.theme.colors.lightGray};
+        border-bottom: 1px solid #E2E8F0;
+        background: #F8FAFC;
 
         .avatar-large {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: ${props => props.theme.colors.primary};
+            background: #16A34A;
             color: white;
             display: flex;
             align-items: center;
@@ -385,27 +385,27 @@ const ProfileSidebar = styled.div`
             font-weight: bold;
             margin: 0 auto 10px;
             border: 3px solid white;
-            box-shadow: ${props => props.theme.shadows.md};
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        h4 { margin: 0; font-size: 16px; color: ${props => props.theme.colors.textDark}; }
-        p { margin: 0; font-size: 12px; color: ${props => props.theme.colors.textMedium}; }
+        h4 { margin: 0; font-size: 16px; color: #0F172A; }
+        p { margin: 0; font-size: 12px; color: #475569; }
     }
 
     .tabs {
         display: flex;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #E2E8F0;
         div {
             flex: 1;
             text-align: center;
             padding: 10px;
             font-size: 12px;
             font-weight: bold;
-            color: #999;
+            color: #94A3B8;
             cursor: pointer;
         }
         div.active {
-            color: ${props => props.theme.colors.primary};
-            border-bottom: 2px solid ${props => props.theme.colors.primary};
+            color: #16A34A;
+            border-bottom: 2px solid #16A34A;
         }
     }
 
@@ -416,7 +416,7 @@ const ProfileSidebar = styled.div`
         label {
             display: block;
             font-size: 10px;
-            color: #999;
+            color: #94A3B8;
             font-weight: bold;
             text-transform: uppercase;
             margin-bottom: 4px;
@@ -446,10 +446,10 @@ const ProfileSidebar = styled.div`
 const ActionButton = styled.div`
     margin-top: 20px;
     padding: 10px;
-    background: ${props => props.theme.colors.primary};
+    background: #16A34A;
     color: white;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 100px;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
@@ -469,14 +469,14 @@ const DashboardMock = styled.div`
 
     .card {
         background: #fff;
-        border: 1px solid #eee;
+        border: 1px solid #E2E8F0;
         border-radius: 10px;
         padding: 1rem;
     }
 
     h4 {
         font-size: 0.8rem;
-        color: #666;
+        color: #475569;
         margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
@@ -486,7 +486,7 @@ const DashboardMock = styled.div`
     .val {
         font-size: 1.5rem;
         font-weight: bold;
-        color: #333;
+        color: #0F172A;
     }
 
     .full-width {
@@ -529,17 +529,17 @@ const PowerGrid = styled.div`
 `
 
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #F8FAFC;
     padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid #eee;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
     transition: all ${props => props.theme.transitions.base};
 
     &:hover {
         transform: translateY(-5px);
         background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: ${props => props.theme.colors.primary}40;
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
+        border-color: #BBF7D0;
     }
 
     .icon {
@@ -550,21 +550,21 @@ const PowerCard = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        color: ${props => props.theme.colors.primary};
+        color: #16A34A;
         margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     h4 {
         font-size: 1.25rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
     }
 
     p {
         font-size: 1rem;
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.5;
         margin: 0;
     }
@@ -927,7 +927,7 @@ export default function WhatsAppDeepDive() {
                                 <h4><Thermometer size={16}/> Mapa de Calor (Horários de Pico)</h4>
                                 <div className="heatmap">
                                     {Array.from({length: 48}).map((_, i) => (
-                                        <div key={i} style={{background: `rgba(37, 99, 235, ${Math.random()})`}}></div>
+                                        <div key={i} style={{background: `rgba(22, 163, 74, ${Math.random()})`}}></div>
                                     ))}
                                 </div>
                             </div>
@@ -954,10 +954,10 @@ export default function WhatsAppDeepDive() {
                     <h3 style={{
                         fontSize: '2rem',
                         fontWeight: 800,
-                        color: '#333',
+                        color: '#0F172A',
                         fontFamily: 'var(--font-inter)'
                     }}>Ferramentas de Produtividade</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Funcionalidades pensadas para a rotina escolar.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem'}}>Funcionalidades pensadas para a rotina escolar.</p>
                 </div>
 
                 <PowerGrid>

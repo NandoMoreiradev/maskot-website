@@ -7,74 +7,70 @@ import { Container } from '@/components/ui/Container'
 import { SectionHeader, SectionTitle, SectionSubtitle, GradientText } from '@/components/ui/SectionHeading'
 
 const Section = styled.section`
-    padding: 6rem 0;
-    /* Background sutil para destacar os cards brancos */
-    background: linear-gradient(180deg,
-    ${props => props.theme.colors.pageBackground} 0%,
-    ${props => props.theme.colors.lightGray} 100%
-    );
+    padding: 5rem 0; /* Reduzido de 6rem */
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
     position: relative;
     overflow: hidden;
 `
 
 const Highlight = styled(GradientText)`
-    font-weight: 700;
+    font-weight: 800;
 `
 
 const BenefitsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem; /* Reduzido de 2rem */
     margin-top: 2rem;
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 `
 
 const BenefitCard = styled.div`
-    background: ${props => props.theme.colors.white};
-    border: 1px solid rgba(0,0,0,0.05);
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px; /* Reduzido de 20px */
+    padding: 1.75rem 1.5rem; /* Reduzido de 2.5rem 2rem */
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 18px 35px -10px rgba(0,0,0,0.12);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05);
     }
 `
 
 const BenefitIcon = styled.div`
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: ${props => props.theme.colors.primary}10;
+    width: 48px; /* Reduzido de 64px */
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(37, 99, 235, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.25rem;
+    margin: 0 auto 1rem;
 
     svg {
-        width: 28px;
-        height: 28px;
-        color: ${props => props.theme.colors.primary};
+        width: 24px; /* Reduzido de 28px */
+        height: 24px;
+        color: #2563EB;
     }
 `
 
 const BenefitTitle = styled.h3`
-    font-size: 1.35rem;
+    font-size: 1.15rem; /* Reduzido de 1.35rem */
     font-weight: 800;
-    color: ${props => props.theme.colors.textDark};
-    margin: 0 0 0.6rem 0;
+    color: #0F172A;
+    margin: 0 0 0.5rem 0;
 `
 
 const BenefitDescription = styled.p`
-    font-size: 0.95rem;
-    color: ${props => props.theme.colors.textMedium};
+    font-size: 0.85rem; /* Reduzido de 0.95rem */
+    color: #64748B;
     margin: 0;
     line-height: 1.5;
 `
@@ -82,12 +78,12 @@ const BenefitDescription = styled.p`
 const TestimonialCard = styled.div`
     position: relative;
     max-width: 860px;
-    margin: 4rem auto 0;
-    background: ${props => props.theme.colors.white};
-    border: 1px solid rgba(0,0,0,0.05);
-    border-radius: 24px;
-    padding: 3rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    margin: 3.5rem auto 0; /* Reduzido de 4rem */
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 20px;
+    padding: 2.5rem; /* Reduzido de 3rem */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
 
     @media (max-width: 768px) {
         padding: 2rem 1.5rem;
@@ -95,21 +91,21 @@ const TestimonialCard = styled.div`
 `
 
 const QuoteIcon = styled(Quote)`
-    width: 36px;
-    height: 36px;
-    color: ${props => props.theme.colors.primary};
-    opacity: 0.25;
-    margin-bottom: 1rem;
+    width: 32px; /* Reduzido de 36px */
+    height: 32px;
+    color: #2563EB;
+    opacity: 0.2;
+    margin-bottom: 0.75rem;
 `
 
 const TestimonialText = styled.p`
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: ${props => props.theme.colors.textDark};
-    margin: 0 0 2rem 0;
+    font-size: 1rem; /* Reduzido de 1.1rem */
+    line-height: 1.6;
+    color: #334155;
+    margin: 0 0 1.5rem 0;
 
     @media (max-width: 768px) {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 `
 

@@ -31,21 +31,21 @@ const ScrollWrapper = styled.div`
 `
 
 const PostCard = styled.article`
-    flex: 0 0 320px;
+    flex: 0 0 300px;
     scroll-snap-align: start;
     background: white;
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
-    border: 1px solid ${props => props.theme.colors.borderLight}50;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    border: 1px solid ${props => props.theme.colors.borderLight};
+    box-shadow: ${props => props.theme.shadows.sm};
+    transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
 
     &:hover {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        transform: translateY(-5px);
-        border-color: ${props => props.theme.colors.primary}30;
+        box-shadow: ${props => props.theme.shadows.md};
+        transform: translateY(-3px);
+        border-color: ${props => props.theme.colors.primary}40;
     }
 
     @media (max-width: 768px) {
@@ -70,7 +70,7 @@ const ThumbArea = styled.div`
 `
 
 const PostContent = styled.div`
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -81,15 +81,15 @@ const PostContent = styled.div`
         color: ${props => props.theme.colors.primary};
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
 
     h3 {
-        font-size: 1.125rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: ${props => props.theme.colors.textDark};
         line-height: 1.4;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -102,10 +102,10 @@ const PostContent = styled.div`
     }
 
     p {
-        font-size: 0.875rem;
+        font-size: 0.85rem;
         color: ${props => props.theme.colors.textMedium};
         line-height: 1.5;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -126,7 +126,7 @@ const PostMeta = styled.div`
         display: flex;
         align-items: center;
         gap: 1rem;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         color: ${props => props.theme.colors.textMedium}90;
 
         div { 
@@ -141,7 +141,7 @@ const ReadMore = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: ${props => props.theme.colors.primary};
 
@@ -162,7 +162,11 @@ const Controls = styled.div`
     margin-top: 1rem;
 `
 
-const ControlButton = styled.button<{ disabled?: boolean }>`
+interface ControlButtonProps {
+    disabled?: boolean;
+}
+
+const ControlButton = styled.button<ControlButtonProps>`
     background: white;
     border: 1px solid ${props => props.theme.colors.borderLight};
     border-radius: 50%;
@@ -212,7 +216,7 @@ export default function RecentPostsCarousel({ posts }: { posts: BlogPostDocument
         setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5)
         
         // Calculate active index based on scroll position
-        const itemWidth = 320 + 32; // card width + gap approx
+        const itemWidth = 300 + 32; // card width + gap approx
         const newIndex = Math.round(scrollLeft / itemWidth)
         setActiveIndex(newIndex)
     }
@@ -228,7 +232,7 @@ export default function RecentPostsCarousel({ posts }: { posts: BlogPostDocument
 
     const scroll = (direction: 'left' | 'right') => {
         if (!scrollRef.current) return
-        const itemWidth = 320 + 32; // Approximate width to scroll
+        const itemWidth = 300 + 32; // Approximate width to scroll
         const scrollAmount = direction === 'left' ? -itemWidth : itemWidth
         scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
     }

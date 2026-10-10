@@ -48,17 +48,15 @@ const FeatureRow = styled.div<{ $reverse?: boolean }>`
 
 const TextContent = styled.div`
     h3 {
-        font-family: ${props => props.theme.typography.fontFamily.main};
-        font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-size: 2.25rem;
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
     }
     p {
-        font-family: ${props => props.theme.typography.fontFamily.main};
-        font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        font-size: 1.1rem;
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -73,11 +71,11 @@ const TextContent = styled.div`
         display: flex;
         align-items: flex-start;
         gap: 1rem;
-        font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-size: 1rem;
+        font-weight: 600;
+        color: #0F172A;
         svg {
-            color: #DB2777; /* Rosa/magenta */
+            color: #EC4899;
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -85,10 +83,10 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -96,42 +94,43 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     gap: 0.5rem;
-    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; } }
+    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; } }
 `
 
 // --- MOCKUP 1: COMPOSITOR / PREVIEW ---
 const ComposerMock = styled.div`
     padding: 20px;
-    background: #FDF2F8;
+    background: #FFFFFF;
     display: flex;
     gap: 20px;
 
     .formats { display: flex; flex-direction: column; gap: 8px; width: 84px; flex-shrink: 0; }
     .format-item {
         display: flex; flex-direction: column; align-items: center; gap: 4px;
-        padding: 8px 4px; border-radius: 10px; background: white; border: 1px solid #F3D4E4;
-        font-size: 9.5px; color: #6B7280; font-weight: 600;
-        &.active { border-color: #DB2777; background: #FCE7F3; color: #9D174D; }
+        padding: 8px 4px; border-radius: 10px; background: white; border: 1px solid #E2E8F0;
+        font-size: 9.5px; color: #64748B; font-weight: 600;
+        &.active { border-color: #EC4899; color: #EC4899; }
         svg { color: inherit; }
     }
     .preview {
-        flex: 1; background: white; border-radius: 12px; border: 1px solid #F3D4E4;
+        flex: 1; background: white; border-radius: 12px; border: 1px solid #E2E8F0;
         overflow: hidden;
     }
     .preview-media {
         height: 110px;
-        background: linear-gradient(135deg, #F59E0B 0%, #EC4899 50%, #8B5CF6 100%);
+        background: #F8FAFC;
+        border-bottom: 1px solid #E2E8F0;
     }
     .preview-body { padding: 10px 12px; }
-    .preview-caption { font-size: 10.5px; color: #374151; line-height: 1.4; margin-bottom: 8px; }
-    .preview-caption strong { color: #111827; }
-    .preview-actions { display: flex; gap: 12px; color: #6B7280; }
+    .preview-caption { font-size: 10.5px; color: #475569; line-height: 1.4; margin-bottom: 8px; }
+    .preview-caption strong { color: #0F172A; }
+    .preview-actions { display: flex; gap: 12px; color: #64748B; }
 `
 
 // --- MOCKUP 2: APROVAÇÃO / KANBAN ---
@@ -144,38 +143,41 @@ const ApprovalMock = styled.div`
     .col { flex: 1; min-width: 0; }
     .col-title {
         font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;
-        color: #6B7280; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+        color: #64748B; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
         span.dot { width: 6px; height: 6px; border-radius: 50%; }
     }
     .card {
-        background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px;
+        background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px;
         padding: 8px; margin-bottom: 8px;
-        .bar { height: 6px; border-radius: 4px; background: #E5E7EB; margin-bottom: 6px; width: 70%; }
-        .txt { font-size: 9px; color: #9CA3AF; }
+        .bar { height: 6px; border-radius: 4px; background: #F1F5F9; margin-bottom: 6px; width: 70%; }
+        .txt { font-size: 9px; color: #94A3B8; }
     }
-    .card.highlight { border-color: #F9A8D4; background: #FDF2F8; }
+    .card.highlight { border-color: #EC4899; box-shadow: 0 2px 4px rgba(236,72,153,0.1); }
 `
 
 // --- MOCKUP 3: AUTOMAÇÃO / FLUXO ---
 const FlowMock = styled.div`
     padding: 20px 16px;
-    background: #FAFAFA;
+    background: #FFFFFF;
+    background-image: radial-gradient(rgba(236, 72, 153, 0.08) 1px, transparent 0);
+    background-size: 20px 20px;
 
     .node {
         display: flex; align-items: center; gap: 10px;
-        background: white; border: 1px solid #E5E7EB; border-radius: 10px;
+        background: white; border: 1px solid #E2E8F0; border-radius: 10px;
         padding: 10px 12px; margin-bottom: 0;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
     .node-icon {
         width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
-        display: flex; align-items: center; justify-content: center; color: white;
+        display: flex; align-items: center; justify-content: center;
+        background: #F8FAFC; border: 1px solid #E2E8F0;
     }
     .node-text { min-width: 0; }
-    .node-title { font-size: 11.5px; font-weight: 700; color: #111827; }
-    .node-sub { font-size: 9.5px; color: #9CA3AF; }
-    .connector { width: 2px; height: 18px; background: #E5E7EB; margin-left: 24px; }
-    .branch { display: flex; gap: 10px; margin-left: 24px; padding-left: 16px; border-left: 2px solid #E5E7EB; }
+    .node-title { font-size: 11.5px; font-weight: 700; color: #0F172A; }
+    .node-sub { font-size: 9.5px; color: #64748B; }
+    .connector { width: 2px; height: 18px; background: #E2E8F0; margin-left: 24px; }
+    .branch { display: flex; gap: 10px; margin-left: 24px; padding-left: 16px; border-left: 2px solid #E2E8F0; }
 `
 
 // --- MOCKUP 4: ANALYTICS ---
@@ -185,14 +187,14 @@ const AnalyticsMock = styled.div`
 
     .kpis { display: flex; gap: 10px; margin-bottom: 14px; }
     .kpi {
-        flex: 1; background: #FDF2F8; border: 1px solid #FBCFE8; border-radius: 10px;
+        flex: 1; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px;
         padding: 10px; text-align: center;
-        .num { font-size: 16px; font-weight: 800; color: #9D174D; line-height: 1; }
-        .label { font-size: 8.5px; color: #6B7280; font-weight: 600; margin-top: 4px; text-transform: uppercase; }
+        .num { font-size: 16px; font-weight: 800; color: #EC4899; line-height: 1; }
+        .label { font-size: 8.5px; color: #64748B; font-weight: 600; margin-top: 4px; text-transform: uppercase; }
     }
     .rank-row {
         display: flex; align-items: center; gap: 10px; padding: 8px 0;
-        border-bottom: 1px solid #F3F4F6;
+        border-bottom: 1px solid #F1F5F9;
         &:last-child { border: none; }
     }
     .rank-thumb {
@@ -200,30 +202,32 @@ const AnalyticsMock = styled.div`
         background: linear-gradient(135deg, #F59E0B, #EC4899, #8B5CF6);
     }
     .rank-text { flex: 1; min-width: 0; }
-    .rank-title { font-size: 11px; font-weight: 600; color: #111827; }
-    .rank-sub { font-size: 9.5px; color: #9CA3AF; }
-    .rank-value { font-size: 11.5px; font-weight: 700; color: #10B981; }
+    .rank-title { font-size: 11px; font-weight: 600; color: #0F172A; }
+    .rank-sub { font-size: 9.5px; color: #64748B; }
+    .rank-value { font-size: 11.5px; font-weight: 700; color: #16A34A; }
 `
 
 // --- MOCKUP 5: COMENTÁRIOS ---
 const CommentsMock = styled.div`
     padding: 16px;
-    background: #F8FAFC;
+    background: #FFFFFF;
 
     .c-item {
         display: flex; gap: 10px; padding: 10px; border-radius: 10px;
-        background: white; border: 1px solid #E5E7EB; margin-bottom: 8px;
+        background: white; border: 1px solid #E2E8F0; margin-bottom: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
     .avatar {
         width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
         display: flex; align-items: center; justify-content: center;
-        font-size: 10.5px; font-weight: 700; color: white;
+        font-size: 10.5px; font-weight: 700; color: #0F172A;
+        background: #F8FAFC; border: 1px solid #E2E8F0;
     }
     .c-body { flex: 1; min-width: 0; }
-    .c-name { font-size: 11px; font-weight: 700; color: #111827; }
-    .c-text { font-size: 10.5px; color: #4B5563; margin: 2px 0 4px; }
-    .c-meta { display: flex; align-items: center; gap: 8px; font-size: 9px; color: #9CA3AF; }
-    .c-reply { color: #DB2777; font-weight: 700; }
+    .c-name { font-size: 11px; font-weight: 700; color: #0F172A; }
+    .c-text { font-size: 10.5px; color: #475569; margin: 2px 0 4px; }
+    .c-meta { display: flex; align-items: center; gap: 8px; font-size: 9px; color: #64748B; }
+    .c-reply { color: #EC4899; font-weight: 700; }
 `
 
 // --- POWER GRID ---
@@ -235,26 +239,26 @@ const PowerGrid = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.md}) { grid-template-columns: 1fr; }
 `
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #F8FAFC;
     padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
     &:hover {
         transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: #DB2777;
-        .icon { background: #DB2777; color: white; }
+        background: #FFFFFF;
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
+        border-color: #FBCFE8;
     }
     .icon {
         width: 48px; height: 48px; border-radius: 12px;
-        background: white; display: flex; align-items: center; justify-content: center;
-        color: #DB2777; margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        background: #FFFFFF; display: flex; align-items: center; justify-content: center;
+        color: #EC4899; margin-bottom: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        border: 1px solid #E2E8F0;
     }
-    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: ${props => props.theme.colors.textDark}; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #0F172A; }
+    p { font-size: 1rem; color: #475569; line-height: 1.5; margin: 0; }
 `
 
 export default function SocialMediaDeepDive() {
@@ -354,7 +358,7 @@ export default function SocialMediaDeepDive() {
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <FlowMock>
                             <div className="node">
-                                <div className="node-icon" style={{background: '#DB2777'}}><Instagram size={15}/></div>
+                                <div className="node-icon"><Instagram size={15} color="#EC4899"/></div>
                                 <div className="node-text">
                                     <div className="node-title">Palavra-chave na DM</div>
                                     <div className="node-sub">Gatilho · &quot;matrícula&quot;</div>
@@ -362,7 +366,7 @@ export default function SocialMediaDeepDive() {
                             </div>
                             <div className="connector" />
                             <div className="node">
-                                <div className="node-icon" style={{background: '#8B5CF6'}}><GitBranch size={15}/></div>
+                                <div className="node-icon"><GitBranch size={15} color="#8B5CF6"/></div>
                                 <div className="node-text">
                                     <div className="node-title">Tem a tag &quot;Lead quente&quot;?</div>
                                     <div className="node-sub">Condição</div>
@@ -371,7 +375,7 @@ export default function SocialMediaDeepDive() {
                             <div className="connector" />
                             <div className="branch">
                                 <div className="node" style={{marginBottom: '8px'}}>
-                                    <div className="node-icon" style={{background: '#10B981'}}><MessageSquare size={15}/></div>
+                                    <div className="node-icon"><MessageSquare size={15} color="#10B981"/></div>
                                     <div className="node-text">
                                         <div className="node-title">Enviar mensagem</div>
                                         <div className="node-sub">Ação</div>
@@ -438,7 +442,7 @@ export default function SocialMediaDeepDive() {
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <CommentsMock>
                             <div className="c-item">
-                                <div className="avatar" style={{background: '#EC4899'}}>RM</div>
+                                <div className="avatar">RM</div>
                                 <div className="c-body">
                                     <div className="c-name">Renata Martins</div>
                                     <div className="c-text">Vocês ainda têm vaga para o infantil?</div>
@@ -446,7 +450,7 @@ export default function SocialMediaDeepDive() {
                                 </div>
                             </div>
                             <div className="c-item">
-                                <div className="avatar" style={{background: '#8B5CF6'}}>JL</div>
+                                <div className="avatar">JL</div>
                                 <div className="c-body">
                                     <div className="c-name">João Lima</div>
                                     <div className="c-text">Qual o valor da matrícula esse ano?</div>
@@ -462,10 +466,9 @@ export default function SocialMediaDeepDive() {
                     <h3 style={{
                         fontSize: '2rem',
                         fontWeight: 800,
-                        color: '#333',
-                        fontFamily: 'var(--font-inter)'
+                        color: '#0F172A'
                     }}>Feito para a rotina de marketing da escola</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Recursos que dão controle de verdade sobre o que vai ao ar.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem'}}>Recursos que dão controle de verdade sobre o que vai ao ar.</p>
                 </div>
 
                 <PowerGrid>

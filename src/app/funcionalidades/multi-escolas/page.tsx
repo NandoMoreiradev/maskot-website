@@ -18,7 +18,7 @@ export default function MultiSchoolPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <MultiSchoolHero />
                 <MultiSchoolDeepDive />
                 <CTASection />

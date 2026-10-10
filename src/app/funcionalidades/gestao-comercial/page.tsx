@@ -18,7 +18,7 @@ export default function CrmPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main >
                 <CrmHero />
                 <CrmDeepDive />
                 <CrmFeatures />

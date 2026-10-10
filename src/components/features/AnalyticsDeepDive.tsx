@@ -16,7 +16,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -47,15 +47,16 @@ const TextContent = styled.div`
     h3 {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
     p {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -71,10 +72,10 @@ const TextContent = styled.div`
         align-items: flex-start;
         gap: 1rem;
         font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 500;
+        color: #334155;
         svg {
-            color: #0F766E; /* Teal */
+            color: #0D9488; /* Teal-600 */
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -82,10 +83,10 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -93,19 +94,19 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     gap: 0.5rem;
-    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; } }
+    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; } }
 `
 
 // --- MOCKUP 1: FUNIL DE VENDAS ---
 const FunnelMock = styled.div`
     padding: 30px;
-    background: white;
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,66 +114,66 @@ const FunnelMock = styled.div`
     
     .stage {
         width: 100%; border-radius: 8px; color: white; padding: 10px; text-align: center; position: relative;
-        display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
     
     .conversion {
-        background: #F3F4F6; padding: 4px 10px; border-radius: 12px; font-size: 11px; color: #4B5563; font-weight: 600;
-        border: 1px solid #E5E7EB; margin: -5px 0; z-index: 1; display: flex; align-items: center; gap: 4px;
+        background: #F8FAFC; padding: 4px 10px; border-radius: 12px; font-size: 11px; color: #475569; font-weight: 600;
+        border: 1px solid #E2E8F0; margin: -5px 0; z-index: 1; display: flex; align-items: center; gap: 4px;
     }
 `
 
 // --- MOCKUP 2: DASHBOARD EXECUTIVO ---
 const DashboardMock = styled.div`
     padding: 20px;
-    background: #F8FAFC;
+    background: #FFFFFF;
     
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
     
     .kpi-card {
-        background: white; padding: 15px; border-radius: 10px; border: 1px solid #E5E7EB;
-        .label { font-size: 11px; color: #64748B; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px; }
-        .value { font-size: 20px; font-weight: 800; color: #111827; display: block; }
+        background: #F8FAFC; padding: 15px; border-radius: 10px; border: 1px solid #E2E8F0;
+        .label { font-size: 11px; color: #64748B; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 5px; letter-spacing: 0.05em; }
+        .value { font-size: 20px; font-weight: 700; color: #0F172A; display: block; letter-spacing: -0.02em; }
         .trend { 
             font-size: 11px; margin-top: 5px; display: flex; align-items: center; gap: 4px; font-weight: 600;
-            &.up { color: #10B981; }
+            &.up { color: #0D9488; }
             &.down { color: #EF4444; }
         }
     }
     
     .chart-area {
-        background: white; border-radius: 10px; border: 1px solid #E5E7EB; padding: 20px;
-        h4 { margin: 0 0 15px 0; font-size: 14px; color: #374151; }
+        background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; padding: 20px;
+        h4 { margin: 0 0 15px 0; font-size: 14px; color: #0F172A; font-weight: 600; }
         .graph { 
             height: 100px; width: 100%; position: relative;
-            border-bottom: 1px solid #E5E7EB; border-left: 1px solid #E5E7EB;
+            border-bottom: 1px solid #E2E8F0; border-left: 1px solid #E2E8F0;
         }
         svg { width: 100%; height: 100%; overflow: visible; }
-        path { fill: url(#gradient); stroke: #0F766E; stroke-width: 2; }
+        path { fill: url(#gradient); stroke: #0D9488; stroke-width: 2; }
     }
 `
 
 // --- MOCKUP 3: TEAM RANKING ---
 const RankingMock = styled.div`
     padding: 0;
-    background: white;
+    background: #FFFFFF;
     
     .table-header {
-        display: flex; padding: 15px 20px; background: #F9FAFB; border-bottom: 1px solid #E5E7EB;
-        font-size: 11px; font-weight: bold; color: #6B7280; text-transform: uppercase;
+        display: flex; padding: 15px 20px; background: #F8FAFC; border-bottom: 1px solid #E2E8F0;
+        font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em;
         div { flex: 1; }
         .right { text-align: right; }
         .center { text-align: center; flex: 0.5; }
     }
     
     .row {
-        display: flex; padding: 15px 20px; border-bottom: 1px solid #F3F4F6; align-items: center;
+        display: flex; padding: 15px 20px; border-bottom: 1px solid #F1F5F9; align-items: center;
         &:last-child { border: none; }
-        div { flex: 1; font-size: 13px; color: #374151; }
-        .right { text-align: right; font-weight: bold; }
-        .center { text-align: center; flex: 0.5; font-weight: bold; color: #0F766E; }
-        .medal { color: #F59E0B; margin-right: 8px; }
+        div { flex: 1; font-size: 13px; color: #334155; font-weight: 500; }
+        .right { text-align: right; font-weight: 600; color: #0F172A; }
+        .center { text-align: center; flex: 0.5; font-weight: 600; color: #0D9488; }
+        .medal { color: #0D9488; margin-right: 8px; }
     }
 `
 
@@ -185,26 +186,26 @@ const PowerGrid = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.md}) { grid-template-columns: 1fr; }
 `
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #FFFFFF;
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
     &:hover {
         transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: #0F766E;
-        .icon { background: #0F766E; color: white; }
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #0D9488;
+        .icon { background: #0D9488; color: #FFFFFF; border-color: #0D9488; }
     }
     .icon {
         width: 48px; height: 48px; border-radius: 12px;
-        background: white; display: flex; align-items: center; justify-content: center;
-        color: #0F766E; margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        background: #F8FAFC; display: flex; align-items: center; justify-content: center;
+        color: #0D9488; margin-bottom: 1.5rem;
+        border: 1px solid #E2E8F0;
+        transition: all 0.3s ease;
     }
-    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: ${props => props.theme.colors.textDark}; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #0F172A; letter-spacing: -0.02em; }
+    p { font-size: 1rem; color: #475569; line-height: 1.5; margin: 0; }
 `
 
 export default function AnalyticsDeepDive() {
@@ -229,12 +230,12 @@ export default function AnalyticsDeepDive() {
                     <MockupCard>
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <FunnelMock>
-                            <div className="stage" style={{width: '100%', background: '#2563EB'}}>
+                            <div className="stage" style={{width: '100%', background: '#334155'}}>
                                 <span>Leads (Interessados)</span>
                                 <span>245</span>
                             </div>
                             <div className="conversion"><ArrowDownRight size={12}/> 40% agendaram</div>
-                            <div className="stage" style={{width: '75%', background: '#0EA5E9'}}>
+                            <div className="stage" style={{width: '75%', background: '#0D9488'}}>
                                 <span>Visitas Agendadas</span>
                                 <span>98</span>
                             </div>
@@ -244,7 +245,7 @@ export default function AnalyticsDeepDive() {
                                 <span>74</span>
                             </div>
                             <div className="conversion"><ArrowDownRight size={12}/> 60% fecharam</div>
-                            <div className="stage" style={{width: '35%', background: '#10B981'}}>
+                            <div className="stage" style={{width: '35%', background: '#2DD4BF'}}>
                                 <span>Matrículas (Vendas)</span>
                                 <span>45</span>
                             </div>
@@ -275,8 +276,8 @@ export default function AnalyticsDeepDive() {
                                     <svg viewBox="0 0 100 50" preserveAspectRatio="none">
                                         <defs>
                                             <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
-                                                <stop offset="0%" stopColor="#0F766E" stopOpacity="0.2"/>
-                                                <stop offset="100%" stopColor="#0F766E" stopOpacity="0"/>
+                                                <stop offset="0%" stopColor="#0D9488" stopOpacity="0.2"/>
+                                                <stop offset="100%" stopColor="#0D9488" stopOpacity="0"/>
                                             </linearGradient>
                                         </defs>
                                         <path d="M0,50 L0,40 Q10,30 20,35 T40,20 T60,25 T80,10 L100,5 L100,50 Z" />
@@ -324,19 +325,19 @@ export default function AnalyticsDeepDive() {
                                 <div className="center"><Trophy size={14} className="medal"/> 1</div>
                                 <div>Ana Silva</div>
                                 <div className="right">28</div>
-                                <div className="right" style={{color: '#10B981'}}>42%</div>
+                                <div className="right" style={{color: '#0D9488'}}>42%</div>
                             </div>
                             <div className="row">
                                 <div className="center">2</div>
                                 <div>Carlos Souza</div>
                                 <div className="right">19</div>
-                                <div className="right" style={{color: '#10B981'}}>35%</div>
+                                <div className="right" style={{color: '#0D9488'}}>35%</div>
                             </div>
                             <div className="row">
                                 <div className="center">3</div>
                                 <div>Mariana Lima</div>
                                 <div className="right">12</div>
-                                <div className="right" style={{color: '#F59E0B'}}>22%</div>
+                                <div className="right" style={{color: '#0F172A'}}>22%</div>
                             </div>
                         </RankingMock>
                     </MockupCard>
@@ -347,10 +348,11 @@ export default function AnalyticsDeepDive() {
                     <h3 style={{
                         fontSize: '2rem',
                         fontWeight: 800,
-                        color: '#333',
-                        fontFamily: 'var(--font-inter)'
+                        color: '#0F172A',
+                        fontFamily: 'var(--font-inter)',
+                        letterSpacing: '-0.02em'
                     }}>Análises Profundas</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Inteligência para cada setor da escola.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem', fontSize: '1.125rem'}}>Inteligência para cada setor da escola.</p>
                 </div>
 
                 <PowerGrid>

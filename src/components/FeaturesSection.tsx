@@ -10,18 +10,18 @@ import {
     BarChart3,
     BrainCircuit,
     Smartphone,
-    CalendarCheck
+    CalendarCheck,
+    ArrowRight,
+    MousePointerClick
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
-
-// --- ESTILOS GERAIS DA SEÇÃO ---
+import Link from 'next/link'
 
 const Section = styled.section`
     padding: 6rem 0;
     background: ${props => props.theme.colors.pageBackground};
     position: relative;
-    overflow: hidden;
 `
 
 const Highlight = styled.span`
@@ -29,265 +29,208 @@ const Highlight = styled.span`
     font-weight: 700;
 `
 
-// --- GRID DE FEATURES ---
-
 const FeaturesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 
-    @media (max-width: 968px) {
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
         grid-template-columns: 1fr;
     }
 `
 
-interface FeatureCardProps {
-    $gradient: string;
-}
-
-const FeatureCard = styled.div<FeatureCardProps>`
-    background: ${props => props.theme.colors.white};
-    padding: 2.5rem;
+const FeatureCard = styled(Link)`
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-
-    /* Barra colorida no topo */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 6px;
-        background: ${props => props.$gradient};
-    }
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    height: 100%;
+    group: hover;
 
     &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-`
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.12);
+        border-color: #BFDBFE;
 
-const IconWrapper = styled.div<{ $color: string }>`
-    width: 64px;
-    height: 64px;
-    border-radius: 16px;
-    background: ${props => props.$color}15; /* 15% opacidade */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    color: ${props => props.$color};
-
-    svg {
-        width: 32px;
-        height: 32px;
-    }
-`
-
-const FeatureTitle = styled.h3`
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.textDark};
-`
-
-const FeatureDescription = styled.p`
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-`
-
-const FeatureList = styled.ul`
-    list-style: none;
-    padding: 0;
-
-    li {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
-        font-size: 0.9rem;
-        color: ${props => props.theme.colors.textDark};
-        font-weight: 500;
-
-        /* Bullet point customizado */
-        &::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: ${props => props.theme.colors.secondary};
-            flex-shrink: 0;
+        .action-icon {
+            transform: translateX(4px);
+            color: #2563EB;
         }
     }
 `
 
+const CardHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+`
+
+const IconBox = styled.div<{ $color: string, $bg: string }>`
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: ${props => props.$bg};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+
+    svg {
+        width: 24px;
+        height: 24px;
+        color: ${props => props.$color};
+    }
+`
+
+const FeatureTitle = styled.h3`
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0;
+`
+
+const FeatureDescription = styled.p`
+    color: #64748B;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    flex-grow: 1;
+`
+
+const CardFooter = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: auto;
+    transition: color 0.3s ease;
+    
+    .action-icon {
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+`
+
 export default function FeaturesSection() {
-    const theme = useTheme()
+    const features = [
+        {
+            title: 'Funil de Vendas Visual',
+            description: 'Visualize todos os interessados em colunas (Kanban), saiba quem visitou, quem está negociando e quem sumiu.',
+            icon: <LayoutDashboard />,
+            color: '#2563EB',
+            bg: '#EFF6FF',
+            href: '/funcionalidades/funil-de-vendas'
+        },
+        {
+            title: 'WhatsApp Centralizado',
+            description: 'Conecte toda sua equipe no mesmo número oficial. Organize o atendimento e não perca o controle das conversas.',
+            icon: <MessageSquare />,
+            color: '#16A34A',
+            bg: '#F0FDF4',
+            href: '/funcionalidades/whatsapp'
+        },
+        {
+            title: 'Mia, a Copilota de IA',
+            description: 'Sua copilota prepara o briefing do dia, analisa cada lead e sugere a próxima ação para focar em fechar matrículas.',
+            icon: <BrainCircuit />,
+            color: '#9333EA',
+            bg: '#FAF5FF',
+            href: '/funcionalidades/mia-ia'
+        },
+        {
+            title: 'Campanhas em Massa',
+            description: 'Dispare mensagens segmentadas para atrair novos alunos ou convidar para eventos. Alcance milhares com um clique.',
+            icon: <Megaphone />,
+            color: '#EA580C',
+            bg: '#FFF7ED',
+            href: '/funcionalidades/campanhas'
+        },
+        {
+            title: 'Relatórios de Marketing',
+            description: 'Descubra de onde vêm seus alunos (Instagram, Google, Indicação). Invista seu orçamento apenas no que traz resultado.',
+            icon: <BarChart3 />,
+            color: '#0891B2',
+            bg: '#ECFEFF',
+            href: '/funcionalidades/relatorios'
+        },
+        {
+            title: 'Agendamento de Visitas',
+            description: 'Confirme e gerencie visitas direto pelo funil — sem ida e volta manual de mensagens pra fechar horário com as famílias.',
+            icon: <CalendarCheck />,
+            color: '#4F46E5',
+            bg: '#EEF2FF',
+            href: '/funcionalidades/agendamento'
+        },
+        {
+            title: 'Formulários de Captação',
+            description: 'Conecte seus anúncios e site diretamente ao Maskot. Cada novo cadastro cai automaticamente no funil certo.',
+            icon: <MousePointerClick />,
+            color: '#E11D48',
+            bg: '#FFF1F2',
+            href: '/funcionalidades/formularios'
+        },
+        {
+            title: 'Régua de Follow-up',
+            description: 'Crie automações que cobram o retorno da família. Se o lead não respondeu, o Maskot manda mensagem para reaquecer.',
+            icon: <Zap />,
+            color: '#D97706',
+            bg: '#FEF3C7',
+            href: '/funcionalidades/automacoes'
+        },
+        {
+            title: 'App Mobile',
+            description: 'Responda os pais, consulte informações e não deixe nenhuma mensagem pendente mesmo fora da escola.',
+            icon: <Smartphone />,
+            color: '#475569',
+            bg: '#F8FAFC',
+            href: '/funcionalidades/app-mobile'
+        }
+    ];
 
     return (
         <Section id="recursos">
             <Container>
-                <SectionHeader $maxWidth="800px" $marginBottom="5rem">
+                <SectionHeader $maxWidth="800px" $marginBottom="4rem">
                     <SectionTitle>
-                        Tudo para focar em <Highlight>Vendas e Captação</Highlight>
+                        Um ecossistema completo para <Highlight>Escolas</Highlight>
                     </SectionTitle>
                     <SectionSubtitle>
-                        Cada recurso do Maskot existe para uma só coisa: transformar interessados em alunos matriculados.
-                        Organize o comercial, agilize o atendimento e nunca mais perca um lead.
+                        Muito mais que um CRM. O Maskot une atração, conversão e relacionamento em uma única plataforma, desenhada para acelerar suas matrículas.
                     </SectionSubtitle>
                 </SectionHeader>
 
                 <FeaturesGrid>
-                    {/* CARD 1: CRM / KANBAN */}
-                    <FeatureCard $gradient="linear-gradient(to right, #007BFF, #00C6FF)">
-                        <IconWrapper $color="#007BFF">
-                            <LayoutDashboard />
-                        </IconWrapper>
-                        <FeatureTitle>Funil de Vendas Visual</FeatureTitle>
-                        <FeatureDescription>
-                            Pare de usar planilhas confusas. Visualize todos os interessados em colunas (Kanban), saiba quem visitou, quem está negociando e quem sumiu.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Arraste e solte para mover leads</li>
-                            <li>Histórico completo da negociação</li>
-                            <li>Alertas de leads estagnados</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 2: WHATSAPP CENTRAL */}
-                    <FeatureCard $gradient="linear-gradient(to right, #25D366, #128C7E)">
-                        <IconWrapper $color="#128C7E">
-                            <MessageSquare />
-                        </IconWrapper>
-                        <FeatureTitle>WhatsApp Centralizado</FeatureTitle>
-                        <FeatureDescription>
-                            Conecte sua equipe no mesmo número oficial. O diretor acompanha tudo e garante que nenhum pai fique sem resposta.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Múltiplos atendentes no mesmo número</li>
-                            <li>Distribuição de conversas por setor</li>
-                            <li>Auditoria e gravação de mensagens</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 3: CAMPANHAS */}
-                    <FeatureCard $gradient="linear-gradient(to right, #FD7E14, #F2C94C)">
-                        <IconWrapper $color="#FD7E14">
-                            <Megaphone />
-                        </IconWrapper>
-                        <FeatureTitle>Campanhas em Massa</FeatureTitle>
-                        <FeatureDescription>
-                            Precisa avisar sobre rematrículas ou um evento aberto? Dispare mensagens para milhares de contatos com segurança e segmentação.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Envio seguro (API Oficial)</li>
-                            <li>Segmentação por etapa do funil</li>
-                            <li>Recuperação de ex-alunos</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 4: AUTOMAÇÃO */}
-                    <FeatureCard $gradient="linear-gradient(to right, #8E2DE2, #4A00E0)">
-                        <IconWrapper $color="#8E2DE2">
-                            <Zap />
-                        </IconWrapper>
-                        <FeatureTitle>Régua de Follow-up</FeatureTitle>
-                        <FeatureDescription>
-                            Crie automações que cobram o retorno do pai. Se o lead não respondeu em 2 dias, o Maskot manda uma mensagem automática para reaquecer.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Mensagens automáticas de saudação</li>
-                            <li>Lembretes de visita agendada</li>
-                            <li>Follow-up de leads frios</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 5: EQUIPE */}
-                    <FeatureCard $gradient="linear-gradient(to right, #FF416C, #FF4B2B)">
-                        <IconWrapper $color="#FF416C">
-                            <Users />
-                        </IconWrapper>
-                        <FeatureTitle>Gestão da Equipe</FeatureTitle>
-                        <FeatureDescription>
-                            Saiba quem está atendendo bem e quem está demorando. Defina permissões e acompanhe a produtividade do seu time comercial.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Controle de tempo de resposta</li>
-                            <li>Permissões de acesso granulares</li>
-                            <li>Transferência de leads entre vendedores</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 6: RELATÓRIOS */}
-                    <FeatureCard $gradient="linear-gradient(to right, #11998e, #38ef7d)">
-                        <IconWrapper $color="#11998e">
-                            <BarChart3 />
-                        </IconWrapper>
-                        <FeatureTitle>Relatórios de Marketing</FeatureTitle>
-                        <FeatureDescription>
-                            Descubra de onde vêm seus alunos (Instagram, Google, Indicação). Invista seu orçamento de marketing apenas no que traz resultado.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Origem dos leads (Rastreamento)</li>
-                            <li>Taxa de conversão por canal</li>
-                            <li>Motivos de perda de venda</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 7: MIA (COPILOTO IA) */}
-                    <FeatureCard $gradient={`linear-gradient(to right, ${theme.colors.mia.from}, ${theme.colors.mia.to})`}>
-                        <IconWrapper $color={theme.colors.mia.from}>
-                            <BrainCircuit />
-                        </IconWrapper>
-                        <FeatureTitle>Mia, a Copilota de IA</FeatureTitle>
-                        <FeatureDescription>
-                            Sua copilota de IA prepara o briefing do dia, analisa cada lead e sugere a próxima ação — para o consultor focar em fechar a matrícula.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Briefing diário do funil</li>
-                            <li>Diagnóstico de risco por lead</li>
-                            <li>Mensagens no tom da escola</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 8: APP MOBILE */}
-                    <FeatureCard $gradient="linear-gradient(to right, #6366F1, #4338CA)">
-                        <IconWrapper $color="#4338CA">
-                            <Smartphone />
-                        </IconWrapper>
-                        <FeatureTitle>App Mobile</FeatureTitle>
-                        <FeatureDescription>
-                            Gerencie comercial, visitas e relacionamento com os pais em tempo real, de qualquer lugar — direto do celular.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Funil de leads no bolso</li>
-                            <li>Agenda de visitas</li>
-                            <li>WhatsApp nativo mobile</li>
-                        </FeatureList>
-                    </FeatureCard>
-
-                    {/* CARD 9: AGENDAMENTO DE VISITAS */}
-                    <FeatureCard $gradient="linear-gradient(to right, #06B6D4, #0E7490)">
-                        <IconWrapper $color="#06B6D4">
-                            <CalendarCheck />
-                        </IconWrapper>
-                        <FeatureTitle>Agendamento de Visitas</FeatureTitle>
-                        <FeatureDescription>
-                            Confirme e gerencie visitas direto pelo funil — sem ida e volta manual de mensagens pra fechar horário.
-                        </FeatureDescription>
-                        <FeatureList>
-                            <li>Confirmação automática por WhatsApp</li>
-                            <li>Lembretes pra não faltar</li>
-                            <li>Calendário integrado ao funil</li>
-                        </FeatureList>
-                    </FeatureCard>
+                    {features.map((feature, index) => (
+                        <FeatureCard key={index} href={feature.href}>
+                            <CardHeader>
+                                <IconBox $color={feature.color} $bg={feature.bg}>
+                                    {feature.icon}
+                                </IconBox>
+                                <FeatureTitle>{feature.title}</FeatureTitle>
+                            </CardHeader>
+                            <FeatureDescription>
+                                {feature.description}
+                            </FeatureDescription>
+                            <CardFooter>
+                                Saiba mais
+                                <ArrowRight className="action-icon" size={18} />
+                            </CardFooter>
+                        </FeatureCard>
+                    ))}
                 </FeaturesGrid>
             </Container>
         </Section>

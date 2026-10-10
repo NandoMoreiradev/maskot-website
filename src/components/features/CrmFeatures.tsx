@@ -9,7 +9,7 @@ import {
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: #ffffff;
+    background: #F8FAFC;
 `
 
 const Container = styled.div`
@@ -26,15 +26,16 @@ const Header = styled.div`
     h2 {
         font-size: 2.5rem;
         font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
         margin-bottom: 1rem;
+        letter-spacing: -0.02em;
         
-        span { color: ${props => props.theme.colors.primary}; }
+        span { color: #2563EB; }
     }
     
     p {
         font-size: 1.125rem;
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
     }
 `
@@ -44,37 +45,40 @@ const FeaturesGrid = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 
-    @media (max-width: ${props => props.theme.breakpoints.sm}) {
+    @media (max-width: 768px) {
         grid-template-columns: 1fr;
     }
 `
 
 const FeatureCategory = styled.div`
-    background: #F8F9FA;
+    background: #FFFFFF;
     border: 1px solid #E2E8F0;
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 24px;
+    padding: 2.5rem;
     height: 100%;
     transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
 
     &:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+        border-color: #CBD5E1;
     }
 `
 
-const CategoryHeader = styled.div<{ $color: string }>`
+const CategoryHeader = styled.div<{ $color?: string }>`
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
 
     .icon-wrapper {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        background: ${props => props.$color}15;
-        color: ${props => props.$color};
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        color: #2563EB;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -83,7 +87,8 @@ const CategoryHeader = styled.div<{ $color: string }>`
     h3 {
         font-size: 1.25rem;
         font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.01em;
     }
 `
 
@@ -93,31 +98,31 @@ const FeatureList = styled.ul`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 `
 
 const FeatureItem = styled.li`
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 1rem;
 
     svg {
-        color: ${props => props.theme.colors.primary};
+        color: #64748B;
         margin-top: 2px;
         flex-shrink: 0;
     }
 
     div {
         h4 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: ${props => props.theme.colors.textDark};
+            color: #0F172A;
             margin-bottom: 0.25rem;
         }
         p {
-            font-size: 0.85rem;
-            color: ${props => props.theme.colors.textMedium};
-            line-height: 1.4;
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
         }
     }
 `

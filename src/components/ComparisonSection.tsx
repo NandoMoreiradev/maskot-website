@@ -121,7 +121,10 @@ const TableHeader = styled.div`
   }
 `
 
-const HeaderCell = styled.div<{ $highlight?: boolean }>`
+interface HeaderCellProps {
+    $highlight?: boolean;
+}
+const HeaderCell = styled.div<HeaderCellProps>`
   padding: 1.5rem;
   text-align: center;
   position: relative;
@@ -177,7 +180,10 @@ const HeaderTitle = styled.div`
   }
 `
 
-const HeaderPrice = styled.div<{ $color?: string }>`
+interface HeaderPriceProps {
+    $color?: string;
+}
+const HeaderPrice = styled.div<HeaderPriceProps>`
   font-size: 1.5rem;
   font-weight: 800;
   color: ${props => props.$color || props.theme.colors.textDark};
