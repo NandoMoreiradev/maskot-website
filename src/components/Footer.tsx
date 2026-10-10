@@ -282,7 +282,7 @@ export default function Footer() {
                 <FooterContent>
                     <CompanySection>
                         <Logo>
-                            <Image src="/logo_maskot_website.png" alt="Maskot Edu" width={180} height={50} />
+                            <Image src="/logo_maskot_website_preta.png" alt="Maskot Edu" width={180} height={50} />
                         </Logo>
                         <CompanyDescription>
                             O CRM que realmente entende escolas. Centralize toda a gestão de leads,

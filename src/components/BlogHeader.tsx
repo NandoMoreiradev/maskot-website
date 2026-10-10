@@ -260,7 +260,7 @@ export default function BlogHeader({ categories = [] }: BlogHeaderProps) {
           <LogoArea href="/blog">
             <div className="logo-container">
               <Image
-                src="/logo_maskot_website.png"
+                src="/logo_maskot_website_preta.png"
                 alt="Maskot Edu"
                 width={150}
                 height={40}

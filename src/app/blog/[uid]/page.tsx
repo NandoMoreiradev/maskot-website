@@ -164,7 +164,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
         publisher: {
           '@type': 'Organization',
           name: 'Maskot',
-          logo: { '@type': 'ImageObject', url: 'https://www.maskotedu.com.br/logo_maskot_website.png' },
+          logo: { '@type': 'ImageObject', url: 'https://www.maskotedu.com.br/logo_maskot_website_preta.png' },
         },
         mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
       },

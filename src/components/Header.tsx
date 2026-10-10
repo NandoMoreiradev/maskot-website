@@ -422,7 +422,7 @@ export default function Header() {
             <Container $scrolled={scrolled}>
                 <LogoLink href="/" aria-label="Maskot Home">
                     <Image
-                        src="/logo_maskot_website.png"
+                        src="/logo_maskot_website_preta.png"
                         alt="Maskot CRM"
                         fill
                         sizes="220px"
