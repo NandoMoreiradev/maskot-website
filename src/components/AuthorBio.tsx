@@ -41,9 +41,9 @@ export default function AuthorBio({ author }: { author: BlogAuthor | null }) {
         alignItems: "flex-start",
         marginTop: "4rem",
         padding: "2rem",
-        background: "#f8fbff",
-        border: "1px solid #e6ecf2",
-        borderRadius: "20px",
+        background: "#F8FAFC",
+        border: "1px solid #E2E8F0",
+        borderRadius: "4px",
       }}
     >
       {photo?.url && (
@@ -55,7 +55,7 @@ export default function AuthorBio({ author }: { author: BlogAuthor | null }) {
             flexShrink: 0,
             borderRadius: "50%",
             overflow: "hidden",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+            
           }}
         >
           <Image
@@ -73,17 +73,17 @@ export default function AuthorBio({ author }: { author: BlogAuthor | null }) {
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "1px",
-            color: "#007BFF",
+            color: "#2563EB",
           }}
         >
           Escrito por
         </span>
-        <h3 style={{ margin: "0.2rem 0 0.15rem", fontSize: "1.25rem", fontWeight: 800, color: "#1a1a2e" }}>
+        <h3 style={{ margin: "0.2rem 0 0.15rem", fontSize: "1.25rem", fontWeight: 800, color: "#0F172A" }}>
           {name}
         </h3>
-        {role && <p style={{ margin: 0, color: "#777", fontSize: "0.92rem" }}>{role}</p>}
+        {role && <p style={{ margin: 0, color: "#64748B", fontSize: "0.92rem" }}>{role}</p>}
         {bioText && (
-          <p style={{ margin: "0.75rem 0 0", color: "#444", fontSize: "0.98rem", lineHeight: 1.6 }}>
+          <p style={{ margin: "0.75rem 0 0", color: "#475569", fontSize: "0.98rem", lineHeight: 1.6 }}>
             {bioText}
           </p>
         )}
@@ -95,7 +95,7 @@ export default function AuthorBio({ author }: { author: BlogAuthor | null }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`LinkedIn de ${name}`}
-                style={{ color: "#007BFF", display: "inline-flex" }}
+                style={{ color: "#2563EB", display: "inline-flex" }}
               >
                 <Linkedin size={20} />
               </a>
@@ -106,7 +106,7 @@ export default function AuthorBio({ author }: { author: BlogAuthor | null }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Instagram de ${name}`}
-                style={{ color: "#007BFF", display: "inline-flex" }}
+                style={{ color: "#2563EB", display: "inline-flex" }}
               >
                 <Instagram size={20} />
               </a>

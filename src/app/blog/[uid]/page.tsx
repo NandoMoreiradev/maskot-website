@@ -13,11 +13,11 @@ import Link from "next/link";
 import { extractHeadings } from "@/lib/toc";
 import { calculateReadingTime } from "@/lib/readingTime";
 import { categorySlug } from "@/lib/categories";
-import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter, User } from "lucide-react";
+import { Facebook, Linkedin, Share2, Twitter } from "lucide-react";
 import { 
   PageWrapper, Container, ArticleContent, Breadcrumbs, PostHeader, 
   FeaturedImage, RichTextWrapper, AuthorBox, CTAButton,
-  MetaInfo, RelatedSection, RelatedCard, ShareButtons
+  MetaInfo, RelatedSection, RelatedCard, ShareButtons, ShareInline
 } from "./styles";
 
 type Params = { uid: string };
@@ -143,6 +143,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
     }
   }
   const authorName = author?.data?.name || undefined;
+  const authorPhoto = author?.data?.photo?.url || undefined;
 
   // ==================== STRUCTURED DATA (JSON-LD) ====================
   const category = page.data.category || 'Gestão Escolar';
@@ -196,6 +197,25 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
     }
   } catch { /* blog_settings not yet published — banner simply won't show */ }
 
+  const shareLinks = (
+    <>
+      <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${encodeURIComponent(postTitle)}`} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no X">
+        <Twitter size={16} />
+      </a>
+      <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no Facebook">
+        <Facebook size={16} />
+      </a>
+      <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no LinkedIn">
+        <Linkedin size={16} />
+      </a>
+      <a href={`https://wa.me/?text=${encodeURIComponent(postTitle + ' ' + postUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </a>
+    </>
+  );
+
   return (
     <>
       <script
@@ -211,35 +231,34 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
               <Link href="/blog">Blog</Link>
               <span className="separator">/</span>
               <Link href={`/blog/categoria/${categorySlug(category)}`}>{category}</Link>
-              <span className="separator">/</span>
-              <span className="current">{postTitle}</span>
             </Breadcrumbs>
 
             <PostHeader>
-              <Link className="category" href={`/blog/categoria/${categorySlug(category)}`}>
-                {category}
-              </Link>
               <h1>{postTitle}</h1>
               <div className="excerpt">{asText(page.data.excerpt)}</div>
-              
+
               <MetaInfo>
-                {authorName && (
-                  <span>
-                    <User size={18} color="#2563EB" /> Por {authorName}
-                  </span>
-                )}
-                <span>
-                  <Calendar size={18} color="#2563EB" />
-                  {new Date(page.first_publication_date).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric'
-                  })}
-                </span>
-                <span>
-                  <Clock size={18} color="#2563EB" />
-                  {readingTime} min de leitura
-                </span>
+                <div className="byline">
+                  <div className="avatar">
+                    {authorPhoto ? (
+                      <Image src={authorPhoto} alt={authorName || 'Autor'} fill sizes="44px" style={{ objectFit: 'cover' }} />
+                    ) : (
+                      (authorName || 'Maskot').charAt(0).toUpperCase()
+                    )}
+                  </div>
+                  <div className="who">
+                    <strong>{authorName ? `Por ${authorName}` : 'Equipe Maskot'}</strong>
+                    <span>
+                      {new Date(page.first_publication_date).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}{' '}
+                      · {readingTime} min de leitura
+                    </span>
+                  </div>
+                </div>
+                <ShareInline>{shareLinks}</ShareInline>
               </MetaInfo>
             </PostHeader>
 
@@ -250,6 +269,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                   alt={page.data.featured_image.alt || postTitle}
                   fill
                   priority
+                  sizes="(max-width: 1024px) 100vw, 780px"
                 />
               </FeaturedImage>
             )}
@@ -257,25 +277,10 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             <RichTextWrapper>
               <SliceZone slices={page.data.slices as never} components={components} />
             </RichTextWrapper>
-            
+
             <ShareButtons>
-              <span><Share2 size={20} /> Compartilhe:</span>
-              <div className="icons">
-                <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${postTitle}`} target="_blank" rel="noopener noreferrer">
-                  <Twitter size={18} />
-                </a>
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer">
-                  <Facebook size={18} />
-                </a>
-                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer">
-                  <Linkedin size={18} />
-                </a>
-                <a href={`https://wa.me/?text=${encodeURIComponent(postTitle + ' ' + postUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                </a>
-              </div>
+              <span><Share2 size={16} /> Compartilhe</span>
+              <ShareInline>{shareLinks}</ShareInline>
             </ShareButtons>
 
             <AuthorBio author={author} />
@@ -288,39 +293,43 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             <AuthorBox>
               <h3>Gostou deste conteúdo?</h3>
               <p>
-                O Maskot ajuda centenas de escolas a crescerem e fidelizarem alunos. 
+                O Maskot ajuda centenas de escolas a crescerem e fidelizarem alunos.
                 Que tal conhecer na prática?
               </p>
               <CTAButton href="/">
                 Agendar demonstração gratuita
               </CTAButton>
             </AuthorBox>
-
-            {relatedPosts.length > 0 && (
-              <RelatedSection>
-                <h2>Continue lendo</h2>
-                <div className="grid">
-                  {relatedPosts.map(post => (
-                    <RelatedCard key={post.id} href={`/blog/${post.uid}`}>
-                      <div className="img-box">
-                        <Image 
-                          src={post.data.featured_image?.url || ''} 
-                          alt={asText(post.data.title)} 
-                          fill 
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          style={{ objectFit: 'cover' }}
-                        />
-                      </div>
-                      <h3>{asText(post.data.title)}</h3>
-                    </RelatedCard>
-                  ))}
-                </div>
-              </RelatedSection>
-            )}
           </ArticleContent>
 
           <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} headings={headings} sidebarBanner={sidebarBanner} />
         </Container>
+
+        {relatedPosts.length > 0 && (
+          <RelatedSection>
+            <h2>Continue lendo</h2>
+            <div className="grid">
+              {relatedPosts.map(post => (
+                <RelatedCard key={post.id} href={`/blog/${post.uid}`}>
+                  <div className="img-box">
+                    {post.data.featured_image?.url && (
+                      <Image
+                        src={post.data.featured_image.url}
+                        alt={asText(post.data.title)}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 33vw"
+                      />
+                    )}
+                  </div>
+                  <div>
+                    <span className="kicker">{post.data.category || 'Artigo'}</span>
+                    <h3>{asText(post.data.title)}</h3>
+                  </div>
+                </RelatedCard>
+              ))}
+            </div>
+          </RelatedSection>
+        )}
       </PageWrapper>
     </>
   );

@@ -3,138 +3,136 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { Calendar, Clock } from 'lucide-react'
 import { asText } from '@prismicio/client'
 import type { Content } from '@prismicio/client'
 import { calculateReadingTime } from '@/lib/readingTime'
+import { formatDate, sans } from '@/components/blogTokens'
 
-const Card = styled.article`
-  background: white;
-  border-radius: 18px;
-  overflow: hidden;
+const Row = styled(Link)`
   display: grid;
-  grid-template-columns: 220px 1fr;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  transition: all 0.25s ease;
-  min-height: 150px;
+  grid-template-columns: 1fr 240px;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid #E2E8F0;
+
+  &:first-child {
+    padding-top: 0;
+  }
 
   @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  &:hover {
-    box-shadow: 0 14px 30px -6px rgba(15, 23, 42, 0.08);
-    transform: translateY(-2px);
-    border-color: #CBD5E1;
+    grid-template-columns: 1fr 110px;
+    gap: 1rem;
+    padding: 1.25rem 0;
   }
 `
 
-const ThumbArea = styled.div`
-  position: relative;
-  overflow: hidden;
-  background: #F8FAFC;
-  @media (max-width: 640px) { aspect-ratio: 16/9; }
-
-  img { transition: transform 0.4s ease; }
-  ${Card}:hover img { transform: scale(1.05); }
-`
-
-const PostInfo = styled.div`
-  padding: 1.5rem 1.75rem;
+const Info = styled.div`
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
 
-  .category {
-    font-size: 0.725rem;
-    font-weight: 700;
+  .kicker {
+    font-size: 0.72rem;
+    font-weight: 800;
     color: #2563EB;
-    background: #EFF6FF;
-    border: 1px solid #DBEAFE;
-    padding: 0.2rem 0.65rem;
-    border-radius: 100px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    width: fit-content;
+    letter-spacing: 0.12em;
   }
 
   h3 {
-    font-size: 1.15rem;
+    font-family: ${sans};
+    font-size: 1.55rem;
     font-weight: 700;
     color: #0F172A;
-    line-height: 1.35;
+    line-height: 1.22;
     letter-spacing: -0.01em;
-    transition: color 0.2s ease;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+
+    @media (max-width: 640px) {
+      font-size: 1.1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   }
 
-  ${Card}:hover h3 {
-    color: #2563EB;
+  ${Row}:hover h3 {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #475569;
-    line-height: 1.55;
+    line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+
+    @media (max-width: 640px) { display: none; }
   }
 
   .meta {
-    display: flex;
-    gap: 1.25rem;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 500;
     color: #64748B;
-    margin-top: 0.25rem;
-    align-items: center;
-    div { 
-      display: flex; 
-      align-items: center; 
-      gap: 0.35rem; 
+  }
+`
 
-      svg {
-        color: #94A3B8;
-      }
-    }
+const Thumb = styled.div`
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #F1F5F9;
+
+  img {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  ${Row}:hover & img {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 640px) {
+    aspect-ratio: 1;
   }
 `
 
 /**
- * Card horizontal de post reutilizado na listagem e nas páginas de categoria.
- * Calcula o tempo de leitura real a partir do conteúdo (sem valor fixo).
+ * Linha de post (texto à esquerda, miniatura à direita) usada nas listagens
+ * da home e das páginas de categoria. O tempo de leitura é calculado do conteúdo.
  */
 export default function PostListCard({ post }: { post: Content.BlogPostDocument }) {
   const readingTime = calculateReadingTime(post.data.slices)
+  const title = asText(post.data.title)
+  const imageUrl = post.data.featured_image?.url
 
   return (
-    <Link href={`/blog/${post.uid}`} style={{ textDecoration: 'none' }}>
-      <Card>
-        <ThumbArea>
+    <Row href={`/blog/${post.uid}`}>
+      <Info>
+        <span className="kicker">{post.data.category || 'Artigo'}</span>
+        <h3>{title}</h3>
+        <p>{asText(post.data.excerpt)}</p>
+        <span className="meta">
+          {formatDate(post.first_publication_date)} · {readingTime} min de leitura
+        </span>
+      </Info>
+      <Thumb>
+        {imageUrl && (
           <Image
-            src={post.data.featured_image.url || ''}
-            alt={asText(post.data.title)}
+            src={imageUrl}
+            alt={post.data.featured_image?.alt || title}
             fill
-            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 640px) 110px, 240px"
           />
-        </ThumbArea>
-        <PostInfo>
-          <span className="category">{post.data.category || 'Artigo'}</span>
-          <h3>{asText(post.data.title)}</h3>
-          <p>{asText(post.data.excerpt)}</p>
-          <div className="meta">
-            <div><Calendar size={12} /> {new Date(post.first_publication_date).toLocaleDateString('pt-BR')}</div>
-            <div><Clock size={12} /> {readingTime} min</div>
-          </div>
-        </PostInfo>
-      </Card>
-    </Link>
+        )}
+      </Thumb>
+    </Row>
   )
 }

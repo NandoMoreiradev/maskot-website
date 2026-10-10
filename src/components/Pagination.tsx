@@ -20,7 +20,7 @@ const pageStyles = `
   min-width: 42px;
   height: 42px;
   padding: 0 0.75rem;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: 0.9rem;
   font-weight: 700;
   text-decoration: none;
@@ -41,9 +41,9 @@ const PageLink = styled(Link)<{ $active?: boolean }>`
 
 const Disabled = styled.span`
   ${pageStyles}
-  background: #f4f6f8;
-  color: #bbb;
-  border: 1px solid #eee;
+  background: #F8FAFC;
+  color: #CBD5E1;
+  border: 1px solid #E2E8F0;
   cursor: not-allowed;
 `
 
@@ -83,7 +83,7 @@ export default function Pagination({
       {start > 1 && (
         <>
           <PageLink href={href(1)}>1</PageLink>
-          {start > 2 && <span style={{ color: '#bbb' }}>…</span>}
+          {start > 2 && <span style={{ color: '#94A3B8' }}>…</span>}
         </>
       )}
 
@@ -95,7 +95,7 @@ export default function Pagination({
 
       {end < totalPages && (
         <>
-          {end < totalPages - 1 && <span style={{ color: '#bbb' }}>…</span>}
+          {end < totalPages - 1 && <span style={{ color: '#94A3B8' }}>…</span>}
           <PageLink href={href(totalPages)}>{totalPages}</PageLink>
         </>
       )}

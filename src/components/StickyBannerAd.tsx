@@ -6,16 +6,15 @@ import styled from 'styled-components'
 const Outer = styled(Link)`
   display: block;
   position: sticky;
-  top: 120px; /* below dual header */
-  border-radius: 16px;
+  top: 140px;
+  border-radius: 4px;
   overflow: hidden;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #E2E8F0;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.13);
+    opacity: 0.92;
   }
 `
 

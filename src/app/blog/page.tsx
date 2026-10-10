@@ -1,11 +1,10 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { isFilled } from '@prismicio/client';
-import { BookOpen } from 'lucide-react';
 import { createPrismicClient } from '@/prismicio';
 import BlogFeed from '@/components/BlogFeed';
 import { PageWrapper } from './styles';
-import { BlogPageInner, BlogPageHeader, BlogTag } from './blog-page-styles';
+import { BlogPageInner } from './blog-page-styles';
 
 export const metadata: Metadata = {
   title: 'Blog Educacional | Maskot',
@@ -19,6 +18,15 @@ export const metadata: Metadata = {
     url: 'https://www.maskotedu.com.br/blog',
     type: 'website',
   },
+};
+
+const visuallyHidden: React.CSSProperties = {
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  overflow: 'hidden',
+  clip: 'rect(0 0 0 0)',
+  whiteSpace: 'nowrap',
 };
 
 export default async function BlogPage() {
@@ -49,20 +57,10 @@ export default async function BlogPage() {
   return (
     <PageWrapper>
       <BlogPageInner>
-        <BlogPageHeader>
-          <BlogTag>
-            <BookOpen size={14} /> Conteúdo & Estratégia Educacional
-          </BlogTag>
-          <h1>
-            Artigos e insights para a <strong>gestão escolar moderna</strong>
-          </h1>
-          <p>
-            Dicas práticas de captação de alunos, atendimento via WhatsApp, tecnologia e retenção para instituições de ensino.
-          </p>
-        </BlogPageHeader>
+        <h1 style={visuallyHidden}>Blog Maskot: artigos e insights para a gestão escolar moderna</h1>
 
         {/* BlogFeed uses useSearchParams → must be wrapped in Suspense */}
-        <Suspense fallback={<div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Carregando...</div>}>
+        <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
           <BlogFeed posts={posts} sidebarBanner={sidebarBanner} />
         </Suspense>
       </BlogPageInner>

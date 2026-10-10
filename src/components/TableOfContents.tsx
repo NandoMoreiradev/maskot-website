@@ -6,28 +6,22 @@ import { List } from 'lucide-react'
 import type { TocHeading } from '@/lib/toc'
 
 const Wrapper = styled.nav`
-  background: #f8fbff;
-  border: 1px solid ${props => props.theme.colors.primary}18;
-  border-radius: 16px;
-  padding: 1.5rem 1.75rem;
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - 220px);
   overflow-y: auto;
-
-  @media (max-width: 600px) {
-    padding: 1.25rem;
-  }
 `
 
 const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: ${props => props.theme.colors.primary};
-  margin-bottom: 1rem;
+  letter-spacing: 0.14em;
+  color: #0F172A;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 3px solid #0F172A;
 `
 
 const Items = styled.ul`
@@ -49,8 +43,7 @@ const Item = styled.li<{ $level: 2 | 3; $active: boolean }>`
     font-weight: ${props => (props.$active ? 700 : 500)};
     color: ${props => (props.$active ? props.theme.colors.primary : props.theme.colors.textMedium)};
     line-height: 1.4;
-    border-radius: 0 6px 6px 0;
-    transition: color 0.2s, background 0.2s;
+        transition: color 0.2s, background 0.2s;
 
     &:hover {
       color: ${props => props.theme.colors.primary};
@@ -98,7 +91,7 @@ export default function TableOfContents({ headings }: { headings: TocHeading[] }
   return (
     <Wrapper aria-label="Índice do artigo">
       <Header>
-        <List size={16} /> Neste artigo
+        <List size={14} /> Neste artigo
       </Header>
       <Items>
         {headings.map((h) => (

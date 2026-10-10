@@ -1,157 +1,124 @@
 'use client'
 import styled from 'styled-components'
-import { Mail, Phone, Instagram, Facebook } from 'lucide-react'
+import { Mail, Instagram, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { BLOG_CATEGORIES, categorySlug } from '@/lib/categories'
 
 const Wrapper = styled.footer`
-  background: #F8FAFC;
-  color: #0F172A;
-  padding: 4rem 2rem 2.5rem;
-  position: relative;
-  overflow: hidden;
-  border-top: 1px solid #E2E8F0;
+  background: #0F172A;
+  color: #CBD5E1;
+  padding: 4rem 2rem 2rem;
+  border-top: 4px solid #2563EB;
+
+  @media (max-width: 640px) {
+    padding: 3rem 1.25rem 1.5rem;
+  }
 `
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.6fr 1.2fr 1fr 1fr;
+  gap: 3rem;
 
   @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr 1fr;
   }
-`
 
-const CompanySection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
 `
 
 const Logo = styled.div`
-  height: 44px;
-  width: auto;
-  position: relative;
+  height: 40px;
   display: flex;
   align-items: center;
+  margin-bottom: 1.25rem;
 `
 
 const Description = styled.p`
-  color: #64748B;
-  font-size: 0.925rem;
-  line-height: 1.6;
-  max-width: 400px;
-  margin: 0;
-`
-
-const ContactList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-`
-
-const ContactItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.875rem;
-  color: #475569;
-
-  svg {
-    width: 16px;
-    height: 16px;
-    color: #2563EB;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
-    &:hover { color: #2563EB; }
-  }
-`
-
-const SectionTitle = styled.h4`
-  font-size: 1rem;
-  font-weight: 800;
-  color: #0F172A;
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.01em;
-`
-
-const LinksList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  a {
-    color: #475569;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-    &:hover { 
-      color: #2563EB; 
-      transform: translateX(3px);
-      display: inline-block;
-    }
-  }
+  color: #94A3B8;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 340px;
+  margin-bottom: 1.5rem;
 `
 
 const SocialLinks = styled.div`
   display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: 0.6rem;
 `
 
 const SocialIcon = styled.a`
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #334155;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #CBD5E1;
   transition: all 0.2s ease;
-  color: #64748B;
 
   &:hover {
     background: #2563EB;
     border-color: #2563EB;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    color: #FFFFFF;
+  }
+`
+
+const SectionTitle = styled.h4`
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+`
+
+const LinksList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  a {
+    color: #94A3B8;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    &:hover { color: #FFFFFF; }
   }
 `
 
 const Bottom = styled.div`
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 3.5rem auto 0;
-  padding-top: 2rem;
-  border-top: 1px solid #E2E8F0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1E293B;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: #94A3B8;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #64748B;
 
-  a {
-    color: #64748B;
-    text-decoration: none;
-    transition: color 0.2s;
-    &:hover { color: #2563EB; }
+  .legal {
+    display: flex;
+    gap: 1.5rem;
   }
 
-  @media (max-width: 768px) {
+  a {
+    color: #94A3B8;
+    transition: color 0.2s;
+    &:hover { color: #FFFFFF; }
+  }
+
+  @media (max-width: 640px) {
     flex-direction: column;
-    gap: 1rem;
     text-align: center;
   }
 `
@@ -160,49 +127,66 @@ export default function BlogFooter() {
   return (
     <Wrapper>
       <Container>
-        <CompanySection>
+        <div>
           <Logo>
-            <Image src="/logo_maskot_website_preta.png" alt="Maskot Edu" width={160} height={44} style={{ width: 'auto', height: '100%' }} />
+            <Image
+              src="/logo_maskot_website.branca.png"
+              alt="Maskot Edu"
+              width={160}
+              height={40}
+              style={{ width: 'auto', height: '100%' }}
+            />
           </Logo>
           <Description>
-            Transformando a gestão escolar através de conteúdo estratégico e tecnologia de ponta.
+            O blog da Maskot: conteúdo estratégico sobre captação de alunos, gestão escolar e tecnologia para instituições de ensino.
           </Description>
-          <ContactList>
-            <ContactItem>
-              <Mail />
-              <a href="mailto:fernandomoreira@maskotedu.com.br">fernandomoreira@maskotedu.com.br</a>
-            </ContactItem>
-            <ContactItem>
-              <Phone />
-              <a href="tel:+5579996268858">(79) 99106-4405</a>
-            </ContactItem>
-            <ContactItem>
-              <span style={{ fontWeight: 'bold' }}>CNPJ:</span> 55.188.948/0001-04
-            </ContactItem>
-          </ContactList>
-        </CompanySection>
+          <SocialLinks>
+            <SocialIcon href="https://instagram.com/maskotedu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram size={17} />
+            </SocialIcon>
+            <SocialIcon href="https://facebook.com/maskotedu" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <Facebook size={17} />
+            </SocialIcon>
+            <SocialIcon href="mailto:fernandomoreira@maskotedu.com.br" aria-label="E-mail">
+              <Mail size={17} />
+            </SocialIcon>
+          </SocialLinks>
+        </div>
 
         <div>
-          <SectionTitle>Explorar</SectionTitle>
+          <SectionTitle>Categorias</SectionTitle>
           <LinksList>
-            <li><Link href="/blog">Página Inicial</Link></li>
-            <li><Link href="/#funcionalidades">Funcionalidades</Link></li>
-            <li><Link href="/#precos">Preços</Link></li>
-            <li><Link href="/sobre">Sobre nós</Link></li>
+            {BLOG_CATEGORIES.slice(0, 6).map(cat => (
+              <li key={cat}>
+                <Link href={`/blog/categoria/${categorySlug(cat)}`}>{cat}</Link>
+              </li>
+            ))}
           </LinksList>
         </div>
 
         <div>
-          <SectionTitle>Redes Sociais</SectionTitle>
-          <SocialLinks>
-            <SocialIcon href="https://instagram.com/maskotedu" target="_blank"><Instagram size={18}/></SocialIcon>
-            <SocialIcon href="https://facebook.com/maskotedu" target="_blank"><Facebook size={18}/></SocialIcon>
-          </SocialLinks>
+          <SectionTitle>Blog</SectionTitle>
+          <LinksList>
+            <li><Link href="/blog">Últimas publicações</Link></li>
+            <li><Link href="/cases">Cases de sucesso</Link></li>
+            <li><Link href="/sobre">Sobre a Maskot</Link></li>
+          </LinksList>
+        </div>
+
+        <div>
+          <SectionTitle>Maskot Edu</SectionTitle>
+          <LinksList>
+            <li><Link href="/">Conhecer a plataforma</Link></li>
+            <li><Link href="/#funcionalidades">Funcionalidades</Link></li>
+            <li><Link href="/#precos">Preços</Link></li>
+            <li><a href="https://app.maskotedu.com.br/login">Entrar</a></li>
+          </LinksList>
         </div>
       </Container>
+
       <Bottom>
-        <p>© {new Date().getFullYear()} Maskot Edu. Todos os direitos reservados.</p>
-        <div style={{ display: 'flex', gap: '1.5rem' }}>
+        <p>© {new Date().getFullYear()} Maskot Edu · CNPJ 55.188.948/0001-04 · Todos os direitos reservados.</p>
+        <div className="legal">
           <Link href="/legal/privacidade">Privacidade</Link>
           <Link href="/legal/termos">Termos</Link>
         </div>

@@ -3,11 +3,12 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import * as prismic from '@prismicio/client'
 import { createPrismicClient } from '@/prismicio'
-import PostCard from '@/components/PostCard'
+import PostListCard from '@/components/PostListCard'
+import BlogSidebar from '@/components/BlogSidebar'
 import Pagination from '@/components/Pagination'
 import { BLOG_CATEGORIES, categoryFromSlug, categorySlug } from '@/lib/categories'
 import { PageWrapper } from '@/app/blog/styles'
-import { BlogPageInner, BlogPageHeader, BlogTag } from '@/app/blog/blog-page-styles'
+import { BlogPageInner, BlogPageHeader, BlogTag, ListingLayout as Layout, EmptyCategory as Empty } from '@/app/blog/blog-page-styles'
 import { FolderOpen } from 'lucide-react'
 
 const PAGE_SIZE = 9
@@ -61,6 +62,12 @@ export default async function CategoryPage({
     fetchOptions: { next: { tags: ['prismic'] } },
   })
 
+  const sidebarPosts = await client.getByType('blog_post', {
+    orderings: { field: 'document.first_publication_date', direction: 'desc' },
+    pageSize: 5,
+    fetchOptions: { next: { tags: ['prismic'] } },
+  })
+
   // Página inexistente (além do total) → 404
   if (response.results.length === 0 && page > 1) notFound()
 
@@ -82,21 +89,10 @@ export default async function CategoryPage({
       />
       <BlogPageInner>
         <BlogPageHeader>
-          <nav
-            style={{
-              marginBottom: '1.25rem',
-              fontSize: '0.875rem',
-              color: '#64748B',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-            }}
-          >
-            <Link href="/blog" style={{ color: '#2563EB', textDecoration: 'none', fontWeight: 600 }}>
-              Blog
-            </Link>
-            <span style={{ color: '#CBD5E1' }}>/</span>
-            <span style={{ color: '#0F172A', fontWeight: 600 }}>{category}</span>
+          <nav className="crumbs" aria-label="Navegação estrutural">
+            <Link href="/blog">Blog</Link>
+            <span className="sep">/</span>
+            <span className="current">{category}</span>
           </nav>
           <BlogTag>
             <FolderOpen size={14} /> Categoria
@@ -107,104 +103,23 @@ export default async function CategoryPage({
           </p>
         </BlogPageHeader>
 
-        {/* Category switcher pills */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            marginBottom: '3rem',
-            paddingBottom: '1.5rem',
-            borderBottom: '1px solid #E2E8F0',
-          }}
-        >
-          <Link
-            href="/blog"
-            style={{
-              textDecoration: 'none',
-              padding: '0.45rem 1rem',
-              borderRadius: '100px',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              border: '1px solid #E2E8F0',
-              background: '#FFFFFF',
-              color: '#475569',
-            }}
-          >
-            Todos os Artigos
-          </Link>
-          {BLOG_CATEGORIES.map((cat) => {
-            const isCurrent = cat === category
-            return (
-              <Link
-                key={cat}
-                href={`/blog/categoria/${categorySlug(cat)}`}
-                style={{
-                  textDecoration: 'none',
-                  padding: '0.45rem 1rem',
-                  borderRadius: '100px',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  border: `1px solid ${isCurrent ? '#2563EB' : '#E2E8F0'}`,
-                  background: isCurrent ? '#2563EB' : '#FFFFFF',
-                  color: isCurrent ? '#FFFFFF' : '#475569',
-                  boxShadow: isCurrent ? '0 2px 8px rgba(37, 99, 235, 0.25)' : 'none',
-                }}
-              >
-                {cat}
-              </Link>
-            )
-          })}
-        </div>
+        <Layout>
+          <div>
+            {response.results.length === 0 ? (
+              <Empty>
+                <h3>Nenhum artigo publicado nesta categoria ainda</h3>
+                <p>Estamos preparando novos conteúdos sobre {category}.</p>
+                <Link href="/blog">Ver todos os artigos</Link>
+              </Empty>
+            ) : (
+              response.results.map((post) => <PostListCard key={post.id} post={post} />)
+            )}
 
-        {response.results.length === 0 ? (
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '4rem 2rem',
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              border: '1px solid #E2E8F0',
-            }}
-          >
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '0.5rem' }}>
-              Nenhum artigo publicado nesta categoria ainda
-            </h3>
-            <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-              Estamos preparando novos conteúdos sobre {category}.
-            </p>
-            <Link
-              href="/blog"
-              style={{
-                display: 'inline-block',
-                background: '#2563EB',
-                color: '#FFFFFF',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '10px',
-                fontWeight: 600,
-                textDecoration: 'none',
-              }}
-            >
-              Ver todos os artigos
-            </Link>
+            <Pagination basePath={basePath} currentPage={page} totalPages={response.total_pages} />
           </div>
-        ) : (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-              gap: '2rem',
-            }}
-          >
-            {response.results.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
 
-        <Pagination basePath={basePath} currentPage={page} totalPages={response.total_pages} />
+          <BlogSidebar recentPosts={sidebarPosts.results} />
+        </Layout>
       </BlogPageInner>
     </PageWrapper>
   )
