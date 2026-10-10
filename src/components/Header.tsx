@@ -33,7 +33,8 @@ const HeaderWrapper = styled.header<{ $scrolled: boolean }>`
 
 const Container = styled.div<{ $scrolled: boolean }>`
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
+    gap: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,7 +49,7 @@ const LogoLink = styled(Link)`
     cursor: pointer;
     position: relative;
     height: 54px;
-    width: 216px; /* Tamanho adequado para não empurrar o menu */
+    width: 170px; /* Tamanho adequado para não empurrar o menu */
     flex-shrink: 0; /* Impede que a logo seja espremida pelo menu */
     transition: opacity 0.2s ease;
 
@@ -179,7 +180,7 @@ const DropdownTrigger = styled.div<DropdownTriggerProps>`
     color: ${props => props.theme.colors.textDark};
     cursor: pointer;
     white-space: nowrap;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 100px;
     transition: all 0.2s ease;
 
@@ -278,7 +279,7 @@ const SimpleLink = styled(Link)`
     text-decoration: none;
     position: relative;
     white-space: nowrap;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 100px;
     transition: all 0.2s ease;
 
@@ -322,7 +323,7 @@ const LoginButton = styled.a`
     color: ${props => props.theme.colors.textDark};
     font-size: 0.95rem;
     font-weight: 600;
-    padding: 0.6rem 1.25rem;
+    padding: 0.6rem 0.9rem;
     cursor: pointer;
     border-radius: 8px;
     text-decoration: none;
