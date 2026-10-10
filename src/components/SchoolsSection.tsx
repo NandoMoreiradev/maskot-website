@@ -52,10 +52,10 @@ const scroll = keyframes`
     100% { transform: translateX(-50%); }
 `
 
-const MarqueeContainer = styled.div`
+const MarqueeContainer = styled.div<{ $duration: number }>`
     display: flex;
     width: max-content;
-    animation: ${scroll} 40s linear infinite;
+    animation: ${scroll} ${({ $duration }) => $duration}s linear infinite;
     
     &:hover {
         animation-play-state: paused; /* Pausa ao passar o mouse */
@@ -101,7 +101,11 @@ export default function SchoolsSection({ logos, stat = '+ de 150 escolas confiam
     // independentemente de quantos logos temos no banco
     const repeatedLogos = [...logos, ...logos, ...logos, ...logos, ...logos];
 
-    const renderTrack = (isDuplicate = false) => (
+    // Duração proporcional à quantidade de logos para manter a velocidade constante
+    const SECONDS_PER_LOGO = 10;
+    const duration = logos.length * SECONDS_PER_LOGO;
+
+    const renderTrack =(isDuplicate = false) => (
         <LogoTrack aria-hidden={isDuplicate}>
             {repeatedLogos.map((logo, index) => (
                 <LogoWrapper key={isDuplicate ? `dup-${index}` : `orig-${index}`}>
@@ -115,7 +119,7 @@ export default function SchoolsSection({ logos, stat = '+ de 150 escolas confiam
         <Section aria-label="Escolas que usam o Maskot">
             <Title>{stat}</Title>
             
-            <MarqueeContainer>
+            <MarqueeContainer $duration={duration}>
                 {renderTrack(false)}
                 {renderTrack(true)}
             </MarqueeContainer>
