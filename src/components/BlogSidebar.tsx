@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { asText, RichTextField } from '@prismicio/client'
 import { ArrowRight } from 'lucide-react'
+import BlogFeatureCards from './BlogFeatureCards'
 import StickyBannerAd from './StickyBannerAd'
 import TableOfContents from './TableOfContents'
 import { BLOG_CATEGORIES, categorySlug } from '@/lib/categories'
@@ -29,6 +30,7 @@ type BlogPost = {
 type Props = {
   recentPosts: BlogPost[]
   currentPostId?: string
+  category?: string
   headings?: TocHeading[]
   sidebarBanner?: {
     imageUrl: string
@@ -39,16 +41,18 @@ type Props = {
 }
 
 // ==================== STYLES ====================
-const Sidebar = styled.aside`
+const Sidebar = styled.aside<{ $sticky?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
   min-width: 0;
 
   @media (min-width: 1024px) {
-    position: sticky;
-    top: ${BLOG_HEADER_HEIGHT + 24}px;
-    align-self: flex-start;
+    ${props => props.$sticky && `
+      position: sticky;
+      top: ${BLOG_HEADER_HEIGHT + 24}px;
+      align-self: flex-start;
+    `}
   }
 `
 
@@ -66,6 +70,11 @@ const WidgetTitle = styled.h4`
   padding-bottom: 0.75rem;
   margin-bottom: 0.25rem;
   border-bottom: 3px solid #0F172A;
+`
+
+/* Índice sem barra de rolagem interna (o container do TOC limita a altura por padrão). */
+const FullToc = styled.div`
+  nav { max-height: none; overflow: visible; }
 `
 
 const RankList = styled.ol`
@@ -192,21 +201,34 @@ const ConsultBox = styled.div`
 `
 
 // ==================== COMPONENT ====================
-export default function BlogSidebar({ recentPosts, currentPostId, headings, sidebarBanner }: Props) {
+export default function BlogSidebar({ recentPosts, currentPostId, category, headings, sidebarBanner }: Props) {
+  const isArticle = headings !== undefined
   const posts = recentPosts.filter(post => post.id !== currentPostId).slice(0, 5)
+  const featuresWidget = <BlogFeatureCards category={category} />
+
+  const banner = sidebarBanner?.imageUrl && (
+    <StickyBannerAd
+      imageUrl={sidebarBanner.imageUrl}
+      imageAlt={sidebarBanner.imageAlt}
+      linkUrl={sidebarBanner.linkUrl}
+      ctaText={sidebarBanner.ctaText}
+    />
+  )
+
+  // No artigo: índice no topo, depois banner; as funcionalidades vêm por último e acompanham a leitura.
+  if (isArticle) {
+    return (
+      <Sidebar>
+        <FullToc><TableOfContents headings={headings} /></FullToc>
+        {banner}
+        {featuresWidget}
+      </Sidebar>
+    )
+  }
 
   return (
-    <Sidebar>
-      {headings && <TableOfContents headings={headings} />}
-
-      {sidebarBanner?.imageUrl && (
-        <StickyBannerAd
-          imageUrl={sidebarBanner.imageUrl}
-          imageAlt={sidebarBanner.imageAlt}
-          linkUrl={sidebarBanner.linkUrl}
-          ctaText={sidebarBanner.ctaText}
-        />
-      )}
+    <Sidebar $sticky>
+      {banner}
 
       {posts.length > 0 && (
         <Widget>
@@ -226,6 +248,8 @@ export default function BlogSidebar({ recentPosts, currentPostId, headings, side
           </RankList>
         </Widget>
       )}
+
+      {featuresWidget}
 
       <Widget>
         <WidgetTitle>Categorias</WidgetTitle>

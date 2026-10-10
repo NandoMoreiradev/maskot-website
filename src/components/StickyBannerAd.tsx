@@ -5,8 +5,6 @@ import styled from 'styled-components'
 
 const Outer = styled(Link)`
   display: block;
-  position: sticky;
-  top: 140px;
   border-radius: 4px;
   overflow: hidden;
   text-decoration: none;

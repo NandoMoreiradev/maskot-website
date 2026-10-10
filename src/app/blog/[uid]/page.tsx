@@ -302,7 +302,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             </AuthorBox>
           </ArticleContent>
 
-          <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} headings={headings} sidebarBanner={sidebarBanner} />
+          <BlogSidebar recentPosts={recentPosts} currentPostId={page.id} category={category} headings={headings} sidebarBanner={sidebarBanner} />
         </Container>
 
         {relatedPosts.length > 0 && (

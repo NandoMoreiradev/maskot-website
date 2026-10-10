@@ -20,11 +20,23 @@ const SplitLayout = styled.div`
     display: grid;
     grid-template-columns: 1fr 1.15fr;
     gap: 4.5rem;
-    align-items: center;
+    align-items: start;
 
     @media (max-width: 968px) {
         grid-template-columns: 1fr;
         gap: 3rem;
+    }
+`
+
+/* Coluna esquerda (foto + citação): acompanha a leitura do texto longo ao lado */
+const Aside = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (min-width: 969px) {
+        position: sticky;
+        top: 7rem;
     }
 `
 
@@ -34,7 +46,7 @@ const ImageWrapper = styled.div`
     overflow: hidden;
     box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
     border: 1px solid #E2E8F0;
-    min-height: 520px;
+    aspect-ratio: 4 / 5;
     background: #F8FAFC;
 
     img {
@@ -112,7 +124,7 @@ const QuoteBox = styled.div`
     border-radius: 16px;
     border: 1px solid #E2E8F0;
     border-left: 4px solid #2563EB;
-    margin: 2rem 0;
+    margin: 0;
     
     p {
         font-style: italic;
@@ -136,6 +148,7 @@ export default function FounderStory() {
         <Section>
             <Container>
                 <SplitLayout>
+                    <Aside>
                     <ImageWrapper>
                         <Image
                             src="/fernando_moreira.png"
@@ -154,6 +167,12 @@ export default function FounderStory() {
                             </div>
                         </div>
                     </ImageWrapper>
+                    <QuoteBox>
+                        <Quote size={28} color="#2563EB" style={{ marginBottom: '12px' }} />
+                        <p>Procurei CRMs no mercado. Ou eram genéricos demais (feitos para vender software corporativo, não matrícula escolar) ou custavam fortunas impraticáveis. A escola precisava de algo que falasse a nossa língua.</p>
+                        <span>— Fernando Moreira • Fundador do Maskot Edu</span>
+                    </QuoteBox>
+                    </Aside>
 
                     <TextContent>
                         <h2>Eu sei o que é perder uma matrícula porque a mensagem ficou esquecida no WhatsApp.</h2>
@@ -172,12 +191,6 @@ export default function FounderStory() {
                             Eu sabia que o pai interessado tinha ligado na semana anterior, mas ninguém lembrava de retornar.
                             Eu sabia que uma mãe queria visitar o colégio, mas o bilhete em cima da mesa da secretaria sumiu.
                         </p>
-
-                        <QuoteBox>
-                            <Quote size={28} color="#2563EB" style={{ marginBottom: '12px' }} />
-                            <p>Procurei CRMs no mercado. Ou eram genéricos demais (feitos para vender software corporativo, não matrícula escolar) ou custavam fortunas impraticáveis. A escola precisava de algo que falasse a nossa língua.</p>
-                            <span>— Fernando Moreira • Fundador do Maskot Edu</span>
-                        </QuoteBox>
 
                         <p>
                             Foi aí que decidi criar o Maskot Edu. Não como um desenvolvedor distante que acha que sabe o que uma escola precisa,
