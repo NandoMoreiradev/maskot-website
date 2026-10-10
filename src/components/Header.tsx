@@ -47,8 +47,8 @@ const LogoLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     position: relative;
-    height: 45px;
-    width: 180px; /* Tamanho adequado para não empurrar o menu */
+    height: 54px;
+    width: 216px; /* Tamanho adequado para não empurrar o menu */
     flex-shrink: 0; /* Impede que a logo seja espremida pelo menu */
     transition: opacity 0.2s ease;
 

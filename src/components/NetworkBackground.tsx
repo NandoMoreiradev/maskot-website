@@ -49,7 +49,7 @@ export default function NetworkBackground() {
             'rgba(34, 197, 94, 0.6)'   // Success
         ];
 
-        let mouse = { x: -1000, y: -1000 };
+        const mouse = { x: -1000, y: -1000 };
 
         const resize = () => {
             const parent = canvas.parentElement;
