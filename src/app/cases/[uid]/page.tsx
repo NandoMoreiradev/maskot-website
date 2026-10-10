@@ -9,16 +9,18 @@ import Footer from '@/components/Footer';
 import CTASection from '@/components/CTASection';
 import CaseMetrics from '@/components/CaseMetrics';
 import { components } from '@/slices';
+import { ArrowLeft } from 'lucide-react';
 import {
   PageWrapper,
   Container,
   CaseDetailHeader,
+  BackLink,
   ClientBadge,
   CaseTitle,
   Section,
   RichTextContainer,
   TestimonialBox,
-  TestimonialAuthor
+  TestimonialAuthor,
 } from '../styles';
 
 const richTextComponents = {
@@ -27,7 +29,7 @@ const richTextComponents = {
       href={node.data.url || '#'}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ color: '#007BFF', textDecoration: 'underline' }}
+      style={{ color: '#2563EB', fontWeight: 600, textDecoration: 'underline' }}
     >
       {children}
     </a>
@@ -53,12 +55,12 @@ export async function generateMetadata(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const page: any = await client.getByUID('success_case' as any, params.uid);
     return {
-      title: `${asText(page.data.title)} | Cases Maskot`,
-      description: asText(page.data.challenge)?.substring(0, 160) || 'Case de sucesso Maskot',
+      title: `${asText(page.data.title)} | Cases Maskot Edu`,
+      description: asText(page.data.challenge)?.substring(0, 160) || 'Case de sucesso de escola parceira do Maskot Edu',
     };
   } catch {
     return {
-      title: 'Case de Sucesso | Maskot',
+      title: 'Case de Sucesso | Maskot Edu',
     };
   }
 }
@@ -77,6 +79,10 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
   }
 
   const { data } = page;
+  const titleText = asText(data.title) || '';
+  const clientName = data.client_name || 
+    (titleText.match(/col[eé]gio\s+[\w\u00C0-\u00FF]+/i)?.[0] || 'Escola Parceira');
+  const hasLogo = Boolean(data.client_logo && data.client_logo.url);
 
   // Format metrics from Prismic group
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -92,14 +98,16 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
       <PageWrapper>
         <Container>
           <CaseDetailHeader>
-            {data.client_name && (
-              <ClientBadge>
-                {data.client_logo && data.client_logo.url && (
-                  <PrismicNextImage field={data.client_logo} fallbackAlt="" />
-                )}
-                <span>{data.client_name}</span>
-              </ClientBadge>
-            )}
+            <BackLink href="/cases">
+              <ArrowLeft size={16} /> Voltar para todos os cases
+            </BackLink>
+            
+            <ClientBadge>
+              {hasLogo && (
+                <PrismicNextImage field={data.client_logo} fallbackAlt="" />
+              )}
+              <span>{clientName}</span>
+            </ClientBadge>
             
             <CaseTitle>
               <PrismicRichText field={data.title} components={{
@@ -145,7 +153,10 @@ export default async function CasePage(props: { params: Promise<{ uid: string }>
                   {data.testimonial_avatar?.url && (
                     <PrismicNextImage field={data.testimonial_avatar} fallbackAlt="" />
                   )}
-                  <span>{data.testimonial_author}</span>
+                  <div className="author-info">
+                    <span className="name">{data.testimonial_author}</span>
+                    <span className="role">{clientName}</span>
+                  </div>
                 </TestimonialAuthor>
               )}
             </TestimonialBox>

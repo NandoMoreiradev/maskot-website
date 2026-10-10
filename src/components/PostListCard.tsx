@@ -10,14 +10,14 @@ import { calculateReadingTime } from '@/lib/readingTime'
 
 const Card = styled.article`
   background: white;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 200px 1fr;
-  border: 1px solid ${props => props.theme.colors.borderLight}50;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  grid-template-columns: 220px 1fr;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   transition: all 0.25s ease;
-  min-height: 140px;
+  min-height: 150px;
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
@@ -25,54 +25,63 @@ const Card = styled.article`
   }
 
   &:hover {
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 14px 30px -6px rgba(15, 23, 42, 0.08);
     transform: translateY(-2px);
-    border-color: ${props => props.theme.colors.primary}20;
+    border-color: #CBD5E1;
   }
-
-  &:hover h3 { color: ${props => props.theme.colors.primary}; }
 `
 
 const ThumbArea = styled.div`
   position: relative;
   overflow: hidden;
+  background: #F8FAFC;
   @media (max-width: 640px) { aspect-ratio: 16/9; }
 
   img { transition: transform 0.4s ease; }
-  ${Card}:hover img { transform: scale(1.06); }
+  ${Card}:hover img { transform: scale(1.05); }
 `
 
 const PostInfo = styled.div`
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
 
   .category {
-    font-size: 0.7rem;
+    font-size: 0.725rem;
     font-weight: 700;
-    color: ${props => props.theme.colors.primary};
+    color: #2563EB;
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.05em;
+    width: fit-content;
   }
 
   h3 {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    color: ${props => props.theme.colors.textDark};
+    color: #0F172A;
     line-height: 1.35;
-    transition: color 0.2s;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
+  ${Card}:hover h3 {
+    color: #2563EB;
+  }
+
   p {
-    font-size: 0.875rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.5;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.55;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -81,12 +90,20 @@ const PostInfo = styled.div`
 
   .meta {
     display: flex;
-    gap: 1rem;
-    font-size: 0.78rem;
-    color: ${props => props.theme.colors.textMedium}70;
+    gap: 1.25rem;
+    font-size: 0.8rem;
+    color: #64748B;
     margin-top: 0.25rem;
     align-items: center;
-    div { display: flex; align-items: center; gap: 0.3rem; }
+    div { 
+      display: flex; 
+      align-items: center; 
+      gap: 0.35rem; 
+
+      svg {
+        color: #94A3B8;
+      }
+    }
   }
 `
 

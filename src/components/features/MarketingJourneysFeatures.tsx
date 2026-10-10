@@ -8,7 +8,8 @@ import {
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: #ffffff;
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
 `
 
 const Container = styled.div`
@@ -25,15 +26,16 @@ const Header = styled.div`
     h2 {
         font-size: 2.5rem;
         font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
         margin-bottom: 1rem;
         
-        span { color: ${props => props.theme.colors.primary}; }
+        span { color: #0284C7; }
     }
     
     p {
         font-size: 1.125rem;
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
     }
 `
@@ -53,16 +55,18 @@ const FeaturesGrid = styled.div`
 `
 
 const FeatureCategory = styled.div`
-    background: #F8F9FA;
+    background: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 2.25rem 2rem;
     height: 100%;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 
     &:hover {
         transform: translateY(-4px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+        border-color: #0284C7;
     }
 `
 
@@ -70,13 +74,14 @@ const CategoryHeader = styled.div<{ $color: string }>`
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 
     .icon-wrapper {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
         border-radius: 12px;
-        background: ${props => props.$color}15;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
         color: ${props => props.$color};
         display: flex;
         align-items: center;
@@ -86,7 +91,8 @@ const CategoryHeader = styled.div<{ $color: string }>`
     h3 {
         font-size: 1.25rem;
         font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.01em;
     }
 `
 
@@ -96,7 +102,7 @@ const FeatureList = styled.ul`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 `
 
 const FeatureItem = styled.li`
@@ -105,22 +111,22 @@ const FeatureItem = styled.li`
     gap: 0.75rem;
 
     svg {
-        color: ${props => props.theme.colors.primary};
-        margin-top: 2px;
+        color: #0284C7;
+        margin-top: 3px;
         flex-shrink: 0;
     }
 
     div {
         h4 {
             font-size: 0.95rem;
-            font-weight: 600;
-            color: ${props => props.theme.colors.textDark};
+            font-weight: 700;
+            color: #0F172A;
             margin-bottom: 0.25rem;
         }
         p {
-            font-size: 0.85rem;
-            color: ${props => props.theme.colors.textMedium};
-            line-height: 1.4;
+            font-size: 0.875rem;
+            color: #475569;
+            line-height: 1.5;
         }
     }
 `

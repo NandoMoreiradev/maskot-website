@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
-  padding-top: 7rem; /* 64px main bar + 42px category bar = 106px */
+  padding-top: 5.5rem;
   padding-bottom: 6rem;
   background-color: ${props => props.theme.colors.pageBackground};
   min-height: 100vh;

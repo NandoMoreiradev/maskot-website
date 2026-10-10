@@ -5,25 +5,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const Wrapper = styled.footer`
-  background: linear-gradient(135deg, ${props => props.theme.colors.textDark} 0%, #1a1a1a 100%);
-  color: white;
-  padding: 4rem 2rem 2rem;
+  background: #F8FAFC;
+  color: #0F172A;
+  padding: 4rem 2rem 2.5rem;
   position: relative;
   overflow: hidden;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg,
-      ${props => props.theme.colors.primary} 0%,
-      ${props => props.theme.colors.secondary} 50%,
-      ${props => props.theme.colors.accent} 100%
-    );
-  }
+  border-top: 1px solid #E2E8F0;
 `
 
 const Container = styled.div`
@@ -42,70 +29,76 @@ const Container = styled.div`
 const CompanySection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 `
 
 const Logo = styled.div`
-  height: 40px;
+  height: 44px;
   width: auto;
   position: relative;
+  display: flex;
+  align-items: center;
 `
 
 const Description = styled.p`
-  color: #ccc;
-  font-size: 0.95rem;
+  color: #64748B;
+  font-size: 0.925rem;
   line-height: 1.6;
   max-width: 400px;
+  margin: 0;
 `
 
 const ContactList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 `
 
 const ContactItem = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 0.9rem;
-  color: #ccc;
+  font-size: 0.875rem;
+  color: #475569;
 
   svg {
-    width: 18px;
-    height: 18px;
-    color: ${props => props.theme.colors.primary};
+    width: 16px;
+    height: 16px;
+    color: #2563EB;
   }
 
   a {
     color: inherit;
     text-decoration: none;
     transition: color 0.2s;
-    &:hover { color: white; }
+    &:hover { color: #2563EB; }
   }
 `
 
 const SectionTitle = styled.h4`
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
 `
 
 const LinksList = styled.ul`
   list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 
   a {
-    color: #ccc;
+    color: #475569;
     text-decoration: none;
     font-size: 0.9rem;
     transition: all 0.2s;
     &:hover { 
-      color: white;
-      transform: translateX(4px);
+      color: #2563EB; 
+      transform: translateX(3px);
       display: inline-block;
     }
   }
@@ -113,38 +106,48 @@ const LinksList = styled.ul`
 
 const SocialLinks = styled.div`
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 `
 
 const SocialIcon = styled.a`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  color: #ccc;
+  transition: all 0.2s ease;
+  color: #64748B;
 
   &:hover {
-    background: ${props => props.theme.colors.primary};
+    background: #2563EB;
+    border-color: #2563EB;
     color: white;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
   }
 `
 
 const Bottom = styled.div`
   max-width: 1200px;
-  margin: 4rem auto 0;
+  margin: 3.5rem auto 0;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #E2E8F0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.85rem;
-  color: #888;
+  color: #94A3B8;
+
+  a {
+    color: #64748B;
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover { color: #2563EB; }
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -159,7 +162,7 @@ export default function BlogFooter() {
       <Container>
         <CompanySection>
           <Logo>
-            <Image src="/maskot_crm_logo_branca.png" alt="Maskot Edu" width={140} height={40} style={{ width: 'auto', height: '100%' }} />
+            <Image src="/logo_maskot_website_preta.png" alt="Maskot Edu" width={160} height={44} style={{ width: 'auto', height: '100%' }} />
           </Logo>
           <Description>
             Transformando a gestão escolar através de conteúdo estratégico e tecnologia de ponta.
@@ -192,8 +195,8 @@ export default function BlogFooter() {
         <div>
           <SectionTitle>Redes Sociais</SectionTitle>
           <SocialLinks>
-            <SocialIcon href="https://instagram.com/maskotedu" target="_blank"><Instagram size={20}/></SocialIcon>
-            <SocialIcon href="https://facebook.com/maskotedu" target="_blank"><Facebook size={20}/></SocialIcon>
+            <SocialIcon href="https://instagram.com/maskotedu" target="_blank"><Instagram size={18}/></SocialIcon>
+            <SocialIcon href="https://facebook.com/maskotedu" target="_blank"><Facebook size={18}/></SocialIcon>
           </SocialLinks>
         </div>
       </Container>

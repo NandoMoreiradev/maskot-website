@@ -27,8 +27,8 @@ const dashFlow = keyframes`
 
 // --- LAYOUT ---
 const Section = styled.section`
-    padding: 4rem 0 6rem;
-    background: ${props => props.theme.colors.pageBackground};
+    padding: 6rem 0;
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -46,31 +46,30 @@ const Header = styled.div`
     h2 {
         font-size: 2.5rem;
         font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
         margin-bottom: 1rem;
         
-        span { color: ${props => props.theme.colors.accent}; }
+        span { color: #0284C7; }
     }
     
     p {
         font-size: 1.125rem;
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
     }
 `
 
 // --- BUILDER VISUALIZATION ---
 const BuilderContainer = styled.div`
-    background: #F8F9FA;
-    border: 1px solid ${(props) => (props.theme.colors as unknown as {
-        borderLight?: string
-    }).borderLight || '#DEE2E6'};
-    border-radius: 16px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 20px;
     height: 600px;
     position: relative;
     overflow: hidden;
     margin-bottom: 5rem;
-    box-shadow: ${props => props.theme.shadows.xl};
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
     background-image: radial-gradient(#CBD5E1 1.5px, transparent 0);
     background-size: 24px 24px;
     animation: ${slideUp} 0.8s ease-out;
@@ -80,14 +79,14 @@ const BuilderOverlay = styled.div`
     position: absolute;
     top: 20px;
     right: 20px;
-    background: white;
+    background: #FFFFFF;
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: 100px;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #10B981;
-    border: 1px solid #10B98140;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    color: #166534;
+    border: 1px solid #DCFCE7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -97,9 +96,8 @@ const BuilderOverlay = styled.div`
         content: '';
         width: 8px;
         height: 8px;
-        background: currentColor;
+        background: #22C55E;
         border-radius: 50%;
-        animation: pulse 2s infinite;
     }
 `
 
@@ -107,27 +105,33 @@ const BuilderOverlay = styled.div`
 const NodeCard = styled.div<{ $type: 'trigger' | 'action' | 'condition' | 'exit' }>`
     position: absolute;
     width: 240px;
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
     z-index: 2;
     cursor: default;
 
-    /* Estilo baseado no tipo */
-
     ${props => props.$type === 'trigger' && css`
-        background: linear-gradient(135deg, ${props.theme.colors.primary} 0%, #0056b3 100%);
+        background: #0F172A;
         color: white;
-        border: none;
+        border: 1px solid #0F172A;
     `}
-    ${props => props.$type !== 'trigger' && css`
-        border: 2px solid ${props.theme.colors.primary};
-        border-color: ${props.$type === 'exit' ? '#64748b' : props.$type === 'condition' ? '#F59E0B' : props.theme.colors.primary};
-        ${props.$type === 'exit' && 'border-style: dashed; opacity: 0.9;'}
+    ${props => props.$type === 'condition' && css`
+        border-top: 3px solid #D97706;
     `}
+    ${props => props.$type === 'action' && css`
+        border-top: 3px solid #0284C7;
+    `}
+    ${props => props.$type === 'exit' && css`
+        border: 1px dashed #94A3B8;
+        opacity: 0.9;
+    `}
+
     &:hover {
         transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         z-index: 3;
     }
 `
@@ -153,7 +157,7 @@ const NodeIcon = styled.div<{ $isTrigger?: boolean; $color?: string }>`
     flex-shrink: 0;
 
     ${props => props.$isTrigger ? css`
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
         color: white;
     ` : css`
         background: ${props.$color}15;
@@ -162,15 +166,15 @@ const NodeIcon = styled.div<{ $isTrigger?: boolean; $color?: string }>`
 `
 
 const NodeTitle = styled.div<{ $isTrigger?: boolean }>`
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.9rem;
-    color: ${props => props.$isTrigger ? 'white' : props.theme.colors.textDark};
+    color: ${props => props.$isTrigger ? 'white' : '#0F172A'};
     line-height: 1.2;
 `
 
 const NodeInfo = styled.div<{ $isTrigger?: boolean }>`
     font-size: 0.75rem;
-    color: ${props => props.$isTrigger ? 'rgba(255,255,255,0.8)' : props.theme.colors.textMedium};
+    color: ${props => props.$isTrigger ? 'rgba(255,255,255,0.7)' : '#64748B'};
     margin-top: 4px;
 `
 
@@ -178,7 +182,7 @@ const NodeInfo = styled.div<{ $isTrigger?: boolean }>`
 const StatsBar = styled.div`
     display: flex;
     border-top: 1px solid #E2E8F0;
-    background: #F8F9FA;
+    background: #F8FAFC;
     height: 28px;
     border-radius: 0 0 12px 12px;
     overflow: hidden;
@@ -191,7 +195,7 @@ const StatItem = styled.div<{ $color: string; $border?: boolean }>`
     justify-content: center;
     gap: 4px;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     color: ${props => props.$color};
     border-right: ${props => props.$border ? '1px solid #E2E8F0' : 'none'};
 `
@@ -217,8 +221,7 @@ const Connections = styled.svg`
     text {
         fill: #64748B;
         font-size: 10px;
-        font-weight: 600;
-        background: white;
+        font-weight: 700;
     }
 `
 
@@ -227,7 +230,7 @@ const FeatureGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 
     @media (max-width: ${props => props.theme.breakpoints.md}) {
         grid-template-columns: 1fr;
@@ -235,37 +238,50 @@ const FeatureGrid = styled.div`
 `
 
 const FeatureCard = styled.div`
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid ${(props) => (props.theme.colors as unknown as {
-        borderLight?: string
-    }).borderLight || '#DEE2E6'};
+    background: #FFFFFF;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #0284C7;
+        .icon {
+            background: #0284C7;
+            color: #FFFFFF;
+            border-color: #0284C7;
+        }
+    }
 
     h4 {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.01em;
     }
 
     p {
-        font-size: 0.9rem;
-        color: ${props => props.theme.colors.textMedium};
-        line-height: 1.5;
+        font-size: 0.95rem;
+        color: #475569;
+        line-height: 1.6;
     }
 
     .icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        background: ${props => props.theme.colors.pageBackground};
-        color: ${props => props.theme.colors.primary};
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #F8FAFC;
+        color: #0284C7;
+        border: 1px solid #E2E8F0;
         display: flex;
-        alignItems: center;
-        justifyContent: center;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
     }
 `
 
@@ -423,93 +439,119 @@ export default function MarketingJourneysDeepDive() {
 
                 {/* --- EXEMPLOS DE USO (Use Cases) --- */}
                 <div style={{textAlign: 'center', marginBottom: '3rem'}}>
-                    <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#333'}}>Casos de Uso Comuns</h3>
+                    <h3 style={{
+                        fontSize: '2rem',
+                        fontWeight: 800,
+                        color: '#0F172A',
+                        fontFamily: 'var(--font-inter)',
+                        letterSpacing: '-0.02em'
+                    }}>Casos de Uso Comuns</h3>
+                    <p style={{color: '#475569', marginTop: '0.5rem', fontSize: '1.125rem'}}>Estratégias já testadas e validadas em centenas de escolas parceiras.</p>
                 </div>
 
                 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
                     {/* CASE 1 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
                         borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        border: '1px solid #E2E8F0',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.02)'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
+                            gap: '10px',
                             fontSize: '1.2rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A',
+                            letterSpacing: '-0.01em'
                         }}>
                             <span style={{
-                                background: '#E0F2FE',
-                                color: '#007BFF',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                background: '#F0F9FF',
+                                color: '#0284C7',
+                                padding: '8px',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '1px solid #BAE6FD'
                             }}><Users size={18}/></span>
                             Recuperação de Leads Antigos
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
-                            Busque leads que não fecharam no ano passado. Envie um WhatsApp perguntando se já decidiram
-                            a escola. Se responderem Não, mova para o funil de vendas.
+                        <p style={{color: '#475569', fontSize: '0.95rem', lineHeight: '1.6'}}>
+                            Busque leads que não fecharam no ano anterior. Envie um WhatsApp cordial perguntando se já definiram a escola. Se responderem positivamente a uma nova visita, o lead volta imediatamente para o topo do funil do CRM.
                         </p>
                     </div>
 
                     {/* CASE 2 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
                         borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        border: '1px solid #E2E8F0',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.02)'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
+                            gap: '10px',
                             fontSize: '1.2rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A',
+                            letterSpacing: '-0.01em'
                         }}>
                             <span style={{
-                                background: '#DCFCE7',
-                                color: '#166534',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                background: '#F0FDF4',
+                                color: '#16A34A',
+                                padding: '8px',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '1px solid #DCFCE7'
                             }}><CheckCircle2 size={18}/></span>
-                            Pós-Visita (Matrícula)
+                            Pós-Visita e Fechamento
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
-                            Após a visita, espere 2 horas e envie um vídeo institucional. Aguarde 2 dias. Se não houver
-                            matrícula, crie uma tarefa de Ligação de Fechamento.
+                        <p style={{color: '#475569', fontSize: '0.95rem', lineHeight: '1.6'}}>
+                            Após a visita presencial, aguarde 2 horas e dispare um vídeo pedagógico acolhedor. Se após 48h o contrato não for assinado, a jornada cria uma tarefa prioritária com notificação para a secretária ligar.
                         </p>
                     </div>
 
                     {/* CASE 3 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
                         borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        border: '1px solid #E2E8F0',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.02)'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
+                            gap: '10px',
                             fontSize: '1.2rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A',
+                            letterSpacing: '-0.01em'
                         }}>
                             <span style={{
-                                background: '#FEF3C7',
+                                background: '#FFFBEB',
                                 color: '#D97706',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                padding: '8px',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '1px solid #FDE68A'
                             }}><TrendingUp size={18}/></span>
                             Régua de Nutrição Ativa
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
-                            Envie conteúdos valiosos semanalmente para leads frios. Quando o sistema identificar que o lead atingiu uma alta pontuação (Lead Score), uma tarefa é criada para o comercial.
+                        <p style={{color: '#475569', fontSize: '0.95rem', lineHeight: '1.6'}}>
+                            Envie conteúdos pedagógicos e diferenciais da escola semanalmente para famílias em processo de decisão. Conforme clicam nos materiais, acumulam pontos no Lead Scoring até a abordagem comercial ideal.
                         </p>
                     </div>
                 </div>

@@ -57,28 +57,30 @@ const Widget = styled.div`
 `
 
 const WidgetTitle = styled.h4`
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  color: ${props => props.theme.colors.textDark};
+  color: #0F172A;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
 
   &:after {
     content: '';
     flex: 1;
     height: 1px;
-    background: ${props => props.theme.colors.borderLight}80;
+    background: #E2E8F0;
   }
 `
 
 const PostList = styled.ul`
   list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 `
 
 const MiniPostCard = styled.li`
@@ -89,22 +91,23 @@ const MiniPostCard = styled.li`
     align-items: center;
     
     &:hover h5 {
-      color: ${props => props.theme.colors.primary};
+      color: #2563EB;
     }
 
     &:hover .img-wrapper img {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
   }
 
   .img-wrapper {
     position: relative;
-    width: 70px;
-    height: 70px;
+    width: 72px;
+    height: 72px;
     flex-shrink: 0;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
 
     img {
       transition: transform 0.3s ease;
@@ -116,13 +119,13 @@ const MiniContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
   
   h5 {
-    font-size: 0.95rem;
+    font-size: 0.925rem;
     font-weight: 700;
-    color: ${props => props.theme.colors.textDark};
-    line-height: 1.3;
+    color: #0F172A;
+    line-height: 1.35;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -132,7 +135,7 @@ const MiniContent = styled.div`
   
   span {
     font-size: 0.8rem;
-    color: ${props => props.theme.colors.textMedium}80;
+    color: #64748B;
   }
 `
 
@@ -140,8 +143,8 @@ const ExpertWidget = styled.div`
   background: white;
   padding: 2rem;
   border-radius: 20px;
-  border: 1px solid ${props => props.theme.colors.borderLight}50;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -149,48 +152,54 @@ const ExpertWidget = styled.div`
   gap: 1rem;
 
   .users-icon {
-    width: 54px;
-    height: 54px;
-    background: #28a74510;
-    color: #28a745;
-    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    background: #EFF6FF;
+    color: #2563EB;
+    border: 1px solid #DBEAFE;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   h5 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
-    color: ${props => props.theme.colors.textDark};
+    color: #0F172A;
+    letter-spacing: -0.01em;
   }
 
   p {
-    font-size: 0.9rem;
-    color: ${props => props.theme.colors.textMedium};
-    line-height: 1.5;
+    font-size: 0.875rem;
+    color: #64748B;
+    line-height: 1.55;
+    margin: 0;
   }
 `
 
 const SidebarButton = styled.button`
   width: 100%;
-  padding: 0.9rem;
-  background: white;
-  color: ${props => props.theme.colors.primary};
-  border: 2px solid ${props => props.theme.colors.primary};
+  padding: 0.85rem;
+  background: #2563EB;
+  color: #FFFFFF;
+  border: none;
   border-radius: 10px;
   font-weight: 700;
+  font-size: 0.925rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 
   &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: white;
+    background: #1D4ED8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
   }
 `
 

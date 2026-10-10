@@ -24,7 +24,7 @@ export default function AboutPage() {
     return (
         <>
             <Header />
-            <main style={{ marginTop: '72px' }}>
+            <main>
                 <AboutHero />
                 <FounderStory />
                 <ValuesGrid />

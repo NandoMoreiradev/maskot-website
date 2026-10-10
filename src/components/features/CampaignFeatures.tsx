@@ -9,7 +9,7 @@ import {
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: #ffffff;
+    background: #FFFFFF;
 `
 
 const Container = styled.div`
@@ -26,15 +26,18 @@ const Header = styled.div`
     h2 {
         font-size: 2.5rem;
         font-weight: 800;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
         margin-bottom: 1rem;
         
-        span { color: ${props => props.theme.colors.primary}; }
+        span { 
+            color: #9333EA; 
+        }
     }
     
     p {
         font-size: 1.125rem;
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
     }
 `
@@ -44,26 +47,28 @@ const FeaturesGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 
-    @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    @media (max-width: 1024px) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: ${props => props.theme.breakpoints.sm}) {
+    @media (max-width: 640px) {
         grid-template-columns: 1fr;
     }
 `
 
 const FeatureCategory = styled.div`
-    background: #F8F9FA;
+    background: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 16px;
     padding: 2rem;
     height: 100%;
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
 
     &:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #CBD5E1;
     }
 `
 
@@ -87,7 +92,7 @@ const CategoryHeader = styled.div<{ $color: string }>`
     h3 {
         font-size: 1.25rem;
         font-weight: 700;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
     }
 `
 
@@ -97,16 +102,16 @@ const FeatureList = styled.ul`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 `
 
-const FeatureItem = styled.li`
+const FeatureItem = styled.li<{ $color: string }>`
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
 
     svg {
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.$color};
         margin-top: 2px;
         flex-shrink: 0;
     }
@@ -114,14 +119,14 @@ const FeatureItem = styled.li`
     div {
         h4 {
             font-size: 0.95rem;
-            font-weight: 600;
-            color: ${props => props.theme.colors.textDark};
+            font-weight: 700;
+            color: #0F172A;
             margin-bottom: 0.25rem;
         }
         p {
             font-size: 0.85rem;
-            color: ${props => props.theme.colors.textMedium};
-            line-height: 1.4;
+            color: #64748B;
+            line-height: 1.5;
         }
     }
 `
@@ -143,21 +148,21 @@ export default function CampaignFeatures() {
                             <h3>Controle Financeiro (ROI)</h3>
                         </CategoryHeader>
                         <FeatureList>
-                            <FeatureItem>
+                            <FeatureItem $color="#10B981">
                                 <PieChart size={18} />
                                 <div>
                                     <h4>Orçamento por Canal</h4>
                                     <p>Distribua a verba macro da campanha para canais online, offline e parceiros.</p>
                                 </div>
                             </FeatureItem>
-                            <FeatureItem>
+                            <FeatureItem $color="#10B981">
                                 <Activity size={18} />
                                 <div>
                                     <h4>Sincronização de Gastos</h4>
-                                    <p>Importe dados de consumo (AutoSync) e descubra o seu Custo por Aquisição (CAC).</p>
+                                    <p>Importe dados de consumo e acompanhe com precisão o seu Custo por Aquisição (CAC).</p>
                                 </div>
                             </FeatureItem>
-                            <FeatureItem>
+                            <FeatureItem $color="#10B981">
                                 <Target size={18} />
                                 <div>
                                     <h4>Acompanhamento de Metas</h4>
@@ -174,25 +179,25 @@ export default function CampaignFeatures() {
                             <h3>Ecossistema Integrado</h3>
                         </CategoryHeader>
                         <FeatureList>
-                            <FeatureItem>
+                            <FeatureItem $color="#3B82F6">
                                 <Radar size={18} />
                                 <div>
                                     <h4>Atribuição de Anúncios no WhatsApp</h4>
-                                    <p>Lead veio de um anúncio &quot;clique para conversar&quot;? O sistema identifica o anúncio automaticamente e já vincula o contato à campanha e ao canal certo.</p>
+                                    <p>Lead veio de um anúncio clique para conversar? O sistema identifica o anúncio automaticamente e já vincula à campanha certa.</p>
                                 </div>
                             </FeatureItem>
-                            <FeatureItem>
+                            <FeatureItem $color="#3B82F6">
                                 <ClipboardList size={18} />
                                 <div>
                                     <h4>Formulários Públicos</h4>
                                     <p>Crie Landing Pages ou formulários e rastreie exatamente de qual campanha eles vieram.</p>
                                 </div>
                             </FeatureItem>
-                            <FeatureItem>
+                            <FeatureItem $color="#3B82F6">
                                 <LinkIcon size={18} />
                                 <div>
                                     <h4>Mapeamento Flexível</h4>
-                                    <p>Mapeie campos do Meta Ads via Webhook direto para os campos do cadastro do aluno.</p>
+                                    <p>Mapeie campos do Meta Ads via Webhook direto para o cadastro do aluno no CRM.</p>
                                 </div>
                             </FeatureItem>
                         </FeatureList>
@@ -200,26 +205,26 @@ export default function CampaignFeatures() {
 
                     {/* Criativos e IA */}
                     <FeatureCategory>
-                        <CategoryHeader $color="#A855F7">
+                        <CategoryHeader $color="#9333EA">
                             <div className="icon-wrapper"><Sparkles size={24} /></div>
                             <h3>Gestão de Criativos</h3>
                         </CategoryHeader>
                         <FeatureList>
-                            <FeatureItem>
+                            <FeatureItem $color="#9333EA">
                                 <PenTool size={18} />
                                 <div>
                                     <h4>Estúdio IA com Brand Kit</h4>
-                                    <p>Cadastre o nome, o slogan e os diferenciais da sua escola uma vez no Brand Kit — a IA usa isso para gerar textos consistentes em 9 canais diferentes.</p>
+                                    <p>Cadastre o tom de voz e diferenciais da sua escola uma única vez — a IA redige textos consistentes para 9 canais.</p>
                                 </div>
                             </FeatureItem>
-                            <FeatureItem>
+                            <FeatureItem $color="#9333EA">
                                 <CheckCircle2 size={18} />
                                 <div>
                                     <h4>Workflow de Aprovação</h4>
                                     <p>Classifique peças visuais como Pendente ou Aprovada antes da sua agência publicar.</p>
                                 </div>
                             </FeatureItem>
-                            <FeatureItem>
+                            <FeatureItem $color="#9333EA">
                                 <ImageIcon size={18} />
                                 <div>
                                     <h4>Central de Ativos</h4>

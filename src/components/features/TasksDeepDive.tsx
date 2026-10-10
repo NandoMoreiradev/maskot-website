@@ -16,7 +16,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -47,15 +47,16 @@ const TextContent = styled.div`
     h3 {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
     p {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -71,10 +72,10 @@ const TextContent = styled.div`
         align-items: flex-start;
         gap: 1rem;
         font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 500;
+        color: #334155;
         svg {
-            color: ${props => props.theme.colors.primary};
+            color: #4F46E5; /* Indigo */
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -82,10 +83,10 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -93,96 +94,103 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     gap: 0.5rem;
-    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; } }
+    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; } }
 `
 
 // --- MOCKUP 1: KANBAN BOARD ---
 const KanbanMock = styled.div`
     padding: 20px;
-    background: #F8F9FA;
-    height: 350px;
+    background: #FFFFFF;
+    height: 360px;
     display: flex;
-    gap: 15px;
+    gap: 14px;
     overflow: hidden;
 `
 const Column = styled.div`
     flex: 1;
-    background: #F1F5F9;
-    border-radius: 8px;
-    padding: 10px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     
     .header { 
-        font-size: 12px; font-weight: bold; color: #64748B; 
-        display: flex; justify-content: space-between; margin-bottom: 5px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #64748B; 
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
     }
 `
 const Card = styled.div`
-    background: white;
+    background: #FFFFFF;
     padding: 12px;
-    border-radius: 6px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
     border: 1px solid #E2E8F0;
     
-    .tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 6px; font-weight: 600; }
-    .tag.sec { background: #DBEAFE; color: #1E40AF; }
-    .tag.fin { background: #D1FAE5; color: #065F46; }
+    .tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 6px; font-weight: 700; }
+    .tag.sec { background: #EEF2FF; color: #4F46E5; }
+    .tag.fin { background: #ECFDF5; color: #059669; }
     
-    h4 { font-size: 13px; margin: 0 0 8px 0; color: #334155; }
+    h4 { font-size: 12px; font-weight: 700; margin: 0 0 8px 0; color: #0F172A; line-height: 1.35; }
     
     .footer { 
         display: flex; justify-content: space-between; align-items: center; 
         border-top: 1px solid #F1F5F9; padding-top: 8px;
     }
-    .avatar { width: 20px; height: 20px; border-radius: 50%; background: #CBD5E1; color: white; font-size: 9px; display: flex; alignItems: center; justifyContent: center; }
-    .date { font-size: 10px; color: #94A3B8; display: flex; align-items: center; gap: 4px; }
+    .avatar { width: 20px; height: 20px; border-radius: 50%; background: #4F46E5; color: white; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .date { font-size: 10px; color: #64748B; font-weight: 500; display: flex; align-items: center; gap: 4px; }
 `
 
 // --- MOCKUP 2: TASK DETAIL & TIMETRACKING ---
 const TaskDetailMock = styled.div`
     display: flex;
     height: 380px;
-    background: white;
+    background: #FFFFFF;
 `
 const MainArea = styled.div`
     flex: 2;
-    padding: 20px;
+    padding: 24px;
     border-right: 1px solid #E2E8F0;
     
-    h2 { font-size: 18px; color: #1E293B; margin-bottom: 20px; }
+    h2 { font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 18px; }
     
     .tabs { display: flex; gap: 15px; border-bottom: 1px solid #E2E8F0; margin-bottom: 20px; }
-    .tab { font-size: 12px; padding-bottom: 8px; color: #64748B; cursor: pointer; }
-    .tab.active { color: ${props => props.theme.colors.primary}; border-bottom: 2px solid ${props => props.theme.colors.primary}; font-weight: 600; }
+    .tab { font-size: 12px; padding-bottom: 8px; color: #64748B; cursor: pointer; font-weight: 500; }
+    .tab.active { color: #4F46E5; border-bottom: 2px solid #4F46E5; font-weight: 700; }
     
     .checklist-item {
-        display: flex; gap: 10px; align-items: center; margin-bottom: 12px; font-size: 13px; color: #334155;
-        input { accent-color: ${props => props.theme.colors.primary}; }
+        display: flex; gap: 10px; align-items: center; margin-bottom: 12px; font-size: 13px; color: #334155; font-weight: 500;
+        input { accent-color: #4F46E5; }
         &.done { text-decoration: line-through; color: #94A3B8; }
     }
 `
 const SidebarMock = styled.div`
     flex: 1;
-    padding: 20px;
+    padding: 24px;
     background: #F8FAFC;
     
     .section { margin-bottom: 20px; }
-    .label { font-size: 10px; font-weight: bold; color: #64748B; text-transform: uppercase; margin-bottom: 8px; }
+    .label { font-size: 10px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
     
     .timer-box {
-        background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px;
+        background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px;
         display: flex; align-items: center; justify-content: space-between;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
-    .time { font-family: monospace; font-size: 16px; font-weight: bold; color: #1E293B; }
+    .time { font-family: monospace; font-size: 16px; font-weight: 800; color: #0F172A; }
     .play-btn { 
         width: 28px; height: 28px; border-radius: 50%; background: #EF4444; color: white; 
         display: flex; align-items: center; justify-content: center;
@@ -192,45 +200,45 @@ const SidebarMock = styled.div`
 // --- MOCKUP 3: AUTOMATION BUILDER ---
 const AutomationMock = styled.div`
     padding: 30px;
-    background: #F8FAFC;
-    height: 350px;
+    background: #FFFFFF;
+    height: 360px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
 `
 const LogicBlock = styled.div`
-    background: white;
+    background: #F8FAFC;
     border: 1px solid #E2E8F0;
     border-radius: 12px;
-    padding: 20px;
+    padding: 16px;
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 4px 6px -2px rgba(0,0,0,0.05);
     
     .icon { 
-        width: 40px; height: 40px; border-radius: 8px; background: #EFF6FF; 
-        color: ${props => props.theme.colors.primary}; display: flex; align-items: center; justify-content: center;
+        width: 38px; height: 38px; border-radius: 10px; background: #EEF2FF; 
+        color: #4F46E5; display: flex; align-items: center; justify-content: center;
+        border: 1px solid #E0E7FF;
     }
     
     .content {
-        h5 { margin: 0 0 4px 0; font-size: 14px; font-weight: bold; color: #1E293B; }
+        h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 700; color: #0F172A; }
         p { margin: 0; font-size: 12px; color: #64748B; }
     }
 
-    &.action .icon { background: #DCFCE7; color: #16A34A; }
+    &.action .icon { background: #ECFDF5; color: #059669; border-color: #A7F3D0; }
 `
 const Connector = styled.div`
-    height: 20px;
+    height: 18px;
     width: 2px;
     background: #CBD5E1;
-    margin-left: 40px;
+    margin-left: 36px;
     position: relative;
     
     &:after {
         content: '▼';
-        position: absolute; bottom: -5px; left: -5px; color: #CBD5E1; font-size: 10px;
+        position: absolute; bottom: -5px; left: -4px; color: #94A3B8; font-size: 8px;
     }
 `
 
@@ -243,30 +251,50 @@ const PowerGrid = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.md}) { grid-template-columns: 1fr; }
 `
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #FFFFFF;
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
+
     &:hover {
         transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: ${props => props.theme.colors.primary}40;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #4F46E5;
+        .icon {
+            background: #4F46E5;
+            color: #FFFFFF;
+            border-color: #4F46E5;
+        }
     }
+
     .icon {
         width: 48px; height: 48px; border-radius: 12px;
-        background: white; display: flex; align-items: center; justify-content: center;
-        color: ${props => props.theme.colors.primary}; margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        background: #F8FAFC; border: 1px solid #E2E8F0;
+        display: flex; align-items: center; justify-content: center;
+        color: #4F46E5; margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
     }
-    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: ${props => props.theme.colors.textDark}; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+
+    h4 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: #0F172A;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #475569;
+        line-height: 1.5;
+        margin: 0;
+    }
 `
 
 export default function TasksDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* 1. KANBAN & VIEWS */}
@@ -278,7 +306,7 @@ export default function TasksDeepDive() {
                             e a coordenação precisa ver o Calendário. No Maskot, você alterna a visão com um clique.
                         </p>
                         <ul>
-                            <li><Kanban size={20}/> <strong>Quadro Kanban:</strong> Arraste e solte para mover matrículas de etapa.</li>
+                            <li><Kanban size={20}/> <strong>Quadro Kanban:</strong> Arraste e solte para mover demandas de etapa.</li>
                             <li><List size={20}/> <strong>Lista Rápida:</strong> Ideal para processar várias pendências em sequência.</li>
                             <li><Calendar size={20}/> <strong>Calendário:</strong> Visualize prazos de entrega e visitas agendadas.</li>
                         </ul>
@@ -287,7 +315,7 @@ export default function TasksDeepDive() {
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <KanbanMock>
                             <Column>
-                                <div className="header">A FAZER <span>3</span></div>
+                                <div className="header">A FAZER <span>2</span></div>
                                 <Card>
                                     <span className="tag sec">Secretaria</span>
                                     <h4>Organizar documentos do Berçário</h4>
@@ -312,7 +340,7 @@ export default function TasksDeepDive() {
                                     <h4>Retornar contato mãe do Pedro</h4>
                                     <div className="footer">
                                         <div className="avatar">M</div>
-                                        <div className="date" style={{color: 'orange'}}><Clock size={10}/> Atrasado</div>
+                                        <div className="date" style={{color: '#DC2626', fontWeight: 700}}><Clock size={10}/> Atrasado</div>
                                     </div>
                                 </Card>
                             </Column>
@@ -337,7 +365,7 @@ export default function TasksDeepDive() {
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <TaskDetailMock>
                             <MainArea>
-                                <h2>Preparar Contrato 2025 (João Silva)</h2>
+                                <h2>Preparar Contrato 2026 (João Silva)</h2>
                                 <div className="tabs">
                                     <div className="tab active">Checklist</div>
                                     <div className="tab">Comentários</div>
@@ -369,8 +397,8 @@ export default function TasksDeepDive() {
                                 </div>
                                 <div className="section">
                                     <div className="label">Responsável</div>
-                                    <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px'}}>
-                                        <div style={{width: '24px', height: '24px', borderRadius: '50%', background: '#3B82F6', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px'}}>M</div>
+                                    <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 600, color: '#0F172A'}}>
+                                        <div style={{width: '24px', height: '24px', borderRadius: '50%', background: '#4F46E5', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 700}}>M</div>
                                         Maria Souza
                                     </div>
                                 </div>
@@ -384,7 +412,7 @@ export default function TasksDeepDive() {
                             (ex: Passo a passo da Matrícula) e o cronômetro (Time Tracking) para medir a produtividade.
                         </p>
                         <ul>
-                            <li><CheckSquare size={20}/> <strong>Checklists:</strong> Quebre tarefas grandes em passos menores.</li>
+                            <li><CheckSquare size={20}/> <strong>Checklists:</strong> Quebre demandas grandes em passos simples.</li>
                             <li><Clock size={20}/> <strong>Time Tracking:</strong> Dê Play na tarefa e saiba quanto tempo sua equipe gasta.</li>
                             <li><Users size={20}/> <strong>Colaboradores:</strong> Adicione múltiplos responsáveis na mesma tarefa.</li>
                         </ul>
@@ -409,8 +437,8 @@ export default function TasksDeepDive() {
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <AutomationMock>
                             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
-                                <span style={{fontWeight: 'bold', fontSize: '14px', color: '#334155'}}>Regra: Notificar Conclusão</span>
-                                <div style={{width: '30px', height: '16px', background: '#DCFCE7', borderRadius: '10px', border: '1px solid #BBF7D0'}}></div>
+                                <span style={{fontWeight: '700', fontSize: '13px', color: '#0F172A'}}>Regra: Notificar Conclusão</span>
+                                <div style={{display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', fontWeight: 700, color: '#166534', background: '#F0FDF4', padding: '2px 8px', borderRadius: '100px', border: '1px solid #DCFCE7'}}>Ativa</div>
                             </div>
 
                             <LogicBlock>
@@ -426,8 +454,8 @@ export default function TasksDeepDive() {
                             <LogicBlock className="action">
                                 <div className="icon"><Bell size={20}/></div>
                                 <div className="content">
-                                    <h5>ENTÃO Enviar E-mail</h5>
-                                    <p>Para: <strong>Diretoria Pedagógica</strong></p>
+                                    <h5>ENTÃO Notificar por E-mail</h5>
+                                    <p>Para: <strong>Coordenação Pedagógica</strong></p>
                                 </div>
                             </LogicBlock>
                         </AutomationMock>
@@ -439,10 +467,11 @@ export default function TasksDeepDive() {
                     <h3 style={{
                         fontSize: '2rem',
                         fontWeight: 800,
-                        color: '#333',
-                        fontFamily: 'var(--font-inter)'
+                        color: '#0F172A',
+                        fontFamily: 'var(--font-inter)',
+                        letterSpacing: '-0.02em'
                     }}>Muito Mais que um To-Do List</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Recursos avançados para gestão escolar profissional.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem', fontSize: '1.125rem'}}>Recursos avançados para gestão escolar profissional.</p>
                 </div>
 
                 <PowerGrid>
@@ -454,7 +483,7 @@ export default function TasksDeepDive() {
                     <PowerCard>
                         <div className="icon"><Filter size={24}/></div>
                         <h4>Contextos e Projetos</h4>
-                        <p>Organize tarefas por área: Campanha de Matrículas, Festa Junina, Manutenção Predial.</p>
+                        <p>Organize tarefas por área: Campanha de Matrículas, Feira Cultural, Manutenção Predial.</p>
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><Users size={24}/></div>
@@ -463,12 +492,12 @@ export default function TasksDeepDive() {
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><Tag size={24}/></div>
-                        <h4>Etiquetas Coloridas</h4>
-                        <p>Classifique demandas visualmente com tags personalizadas para filtro rápido.</p>
+                        <h4>Etiquetas e Prioridades</h4>
+                        <p>Classifique demandas visualmente com tags e níveis de prioridade para filtro rápido.</p>
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><Play size={24}/></div>
-                        <h4>Dependências</h4>
+                        <h4>Dependências de Tarefas</h4>
                         <p>Bloqueie uma tarefa até que outra seja concluída (ex: Enviar Contrato depende de Aprovar Financeiro).</p>
                     </PowerCard>
                     <PowerCard>

@@ -3,11 +3,12 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import * as prismic from '@prismicio/client'
 import { createPrismicClient } from '@/prismicio'
-import PostListCard from '@/components/PostListCard'
+import PostCard from '@/components/PostCard'
 import Pagination from '@/components/Pagination'
 import { BLOG_CATEGORIES, categoryFromSlug, categorySlug } from '@/lib/categories'
 import { PageWrapper } from '@/app/blog/styles'
-import { BlogPageInner, BlogPageHeader } from '@/app/blog/blog-page-styles'
+import { BlogPageInner, BlogPageHeader, BlogTag } from '@/app/blog/blog-page-styles'
+import { FolderOpen } from 'lucide-react'
 
 const PAGE_SIZE = 9
 
@@ -81,36 +82,124 @@ export default async function CategoryPage({
       />
       <BlogPageInner>
         <BlogPageHeader>
-          <nav style={{ marginBottom: '1rem', fontSize: '0.9rem', color: '#888' }}>
-            <Link href="/blog" style={{ color: '#007BFF', textDecoration: 'none' }}>
+          <nav
+            style={{
+              marginBottom: '1.25rem',
+              fontSize: '0.875rem',
+              color: '#64748B',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+            }}
+          >
+            <Link href="/blog" style={{ color: '#2563EB', textDecoration: 'none', fontWeight: 600 }}>
               Blog
             </Link>
-            <span style={{ margin: '0 0.5rem' }}>/</span>
-            <span>{category}</span>
+            <span style={{ color: '#CBD5E1' }}>/</span>
+            <span style={{ color: '#0F172A', fontWeight: 600 }}>{category}</span>
           </nav>
+          <BlogTag>
+            <FolderOpen size={14} /> Categoria
+          </BlogTag>
           <h1>{category}</h1>
-          <p>Conteúdos de {category} para a sua escola crescer.</p>
+          <p>
+            Conteúdo estratégico sobre {category} para impulsionar os resultados da sua instituição de ensino.
+          </p>
         </BlogPageHeader>
 
+        {/* Category switcher pills */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            marginBottom: '3rem',
+            paddingBottom: '1.5rem',
+            borderBottom: '1px solid #E2E8F0',
+          }}
+        >
+          <Link
+            href="/blog"
+            style={{
+              textDecoration: 'none',
+              padding: '0.45rem 1rem',
+              borderRadius: '100px',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              border: '1px solid #E2E8F0',
+              background: '#FFFFFF',
+              color: '#475569',
+            }}
+          >
+            Todos os Artigos
+          </Link>
+          {BLOG_CATEGORIES.map((cat) => {
+            const isCurrent = cat === category
+            return (
+              <Link
+                key={cat}
+                href={`/blog/categoria/${categorySlug(cat)}`}
+                style={{
+                  textDecoration: 'none',
+                  padding: '0.45rem 1rem',
+                  borderRadius: '100px',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  border: `1px solid ${isCurrent ? '#2563EB' : '#E2E8F0'}`,
+                  background: isCurrent ? '#2563EB' : '#FFFFFF',
+                  color: isCurrent ? '#FFFFFF' : '#475569',
+                  boxShadow: isCurrent ? '0 2px 8px rgba(37, 99, 235, 0.25)' : 'none',
+                }}
+              >
+                {cat}
+              </Link>
+            )
+          })}
+        </div>
+
         {response.results.length === 0 ? (
-          <p style={{ textAlign: 'center', color: '#777', padding: '3rem 0' }}>
-            Ainda não há artigos publicados nesta categoria.{' '}
-            <Link href="/blog" style={{ color: '#007BFF' }}>
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '4rem 2rem',
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              border: '1px solid #E2E8F0',
+            }}
+          >
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '0.5rem' }}>
+              Nenhum artigo publicado nesta categoria ainda
+            </h3>
+            <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
+              Estamos preparando novos conteúdos sobre {category}.
+            </p>
+            <Link
+              href="/blog"
+              style={{
+                display: 'inline-block',
+                background: '#2563EB',
+                color: '#FFFFFF',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '10px',
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+            >
               Ver todos os artigos
             </Link>
-          </p>
+          </div>
         ) : (
           <div
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.5rem',
-              maxWidth: '820px',
-              margin: '0 auto',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gap: '2rem',
             }}
           >
             {response.results.map((post) => (
-              <PostListCard key={post.id} post={post} />
+              <PostCard key={post.id} post={post} />
             ))}
           </div>
         )}

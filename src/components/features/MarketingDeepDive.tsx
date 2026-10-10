@@ -16,7 +16,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -47,15 +47,16 @@ const TextContent = styled.div`
     h3 {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
     p {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -71,10 +72,10 @@ const TextContent = styled.div`
         align-items: flex-start;
         gap: 1rem;
         font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 500;
+        color: #334155;
         svg {
-            color: #F97316; /* Laranja */
+            color: #EA580C;
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -82,10 +83,10 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -93,35 +94,68 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     gap: 0.5rem;
-    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; } }
+    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; } }
 `
 
 // --- MOCKUP 1: AUDIENCE BUILDER ---
 const FilterMock = styled.div`
     padding: 25px;
-    background: white;
+    background: #FFFFFF;
+
+    .header-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #0F172A;
+    }
 
     .logic-group {
-        border: 1px dashed #CBD5E1; padding: 15px; border-radius: 8px; position: relative;
+        border: 1px dashed #CBD5E1;
+        padding: 16px;
+        border-radius: 10px;
+        position: relative;
         margin-bottom: 15px;
+        background: #F8FAFC;
 
         &:before {
-            content: 'E (AND)'; position: absolute; top: -10px; left: 10px; background: white;
-            padding: 0 5px; font-size: 10px; font-weight: bold; color: #64748B;
+            content: 'CONDIÇÕES (AND)';
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: #FFFFFF;
+            padding: 0 8px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #64748B;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
         }
     }
 
     .condition-row {
-        display: flex; gap: 8px; margin-bottom: 8px;
+        display: flex;
+        gap: 8px;
+        margin-bottom: 10px;
+        &:last-child { margin-bottom: 0; }
+
         select, input {
-            padding: 8px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 12px;
-            background: #F8FAFC; color: #334155;
+            padding: 8px 10px;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            font-size: 12px;
+            background: #FFFFFF;
+            color: #334155;
+            font-weight: 500;
+            outline: none;
         }
         .field { width: 40%; }
         .op { width: 25%; }
@@ -129,72 +163,161 @@ const FilterMock = styled.div`
     }
 
     .add-btn {
-        width: 100%; border: 1px dashed #94A3B8; color: #64748B; padding: 8px;
-        border-radius: 6px; font-size: 12px; display: flex; align-items: center;
-        justify-content: center; gap: 5px; cursor: pointer;
+        width: 100%;
+        border: 1px dashed #CBD5E1;
+        color: #64748B;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        background: #FFFFFF;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: #EA580C;
+            color: #EA580C;
+        }
+    }
+
+    .result-banner {
+        margin-top: 18px;
+        background: #FFF7ED;
+        border: 1px solid #FFEDD5;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 12px;
+        color: #C2410C;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
     }
 `
 
 // --- MOCKUP 2: CAMPAIGN CREATION ---
 const CampaignMock = styled.div`
-    padding: 30px;
-    background: #F8FAFC;
-    height: 380px;
+    padding: 25px;
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 
     .channel-select {
-        display: flex; gap: 15px;
+        display: flex;
+        gap: 12px;
         .option {
-            flex: 1; background: white; padding: 15px; border: 2px solid #E2E8F0; border-radius: 12px;
-            text-align: center; cursor: pointer; transition: all 0.2s;
-            &.active { border-color: #F97316; background: #FFF7ED; color: #C2410C; }
-            svg { display: block; margin: 0 auto 8px; }
-            span { font-size: 12px; font-weight: bold; }
+            flex: 1;
+            background: #F8FAFC;
+            padding: 14px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #64748B;
+            &.active {
+                border-color: #FDBA74;
+                background: #FFF7ED;
+                color: #EA580C;
+            }
+            svg { display: block; margin: 0 auto 6px; }
+            span { font-size: 12px; font-weight: 700; }
         }
     }
 
     .input-group {
-        label { display: block; font-size: 12px; font-weight: bold; color: #475569; margin-bottom: 6px; }
+        label { display: block; font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
         .fake-input {
-            background: white; border: 1px solid #CBD5E1; padding: 10px; border-radius: 8px;
-            font-size: 13px; color: #334155; display: flex; justify-content: space-between; align-items: center;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #0F172A;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 
     .preview-box {
-        flex: 1; background: #DCF8C6; border-radius: 8px; padding: 15px; position: relative;
-        font-size: 13px; color: #111B21; border: 1px solid #86D96F;
+        background: #F8FAFC;
+        border-radius: 10px;
+        padding: 14px;
+        position: relative;
+        font-size: 13px;
+        color: #0F172A;
+        border: 1px solid #E2E8F0;
+        line-height: 1.5;
 
-        &:after {
-            content: 'Prévia WhatsApp'; position: absolute; bottom: -20px; right: 0; font-size: 10px; color: #94A3B8;
+        .tag-channel {
+            font-size: 10px;
+            font-weight: 700;
+            color: #166534;
+            background: #DCFCE7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: inline-block;
         }
     }
 `
 
 // --- MOCKUP 3: STATS DASHBOARD ---
 const StatsMock = styled.div`
-    padding: 20px; background: white;
+    padding: 20px;
+    background: #FFFFFF;
 
-    .cards { display: flex; gap: 15px; margin-bottom: 20px; }
+    .cards { display: flex; gap: 12px; margin-bottom: 16px; }
     .card {
-        flex: 1; padding: 15px; border-radius: 12px; color: white;
-        h4 { margin: 0 0 5px 0; font-size: 11px; opacity: 0.9; font-weight: normal; }
-        .val { font-size: 24px; font-weight: bold; }
+        flex: 1;
+        padding: 14px;
+        border-radius: 10px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        h4 {
+            margin: 0 0 4px 0;
+            font-size: 11px;
+            color: #64748B;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .val { font-size: 22px; font-weight: 800; color: #0F172A; }
+        .trend {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 600;
+            color: #16A34A;
+        }
     }
 
     .list {
+        border-top: 1px solid #F1F5F9;
+        padding-top: 8px;
         .item {
-            display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #F1F5F9;
             &:last-child { border: none; }
         }
-        .info h5 { margin: 0; font-size: 14px; color: #1E293B; }
-        .info span { font-size: 11px; color: #64748B; display: flex; align-items: center; gap: 4px; }
+        .info h5 { margin: 0; font-size: 13px; color: #0F172A; font-weight: 600; }
+        .info span { font-size: 11px; color: #64748B; display: flex; align-items: center; gap: 4px; margin-top: 2px; }
         .status {
-            font-size: 10px; padding: 4px 8px; border-radius: 12px; font-weight: bold;
-            &.sent { background: #DCFCE7; color: #166534; }
-            &.draft { background: #F1F5F9; color: #475569; }
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 100px;
+            font-weight: 700;
+            &.sent { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+            &.draft { background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; }
         }
     }
 `
@@ -208,31 +331,31 @@ const PowerGrid = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.md}) { grid-template-columns: 1fr; }
 `
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #FFFFFF;
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
     &:hover {
         transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: #F97316;
-        .icon { background: #F97316; color: white; }
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #EA580C;
+        .icon { background: #EA580C; color: #FFFFFF; border-color: #EA580C; }
     }
     .icon {
         width: 48px; height: 48px; border-radius: 12px;
-        background: white; display: flex; align-items: center; justify-content: center;
-        color: #F97316; margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        background: #F8FAFC; display: flex; align-items: center; justify-content: center;
+        color: #EA580C; margin-bottom: 1.5rem;
+        border: 1px solid #E2E8F0;
+        transition: all 0.3s ease;
     }
-    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: ${props => props.theme.colors.textDark}; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #0F172A; letter-spacing: -0.02em; }
+    p { font-size: 1rem; color: #475569; line-height: 1.5; margin: 0; }
 `
 
 export default function MarketingDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* 1. AUDIÊNCIA & SEGMENTAÇÃO */}
@@ -251,6 +374,10 @@ export default function MarketingDeepDive() {
                     <MockupCard>
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <FilterMock>
+                            <div className="header-info">
+                                <span>Filtro de Destinatários</span>
+                                <span style={{ color: '#EA580C' }}>Regra Ativa</span>
+                            </div>
                             <div className="logic-group">
                                 <div className="condition-row">
                                     <select className="field"><option>Status do Lead</option></select>
@@ -264,11 +391,12 @@ export default function MarketingDeepDive() {
                                 </div>
                             </div>
                             <div className="add-btn">
-                                + Adicionar Condição &quot;OU&quot; (OR)
+                                + Adicionar Condição Alternativa (OU)
                             </div>
 
-                            <div style={{marginTop: '20px', borderTop: '1px solid #E2E8F0', paddingTop: '10px', fontSize: '12px', color: '#64748B'}}>
-                                <strong>Resultado Estimado:</strong> 142 contatos encontrados
+                            <div className="result-banner">
+                                <span><Users size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }}/> 142 responsáveis qualificados</span>
+                                <span>100% no Perfil</span>
                             </div>
                         </FilterMock>
                     </MockupCard>
@@ -281,32 +409,34 @@ export default function MarketingDeepDive() {
                         <CampaignMock>
                             <div className="channel-select">
                                 <div className="option active">
-                                    <MessageCircle size={24}/>
-                                    <span>WhatsApp</span>
+                                    <MessageCircle size={22}/>
+                                    <span>WhatsApp Oficial</span>
                                 </div>
                                 <div className="option">
-                                    <Mail size={24}/>
-                                    <span>E-mail</span>
+                                    <Mail size={22}/>
+                                    <span>E-mail Marketing</span>
                                 </div>
                             </div>
 
                             <div className="input-group">
                                 <label>Nome da Campanha</label>
-                                <div className="fake-input">Retorno Visitas - Março</div>
+                                <div className="fake-input">Retorno Visitas - Campanha Março</div>
                             </div>
 
                             <div className="input-group">
-                                <label>Público Alvo</label>
+                                <label>Público Alvo Selecionado</label>
                                 <div className="fake-input">
-                                    Visitantes Não Matriculados (142)
+                                    Visitantes Não Matriculados (142 pais)
                                     <Users size={16} color="#64748B"/>
                                 </div>
                             </div>
 
                             <div className="preview-box">
-                                <strong>Olá, {'{{nome_responsavel}}'}! 👋</strong><br/><br/>
-                                Tudo bem? Vi que você visitou nossa escola recentemente.
-                                As vagas para o <strong>{'{{curso_interesse}}'}</strong> estão acabando...
+                                <div className="tag-channel">WhatsApp HSM Aprovado</div>
+                                <div>
+                                    <strong>Olá, {'{{nome_responsavel}}'}! 👋</strong><br/>
+                                    Tudo bem? Vimos que você visitou nosso colégio recentemente. As condições especiais para o <strong>{'{{curso_interesse}}'}</strong> encerram nesta sexta-feira.
+                                </div>
                             </div>
                         </CampaignMock>
                     </MockupCard>
@@ -340,20 +470,22 @@ export default function MarketingDeepDive() {
                         <MockupHeader><div className="dots"><div></div><div></div><div></div></div></MockupHeader>
                         <StatsMock>
                             <div className="cards">
-                                <div className="card" style={{background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)'}}>
+                                <div className="card">
                                     <h4>Total Enviado</h4>
-                                    <div className="val">1,204</div>
+                                    <div className="val">1.204</div>
+                                    <div className="trend">98.4% entrega</div>
                                 </div>
-                                <div className="card" style={{background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)'}}>
-                                    <h4>Taxa Abertura</h4>
+                                <div className="card">
+                                    <h4>Taxa de Resposta</h4>
                                     <div className="val">42%</div>
+                                    <div className="trend">+14% vs média</div>
                                 </div>
                             </div>
 
                             <div className="list">
                                 <div className="item">
                                     <div className="info">
-                                        <h5>Boas Festas - Pais</h5>
+                                        <h5>Retorno de Visitas - Fundamental</h5>
                                         <span><MessageCircle size={12}/> WhatsApp • Ontem</span>
                                     </div>
                                     <span className="status sent">Enviada</span>
@@ -367,10 +499,10 @@ export default function MarketingDeepDive() {
                                 </div>
                                 <div className="item">
                                     <div className="info">
-                                        <h5>Lembrete Rematrícula</h5>
-                                        <span><MessageCircle size={12}/> WhatsApp • Rascunho</span>
+                                        <h5>Lembrete de Fechamento de Turmas</h5>
+                                        <span><MessageCircle size={12}/> WhatsApp • Agendada</span>
                                     </div>
-                                    <span className="status draft">Rascunho</span>
+                                    <span className="status draft">Agendada</span>
                                 </div>
                             </div>
                         </StatsMock>
@@ -382,10 +514,11 @@ export default function MarketingDeepDive() {
                     <h3 style={{
                         fontSize: '2rem',
                         fontWeight: 800,
-                        color: '#333',
-                        fontFamily: 'var(--font-inter)'
+                        color: '#0F172A',
+                        fontFamily: 'var(--font-inter)',
+                        letterSpacing: '-0.02em'
                     }}>Ferramentas de Crescimento</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Tudo para captar e fidelizar alunos.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem', fontSize: '1.125rem'}}>Tudo para captar e fidelizar alunos.</p>
                 </div>
 
                 <PowerGrid>
@@ -396,7 +529,7 @@ export default function MarketingDeepDive() {
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><CalendarCheck size={24}/></div>
-                        <h4>Agendamento</h4>
+                        <h4>Agendamento Inteligente</h4>
                         <p>Programe seus disparos para o horário nobre. Deixe a campanha pronta na sexta para sair na segunda.</p>
                     </PowerCard>
                     <PowerCard>

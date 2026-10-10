@@ -4,21 +4,19 @@ import styled from 'styled-components'
 
 const MetricsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin: 3rem 0;
-  padding: 3rem;
-  background: linear-gradient(135deg, 
-    ${props => props.theme.colors.pageBackground} 0%, 
-    ${props => props.theme.colors.lightGray} 100%
-  );
-  border-radius: ${props => props.theme.borderRadius.xl};
-  border: 1px solid ${props => props.theme.colors.borderLight};
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  margin: 3.5rem 0;
+  padding: 2.5rem 3rem;
+  background: #F8FAFC;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
+  @media (max-width: 768px) {
     padding: 2rem;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
   }
 `
 
@@ -31,29 +29,24 @@ const MetricItem = styled.div`
 `
 
 const MetricValue = styled.div`
-  font-size: ${props => props.theme.typography.fontSize['4xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
-  background: linear-gradient(135deg,
-    ${props => props.theme.colors.primary} 0%,
-    ${props => props.theme.colors.secondary} 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
+  font-size: 3.25rem;
+  font-weight: 800;
+  color: #2563EB;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
   line-height: 1;
 
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    font-size: ${props => props.theme.typography.fontSize['3xl']};
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
   }
 `
 
 const MetricLabel = styled.div`
-  font-size: ${props => props.theme.typography.fontSize.base};
-  color: ${props => props.theme.colors.textMedium};
-  font-weight: ${props => props.theme.typography.fontWeight.medium};
-  max-width: 180px;
-  line-height: ${props => props.theme.typography.lineHeight.tight};
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 600;
+  max-width: 220px;
+  line-height: 1.4;
 `
 
 interface Metric {

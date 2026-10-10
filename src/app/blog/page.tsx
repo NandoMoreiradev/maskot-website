@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { isFilled } from '@prismicio/client';
+import { BookOpen } from 'lucide-react';
 import { createPrismicClient } from '@/prismicio';
 import BlogFeed from '@/components/BlogFeed';
 import { PageWrapper } from './styles';
-import { BlogPageInner, BlogPageHeader } from './blog-page-styles';
+import { BlogPageInner, BlogPageHeader, BlogTag } from './blog-page-styles';
 
 export const metadata: Metadata = {
   title: 'Blog Educacional | Maskot',
@@ -49,8 +50,15 @@ export default async function BlogPage() {
     <PageWrapper>
       <BlogPageInner>
         <BlogPageHeader>
-          <h1>Blog do Maskot</h1>
-          <p>Conteúdo estratégico para revolucionar sua escola</p>
+          <BlogTag>
+            <BookOpen size={14} /> Conteúdo & Estratégia Educacional
+          </BlogTag>
+          <h1>
+            Artigos e insights para a <strong>gestão escolar moderna</strong>
+          </h1>
+          <p>
+            Dicas práticas de captação de alunos, atendimento via WhatsApp, tecnologia e retenção para instituições de ensino.
+          </p>
         </BlogPageHeader>
 
         {/* BlogFeed uses useSearchParams → must be wrapped in Suspense */}

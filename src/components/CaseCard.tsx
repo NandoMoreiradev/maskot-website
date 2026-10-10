@@ -4,38 +4,61 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { PrismicNextImage } from '@prismicio/next'
 import { ImageField } from '@prismicio/client'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, School } from 'lucide-react'
 
 const Card = styled.article`
-  background: ${props => props.theme.colors.cardBackground};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  border: 1px solid ${props => props.theme.colors.borderLight};
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
   overflow: hidden;
-  transition: all ${props => props.theme.transitions.base};
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: ${props => props.theme.shadows.lg};
-    border-color: ${props => props.theme.colors.primary}40;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06);
+    border-color: #CBD5E1;
+
+    .arrow-icon {
+      transform: translateX(4px);
+    }
   }
 `
 
 const CardHeader = styled.div`
-  padding: 2rem;
-  background: ${props => props.theme.colors.lightGray};
+  padding: 1.75rem;
+  background: #F8FAFC;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid ${props => props.theme.colors.borderLight};
-  min-height: 140px;
+  border-bottom: 1px solid #E2E8F0;
+  min-height: 130px;
+  position: relative;
 
   img {
-    max-width: 150px;
-    max-height: 80px;
+    max-width: 170px;
+    max-height: 65px;
+    width: auto;
+    height: auto;
     object-fit: contain;
+  }
+
+  .fallback-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #64748B;
+    font-weight: 700;
+    font-size: 1rem;
+
+    svg {
+      color: #2563EB;
+      width: 24px;
+      height: 24px;
+    }
   }
 `
 
@@ -44,29 +67,37 @@ const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-`
 
-const ClientName = styled.span`
-  font-size: ${props => props.theme.typography.fontSize.sm};
-  color: ${props => props.theme.colors.primary};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-  display: block;
+  .client-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    background: #EFF6FF;
+    color: #2563EB;
+    border: 1px solid #DBEAFE;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.85rem;
+    width: fit-content;
+  }
 `
 
 const Title = styled.h3`
-  font-size: ${props => props.theme.typography.fontSize.xl};
-  color: ${props => props.theme.colors.textDark};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  line-height: ${props => props.theme.typography.lineHeight.tight};
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #0F172A;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.85rem;
 `
 
 const Summary = styled.p`
-  color: ${props => props.theme.colors.textMedium};
-  line-height: ${props => props.theme.typography.lineHeight.relaxed};
+  color: #64748B;
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin-bottom: 2rem;
   flex-grow: 1;
 `
@@ -75,22 +106,21 @@ const ReadMore = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: ${props => props.theme.colors.primary};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  transition: color ${props => props.theme.transitions.fast};
+  color: #2563EB;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
   margin-top: auto;
+  transition: color 0.2s;
 
-  svg {
-    width: 1.25rem;
-    height: 1.25rem;
-    transition: transform ${props => props.theme.transitions.fast};
+  .arrow-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    transition: transform 0.2s ease;
   }
 
   &:hover {
-    color: ${props => props.theme.colors.secondary};
-    svg {
-      transform: translateX(4px);
-    }
+    color: #1D4ED8;
   }
 `
 
@@ -98,26 +128,37 @@ interface CaseCardProps {
   uid: string;
   title: string;
   clientName: string;
-  clientLogo: ImageField;
+  clientLogo?: ImageField;
   summary: string;
 }
 
-export default function CaseCard({ uid, title, clientName, clientLogo, summary }: CaseCardProps) {
+export default function CaseCard({
+  uid,
+  title,
+  clientName,
+  clientLogo,
+  summary,
+}: CaseCardProps) {
+  const hasLogo = clientLogo && clientLogo.url;
+
   return (
     <Card>
       <CardHeader>
-        {clientLogo && clientLogo.url ? (
+        {hasLogo ? (
           <PrismicNextImage field={clientLogo} fallbackAlt="" />
         ) : (
-          <ClientName>{clientName}</ClientName>
+          <div className="fallback-logo">
+            <School />
+            <span>{clientName}</span>
+          </div>
         )}
       </CardHeader>
       <CardContent>
-        <ClientName>{clientName}</ClientName>
+        <span className="client-tag">{clientName}</span>
         <Title>{title}</Title>
         <Summary>{summary}</Summary>
         <ReadMore href={`/cases/${uid}`}>
-          Ler case completo <ArrowRight />
+          Ler case completo <ArrowRight className="arrow-icon" />
         </ReadMore>
       </CardContent>
     </Card>

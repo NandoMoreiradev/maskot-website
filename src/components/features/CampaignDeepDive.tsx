@@ -1,6 +1,6 @@
 'use client'
 
-import styled, {keyframes, css} from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import {
     LineChart, PieChart, Sparkles, Filter, Link as LinkIcon, 
     Share2, Megaphone, PenTool, LayoutTemplate, Target,
@@ -17,7 +17,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -34,7 +34,7 @@ const FeatureRow = styled.div<{ $reverse?: boolean }>`
     align-items: center;
     margin-bottom: 8rem;
 
-    @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    @media (max-width: 1024px) {
         grid-template-columns: 1fr;
         gap: 3rem;
         margin-bottom: 6rem;
@@ -50,16 +50,17 @@ const FeatureRow = styled.div<{ $reverse?: boolean }>`
 const TextContent = styled.div`
     h3 {
         font-family: ${props => props.theme.typography.fontFamily.main};
-        font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-size: 2.25rem;
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
 
     p {
-        font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        font-size: 1.1rem;
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -76,24 +77,28 @@ const TextContent = styled.div`
         display: flex;
         align-items: flex-start;
         gap: 1rem;
-        font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-size: 1rem;
+        font-weight: 500;
+        color: #334155;
 
         svg {
-            color: ${props => props.theme.colors.primary};
+            color: #9333EA;
             flex-shrink: 0;
             margin-top: 2px;
+        }
+
+        strong {
+            color: #0F172A;
         }
     }
 `
 
 // --- UI MOCKUPS BASE ---
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -101,8 +106,8 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
@@ -110,14 +115,14 @@ const MockupHeader = styled.div`
     .dots {
         display: flex;
         gap: 6px;
-        div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; }
+        div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; }
     }
 `
 
-// --- MOCKUP 1: ESTÚDIO CRIATIVO AIA ---
+// --- MOCKUP 1: ESTÚDIO CRIATIVO IA ---
 const StudioMock = styled.div`
-    height: 380px;
-    background: #fafafa;
+    min-height: 380px;
+    background: #FFFFFF;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -129,25 +134,27 @@ const StudioMock = styled.div`
         button {
             padding: 6px 12px;
             border-radius: 20px;
-            border: 1px solid ${props => props.theme.colors.backgroundMedium};
-            background: white;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
             font-size: 11px;
-            font-weight: bold;
-            color: #555;
+            font-weight: 600;
+            color: #64748B;
             display: flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
         button.active {
-            background: ${props => props.theme.colors.primary}15;
-            color: ${props => props.theme.colors.primary};
-            border-color: ${props => props.theme.colors.primary};
+            background: #FAF5FF;
+            color: #9333EA;
+            border-color: #E9D5FF;
         }
     }
 
     .ai-box {
-        background: white;
-        border: 2px solid #e0baf5;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
         border-radius: 12px;
         padding: 16px;
         flex: 1;
@@ -156,20 +163,21 @@ const StudioMock = styled.div`
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #a855f7;
-            font-weight: bold;
+            color: #9333EA;
+            font-weight: 700;
             font-size: 12px;
             margin-bottom: 12px;
         }
 
         .generated-text {
             font-size: 13px;
-            color: #333;
-            line-height: 1.5;
-            background: #f9f4ff;
-            padding: 12px;
+            color: #334155;
+            line-height: 1.6;
+            background: #FFFFFF;
+            padding: 14px;
             border-radius: 8px;
-            border-left: 3px solid #a855f7;
+            border: 1px solid #E2E8F0;
+            border-left: 3px solid #9333EA;
         }
     }
 `
@@ -180,17 +188,19 @@ const DashboardMock = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    background: #FFFFFF;
 
     .card {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 10px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
         padding: 1rem;
     }
 
     h4 {
         font-size: 0.8rem;
-        color: #666;
+        color: #64748B;
+        font-weight: 600;
         margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
@@ -199,8 +209,8 @@ const DashboardMock = styled.div`
 
     .val {
         font-size: 1.5rem;
-        font-weight: bold;
-        color: #333;
+        font-weight: 800;
+        color: #0F172A;
     }
 
     .full-width {
@@ -209,15 +219,16 @@ const DashboardMock = styled.div`
 
     .progress-bar {
         height: 8px;
-        background: #eee;
-        border-radius: 4px;
+        background: #E2E8F0;
+        border-radius: 99px;
         margin-top: 10px;
         overflow: hidden;
         
         .fill {
             height: 100%;
-            background: ${props => props.theme.colors.secondary};
+            background: #9333EA;
             width: 65%;
+            border-radius: 99px;
         }
     }
 `
@@ -228,15 +239,17 @@ const ChannelMock = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background: #FFFFFF;
 
     .channel-row {
-        background: #fff;
-        border: 1px solid #e2e8f0;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
         border-radius: 12px;
         padding: 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 
         .info {
             display: flex;
@@ -244,17 +257,21 @@ const ChannelMock = styled.div`
             gap: 12px;
             
             .icon-box {
-                width: 40px; height: 40px; border-radius: 8px; 
-                display: flex; align-items: center; justify-content: center;
+                width: 40px; 
+                height: 40px; 
+                border-radius: 10px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center;
             }
-            .name { font-size: 0.9rem; font-weight: 600; color: #1e293b; }
-            .type { font-size: 0.75rem; color: #64748b; }
+            .name { font-size: 0.9rem; font-weight: 700; color: #0F172A; }
+            .type { font-size: 0.75rem; color: #64748B; }
         }
         
         .stats {
             text-align: right;
-            .leads { font-weight: bold; color: #1e293b; font-size: 1.1rem; }
-            .cac { font-size: 0.8rem; color: #10B981; font-weight: 500; }
+            .leads { font-weight: 800; color: #0F172A; font-size: 1.1rem; }
+            .cac { font-size: 0.8rem; color: #16A34A; font-weight: 600; }
         }
     }
 `
@@ -265,28 +282,31 @@ const AssetMock = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    background: #FFFFFF;
 
     .asset-card {
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 10px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
         overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         
         .preview {
             height: 100px;
-            background: #f8fafc;
+            background: #F8FAFC;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #cbd5e1;
+            color: #94A3B8;
+            border-bottom: 1px solid #F1F5F9;
         }
         .details {
             padding: 1rem;
-            .title { font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+            .title { font-size: 0.85rem; font-weight: 700; color: #0F172A; margin-bottom: 8px; }
             .status { 
                 font-size: 0.7rem; font-weight: 600; padding: 4px 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px;
-                &.approved { background: #dcfce7; color: #166534; }
-                &.pending { background: #fef9c3; color: #854d0e; }
+                &.approved { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+                &.pending { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
             }
         }
     }
@@ -299,48 +319,46 @@ const PowerGrid = styled.div`
     gap: 2rem;
     margin-top: 4rem;
 
-    @media (max-width: ${props => props.theme.breakpoints.md}) {
+    @media (max-width: 1024px) {
         grid-template-columns: 1fr;
     }
 `
 
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #FFFFFF;
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: ${props => props.theme.colors.primary}40;
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #CBD5E1;
     }
 
     .icon {
         width: 48px;
         height: 48px;
         border-radius: 12px;
-        background: white;
+        background: #FAF5FF;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: ${props => props.theme.colors.primary};
+        color: #9333EA;
         margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
     }
 
     h4 {
         font-size: 1.25rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
     }
 
     p {
-        font-size: 1rem;
-        color: ${props => props.theme.colors.textMedium};
+        font-size: 0.95rem;
+        color: #64748B;
         line-height: 1.5;
         margin: 0;
     }
@@ -348,7 +366,7 @@ const PowerCard = styled.div`
 
 export default function CampaignDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* 1. DASHBOARD ORÇAMENTO */}
@@ -357,12 +375,12 @@ export default function CampaignDeepDive() {
                         <h3>Gestão de Orçamento e<br/>Retorno em Tempo Real</h3>
                         <p>
                             Defina o budget global da campanha e distribua pelos canais (Online Pago, Offline, Parcerias). 
-                            Acompanhe Leads gerados versus o custo planejado.
+                            Acompanhe Leads gerados versus o custo planejado sem surpresas no fim do mês.
                         </p>
                         <ul>
-                            <li><Target size={20}/> <strong>Controle de Verba:</strong> Saiba exatamente quanto foi alocado e quanto já foi consumido.</li>
-                            <li><PieChart size={20}/> <strong>Performance por Canal:</strong> Veja qual mídia (Facebook, Instagram, Outdoor) gera mais conversão.</li>
-                            <li><LineChart size={20}/> <strong>Dashboard 360º:</strong> Relatório unindo Marketing e Vendas na mesma tela.</li>
+                            <li><Target size={20}/> <strong>Controle de Verba:</strong> Saiba exatamente quanto foi alocado e quanto já foi consumido por canal.</li>
+                            <li><PieChart size={20}/> <strong>Performance por Canal:</strong> Veja qual mídia (Facebook, Instagram, Google, Parcerias) gera mais conversão.</li>
+                            <li><LineChart size={20}/> <strong>Dashboard 360º:</strong> Relatório unindo Marketing e Comercial na mesma tela.</li>
                         </ul>
                     </TextContent>
 
@@ -375,7 +393,7 @@ export default function CampaignDeepDive() {
                                 <h4><Target size={16}/> Orçamento da Campanha (Matrículas 2026)</h4>
                                 <div className="val">R$ 15.000,00</div>
                                 <div className="progress-bar"><div className="fill"></div></div>
-                                <p style={{ fontSize: '11px', marginTop: '6px', color: '#666' }}>R$ 9.750,00 gastos (65%)</p>
+                                <p style={{ fontSize: '11px', marginTop: '6px', color: '#64748B', fontWeight: 500 }}>R$ 9.750,00 gastos (65%)</p>
                             </div>
                             <div className="card">
                                 <h4><Filter size={16}/> Leads Gerados</h4>
@@ -439,7 +457,7 @@ export default function CampaignDeepDive() {
                         <ul>
                             <li><Globe size={20}/> <strong>Meta & Google Ads:</strong> Compare o custo de aquisição (CAC) em tempo real.</li>
                             <li><Users size={20}/> <strong>Parceiros Estratégicos:</strong> Saiba exatamente quantas matrículas vieram da escola parceira.</li>
-                            <li><Layers size={20}/> <strong>Tracking Automático:</strong> Os leads caem no CRM com a origem já preenchida — via <code>UTM</code> ou, em anúncios de WhatsApp, identificação automática do anúncio de origem.</li>
+                            <li><Layers size={20}/> <strong>Tracking Automático:</strong> Os leads caem no CRM com a origem já preenchida — via UTM ou identificação automática em anúncios de WhatsApp.</li>
                         </ul>
                     </TextContent>
 
@@ -450,10 +468,10 @@ export default function CampaignDeepDive() {
                         <ChannelMock>
                             <div className="channel-row">
                                 <div className="info">
-                                    <div className="icon-box" style={{ background: '#e0f2fe', color: '#0ea5e9' }}><Globe size={20}/></div>
+                                    <div className="icon-box" style={{ background: '#EFF6FF', color: '#3B82F6' }}><Globe size={20}/></div>
                                     <div>
                                         <div className="name">Meta Ads - Inverno</div>
-                                        <div className="type">Online Secundário</div>
+                                        <div className="type">Online Pago</div>
                                     </div>
                                 </div>
                                 <div className="stats">
@@ -463,7 +481,7 @@ export default function CampaignDeepDive() {
                             </div>
                             <div className="channel-row">
                                 <div className="info">
-                                    <div className="icon-box" style={{ background: '#fef3c7', color: '#d97706' }}><Users size={20}/></div>
+                                    <div className="icon-box" style={{ background: '#FEF3C7', color: '#D97706' }}><Users size={20}/></div>
                                     <div>
                                         <div className="name">Escola Parceira ABC</div>
                                         <div className="type">Indicação</div>
@@ -512,96 +530,102 @@ export default function CampaignDeepDive() {
                         <ul>
                             <li><ImageIcon size={20}/> <strong>Gestão de Ativos:</strong> Imagens, Vídeos e Documentos centralizados.</li>
                             <li><CheckCircle2 size={20}/> <strong>Fluxo de Aprovação:</strong> A arte só vai pra rua após o &quot;OK&quot; da Direção.</li>
-                            <li><MessageSquare size={20}/> <strong>Ligado à Ponta:</strong> O consultor pode enviar anexos da campanha em 1 clique.</li>
+                            <li><MessageSquare size={20}/> <strong>Ligado à Ponta:</strong> O consultor comercial pode enviar anexos da campanha em 1 clique.</li>
                         </ul>
                     </TextContent>
                 </FeatureRow>
 
-                {/* 5. ASSETS E RASTREIO */}
+                {/* 5. FERRAMENTAS DE TRAÇÃO */}
                 <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '4rem' }}>
-                    <h3 style={{ fontSize: '2rem', fontWeight: 800, color: '#333' }}>Ferramentas de Tração</h3>
-                    <p style={{ color: '#666', marginTop: '0.5rem' }}>Tudo que seu time precisa para dominar a prospecção.</p>
+                    <h3 style={{ fontSize: '2rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em' }}>Ferramentas de Tração</h3>
+                    <p style={{ color: '#64748B', marginTop: '0.5rem', fontSize: '1.05rem' }}>Tudo o que seu time precisa para dominar a prospecção escolar.</p>
                 </div>
 
                 <PowerGrid>
                     <PowerCard>
                         <div className="icon"><LinkIcon size={24}/></div>
                         <h4>Gerador de UTM</h4>
-                        <p>Crie links rastreáveis parametrizados automaticamente para saber a origem exata de cada clique e lead.</p>
+                        <p>Crie links rastreáveis parametrizados automaticamente para saber a origem exata de cada clique e lead no seu funil.</p>
                     </PowerCard>
 
                     <PowerCard>
                         <div className="icon"><LayoutTemplate size={24}/></div>
                         <h4>Gestão de Ativos</h4>
-                        <p>Centralize vídeos, imagens, banners e PDFs da campanha em uma única biblioteca acessível por toda a equipe.</p>
+                        <p>Centralize vídeos, imagens, banners e PDFs da campanha em uma única biblioteca acessível por toda a equipe escolar.</p>
                     </PowerCard>
 
                     <PowerCard>
                         <div className="icon"><Share2 size={24}/></div>
                         <h4>Omnichannel</h4>
-                        <p>Organize suas ações entre Parcerias (escolas parceiras), Panfletagem (offline) e tráfego pago (online).</p>
+                        <p>Organize suas ações entre Parcerias (escolas parceiras), Panfletagem (offline) e tráfego pago (Meta e Google Ads).</p>
                     </PowerCard>
                 </PowerGrid>
 
-                {/* --- EXEMPLOS DE USO (Use Cases) --- */}
-                <div style={{textAlign: 'center', marginBottom: '3rem', marginTop: '6rem'}}>
-                    <h3 style={{fontSize: '1.75rem', fontWeight: 800, color: '#333'}}>Casos de Uso Comuns</h3>
+                {/* --- CASOS DE USO --- */}
+                <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '6rem' }}>
+                    <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em' }}>Casos de Uso Comuns</h3>
                 </div>
 
-                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                     {/* CASE 1 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
                         borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        border: '1px solid #E2E8F0',
+                        boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
+                            gap: '10px',
                             fontSize: '1.2rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A'
                         }}>
                             <span style={{
-                                background: '#E0F2FE',
-                                color: '#007BFF',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                background: '#FAF5FF',
+                                color: '#9333EA',
+                                padding: '8px',
+                                borderRadius: '10px',
+                                display: 'flex'
                             }}><Users size={18}/></span>
                             Captação Antecipada (Bolsões)
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
+                        <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: 1.6 }}>
                             Gere uma Landing Page pública vinculada à campanha, rastreie de qual canal veio cada inscrição via UTM e acompanhe o batimento da sua Meta de Inscrições em tempo real.
                         </p>
                     </div>
 
                     {/* CASE 2 */}
                     <div style={{
-                        background: 'white',
+                        background: '#FFFFFF',
                         padding: '2rem',
                         borderRadius: '16px',
-                        border: '1px solid #DEE2E6'
+                        border: '1px solid #E2E8F0',
+                        boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)'
                     }}>
                         <h4 style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
+                            gap: '10px',
                             fontSize: '1.2rem',
+                            fontWeight: 700,
                             marginBottom: '1rem',
-                            color: '#333'
+                            color: '#0F172A'
                         }}>
                             <span style={{
-                                background: '#DCFCE7',
+                                background: '#F0FDF4',
                                 color: '#166534',
-                                padding: '6px',
-                                borderRadius: '8px'
+                                padding: '8px',
+                                borderRadius: '10px',
+                                display: 'flex'
                             }}><CheckCircle2 size={18}/></span>
                             Recuperação de Evasão
                         </h4>
-                        <p style={{color: '#666', fontSize: '0.95rem'}}>
-                            Defina um orçamento reduzido para disparos de WhatsApp e crie uma campanha focada em ligar para alunos que deixaram a escola no último ano.
+                        <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                            Defina um orçamento reduzido para disparos de WhatsApp e crie uma campanha focada em ligar para alunos que deixaram a escola no último ano, recuperando matrículas perdidas.
                         </p>
                     </div>
                 </div>

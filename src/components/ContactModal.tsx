@@ -2,19 +2,19 @@
 
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { X, Send, CheckCircle2, ShieldCheck, BadgeCheck, Lock } from 'lucide-react'
+import { X, Send, CheckCircle2, ShieldCheck, BadgeCheck, Lock, Sparkles } from 'lucide-react'
 
 const Overlay = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(15, 23, 42, 0.55);
-    backdrop-filter: blur(5px);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
     z-index: 9999;
     display: ${props => props.$isOpen ? 'flex' : 'none'};
     align-items: center;
     justify-content: center;
-    padding: 1rem;
-    animation: fadeIn 0.2s ease-out;
+    padding: 1.5rem;
+    animation: fadeIn 0.25s ease-out;
 
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -23,29 +23,30 @@ const Overlay = styled.div<{ $isOpen: boolean }>`
 `
 
 const ModalContainer = styled.div`
-    background: white;
+    background: #FFFFFF;
     width: 100%;
-    max-width: 860px;
-    max-height: 95vh;
-    border-radius: 20px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    max-width: 880px;
+    max-height: 92vh;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.25);
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    animation: slideUp 0.3s ease-out;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: grid;
-    grid-template-columns: 0.8fr 1fr;
+    grid-template-columns: 0.88fr 1fr;
 
     &::-webkit-scrollbar { width: 6px; }
     &::-webkit-scrollbar-track { background: transparent; }
-    &::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    &::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
 
     @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(20px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
         grid-template-columns: 1fr;
         max-width: 480px;
     }
@@ -53,31 +54,40 @@ const ModalContainer = styled.div`
 
 // --- PAINEL LATERAL (BRANDING) ---
 const AsidePanel = styled.div`
-    background: linear-gradient(150deg,
-        ${props => props.theme.colors.primary} 0%,
-        ${props => props.theme.colors.secondary} 100%
-    );
-    color: white;
-    padding: 2.5rem 2rem;
+    background: linear-gradient(165deg, #0F172A 0%, #1E293B 100%);
+    color: #FFFFFF;
+    padding: 2.75rem 2.25rem;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    border-right: 1px solid #1E293B;
 
-    /* brilho decorativo */
+    /* brilhos decorativos sutis */
     &::before {
         content: '';
         position: absolute;
-        top: -30%;
+        top: -20%;
         right: -20%;
         width: 320px;
         height: 320px;
-        background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 70%);
         pointer-events: none;
     }
 
-    @media (max-width: 720px) {
-        padding: 2rem 1.75rem;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -15%;
+        left: -15%;
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+        padding: 2.25rem 1.75rem;
     }
 `
 
@@ -85,39 +95,46 @@ const Eyebrow = styled.span`
     display: inline-flex;
     align-self: flex-start;
     align-items: center;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #fff;
-    font-size: 0.7rem;
+    gap: 0.4rem;
+    background: rgba(37, 99, 235, 0.18);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: #93C5FD;
+    font-size: 0.725rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     padding: 0.35rem 0.8rem;
     border-radius: 100px;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     position: relative;
     z-index: 1;
+
+    svg {
+        width: 13px;
+        height: 13px;
+    }
 `
 
 const AsideTitle = styled.h2`
-    font-size: 1.6rem;
+    font-size: 1.65rem;
     font-weight: 800;
-    line-height: 1.2;
-    margin: 0 0 0.75rem;
-    color: #fff;
+    line-height: 1.25;
+    margin: 0 0 0.85rem;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
     position: relative;
     z-index: 1;
 
-    @media (max-width: 720px) {
-        font-size: 1.35rem;
+    @media (max-width: 768px) {
+        font-size: 1.4rem;
     }
 `
 
 const AsideSubtitle = styled.p`
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 1.75rem;
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: #94A3B8;
+    margin: 0 0 2rem;
     position: relative;
     z-index: 1;
 `
@@ -128,98 +145,108 @@ const BenefitList = styled.ul`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 1rem;
     position: relative;
     z-index: 1;
 
     li {
         display: flex;
         align-items: flex-start;
-        gap: 0.6rem;
-        font-size: 0.9rem;
-        line-height: 1.4;
-        color: rgba(255, 255, 255, 0.95);
+        gap: 0.65rem;
+        font-size: 0.875rem;
+        line-height: 1.45;
+        color: #E2E8F0;
 
         svg {
             flex-shrink: 0;
             margin-top: 1px;
-            color: #fff;
+            color: #38BDF8;
         }
     }
 
-    @media (max-width: 720px) {
-        /* mantém só os 2 primeiros no mobile para não alongar demais */
+    @media (max-width: 768px) {
         li:nth-child(n+3) { display: none; }
     }
 `
 
 const TrustRow = styled.div`
     margin-top: auto;
-    padding-top: 1.75rem;
+    padding-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.25rem;
     position: relative;
     z-index: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 
     div {
         display: flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.45rem;
         font-size: 0.75rem;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
+        color: #94A3B8;
 
-        svg { width: 15px; height: 15px; }
+        svg { 
+            width: 15px; 
+            height: 15px; 
+            color: #60A5FA;
+        }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
         display: none;
     }
 `
 
 // --- PAINEL DO FORMULÁRIO ---
 const FormPanel = styled.div`
-    padding: 2.25rem 2rem 2rem;
+    padding: 2.5rem 2.25rem 2.25rem;
     position: relative;
+    background: #FFFFFF;
 
-    @media (max-width: 720px) {
-        padding: 1.75rem 1.5rem;
+    @media (max-width: 768px) {
+        padding: 2rem 1.5rem;
     }
 `
 
 const CloseButton = styled.button`
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: transparent;
-    border: none;
-    color: #94a3b8;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #64748B;
     cursor: pointer;
     padding: 6px;
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
     z-index: 2;
 
-    &:hover { background: #f1f5f9; color: #0f172a; }
+    &:hover { 
+        background: #F1F5F9; 
+        color: #0F172A;
+        border-color: #CBD5E1;
+    }
 `
 
 const FormHeading = styled.div`
     margin-bottom: 1.5rem;
 
     h3 {
-        font-size: 1.35rem;
+        font-size: 1.4rem;
         font-weight: 800;
-        color: #0f172a;
+        color: #0F172A;
+        letter-spacing: -0.02em;
         margin: 0 0 0.35rem;
     }
 
     p {
         font-size: 0.875rem;
-        color: #64748b;
+        color: #64748B;
         margin: 0;
         line-height: 1.45;
     }
@@ -234,32 +261,41 @@ const Form = styled.form`
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.375rem;
+    gap: 0.35rem;
 
     label {
         font-size: 0.8125rem;
         font-weight: 600;
-        color: #475569;
+        color: #334155;
     }
 
     input, select {
-        padding: 0.7rem 0.875rem;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
+        padding: 0.75rem 0.9rem;
+        border: 1px solid #E2E8F0;
+        border-radius: 10px;
         font-size: 0.875rem;
-        color: #1e293b;
+        color: #0F172A;
         outline: none;
-        transition: all 0.2s;
+        transition: all 0.2s ease;
         box-sizing: border-box;
         width: 100%;
-        background-color: #fff;
+        background-color: #F8FAFC;
 
-        &::placeholder { color: #94a3b8; }
+        &::placeholder { color: #94A3B8; }
+
+        &:hover {
+            border-color: #CBD5E1;
+        }
 
         &:focus {
-            border-color: ${props => props.theme.colors.primary};
-            box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}1a;
+            background-color: #FFFFFF;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
+    }
+
+    select {
+        cursor: pointer;
     }
 `
 
@@ -274,15 +310,12 @@ const Row = styled.div`
 `
 
 const SubmitButton = styled.button`
-    margin-top: 0.5rem;
-    background: linear-gradient(135deg,
-        ${props => props.theme.colors.primary} 0%,
-        ${props => props.theme.colors.secondary} 100%
-    );
-    color: white;
+    margin-top: 0.75rem;
+    background: #2563EB;
+    color: #FFFFFF;
     border: none;
     padding: 0.95rem;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
@@ -290,12 +323,17 @@ const SubmitButton = styled.button`
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: all 0.2s;
-    box-shadow: 0 6px 16px ${props => props.theme.colors.primary}40;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
 
     &:hover {
+        background: #1D4ED8;
         transform: translateY(-1px);
-        box-shadow: 0 10px 22px ${props => props.theme.colors.primary}55;
+        box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+    }
+
+    &:active {
+        transform: translateY(0);
     }
 `
 
@@ -306,11 +344,14 @@ const Footnote = styled.p`
     gap: 0.4rem;
     margin: 1rem 0 0;
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: #64748B;
     text-align: center;
     line-height: 1.4;
 
-    svg { flex-shrink: 0; }
+    svg { 
+        flex-shrink: 0;
+        color: #94A3B8;
+    }
 `
 
 export default function ContactModal(): React.ReactElement | null {
@@ -378,7 +419,9 @@ export default function ContactModal(): React.ReactElement | null {
         <Overlay $isOpen={isOpen} onClick={() => setIsOpen(false)}>
             <ModalContainer onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
                 <AsidePanel>
-                    <Eyebrow>Demonstração gratuita</Eyebrow>
+                    <Eyebrow>
+                        <Sparkles size={12} /> Demonstração gratuita
+                    </Eyebrow>
                     <AsideTitle>Vamos escalar as matrículas da sua escola?</AsideTitle>
                     <AsideSubtitle>
                         Em uma conversa rápida, um especialista mostra o Maskot funcionando com a realidade da sua instituição.

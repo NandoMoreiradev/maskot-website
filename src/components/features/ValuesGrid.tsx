@@ -1,11 +1,12 @@
 'use client'
 
 import styled from 'styled-components'
-import { Heart, ShieldCheck, Zap, Users } from 'lucide-react'
+import { Heart, ShieldCheck, Zap, Users, Compass } from 'lucide-react'
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.textDark};
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
 `
 
 const Container = styled.div`
@@ -16,89 +17,99 @@ const Container = styled.div`
 
 const Header = styled.div`
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
+
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: #FFFFFF;
+        color: #475569;
+        padding: 0.35rem 0.85rem;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        border: 1px solid #E2E8F0;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+
+        svg {
+            color: #2563EB;
+            width: 14px;
+            height: 14px;
+        }
+    }
 
     h2 {
         font-size: 2.5rem;
         font-weight: 800;
         margin-bottom: 1rem;
-        color: #FFFFFF;
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
 
     p {
-        font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.125rem;
+        color: #64748B;
         max-width: 600px;
         margin: 0 auto;
+        line-height: 1.6;
     }
 `
 
 const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
 
-    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 576px) { grid-template-columns: 1fr; }
+    @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 640px) { grid-template-columns: 1fr; }
 `
 
-// --- ESTILOS ATUALIZADOS DO CARD E DO ÍCONE ---
 const ValueCard = styled.div`
-    background: rgba(255, 255, 255, 0.03); // Fundo do card mais sutil
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 2.5rem 2rem; // Mais espaçamento interno
-    border-radius: 24px; // Bordas mais arredondadas
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 2.25rem 1.75rem;
+    border-radius: 20px;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; // Alinha tudo à esquerda
-    position: relative;
-    overflow: hidden;
+    align-items: flex-start;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 
     &:hover {
-        transform: translateY(-8px);
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+        transform: translateY(-4px);
+        border-color: #CBD5E1;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
     }
 
-    /* ESTILO NOVO DO ÍCONE */
-    .icon {
-        width: 64px;
-        height: 64px;
-        /* Fundo translúcido em vez de sólido */
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.2));
-        border: 1px solid rgba(0, 123, 255, 0.3);
-        border-radius: 20px; // Squircle (entre quadrado e círculo)
+    .icon-box {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 1.5rem;
-        /* Cor do ícone mais clara para contrastar com o fundo escuro */
-        color: #60A5FA;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: transform 0.3s ease;
     }
 
-    /* Efeito ao passar o mouse no CARD */
-    &:hover .icon {
-        background: ${props => props.theme.colors.primary}; // Fica sólido no hover
-        color: white;
-        transform: scale(1.1) rotate(3deg); // Pequeno movimento
-        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
-        border-color: transparent;
+    &:hover .icon-box {
+        transform: scale(1.08);
     }
 
     h4 {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        color: #FFFFFF;
+        color: #0F172A;
     }
 
     p {
         font-size: 0.95rem;
-        color: rgba(255, 255, 255, 0.6);
+        color: #64748B;
         line-height: 1.6;
+        margin: 0;
     }
 `
 
@@ -107,33 +118,44 @@ export default function ValuesGrid() {
         <Section>
             <Container>
                 <Header>
+                    <div className="tag">
+                        <Compass /> Princípios & Cultura
+                    </div>
                     <h2>Nosso DNA Escolar</h2>
-                    <p>Não somos uma empresa de software. Somos parceiros de educação.</p>
+                    <p>Não somos apenas uma empresa de tecnologia. Somos parceiros dedicados ao crescimento sustentável da sua escola.</p>
                 </Header>
 
                 <Grid>
                     <ValueCard>
-                        <div className="icon"><Heart size={28} strokeWidth={1.5} /></div>
+                        <div className="icon-box" style={{ background: '#EFF6FF', color: '#2563EB' }}>
+                            <Heart size={24} />
+                        </div>
                         <h4>Empatia Real</h4>
-                        <p>Sabemos que &quot;rematrícula&quot; é uma época estressante. Criamos recursos para aliviar essa pressão.</p>
+                        <p>Sabemos que época de matrículas é de altíssima pressão. Criamos automações pensadas para devolver a tranquilidade à sua equipe.</p>
                     </ValueCard>
 
                     <ValueCard>
-                        <div className="icon"><Zap size={28} strokeWidth={1.5} /></div>
-                        <h4>Simplicidade</h4>
-                        <p>Secretarias não têm tempo para aprender sistemas complexos. O Maskot é intuitivo desde o dia 1.</p>
+                        <div className="icon-box" style={{ background: '#FEF3C7', color: '#D97706' }}>
+                            <Zap size={24} />
+                        </div>
+                        <h4>Simplicidade Intuitiva</h4>
+                        <p>Secretarias e consultores não têm tempo para sistemas complexos. O Maskot é fluido e pronto para uso desde o primeiro minuto.</p>
                     </ValueCard>
 
                     <ValueCard>
-                        <div className="icon"><Users size={28} strokeWidth={1.5} /></div>
-                        <h4>Aluno no Centro</h4>
-                        <p>Não tratamos alunos como &quot;tickets&quot;. Nosso CRM mostra o histórico, a família e o contexto.</p>
+                        <div className="icon-box" style={{ background: '#F5F3FF', color: '#7C3AED' }}>
+                            <Users size={24} />
+                        </div>
+                        <h4>O Aluno no Centro</h4>
+                        <p>Não tratamos famílias como números ou tickets frios. O Maskot preserva todo o histórico afetivo e o contexto de cada aluno.</p>
                     </ValueCard>
 
                     <ValueCard>
-                        <div className="icon"><ShieldCheck size={28} strokeWidth={1.5} /></div>
-                        <h4>Transparência</h4>
-                        <p>Sem letras miúdas. Sem taxas de implementação surpresa. Somos parceiros do seu crescimento.</p>
+                        <div className="icon-box" style={{ background: '#F0FDF4', color: '#166534' }}>
+                            <ShieldCheck size={24} />
+                        </div>
+                        <h4>Transparência Total</h4>
+                        <p>Sem letras miúdas ou taxas surpresa de implantação. Atuamos como extensão do seu time, comprometidos com seu resultado.</p>
                     </ValueCard>
                 </Grid>
             </Container>

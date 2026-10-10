@@ -15,7 +15,7 @@ import { calculateReadingTime } from "@/lib/readingTime";
 import { categorySlug } from "@/lib/categories";
 import { Calendar, Clock, Facebook, Linkedin, Share2, Twitter, User } from "lucide-react";
 import { 
-  PageWrapper, Container, ArticleContent, PostHeader, 
+  PageWrapper, Container, ArticleContent, Breadcrumbs, PostHeader, 
   FeaturedImage, RichTextWrapper, AuthorBox, CTAButton,
   MetaInfo, RelatedSection, RelatedCard, ShareButtons
 } from "./styles";
@@ -207,8 +207,16 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
       <PageWrapper>
         <Container>
           <ArticleContent>
+            <Breadcrumbs aria-label="Navegação estrutural">
+              <Link href="/blog">Blog</Link>
+              <span className="separator">/</span>
+              <Link href={`/blog/categoria/${categorySlug(category)}`}>{category}</Link>
+              <span className="separator">/</span>
+              <span className="current">{postTitle}</span>
+            </Breadcrumbs>
+
             <PostHeader>
-              <Link className="category" href={`/blog/categoria/${categorySlug(category)}`} style={{ textDecoration: 'none' }}>
+              <Link className="category" href={`/blog/categoria/${categorySlug(category)}`}>
                 {category}
               </Link>
               <h1>{postTitle}</h1>
@@ -217,11 +225,11 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
               <MetaInfo>
                 {authorName && (
                   <span>
-                    <User size={18} color="#007BFF" /> Por {authorName}
+                    <User size={18} color="#2563EB" /> Por {authorName}
                   </span>
                 )}
                 <span>
-                  <Calendar size={18} color="#007BFF" />
+                  <Calendar size={18} color="#2563EB" />
                   {new Date(page.first_publication_date).toLocaleDateString('pt-BR', {
                     day: '2-digit',
                     month: 'long',
@@ -229,7 +237,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                   })}
                 </span>
                 <span>
-                  <Clock size={18} color="#007BFF" />
+                  <Clock size={18} color="#2563EB" />
                   {readingTime} min de leitura
                 </span>
               </MetaInfo>
@@ -299,6 +307,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
                           src={post.data.featured_image?.url || ''} 
                           alt={asText(post.data.title)} 
                           fill 
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           style={{ objectFit: 'cover' }}
                         />
                       </div>

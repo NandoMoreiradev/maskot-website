@@ -16,7 +16,7 @@ const float = keyframes`
 
 const Section = styled.section`
     padding: 6rem 0;
-    background: ${props => props.theme.colors.white};
+    background: #FFFFFF;
     overflow: hidden;
 `
 
@@ -47,15 +47,16 @@ const TextContent = styled.div`
     h3 {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize['3xl']};
-        font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
-        color: ${props => props.theme.colors.textDark};
+        color: #0F172A;
+        letter-spacing: -0.02em;
     }
     p {
         font-family: ${props => props.theme.typography.fontFamily.main};
         font-size: ${props => props.theme.typography.fontSize.lg};
-        color: ${props => props.theme.colors.textMedium};
+        color: #475569;
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -71,10 +72,10 @@ const TextContent = styled.div`
         align-items: flex-start;
         gap: 1rem;
         font-size: ${props => props.theme.typography.fontSize.base};
-        font-weight: ${props => props.theme.typography.fontWeight.medium};
-        color: ${props => props.theme.colors.textDark};
+        font-weight: 500;
+        color: #334155;
         svg {
-            color: #CA8A04; /* Dourado */
+            color: #059669; /* Emerald */
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -82,10 +83,10 @@ const TextContent = styled.div`
 `
 
 const MockupCard = styled.div`
-    background: ${props => props.theme.colors.cardBackground};
-    border-radius: ${props => props.theme.borderRadius.xl};
-    box-shadow: ${props => props.theme.shadows['2xl']};
-    border: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
     position: relative;
     animation: ${float} 8s ease-in-out infinite;
@@ -93,101 +94,225 @@ const MockupCard = styled.div`
 
 const MockupHeader = styled.div`
     height: 40px;
-    background: ${props => props.theme.colors.lightGray};
-    border-bottom: 1px solid ${props => props.theme.colors.backgroundMedium};
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     gap: 0.5rem;
-    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #ccc; } }
+    .dots { display: flex; gap: 6px; div { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; } }
 `
 
 // --- MOCKUP 1: DASHBOARD DE COMISSÕES ---
 const DashboardMock = styled.div`
     padding: 20px;
-    background: #F8F9FA;
+    background: #FFFFFF;
     
     .summary-bar {
-        display: flex; justify-content: flex-end; gap: 15px; margin-bottom: 15px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-bottom: 15px;
+
         .card { 
-            background: #FEFCE8; border: 1px solid #FEF08A; padding: 8px 15px; border-radius: 8px; 
-            display: flex; gap: 10px; align-items: center; font-size: 13px; color: #854D0E;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 8px 14px;
+            border-radius: 8px; 
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            color: #64748B;
+            font-weight: 600;
+
+            strong {
+                font-size: 13px;
+                color: #0F172A;
+                font-weight: 800;
+            }
+
+            &.highlight {
+                background: #ECFDF5;
+                border-color: #A7F3D0;
+                color: #065F46;
+
+                strong {
+                    color: #059669;
+                }
+            }
         }
-        strong { font-size: 14px; color: #713F12; }
     }
 
     .table {
-        background: white; border-radius: 8px; border: 1px solid #E5E7EB; overflow: hidden;
-        .row { display: flex; padding: 12px; border-bottom: 1px solid #F3F4F6; align-items: center; font-size: 13px; }
-        .head { background: #F9FAFB; font-weight: bold; color: #4B5563; font-size: 11px; text-transform: uppercase; }
+        background: #FFFFFF;
+        border-radius: 10px;
+        border: 1px solid #E2E8F0;
+        overflow: hidden;
+
+        .row {
+            display: flex;
+            padding: 12px 14px;
+            border-bottom: 1px solid #F1F5F9;
+            align-items: center;
+            font-size: 13px;
+            color: #0F172A;
+            font-weight: 500;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .head {
+            background: #F8FAFC;
+            font-weight: 700;
+            color: #64748B;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
         .cell { flex: 1; }
         .cell.right { text-align: right; }
+
         .badge { 
-            padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; display: inline-block;
-            &.pending { background: #FEF3C7; color: #D97706; }
-            &.confirmed { background: #DBEAFE; color: #1E40AF; }
-            &.paid { background: #DCFCE7; color: #166534; }
+            padding: 3px 8px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 700;
+            display: inline-block;
+
+            &.pending {
+                background: #FFFBEB;
+                color: #D97706;
+                border: 1px solid #FDE68A;
+            }
+            &.confirmed {
+                background: #ECFDF5;
+                color: #059669;
+                border: 1px solid #A7F3D0;
+            }
+            &.paid {
+                background: #F1F5F9;
+                color: #0F172A;
+                border: 1px solid #E2E8F0;
+            }
         }
     }
 `
 
 // --- MOCKUP 2: RECIBO DE PAGAMENTO ---
 const ReceiptMock = styled.div`
-    padding: 30px;
-    background: #F3F4F6;
+    padding: 25px;
+    background: #F8FAFC;
     display: flex;
     justify-content: center;
 
     .paper {
-        background: white; width: 80%; padding: 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        font-family: 'Courier New', monospace; position: relative;
-        
-        &:before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
-            background: repeating-linear-gradient(45deg, #e5e7eb, #e5e7eb 10px, white 10px, white 20px);
+        background: #FFFFFF;
+        width: 85%;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+        border: 1px solid #E2E8F0;
+        font-family: inherit;
+        position: relative;
+    }
+    
+    .header {
+        text-align: center;
+        border-bottom: 1px dashed #CBD5E1;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+
+        strong {
+            color: #0F172A;
+            font-size: 14px;
+            letter-spacing: 0.04em;
         }
     }
-    
-    .header { text-align: center; border-bottom: 2px dashed #E5E7EB; padding-bottom: 15px; margin-bottom: 15px; }
-    .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px; }
-    .label { color: #6B7280; }
-    .val { font-weight: bold; }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .label { color: #64748B; }
+    .val { font-weight: 700; color: #0F172A; }
     
     .signatures { 
-        margin-top: 30px; border-top: 2px dashed #E5E7EB; padding-top: 20px;
-        display: flex; gap: 20px;
+        margin-top: 25px;
+        border-top: 1px dashed #CBD5E1;
+        padding-top: 20px;
+        display: flex;
+        gap: 20px;
     }
+
     .sign-box { flex: 1; text-align: center; }
-    .line { border-bottom: 1px solid #333; margin-bottom: 5px; height: 20px; }
-    .small { font-size: 9px; color: #9CA3AF; }
+    .line { border-bottom: 1px solid #94A3B8; margin-bottom: 6px; height: 16px; }
+    .small { font-size: 10px; color: #64748B; font-weight: 600; }
 `
 
 // --- MOCKUP 3: SETTINGS (DTO) ---
 const SettingsMock = styled.div`
-    padding: 30px;
-    background: white;
+    padding: 25px;
+    background: #FFFFFF;
     
     .toggle-row {
-        display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #F3F4F6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #F1F5F9;
+
         &:last-child { border: none; }
     }
-    .toggle-info h4 { margin: 0; font-size: 14px; color: #1F2937; }
-    .toggle-info p { margin: 4px 0 0; font-size: 12px; color: #6B7280; }
+
+    .toggle-info h4 { margin: 0; font-size: 13px; font-weight: 700; color: #0F172A; }
+    .toggle-info p { margin: 3px 0 0; font-size: 12px; color: #64748B; }
     
     .switch {
-        width: 44px; height: 24px; background: #E5E7EB; border-radius: 20px; position: relative;
-        &.active { background: #10B981; }
+        width: 44px;
+        height: 24px;
+        background: #E2E8F0;
+        border-radius: 20px;
+        position: relative;
+        cursor: pointer;
+
+        &.active { background: #059669; }
+
         &:after {
-            content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: white; border-radius: 50%;
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
             transition: all 0.3s;
         }
+
         &.active:after { left: 22px; }
     }
     
     .input-group {
         margin-top: 10px;
-        label { display: block; font-size: 11px; color: #6B7280; margin-bottom: 4px; }
-        input { width: 100%; border: 1px solid #D1D5DB; padding: 8px; border-radius: 6px; font-size: 13px; }
+        label { display: block; font-size: 11px; font-weight: 700; color: #64748B; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+        input {
+            width: 100%;
+            border: 1px solid #E2E8F0;
+            background: #F8FAFC;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #0F172A;
+            font-weight: 600;
+        }
     }
 `
 
@@ -200,31 +325,56 @@ const PowerGrid = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.md}) { grid-template-columns: 1fr; }
 `
 const PowerCard = styled.div`
-    background: ${props => props.theme.colors.lightGray};
+    background: #FFFFFF;
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid #eee;
-    transition: all ${props => props.theme.transitions.base};
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
+
     &:hover {
         transform: translateY(-5px);
-        background: white;
-        box-shadow: ${props => props.theme.shadows.lg};
-        border-color: #CA8A04;
-        .icon { background: #CA8A04; color: white; }
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        border-color: #059669;
+        .icon {
+            background: #059669;
+            color: #FFFFFF;
+            border-color: #059669;
+        }
     }
+
     .icon {
-        width: 48px; height: 48px; border-radius: 12px;
-        background: white; display: flex; align-items: center; justify-content: center;
-        color: #CA8A04; margin-bottom: 1.5rem;
-        box-shadow: ${props => props.theme.shadows.sm};
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #059669;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
     }
-    h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: ${props => props.theme.colors.textDark}; }
-    p { font-size: 1rem; color: ${props => props.theme.colors.textMedium}; line-height: 1.5; margin: 0; }
+
+    h4 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: #0F172A;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #475569;
+        line-height: 1.5;
+        margin: 0;
+    }
 `
 
 export default function CommissionsDeepDive() {
     return (
-        <Section>
+        <Section id="recursos">
             <Container>
 
                 {/* 1. PAINEL DE GESTÃO */}
@@ -248,8 +398,8 @@ export default function CommissionsDeepDive() {
                                 <div className="card">
                                     <span>Total Vendas:</span> <strong>R$ 45.200</strong>
                                 </div>
-                                <div className="card" style={{background: '#F0FDF4', borderColor: '#BBF7D0', color: '#166534'}}>
-                                    <span>A Pagar:</span> <strong style={{color: '#15803D'}}>R$ 2.350</strong>
+                                <div className="card highlight">
+                                    <span>A Pagar:</span> <strong>R$ 2.350</strong>
                                 </div>
                             </div>
                             <div className="table">
@@ -294,7 +444,7 @@ export default function CommissionsDeepDive() {
                             <div className="paper">
                                 <div className="header">
                                     <strong>RECIBO DE PAGAMENTO</strong><br/>
-                                    <span style={{fontSize: '10px', color: '#666'}}>Escola Maskot - Ref: #8291</span>
+                                    <span style={{fontSize: '11px', color: '#64748B'}}>Maskot Edu • Ref: #8291</span>
                                 </div>
                                 <div className="row">
                                     <span className="label">Vendedor:</span>
@@ -310,7 +460,7 @@ export default function CommissionsDeepDive() {
                                 </div>
                                 <div className="row">
                                     <span className="label">Comissão (10%):</span>
-                                    <span className="val">R$ 150,00</span>
+                                    <span className="val" style={{color: '#059669'}}>R$ 150,00</span>
                                 </div>
                                 <div className="signatures">
                                     <div className="sign-box">
@@ -367,9 +517,9 @@ export default function CommissionsDeepDive() {
                             <div className="toggle-row">
                                 <div className="toggle-info">
                                     <h4>Tipo de Cálculo</h4>
-                                    <div style={{display: 'flex', gap: '10px', marginTop: '5px'}}>
-                                        <span style={{padding: '4px 8px', background: '#E5E7EB', borderRadius: '4px', fontSize: '11px'}}>Valor Fixo</span>
-                                        <span style={{padding: '4px 8px', background: '#DBEAFE', color: '#1E40AF', borderRadius: '4px', fontSize: '11px', fontWeight: 'bold'}}>Porcentagem</span>
+                                    <div style={{display: 'flex', gap: '8px', marginTop: '6px'}}>
+                                        <span style={{padding: '4px 10px', background: '#F1F5F9', color: '#475569', borderRadius: '6px', fontSize: '11px', fontWeight: 600}}>Valor Fixo</span>
+                                        <span style={{padding: '4px 10px', background: '#ECFDF5', color: '#059669', borderRadius: '6px', fontSize: '11px', fontWeight: 700, border: '1px solid #A7F3D0'}}>Porcentagem</span>
                                     </div>
                                 </div>
                             </div>
@@ -394,10 +544,11 @@ export default function CommissionsDeepDive() {
                     <h3 style={{
                         fontSize: '2rem',
                         fontWeight: 800,
-                        color: '#333',
-                        fontFamily: 'var(--font-inter)'
+                        color: '#0F172A',
+                        fontFamily: 'var(--font-inter)',
+                        letterSpacing: '-0.02em'
                     }}>Vantagens para Gestão Comercial</h3>
-                    <p style={{color: '#666', marginTop: '0.5rem'}}>Ferramentas que profissionalizam seu time de vendas.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem', fontSize: '1.125rem'}}>Ferramentas que profissionalizam seu time de vendas.</p>
                 </div>
 
                 <PowerGrid>

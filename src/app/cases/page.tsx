@@ -1,50 +1,72 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { Metadata } from 'next';
 import { createPrismicClient } from '@/prismicio';
 import { asText } from '@prismicio/client';
-import CaseCard from '@/components/CaseCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CTASection from '@/components/CTASection';
-import { PageWrapper, Container, PageHeader, CasesGrid } from './styles';
+import CaseCard from '@/components/CaseCard';
+import SchoolsSection, { SchoolLogo } from '@/components/SchoolsSection';
+import AuroraBackground from '@/components/AuroraBackground';
+import { Award } from 'lucide-react';
+import {
+  PageWrapper,
+  Container,
+  HeaderArea,
+  CasesGrid,
+} from './styles';
 
 export const revalidate = 60; // Revalidate every 60 seconds
+
+const LOGOS_DIR = 'logos-escolas';
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.svg', '.webp']);
+
+function getSchoolLogos(): SchoolLogo[] {
+  const dir = path.join(process.cwd(), 'public', LOGOS_DIR);
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+
+  return fs.readdirSync(dir)
+    .filter(file => IMAGE_EXTENSIONS.has(path.extname(file).toLowerCase()))
+    .sort()
+    .map(file => ({
+      src: `/${LOGOS_DIR}/${file}`,
+      alt: path.parse(file).name
+        .replace(/[-_]+/g, ' ')
+        .replace(/\b\w/g, char => char.toUpperCase()),
+    }));
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createPrismicClient();
   
+  let title = 'Cases de Sucesso | Maskot Edu';
+  let description = 'Descubra como escolas de todo o Brasil aumentaram matrículas e organizaram sua captação com o Maskot.';
+
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const doc: any = await client.getSingle('success_cases_index' as any);
-    const title = doc.data.meta_title || 'Cases de Sucesso | Maskot';
-    const description = doc.data.meta_description || 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.';
-    return {
+    if (doc?.data?.meta_title) title = doc.data.meta_title;
+    if (doc?.data?.meta_description) description = doc.data.meta_description;
+  } catch {
+    // Uses default fallback title and description
+  }
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: 'https://www.maskotedu.com.br/cases',
+    },
+    openGraph: {
       title,
       description,
-      alternates: {
-        canonical: 'https://www.maskotedu.com.br/cases',
-      },
-      openGraph: {
-        title,
-        description,
-        url: 'https://www.maskotedu.com.br/cases',
-        type: 'website',
-      },
-    };
-  } catch {
-    return {
-      title: 'Cases de Sucesso | Maskot',
-      description: 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
-      alternates: {
-        canonical: 'https://www.maskotedu.com.br/cases',
-      },
-      openGraph: {
-        title: 'Cases de Sucesso | Maskot',
-        description: 'Veja como escolas parceiras estão transformando seus resultados com o Maskot.',
-        url: 'https://www.maskotedu.com.br/cases',
-        type: 'website',
-      },
-    };
-  }
+      url: 'https://www.maskotedu.com.br/cases',
+      type: 'website',
+    },
+  };
 }
 
 export default async function CasesIndexPage() {
@@ -56,7 +78,7 @@ export default async function CasesIndexPage() {
   let cases: any[] = [];
 
   try {
-    // Attempt to fetch data. If types don't exist yet (before slice machine push), this might throw
+    // Attempt to fetch data from Prismic
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     indexData = await client.getSingle('success_cases_index' as any).catch(() => null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,39 +89,67 @@ export default async function CasesIndexPage() {
     console.error('Error fetching Prismic cases:', e);
   }
 
-  const title = indexData?.data?.title ? asText(indexData.data.title) : 'Cases de Sucesso';
-  const description = indexData?.data?.description ? asText(indexData.data.description) : 'Descubra como instituições de ensino estão revolucionando suas captações e retenção de alunos utilizando o Maskot EDU.';
+  const schoolLogos = getSchoolLogos();
+
+  const title = indexData?.data?.title 
+    ? asText(indexData.data.title) 
+    : 'Resultados Comprovados. Escolas que Crescem com o Maskot.';
+  const description = indexData?.data?.description 
+    ? asText(indexData.data.description) 
+    : 'Descubra como instituições de ensino de todo o Brasil unificaram o atendimento, reduziram o tempo de resposta às famílias e bateram suas metas de matrículas.';
 
   return (
     <>
       <Header />
       <PageWrapper>
+        <AuroraBackground />
         <Container>
-          <PageHeader>
-            <h1>{title}</h1>
-            <p>{description}</p>
-          </PageHeader>
+          <HeaderArea>
+            <div className="tag">
+              <Award /> Cases de Sucesso
+            </div>
+            <h1>
+              Resultados Comprovados. <strong>Escolas que Crescem com o Maskot.</strong>
+            </h1>
+            <p>
+              {description}
+            </p>
+          </HeaderArea>
 
           {cases.length > 0 ? (
             <CasesGrid>
-              {cases.map((caseDoc) => (
-                <CaseCard
-                  key={caseDoc.id}
-                  uid={caseDoc.uid}
-                  title={asText(caseDoc.data.title) || 'Sem título'}
-                  clientName={caseDoc.data.client_name || 'Escola Parceira'}
-                  clientLogo={caseDoc.data.client_logo}
-                  summary={asText(caseDoc.data.challenge)?.substring(0, 150) + '...'}
-                />
-              ))}
+              {cases.map((caseDoc) => {
+                const caseTitle = asText(caseDoc.data.title) || 'Sem título';
+                const inferredClient = caseDoc.data.client_name || 
+                  (caseTitle.match(/col[eé]gio\s+[\w\u00C0-\u00FF]+/i)?.[0] || 'Colégio Parceiro');
+
+                return (
+                  <CaseCard
+                    key={caseDoc.id}
+                    uid={caseDoc.uid}
+                    title={caseTitle}
+                    clientName={inferredClient}
+                    clientLogo={caseDoc.data.client_logo}
+                    summary={asText(caseDoc.data.challenge)?.substring(0, 160) + '...'}
+                  />
+                );
+              })}
             </CasesGrid>
           ) : (
-            <div style={{ textAlign: 'center', padding: '4rem 0', color: '#666' }}>
-              <p>Nenhum case de sucesso publicado ainda.</p>
-              <p>Execute o Slice Machine, crie um case no Prismic e publique-o.</p>
+            <div style={{ textAlign: 'center', padding: '4rem 0', color: '#64748B' }}>
+              <p style={{ fontSize: '1.1rem', fontWeight: 600 }}>Nenhum case publicado no momento.</p>
+              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Em breve novas histórias de escolas parceiras estarão disponíveis aqui.</p>
             </div>
           )}
         </Container>
+
+        {/* LOGOS CAROUSEL */}
+        {schoolLogos.length > 0 && (
+          <SchoolsSection 
+            logos={schoolLogos} 
+            stat="+ de 150 instituições de ensino confiam no ecossistema Maskot Edu" 
+          />
+        )}
       </PageWrapper>
       <CTASection />
       <Footer />
