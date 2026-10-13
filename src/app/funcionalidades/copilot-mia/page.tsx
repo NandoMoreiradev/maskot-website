@@ -6,7 +6,7 @@ import CopilotMiaHero from '@/components/features/CopilotMiaHero'
 import CopilotMiaDeepDive from '@/components/features/CopilotMiaDeepDive'
 
 export const metadata: Metadata = {
-    title: 'Copilot IA (Mia) para Escolas | Maskot CRM',
+    title: 'Copilot IA (Mia) para Escolas',
     description: 'Conheça a Mia, a inteligência artificial do Maskot Edu. Analise leads, resuma conversas e receba sugestões automáticas baseadas nos dados da sua escola.',
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/copilot-mia',

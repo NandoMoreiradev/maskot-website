@@ -340,7 +340,7 @@ export default function WhatsAppHero() {
                 <HeroContent>
                     <TextContent>
                         <Tag>
-                            <MessageCircle /> Módulo WhatsApp
+                            <MessageCircle /> WhatsApp & Chatbot
                         </Tag>
                         
                         <MainHeading>

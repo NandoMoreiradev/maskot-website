@@ -20,15 +20,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Maskot Edu | CRM Educacional para Captação de Alunos',
+    default: 'Maskot Edu | Captação e Matrículas para Escolas Particulares',
     template: '%s | Maskot',
   },
-  description: 'O Maskot é o CRM educacional que automatiza a captação de alunos, centraliza leads e ajuda escolas a crescerem. Experimente grátis.',
+  description: 'Ecossistema que une marketing, comercial e atendimento com IA para escolas particulares captarem mais alunos e fecharem mais matrículas. Experimente grátis.',
   metadataBase: new URL('https://www.maskotedu.com.br'),
   alternates: {
     canonical: 'https://www.maskotedu.com.br',
   },
   openGraph: {
+    title: 'Maskot Edu | Captação e Matrículas para Escolas Particulares',
+    description: 'Ecossistema que une marketing, comercial e atendimento com IA para escolas particulares captarem mais alunos e fecharem mais matrículas.',
+    url: 'https://www.maskotedu.com.br',
     siteName: 'Maskot',
     locale: 'pt_BR',
     type: 'website',

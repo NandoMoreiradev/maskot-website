@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/automacoes',
     },
     openGraph: {
-        title: 'Automação de Marketing para Escolas | Maskot CRM',
+        title: 'Automação de Marketing para Escolas | Maskot',
         description: 'Sua secretaria funcionando 24/7. Descubra como automatizar a captação de alunos.',
         url: 'https://www.maskotedu.com.br/funcionalidades/automacoes',
         images: ['/og-automacoes.png'], // Sugestão para o futuro: criar imagens específicas por feature

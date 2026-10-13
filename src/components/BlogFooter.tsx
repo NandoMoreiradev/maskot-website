@@ -177,7 +177,7 @@ export default function BlogFooter() {
           <SectionTitle>Maskot Edu</SectionTitle>
           <LinksList>
             <li><Link href="/">Conhecer a plataforma</Link></li>
-            <li><Link href="/#funcionalidades">Funcionalidades</Link></li>
+            <li><Link href="/#recursos">Funcionalidades</Link></li>
             <li><Link href="/#precos">Preços</Link></li>
             <li><a href="https://app.maskotedu.com.br/login">Entrar</a></li>
           </LinksList>

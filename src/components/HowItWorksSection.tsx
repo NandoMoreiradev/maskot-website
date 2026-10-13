@@ -119,7 +119,7 @@ const steps = [
     {
         icon: <MessageSquare />,
         title: 'Atraiu',
-        text: 'Automação de campanhas e integração com RD, Facebook e site. Gere leads qualificados.',
+        text: 'Campanhas, landing pages e redes sociais no mesmo lugar, com a origem de cada lead rastreada. Gere leads qualificados.',
     },
     {
         icon: <Zap />,

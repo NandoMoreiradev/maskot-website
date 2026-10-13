@@ -581,7 +581,7 @@ export default function ComparisonSection() {
   ]
 
   const traditionalTotal = 3700
-  const maskotTotal = 1294 // Crescimento (597) + WhatsApp Inbox Start (697)
+  const maskotTotal = 1294 // Plano Crescimento (R$ 1.294/mês), já com WhatsApp com IA (2.000 interações)
   const savings = traditionalTotal - maskotTotal
   const savingsPercent = Math.round((savings / traditionalTotal) * 100)
 
@@ -667,7 +667,7 @@ export default function ComparisonSection() {
               <strong>{savingsPercent}%</strong> de economia • <strong>R$ {(savings * 12).toLocaleString('pt-BR')}</strong> por ano
             </SavingsSubtext>
           </SavingsContent>
-          <CTAButton>
+          <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
             Começar Teste Grátis
             <ArrowRight />
           </CTAButton>

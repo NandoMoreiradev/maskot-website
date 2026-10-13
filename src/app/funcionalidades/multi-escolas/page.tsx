@@ -7,8 +7,8 @@ import MultiSchoolDeepDive from '@/components/features/MultiSchoolDeepDive'
 
 export const metadata: Metadata = {
     title: 'Sistema para Redes de Escolas e Franquias',
-    description: 'Gerencie múltiplas unidades escolares em um único lugar. Painel consolidado, login único e controle total para grupos educacionais.',
-    keywords: ['gestão rede escolas', 'sistema franquia educacional', 'multi-unidades', 'crm grupo educacional', 'erp escolar multi-escola'],
+    description: 'Gerencie múltiplas unidades escolares em um único lugar. Painel consolidado, um login para todas as unidades e controle de acesso por unidade.',
+    keywords: ['gestão rede escolas', 'sistema franquia educacional', 'multi-unidades', 'sistema para grupo educacional', 'erp escolar multi-escola'],
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/multi-escolas',
     },

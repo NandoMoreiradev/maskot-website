@@ -6,7 +6,7 @@ import VisitsHero from '@/components/features/VisitsHero'
 import VisitsDeepDive from '@/components/features/VisitsDeepDive'
 
 export const metadata: Metadata = {
-    title: 'Agendamento de Visitas Escolares Online | Maskot CRM',
+    title: 'Agendamento de Visitas Escolares Online',
     description: 'Sistema de agendamento de visitas escolares integrado ao WhatsApp. Elimine faltas e facilite a vida dos pais com uma agenda online.',
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/agendamento',

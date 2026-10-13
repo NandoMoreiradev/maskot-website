@@ -7,8 +7,8 @@ import MarketingDeepDive from '@/components/features/MarketingDeepDive'
 
 export const metadata: Metadata = {
     title: 'Automação de Marketing para Escolas',
-    description: 'Crie campanhas de WhatsApp e E-mail segmentadas pelo CRM. Capte mais alunos e automatize sua régua de relacionamento.',
-    keywords: ['marketing escolar', 'campanha whatsapp escola', 'captação de alunos', 'crm educacional', 'disparo email marketing'],
+    description: 'Crie campanhas de WhatsApp e E-mail segmentadas pela sua base de leads. Capte mais alunos e automatize sua régua de relacionamento.',
+    keywords: ['marketing escolar', 'campanha whatsapp escola', 'captação de alunos', 'plataforma para escolas', 'disparo email marketing'],
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/marketing',
     },

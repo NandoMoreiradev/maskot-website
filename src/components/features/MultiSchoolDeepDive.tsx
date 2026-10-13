@@ -3,7 +3,7 @@
 import styled, { keyframes, css } from 'styled-components'
 import {
     Building2, Globe, TrendingUp, Eye,
-    Users, Share2, MapPin, Store,
+    Users, Share2, MapPin, Lock, CalendarDays, BadgeDollarSign, Download,
     ShieldCheck, ArrowRightLeft
 } from 'lucide-react'
 
@@ -232,7 +232,7 @@ export default function MultiSchoolDeepDive() {
                         </p>
                         <ul>
                             <li><ArrowRightLeft size={20}/> <strong>Navegação Fluida:</strong> Acesse os dados de qualquer unidade em segundos.</li>
-                            <li><Eye size={20}/> <strong>Visão de Grupo:</strong> Some matrículas, faturamento e leads de todas as escolas.</li>
+                            <li><Eye size={20}/> <strong>Visão de Grupo:</strong> Some leads, matrículas e receita de matrículas de todas as escolas.</li>
                             <li><ShieldCheck size={20}/> <strong>Permissões:</strong> Diretores veem só sua escola; Donos veem tudo.</li>
                         </ul>
                     </TextContent>
@@ -251,21 +251,21 @@ export default function MultiSchoolDeepDive() {
                                     <Building2 size={18} className="icon"/>
                                     <div className="info">
                                         <strong>Colégio Maskot - Matriz</strong>
-                                        <span>São Paulo • SP</span>
+                                        <span>Grupo Maskot • MTZ</span>
                                     </div>
                                 </div>
                                 <div className="item">
                                     <Building2 size={18} className="icon"/>
                                     <div className="info">
                                         <strong>Unidade Jardins</strong>
-                                        <span>Filial • JD-01</span>
+                                        <span>Grupo Maskot • JD1</span>
                                     </div>
                                 </div>
                                 <div className="item">
                                     <Building2 size={18} className="icon"/>
                                     <div className="info">
                                         <strong>Unidade Barra Funda</strong>
-                                        <span>Filial • BF-02</span>
+                                        <span>Grupo Maskot • BF2</span>
                                     </div>
                                 </div>
                             </Dropdown>
@@ -284,43 +284,43 @@ export default function MultiSchoolDeepDive() {
                                     <strong>1.245 <span className="trend">+12%</span></strong>
                                 </div>
                                 <div className="kpi">
-                                    <small>Faturamento Global</small>
+                                    <small>Receita de Matrículas</small>
                                     <strong>R$ 2.4Mi <span className="trend">+5%</span></strong>
                                 </div>
                             </div>
                             <div className="chart-box">
-                                <h4>Matrículas por Unidade (Este Mês)</h4>
+                                <h4>Matrículas por Mês (Grupo)</h4>
                                 <div className="bars">
                                     <div className="bar-group">
-                                        <div className="bar" style={{height: '80%'}}></div>
-                                        <span className="label">Matriz</span>
+                                        <div className="bar" style={{height: '45%'}}></div>
+                                        <span className="label">Jan</span>
                                     </div>
                                     <div className="bar-group">
-                                        <div className="bar" style={{height: '45%'}}></div>
-                                        <span className="label">Jardins</span>
+                                        <div className="bar" style={{height: '80%'}}></div>
+                                        <span className="label">Fev</span>
                                     </div>
                                     <div className="bar-group">
                                         <div className="bar" style={{height: '60%'}}></div>
-                                        <span className="label">Barra</span>
+                                        <span className="label">Mar</span>
                                     </div>
                                     <div className="bar-group">
-                                        <div className="bar" style={{height: '30%'}}></div>
-                                        <span className="label">Sul</span>
+                                        <div className="bar" style={{height: '70%'}}></div>
+                                        <span className="label">Abr</span>
                                     </div>
                                 </div>
                             </div>
                         </ConsolidatedMock>
                     </MockupCard>
                     <TextContent>
-                        <h3>Compare Desempenho<br/>Em Tempo Real</h3>
+                        <h3>O Grupo Inteiro<br/>Em Um Só Painel</h3>
                         <p>
-                            Qual unidade está vendendo mais? Qual tem a maior taxa de inadimplência?
-                            O dashboard consolidado responde essas perguntas sem você precisar abrir 10 planilhas diferentes.
+                            Quantos leads, visitas e matrículas o grupo teve neste mês?
+                            O dashboard consolidado soma todas as unidades que você administra, sem precisar abrir uma planilha por escola.
                         </p>
                         <ul>
-                            <li><TrendingUp size={20}/> <strong>Ranking de Vendas:</strong> Descubra as filiais campeãs.</li>
-                            <li><Share2 size={20}/> <strong>Centralização Financeira:</strong> Controle o fluxo de caixa do grupo inteiro.</li>
-                            <li><Globe size={20}/> <strong>Padronização:</strong> Garanta que todas usem os mesmos processos de venda.</li>
+                            <li><Share2 size={20}/> <strong>Funil do Grupo:</strong> Leads, visitas e matrículas de todas as unidades somados em uma única visão.</li>
+                            <li><TrendingUp size={20}/> <strong>Evolução Mensal:</strong> Acompanhe leads e matrículas do grupo mês a mês.</li>
+                            <li><Globe size={20}/> <strong>Leads de Todas as Unidades:</strong> Veja o funil de matrículas de toda a rede em uma lista só.</li>
                         </ul>
                     </TextContent>
                 </FeatureRow>
@@ -330,12 +330,12 @@ export default function MultiSchoolDeepDive() {
                     <TextContent>
                         <h3>Expanda sua Rede<br/>Sem Complicação</h3>
                         <p>
-                            Abriu uma nova unidade? Adicione-a ao painel em minutos. O Maskot foi feito para escalar junto com o seu negócio, seja uma escola de bairro que virou franquia ou um grande grupo educacional.
+                            Abriu uma nova unidade? Cadastre-a direto no sistema e ela entra no painel do grupo. O Maskot foi feito para escalar junto com o seu negócio, seja uma escola de bairro que virou franquia ou um grande grupo educacional.
                         </p>
                         <ul>
-                            <li><Store size={20}/> <strong>Cadastro Rápido:</strong> Replique configurações da Matriz para a nova Filial.</li>
-                            <li><Users size={20}/> <strong>Equipe Compartilhada:</strong> Um funcionário pode ter acesso a várias unidades (ex: Diretor Pedagógico).</li>
-                            <li><MapPin size={20}/> <strong>Organização Geográfica:</strong> Filtre escolas por região ou estado.</li>
+                            <li><Building2 size={20}/> <strong>Acesso Automático:</strong> Os administradores do grupo ganham acesso à nova unidade assim que ela é criada.</li>
+                            <li><Users size={20}/> <strong>Equipe Compartilhada:</strong> Um funcionário pode ter acesso a várias unidades, com um cargo diferente em cada uma.</li>
+                            <li><MapPin size={20}/> <strong>Código por Unidade:</strong> Identifique cada filial por um código (ex: MTZ, JD1) dentro do grupo.</li>
                         </ul>
                     </TextContent>
                     <MockupCard>
@@ -352,7 +352,7 @@ export default function MultiSchoolDeepDive() {
                                         <div className="name">Colégio Maskot <span className="code">(MTZ)</span></div>
                                     </div>
                                 </div>
-                                <span className="status">Ativa</span>
+                                <span className="status">Matriz</span>
                             </div>
                             <div className="unit-row">
                                 <div className="left">
@@ -361,7 +361,7 @@ export default function MultiSchoolDeepDive() {
                                         <div className="name">Unidade Jardins <span className="code">(JD1)</span></div>
                                     </div>
                                 </div>
-                                <span className="status">Ativa</span>
+                                <span className="status">Filial</span>
                             </div>
                             <div className="unit-row">
                                 <div className="left">
@@ -370,7 +370,7 @@ export default function MultiSchoolDeepDive() {
                                         <div className="name">Unidade Zona Norte <span className="code">(ZN3)</span></div>
                                     </div>
                                 </div>
-                                <span className="status">Inauguração</span>
+                                <span className="status">Filial</span>
                             </div>
                         </UnitsMock>
                     </MockupCard>
@@ -384,40 +384,40 @@ export default function MultiSchoolDeepDive() {
                         color: '#0F172A',
                         fontFamily: 'var(--font-inter)',
                         letterSpacing: '-0.02em'
-                    }}>Arquitetura Enterprise</h3>
-                    <p style={{color: '#475569', marginTop: '0.75rem', fontSize: '1.125rem'}}>Tecnologia robusta para grandes operações.</p>
+                    }}>Feita para Grupos Escolares</h3>
+                    <p style={{color: '#475569', marginTop: '0.75rem', fontSize: '1.125rem'}}>Controle de acesso e segurança para grandes operações.</p>
                 </div>
 
                 <PowerGrid>
                     <PowerCard>
                         <div className="icon"><Users size={24}/></div>
-                        <h4>Login Único (SSO)</h4>
+                        <h4>Um Login, Várias Unidades</h4>
                         <p>Seus gestores usam um único e-mail e senha para acessar todas as unidades permitidas.</p>
                     </PowerCard>
                     <PowerCard>
-                        <div className="icon"><Share2 size={24}/></div>
-                        <h4>CRM Unificado</h4>
-                        <p>Se um aluno estuda na Unidade A e o irmão quer vaga na Unidade B, o sistema reconhece a família.</p>
-                    </PowerCard>
-                    <PowerCard>
-                        <div className="icon"><TrendingUp size={24}/></div>
-                        <h4>Relatórios BI</h4>
-                        <p>Exporte dados brutos de todas as unidades para conectar com PowerBI ou Excel.</p>
-                    </PowerCard>
-                    <PowerCard>
                         <div className="icon"><ShieldCheck size={24}/></div>
-                        <h4>Hierarquia de Acesso</h4>
-                        <p>Controle granular: &quot;Secretária&quot; vê só a unidade dela; &quot;Diretor Regional&quot; vê as 5 da região.</p>
+                        <h4>Acesso por Unidade</h4>
+                        <p>Libere cada pessoa só nas unidades dela: a secretária vê apenas a sua escola; o diretor regional recebe acesso às 5 da região.</p>
                     </PowerCard>
                     <PowerCard>
-                        <div className="icon"><Globe size={24}/></div>
-                        <h4>Auditoria Central</h4>
-                        <p>Acompanhe logs de atividade de todos os usuários em todas as filiais em um só lugar.</p>
+                        <div className="icon"><Lock size={24}/></div>
+                        <h4>Dados Isolados</h4>
+                        <p>Cada unidade tem seus dados separados, com isolamento no banco de dados para evitar que informações passem de uma escola para outra.</p>
                     </PowerCard>
                     <PowerCard>
-                        <div className="icon"><Store size={24}/></div>
-                        <h4>White Label</h4>
-                        <p>Para grandes redes, personalizamos o sistema com a sua marca e domínio (consulte plano Enterprise).</p>
+                        <div className="icon"><CalendarDays size={24}/></div>
+                        <h4>Agenda do Grupo</h4>
+                        <p>Veja as visitas e eventos de todas as unidades em um único calendário.</p>
+                    </PowerCard>
+                    <PowerCard>
+                        <div className="icon"><BadgeDollarSign size={24}/></div>
+                        <h4>Comissões Consolidadas</h4>
+                        <p>Acompanhe as comissões de todas as unidades do grupo em uma só tela.</p>
+                    </PowerCard>
+                    <PowerCard>
+                        <div className="icon"><Download size={24}/></div>
+                        <h4>Exportação em CSV</h4>
+                        <p>Exporte leads, atividades, tarefas e comissões de cada unidade para trabalhar no Excel.</p>
                     </PowerCard>
                 </PowerGrid>
 

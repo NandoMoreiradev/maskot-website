@@ -42,7 +42,7 @@ function getSchoolLogos(): SchoolLogo[] {
 export async function generateMetadata(): Promise<Metadata> {
   const client = createPrismicClient();
   
-  let title = 'Cases de Sucesso | Maskot Edu';
+  let title = 'Cases de Sucesso';
   let description = 'Descubra como escolas de todo o Brasil aumentaram matrículas e organizaram sua captação com o Maskot.';
 
   try {

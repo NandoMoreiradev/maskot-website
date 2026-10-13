@@ -285,9 +285,9 @@ export default function Footer() {
                             <Image src="/logo_maskot_website_preta.png" alt="Maskot Edu" width={180} height={50} />
                         </Logo>
                         <CompanyDescription>
-                            O CRM que realmente entende escolas. Centralize toda a gestão de leads,
-                            automatize processos e aumente suas matrículas com a plataforma mais
-                            completa do mercado educacional.
+                            O ecossistema que realmente entende escolas. Centralize marketing, comercial
+                            e atendimento, automatize processos e aumente suas matrículas com uma plataforma
+                            feita para o mercado educacional.
                         </CompanyDescription>
                         <ContactInfo>
                             <ContactItem>
@@ -296,7 +296,7 @@ export default function Footer() {
                             </ContactItem>
                             <ContactItem>
                                 <Phone />
-                                <a href="tel:+5579996268858">(79) 99106-4405</a>
+                                <a href="tel:+5579991064405">(79) 99106-4405</a>
                             </ContactItem>
                             <ContactItem>
                                 <span style={{ fontWeight: 'bold' }}>CNPJ:</span> 55.188.948/0001-04
@@ -309,7 +309,7 @@ export default function Footer() {
                         <LinksList>
                             <LinkItem>
                                 {/* Atualizado com /# para funcionar de outras páginas */}
-                                <FooterLink href="/#funcionalidades">
+                                <FooterLink href="/#recursos">
                                     Funcionalidades
                                     <ExternalLink />
                                 </FooterLink>
@@ -323,12 +323,6 @@ export default function Footer() {
                             <LinkItem>
                                 <FooterLink href="/#precos">
                                     Preços
-                                    <ExternalLink />
-                                </FooterLink>
-                            </LinkItem>
-                            <LinkItem>
-                                <FooterLink href="/#integracoes">
-                                    Integrações
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
@@ -351,14 +345,14 @@ export default function Footer() {
                         <SectionTitle>Recursos</SectionTitle>
                         <LinksList>
                             <LinkItem>
-                                <FooterLink href="/#blog">
+                                <FooterLink href="/blog">
                                     Blog
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
                                 <FooterLink href="/#impacto">
-                                    Impacto do CRM
+                                    Impacto
                                     <ExternalLink />
                                 </FooterLink>
                             </LinkItem>

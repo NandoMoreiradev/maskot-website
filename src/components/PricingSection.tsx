@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useId, useState } from 'react'
+import Link from 'next/link'
 import styled, { css } from 'styled-components'
-import { Check, X, ArrowRight, ChevronDown, Sparkles, MessageCircle, Bot } from 'lucide-react'
+import { Check, X, ArrowRight, ChevronDown, MessageCircle, Bot } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
 import { SectionHeader as BaseSectionHeader, GradientText } from '@/components/ui/SectionHeading'
 
@@ -133,63 +134,15 @@ const SectionSubtitle = styled.p`
   line-height: ${props => props.theme.typography.lineHeight.normal};
 `
 
-// ─── TABS ───────────────────────────────────────────────────────────────────
-
-const TabList = styled.div`
-  display: inline-flex;
-  gap: 0.25rem;
-  background: ${props => props.theme.colors.backgroundMedium};
-  padding: 0.25rem;
-  border-radius: ${props => props.theme.borderRadius.full};
-  margin: 0 auto 2rem;
-  left: 50%;
-  position: relative;
-  transform: translateX(-50%);
-
-  @media (max-width: 560px) {
-    display: flex;
-    width: 100%;
-    left: 0;
-    transform: none;
-  }
-`
-
-const Tab = styled.button<{ $isActive: boolean }>`
-  background: ${props => props.$isActive ? props.theme.colors.white : 'transparent'};
-  color: ${props => props.$isActive ? props.theme.colors.textDark : props.theme.colors.textMedium};
-  padding: 0.55rem 1.5rem;
-  border-radius: ${props => props.theme.borderRadius.full};
-  border: none;
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  font-size: ${props => props.theme.typography.fontSize.sm};
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all ${props => props.theme.transitions.fast};
-  box-shadow: ${props => props.$isActive ? props.theme.shadows.sm : 'none'};
-
-  &:hover {
-    color: ${props => props.theme.colors.textDark};
-  }
-
-  @media (max-width: 560px) {
-    flex: 1;
-    padding: 0.55rem 0.5rem;
-  }
-`
-
 // ─── PLAN CARDS ─────────────────────────────────────────────────────────────
 
 const CardGrid = styled.div`
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: 560px) {
+  @media (max-width: 860px) {
     grid-template-columns: 1fr;
   }
 `
@@ -279,6 +232,40 @@ const CardDivider = styled.hr`
   border: 0;
   border-top: 1px solid ${props => props.theme.colors.borderLight};
   margin: 1.25rem 0;
+`
+
+const WhatsAppBox = styled.div<{ $withAi: boolean }>`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: ${props => props.theme.borderRadius.md};
+  background: ${props => props.$withAi ? '#F0FDF4' : '#F8FAFC'};
+  border: 1px solid ${props => props.$withAi ? '#BBF7D0' : props.theme.colors.borderLight};
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: ${props => props.$withAi ? '#16A34A' : props.theme.colors.textMedium};
+  }
+
+  strong {
+    display: block;
+    font-size: ${props => props.theme.typography.fontSize.sm};
+    font-weight: ${props => props.theme.typography.fontWeight.bold};
+    color: ${props => props.theme.colors.textDark};
+    line-height: 1.3;
+  }
+
+  span {
+    display: block;
+    font-size: ${props => props.theme.typography.fontSize.xs};
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.35;
+  }
 `
 
 const InheritLine = styled.p`
@@ -386,6 +373,72 @@ const StripItem = styled.span`
     height: 14px;
     color: ${props => props.theme.colors.success};
     flex-shrink: 0;
+  }
+`
+
+// ─── FAIXA MULTI-UNIDADES ───────────────────────────────────────────────────
+
+const MultiUnitBanner = styled.div`
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: ${props => props.theme.colors.white};
+  border: 1px dashed ${props => props.theme.colors.primary}60;
+  border-radius: ${props => props.theme.borderRadius.lg};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  flex-wrap: wrap;
+
+  strong {
+    display: block;
+    font-size: ${props => props.theme.typography.fontSize.base};
+    font-weight: ${props => props.theme.typography.fontWeight.bold};
+    color: ${props => props.theme.colors.textDark};
+  }
+
+  p {
+    font-size: ${props => props.theme.typography.fontSize.sm};
+    color: ${props => props.theme.colors.textMedium};
+    margin: 0.15rem 0 0;
+  }
+`
+
+const MultiUnitActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  flex-wrap: wrap;
+`
+
+const MultiUnitLink = styled(Link)`
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  color: ${props => props.theme.colors.primary};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+const MultiUnitCTA = styled.button`
+  padding: 0.6rem 1.1rem;
+  border-radius: ${props => props.theme.borderRadius.md};
+  background: transparent;
+  border: 1px solid ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.primary};
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  cursor: pointer;
+  transition: all ${props => props.theme.transitions.fast};
+
+  &:hover {
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.white};
   }
 `
 
@@ -523,15 +576,22 @@ const Disclaimer = styled.p`
   max-width: 720px;
 `
 
-// ─── DATA: CRM ──────────────────────────────────────────────────────────────
+// ─── DATA: PLANOS ───────────────────────────────────────────────────────────
 // Fonte de verdade: maskotCrmEdu/backend/prisma/seed.ts (PLANS),
 // ai-plan-limits.config.ts e data-import/config/import-plan-capabilities.ts.
+
+interface PlanWhatsApp {
+  title: string
+  detail: string
+  withAi: boolean
+}
 
 interface CrmPlan {
   name: string
   for: string
   metric: string
   metricLabel: string
+  whatsapp: PlanWhatsApp
   inherits?: string
   bullets: string[]
   cta: string
@@ -545,6 +605,11 @@ const CRM_PLANS: CrmPlan[] = [
     for: 'Pequenas escolas e cursos',
     metric: '1.000',
     metricLabel: 'leads ativos',
+    whatsapp: {
+      title: 'WhatsApp oficial',
+      detail: 'Atendimento humano, sem IA',
+      withAi: false,
+    },
     bullets: [
       'Funil de matrículas completo',
       'Resumo de leads com IA',
@@ -558,6 +623,11 @@ const CRM_PLANS: CrmPlan[] = [
     for: 'Colégios de médio porte',
     metric: '5.000',
     metricLabel: 'leads ativos',
+    whatsapp: {
+      title: 'WhatsApp com IA',
+      detail: '2.000 interações de IA por mês',
+      withAi: true,
+    },
     inherits: 'Tudo do Essencial +',
     bullets: [
       'Automações e jornadas de funil',
@@ -573,6 +643,11 @@ const CRM_PLANS: CrmPlan[] = [
     for: 'Grandes colégios',
     metric: 'Ilimitados',
     metricLabel: 'leads ativos',
+    whatsapp: {
+      title: 'WhatsApp com IA',
+      detail: '5.000 interações de IA por mês',
+      withAi: true,
+    },
     inherits: 'Tudo do Crescimento +',
     bullets: [
       'Importação via API e webhook',
@@ -582,29 +657,19 @@ const CRM_PLANS: CrmPlan[] = [
     cta: 'Falar com consultor',
     primary: false,
   },
-  {
-    name: 'Rede',
-    for: 'Grupos multi-unidades',
-    metric: 'Ilimitadas',
-    metricLabel: 'unidades',
-    inherits: 'Tudo do Escala +',
-    bullets: [
-      'Painel consolidado do grupo',
-      'Relatórios comparativos por unidade',
-      'Suporte dedicado',
-    ],
-    cta: 'Cotar para rede',
-    primary: false,
-  },
 ]
 
-// Recursos presentes em todos os planos CRM — evitam 4 linhas sempre-verdes na tabela.
+// Recursos presentes em todos os planos — evitam linhas sempre-verdes na tabela.
 const INCLUDED_IN_ALL = [
   'Usuários ilimitados',
+  'WhatsApp oficial (API Meta)',
+  'Atendentes ilimitados',
+  'Filas e chatbot de regras',
   'Kanban de matrículas',
   'Calendário de visitas',
   'Analytics de captação',
   'Onboarding guiado',
+  'Filiais adicionais',
 ]
 
 type CellValue = boolean | string
@@ -618,108 +683,43 @@ const FEATURE_GROUPS: FeatureGroup[] = [
   {
     category: 'Captação e funil',
     features: [
-      { label: 'Leads ativos',                 values: ['1.000', '5.000', 'Ilimitados', 'Ilimitados'] },
-      { label: 'Automações de funil (régua)',  values: [false, 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
-      { label: 'Jornadas automatizadas',       values: [false, true, true, true] },
-      { label: 'Campanhas de matrícula',       values: [false, true, true, true] },
-      { label: 'E-mails de marketing / mês',   values: ['5.000', '15.000', '25.000', '35.000'] },
-      { label: 'Domínio de e-mail próprio',    values: [false, '1 domínio', '5 domínios', '5 domínios'] },
+      { label: 'Leads ativos',                 values: ['1.000', '5.000', 'Ilimitados'] },
+      { label: 'Automações de funil (régua)',  values: [false, 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Jornadas automatizadas',       values: [false, true, true] },
+      { label: 'Campanhas de matrícula',       values: [false, true, true] },
+      { label: 'E-mails de marketing / mês',   values: ['5.000', '15.000', '25.000'] },
+      { label: 'Domínio de e-mail próprio',    values: [false, '1 domínio', '5 domínios'] },
+    ],
+  },
+  {
+    category: 'WhatsApp',
+    features: [
+      { label: 'Interações de IA / mês',       values: [false, '2.000', '5.000'] },
+      { label: 'IA treinada na sua escola',    values: [false, true, true] },
+      { label: 'Agendamento automático de visitas', values: [false, true, true] },
+      { label: 'Qualificação automática de leads', values: [false, true, true] },
+      { label: 'Transbordo inteligente para humano', values: [false, true, true] },
+      { label: 'Relatórios de conversas e sentimento', values: [false, true, true] },
     ],
   },
   {
     category: 'Inteligência artificial',
     features: [
-      { label: 'Resumo de lead com IA',        values: ['100/mês', '200/mês', '300/mês', '2.000/mês'] },
-      { label: 'Estúdio criativo com IA',      values: ['5/mês', '20/mês', '50/mês', 'Ilimitado'] },
-      { label: 'Mensagens de resgate com IA',  values: ['20/mês', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
-      { label: 'Copilota Mia (IA do consultor)', values: [false, '200/mês', '500/mês', 'Ilimitado'] },
+      { label: 'Resumo de lead com IA',        values: ['100/mês', '200/mês', '300/mês'] },
+      { label: 'Estúdio criativo com IA',      values: ['5/mês', '20/mês', '50/mês'] },
+      { label: 'Mensagens de resgate com IA',  values: ['20/mês', 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Copilota Mia (IA do consultor)', values: [false, '200/mês', '500/mês'] },
     ],
   },
   {
     category: 'Dados, escala e suporte',
     features: [
-      { label: 'Importação de dados',          values: ['500 linhas', '5.000 linhas', 'Ilimitada + API', 'Ilimitada + API'] },
-      { label: 'Relatórios customizados',      values: [false, true, true, true] },
-      { label: 'Upload de arquivos',           values: ['25 MB', '150 MB', '200 MB', '200 MB'] },
-      { label: 'Unidades adicionais',          values: [false, false, false, 'Ilimitadas'] },
-      { label: 'Painel consolidado do grupo',  values: [false, false, false, true] },
-      { label: 'Gerente de sucesso',           values: [false, false, true, true] },
-      { label: 'Canal de suporte',             values: ['E-mail', 'E-mail', 'Prioritário', 'Dedicado'] },
+      { label: 'Importação de dados',          values: ['500 linhas', '5.000 linhas', 'Ilimitada + API'] },
+      { label: 'Relatórios customizados',      values: [false, true, true] },
+      { label: 'Upload de arquivos',           values: ['25 MB', '150 MB', '200 MB'] },
+      { label: 'Gerente de sucesso',           values: [false, false, true] },
+      { label: 'Canal de suporte',             values: ['E-mail', 'E-mail', 'Prioritário'] },
     ],
-  },
-]
-
-// ─── DATA: WHATSAPP & IA ────────────────────────────────────────────────────
-
-interface WaPlan {
-  id: string
-  name: string
-  for: string
-  metric: string
-  metricLabel: string
-  icon: typeof MessageCircle
-  bullets: string[]
-  isPopular?: boolean
-  primary: boolean
-}
-
-const WA_PLANS: WaPlan[] = [
-  {
-    id: 'wa_inbox',
-    name: 'Inbox',
-    for: 'Atendimento humano centralizado',
-    metric: 'Ilimitados',
-    metricLabel: 'atendentes',
-    icon: MessageCircle,
-    bullets: [
-      'WhatsApp oficial (API Meta)',
-      'Filas, departamentos e distribuição',
-      'Chatbot de regras (if/else)',
-    ],
-    primary: false,
-  },
-  {
-    id: 'wa_ai_std',
-    name: 'AI Standard',
-    for: 'Primeira secretaria digital 24/7',
-    metric: '2.000',
-    metricLabel: 'mensagens de IA / mês',
-    icon: Bot,
-    bullets: [
-      'Inbox incluso (atendentes ilimitados)',
-      'IA treinada na sua escola',
-      'Agendamento automático de visitas',
-    ],
-    primary: false,
-  },
-  {
-    id: 'wa_ai_adv',
-    name: 'AI Advanced',
-    for: 'Escolas em expansão',
-    metric: '5.000',
-    metricLabel: 'mensagens de IA / mês',
-    icon: Bot,
-    bullets: [
-      'Tudo do AI Standard',
-      'Qualificação automática de leads',
-      'Transbordo inteligente para humano',
-    ],
-    isPopular: true,
-    primary: true,
-  },
-  {
-    id: 'wa_ai_elite',
-    name: 'AI Elite',
-    for: 'Redes e grandes colégios',
-    metric: '10.000',
-    metricLabel: 'mensagens de IA / mês',
-    icon: Sparkles,
-    bullets: [
-      'Tudo do AI Advanced',
-      'Capacidade máxima de interações',
-      'Relatórios de conversas e sentimento',
-    ],
-    primary: false,
   },
 ]
 
@@ -736,13 +736,9 @@ function Cell({ value }: { value: CellValue }) {
 // ─── MAIN ───────────────────────────────────────────────────────────────────
 
 export default function PricingSection() {
-  const [activeTab, setActiveTab] = useState<'CRM' | 'WA'>('CRM')
   const [compareOpen, setCompareOpen] = useState(false)
   const baseId = useId()
   const tableId = `${baseId}-compare`
-
-  const tabId = (key: string) => `${baseId}-tab-${key}`
-  const panelId = (key: string) => `${baseId}-panel-${key}`
 
   return (
     <Section id="precos">
@@ -757,165 +753,119 @@ export default function PricingSection() {
             Investimento que se paga com <Highlight>uma matrícula</Highlight>
           </SectionTitle>
           <SectionSubtitle>
-            Escolha o plano ideal da plataforma e adicione WhatsApp e IA quando fizer sentido.
+            WhatsApp oficial incluso em todos os planos, com atendimento por IA a partir do Crescimento.
           </SectionSubtitle>
         </SectionHeader>
 
-        <TabList role="tablist" aria-label="Categorias de planos">
-          <Tab
-            role="tab"
-            id={tabId('CRM')}
-            aria-selected={activeTab === 'CRM'}
-            aria-controls={panelId('CRM')}
-            $isActive={activeTab === 'CRM'}
-            onClick={() => setActiveTab('CRM')}
-          >Plataforma Maskot</Tab>
-          <Tab
-            role="tab"
-            id={tabId('WA')}
-            aria-selected={activeTab === 'WA'}
-            aria-controls={panelId('WA')}
-            $isActive={activeTab === 'WA'}
-            onClick={() => setActiveTab('WA')}
-          >
-            WhatsApp &amp; IA
-          </Tab>
-        </TabList>
+        <CardGrid>
+          {CRM_PLANS.map(plan => (
+            <Card key={plan.name} $isPopular={plan.isPopular}>
+              {plan.isPopular && <PopularTag>Mais escolhido</PopularTag>}
+              <PlanName>{plan.name}</PlanName>
+              <PlanFor>{plan.for}</PlanFor>
+              <Metric>{plan.metric}</Metric>
+              <MetricLabel>{plan.metricLabel}</MetricLabel>
+              <CardDivider />
+              <WhatsAppBox $withAi={plan.whatsapp.withAi}>
+                {plan.whatsapp.withAi ? <Bot aria-hidden="true" /> : <MessageCircle aria-hidden="true" />}
+                <div>
+                  <strong>{plan.whatsapp.title}</strong>
+                  <span>{plan.whatsapp.detail}</span>
+                </div>
+              </WhatsAppBox>
+              {plan.inherits && <InheritLine>{plan.inherits}</InheritLine>}
+              <Bullets>
+                {plan.bullets.map(bullet => (
+                  <Bullet key={bullet}>
+                    <Check aria-hidden="true" /> {bullet}
+                  </Bullet>
+                ))}
+              </Bullets>
+              <CardCTA $primary={plan.primary} onClick={openContact}>
+                {plan.cta} <ArrowRight size={15} aria-hidden="true" />
+              </CardCTA>
+            </Card>
+          ))}
+        </CardGrid>
 
-        {/* ── CRM ── */}
-        {activeTab === 'CRM' && (
-          <div role="tabpanel" id={panelId('CRM')} aria-labelledby={tabId('CRM')}>
-            <CardGrid>
-              {CRM_PLANS.map(plan => (
-                <Card key={plan.name} $isPopular={plan.isPopular}>
-                  {plan.isPopular && <PopularTag>Mais escolhido</PopularTag>}
-                  <PlanName>{plan.name}</PlanName>
-                  <PlanFor>{plan.for}</PlanFor>
-                  <Metric>{plan.metric}</Metric>
-                  <MetricLabel>{plan.metricLabel}</MetricLabel>
-                  <CardDivider />
-                  {plan.inherits && <InheritLine>{plan.inherits}</InheritLine>}
-                  <Bullets>
-                    {plan.bullets.map(bullet => (
-                      <Bullet key={bullet}>
-                        <Check aria-hidden="true" /> {bullet}
-                      </Bullet>
+        <IncludedStrip>
+          <StripTitle>Em todos os planos</StripTitle>
+          {INCLUDED_IN_ALL.map(item => (
+            <StripItem key={item}>
+              <Check aria-hidden="true" /> {item}
+            </StripItem>
+          ))}
+        </IncludedStrip>
+
+        <MultiUnitBanner>
+          <div>
+            <strong>Tem mais de uma unidade?</strong>
+            <p>Adicione filiais em qualquer plano e gerencie todas as escolas do grupo em um só lugar.</p>
+          </div>
+          <MultiUnitActions>
+            <MultiUnitLink href="/funcionalidades/multi-escolas">
+              Conhecer o Multi-Escolas <ArrowRight size={14} aria-hidden="true" />
+            </MultiUnitLink>
+            <MultiUnitCTA onClick={openContact}>Cotar para grupo</MultiUnitCTA>
+          </MultiUnitActions>
+        </MultiUnitBanner>
+
+        <DisclosureButton
+          $open={compareOpen}
+          aria-expanded={compareOpen}
+          aria-controls={tableId}
+          onClick={() => setCompareOpen(open => !open)}
+        >
+          {compareOpen ? 'Ocultar comparação' : 'Comparar todos os recursos'}
+          <ChevronDown size={16} aria-hidden="true" />
+        </DisclosureButton>
+
+        <div id={tableId} hidden={!compareOpen}>
+          {compareOpen && (
+            <TableWrapper>
+              <Table>
+                <HiddenCaption>
+                  Comparação de recursos entre os planos da Plataforma Maskot
+                </HiddenCaption>
+                <thead>
+                  <tr>
+                    <Th scope="col" style={{ textAlign: 'left', minWidth: 200 }}>Recurso</Th>
+                    {CRM_PLANS.map((plan, idx) => (
+                      <Th key={plan.name} scope="col" $isPopular={idx === POPULAR_IDX}>
+                        {plan.name}
+                      </Th>
                     ))}
-                  </Bullets>
-                  <CardCTA $primary={plan.primary} onClick={openContact}>
-                    {plan.cta} <ArrowRight size={15} aria-hidden="true" />
-                  </CardCTA>
-                </Card>
-              ))}
-            </CardGrid>
-
-            <IncludedStrip>
-              <StripTitle>Em todos os planos</StripTitle>
-              {INCLUDED_IN_ALL.map(item => (
-                <StripItem key={item}>
-                  <Check aria-hidden="true" /> {item}
-                </StripItem>
-              ))}
-            </IncludedStrip>
-
-            <DisclosureButton
-              $open={compareOpen}
-              aria-expanded={compareOpen}
-              aria-controls={tableId}
-              onClick={() => setCompareOpen(open => !open)}
-            >
-              {compareOpen ? 'Ocultar comparação' : 'Comparar todos os recursos'}
-              <ChevronDown size={16} aria-hidden="true" />
-            </DisclosureButton>
-
-            <div id={tableId} hidden={!compareOpen}>
-              {compareOpen && (
-                <TableWrapper>
-                  <Table>
-                    <HiddenCaption>
-                      Comparação de recursos entre os planos da Plataforma Maskot
-                    </HiddenCaption>
-                    <thead>
-                      <tr>
-                        <Th scope="col" style={{ textAlign: 'left', minWidth: 200 }}>Recurso</Th>
-                        {CRM_PLANS.map((plan, idx) => (
-                          <Th key={plan.name} scope="col" $isPopular={idx === POPULAR_IDX}>
-                            {plan.name}
-                          </Th>
+                  </tr>
+                </thead>
+                {FEATURE_GROUPS.map(group => (
+                  <tbody key={group.category}>
+                    <tr>
+                      <GroupTh scope="colgroup" colSpan={CRM_PLANS.length + 1}>
+                        {group.category}
+                      </GroupTh>
+                    </tr>
+                    {group.features.map(feature => (
+                      <tr key={feature.label}>
+                        <RowHeadTh scope="row">{feature.label}</RowHeadTh>
+                        {feature.values.map((value, idx) => (
+                          <Td key={idx} $isPopular={idx === POPULAR_IDX}>
+                            <Cell value={value} />
+                          </Td>
                         ))}
                       </tr>
-                    </thead>
-                    {FEATURE_GROUPS.map(group => (
-                      <tbody key={group.category}>
-                        <tr>
-                          <GroupTh scope="colgroup" colSpan={CRM_PLANS.length + 1}>
-                            {group.category}
-                          </GroupTh>
-                        </tr>
-                        {group.features.map(feature => (
-                          <tr key={feature.label}>
-                            <RowHeadTh scope="row">{feature.label}</RowHeadTh>
-                            {feature.values.map((value, idx) => (
-                              <Td key={idx} $isPopular={idx === POPULAR_IDX}>
-                                <Cell value={value} />
-                              </Td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
                     ))}
-                  </Table>
-                </TableWrapper>
-              )}
-            </div>
+                  </tbody>
+                ))}
+              </Table>
+            </TableWrapper>
+          )}
+        </div>
 
-            <Disclaimer>
-              Usuários ilimitados em todos os planos. Onboarding guiado incluso — pode haver taxa
-              de migração se a escola quiser trazer os dados de um CRM anterior.
-            </Disclaimer>
-          </div>
-        )}
-
-        {/* ── WhatsApp & IA ── */}
-        {activeTab === 'WA' && (
-          <div role="tabpanel" id={panelId('WA')} aria-labelledby={tabId('WA')}>
-            <CardGrid>
-              {WA_PLANS.map(plan => (
-                <Card key={plan.id} $isPopular={plan.isPopular}>
-                  {plan.isPopular && <PopularTag>Mais escolhido</PopularTag>}
-                  <PlanName>{plan.name}</PlanName>
-                  <PlanFor>{plan.for}</PlanFor>
-                  <Metric>{plan.metric}</Metric>
-                  <MetricLabel>{plan.metricLabel}</MetricLabel>
-                  <CardDivider />
-                  <Bullets>
-                    {plan.bullets.map(bullet => (
-                      <Bullet key={bullet}>
-                        <Check aria-hidden="true" /> {bullet}
-                      </Bullet>
-                    ))}
-                  </Bullets>
-                  <CardCTA $primary={plan.primary} onClick={openContact}>
-                    Falar com consultor <ArrowRight size={15} aria-hidden="true" />
-                  </CardCTA>
-                </Card>
-              ))}
-            </CardGrid>
-
-            <IncludedStrip>
-              <StripTitle>Em todos os módulos</StripTitle>
-              <StripItem><Check aria-hidden="true" /> WhatsApp oficial (API Meta)</StripItem>
-              <StripItem><Check aria-hidden="true" /> Atendentes ilimitados</StripItem>
-              <StripItem><Check aria-hidden="true" /> Histórico integrado ao CRM</StripItem>
-              <StripItem><Check aria-hidden="true" /> Dashboard de performance</StripItem>
-            </IncludedStrip>
-
-            <Disclaimer>
-              Módulos adicionais ao plano de CRM. As mensagens de IA seguem franquia mensal;
-              as conversas cobradas pela Meta são faturadas direto pelo WhatsApp.
-            </Disclaimer>
-          </div>
-        )}
+        <Disclaimer>
+          Usuários ilimitados em todos os planos. Onboarding guiado incluso — pode haver taxa
+          de migração se a escola quiser trazer os dados de um CRM anterior. As interações de IA
+          seguem franquia mensal; as conversas cobradas pela Meta são faturadas direto pelo WhatsApp.
+        </Disclaimer>
       </Container>
     </Section>
   )

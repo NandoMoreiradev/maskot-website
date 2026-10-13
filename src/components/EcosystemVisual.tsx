@@ -165,7 +165,7 @@ export default function EcosystemVisual() {
                     <LayoutDashboard />
                 </IconBox>
                 <CardContent>
-                    <strong>CRM & Vendas</strong>
+                    <strong>Comercial & Matrículas</strong>
                     <span>Negociação Avançada</span>
                 </CardContent>
             </StackCard>

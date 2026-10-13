@@ -7,14 +7,14 @@ import FounderStory from '@/components/features/FounderStory'
 import ValuesGrid from '@/components/features/ValuesGrid'
 
 export const metadata: Metadata = {
-    title: 'Sobre Nós | Maskot CRM Educacional',
-    description: 'Conheça a história do Maskot. Um CRM criado por quem trabalhou anos dentro de escolas e conhece as dores da captação de alunos.',
+    title: 'Sobre Nós',
+    description: 'Conheça a história do Maskot, o ecossistema criado por quem trabalhou anos dentro de escolas e conhece as dores da captação de alunos.',
     alternates: {
         canonical: 'https://www.maskotedu.com.br/sobre',
     },
     openGraph: {
-        title: 'Sobre Nós | Maskot CRM Educacional',
-        description: 'Conheça a história do Maskot. Um CRM criado por quem trabalhou anos dentro de escolas e conhece as dores da captação de alunos.',
+        title: 'Sobre Nós | Maskot',
+        description: 'Conheça a história do Maskot, o ecossistema criado por quem trabalhou anos dentro de escolas e conhece as dores da captação de alunos.',
         url: 'https://www.maskotedu.com.br/sobre',
         type: 'website',
     },

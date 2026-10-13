@@ -55,12 +55,12 @@ export async function generateMetadata(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const page: any = await client.getByUID('success_case' as any, params.uid);
     return {
-      title: `${asText(page.data.title)} | Cases Maskot Edu`,
+      title: `${asText(page.data.title)} | Cases`,
       description: asText(page.data.challenge)?.substring(0, 160) || 'Case de sucesso de escola parceira do Maskot Edu',
     };
   } catch {
     return {
-      title: 'Case de Sucesso | Maskot Edu',
+      title: 'Case de Sucesso',
     };
   }
 }

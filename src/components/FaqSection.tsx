@@ -105,7 +105,7 @@ const faqs = [
     },
     {
         q: 'Como funciona a cobrança? Tem fidelidade?',
-        a: 'Os planos são flexíveis e pensados para se pagarem com poucas matrículas. Fale com um consultor para montar a combinação ideal da plataforma e add-ons de WhatsApp e IA para o tamanho da sua escola.',
+        a: 'Os planos são flexíveis e pensados para se pagarem com poucas matrículas. Todos os planos incluem WhatsApp oficial, e a IA no atendimento entra a partir do Crescimento. Fale com um consultor para escolher o plano ideal para o tamanho da sua escola.',
     },
 ]
 

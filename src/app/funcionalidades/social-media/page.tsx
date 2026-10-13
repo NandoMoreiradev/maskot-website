@@ -13,8 +13,8 @@ export const metadata: Metadata = {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/social-media',
     },
     openGraph: {
-        title: 'Gestão de Redes Sociais para Escolas | Maskot CRM',
-        description: 'Crie, aprove e agende posts para Instagram e Facebook, responda comentários e automatize DMs — sem sair do CRM.',
+        title: 'Gestão de Redes Sociais para Escolas | Maskot',
+        description: 'Crie, aprove e agende posts para Instagram e Facebook, responda comentários e automatize DMs — sem sair do Maskot.',
         url: 'https://www.maskotedu.com.br/funcionalidades/social-media',
         images: ['/og-social-media.png'],
     }

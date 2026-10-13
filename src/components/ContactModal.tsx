@@ -393,7 +393,7 @@ export default function ContactModal(): React.ReactElement | null {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        const message = `Olá! Gostaria de falar com um especialista sobre o Maskot CRM.
+        const message = `Olá! Gostaria de falar com um especialista sobre o Maskot.
 
 *Meus Dados:*
 - *Nome:* ${formData.name}
@@ -428,7 +428,7 @@ export default function ContactModal(): React.ReactElement | null {
                     </AsideSubtitle>
                     <BenefitList>
                         <li><CheckCircle2 size={18} /> Demonstração personalizada para a sua escola</li>
-                        <li><CheckCircle2 size={18} /> Veja o CRM, o WhatsApp e a Mia na prática</li>
+                        <li><CheckCircle2 size={18} /> Veja o marketing, o comercial, o WhatsApp e a Mia na prática</li>
                         <li><CheckCircle2 size={18} /> Diagnóstico do seu funil de matrículas</li>
                         <li><CheckCircle2 size={18} /> Sem compromisso e sem custo</li>
                     </BenefitList>

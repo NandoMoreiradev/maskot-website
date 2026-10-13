@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const funcionalidades = getFuncionalidadesSlugs().map(f => ({
     url: `https://www.maskotedu.com.br/funcionalidades/${f}`,
-    lastModified: new Date('2026-05-03'),
+    lastModified: new Date('2026-10-13'),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }))
@@ -58,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // Data do último deploy significativo do site
-  const SITE_LAST_UPDATED = new Date('2026-05-03')
+  const SITE_LAST_UPDATED = new Date('2026-10-13')
   // Data do último blog post publicado (atualizar quando publicar novo conteúdo)
   const BLOG_LAST_UPDATED = posts.length > 0
     ? new Date(posts[0].last_publication_date)

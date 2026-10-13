@@ -6,13 +6,15 @@ import {
     MessageSquare,
     Megaphone,
     Zap,
-    Users,
     BarChart3,
     BrainCircuit,
-    Smartphone,
     CalendarCheck,
-    ArrowRight,
-    MousePointerClick
+    LayoutTemplate,
+    Instagram,
+    GraduationCap,
+    ClipboardList,
+    CheckSquare,
+    ArrowRight
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/SectionHeading'
@@ -68,6 +70,20 @@ const FeatureCard = styled(Link)`
             color: #2563EB;
         }
     }
+`
+
+const Stage = styled.span<{ $color: string, $bg: string }>`
+    align-self: flex-start;
+    margin-bottom: 1rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: ${props => props.$bg};
+    color: ${props => props.$color};
+    border: 1px solid ${props => props.$color}22;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 `
 
 const CardHeader = styled.div`
@@ -128,15 +144,35 @@ const CardFooter = styled.div`
 export default function FeaturesSection() {
     const features = [
         {
-            title: 'Funil de Vendas Visual',
-            description: 'Visualize todos os interessados em colunas (Kanban), saiba quem visitou, quem está negociando e quem sumiu.',
-            icon: <LayoutDashboard />,
-            color: '#2563EB',
-            bg: '#EFF6FF',
-            href: '/funcionalidades/funil-de-vendas'
+            title: 'Campanhas em Massa',
+            stage: 'Atrair',
+            description: 'Dispare mensagens segmentadas para atrair novos alunos ou convidar para eventos. Alcance milhares com um clique.',
+            icon: <Megaphone />,
+            color: '#EA580C',
+            bg: '#FFF7ED',
+            href: '/funcionalidades/campanhas'
+        },
+        {
+            title: 'Landing Pages que Convertem',
+            stage: 'Atrair',
+            description: 'Crie páginas de captação em minutos, sem programar. Cada novo cadastro cai automaticamente no funil certo.',
+            icon: <LayoutTemplate />,
+            color: '#E11D48',
+            bg: '#FFF1F2',
+            href: '/funcionalidades/criador-de-landing-pages'
+        },
+        {
+            title: 'Redes Sociais',
+            stage: 'Atrair',
+            description: 'Crie, aprove e agende posts, responda comentários e automatize Directs, tudo no mesmo lugar.',
+            icon: <Instagram />,
+            color: '#DB2777',
+            bg: '#FDF2F8',
+            href: '/funcionalidades/social-media'
         },
         {
             title: 'WhatsApp Centralizado',
+            stage: 'Atender',
             description: 'Conecte toda sua equipe no mesmo número oficial. Organize o atendimento e não perca o controle das conversas.',
             icon: <MessageSquare />,
             color: '#16A34A',
@@ -145,30 +181,25 @@ export default function FeaturesSection() {
         },
         {
             title: 'Mia, a Copilota de IA',
+            stage: 'Atender',
             description: 'Sua copilota prepara o briefing do dia, analisa cada lead e sugere a próxima ação para focar em fechar matrículas.',
             icon: <BrainCircuit />,
             color: '#9333EA',
             bg: '#FAF5FF',
-            href: '/funcionalidades/mia-ia'
+            href: '/funcionalidades/copilot-mia'
         },
         {
-            title: 'Campanhas em Massa',
-            description: 'Dispare mensagens segmentadas para atrair novos alunos ou convidar para eventos. Alcance milhares com um clique.',
-            icon: <Megaphone />,
-            color: '#EA580C',
-            bg: '#FFF7ED',
-            href: '/funcionalidades/campanhas'
-        },
-        {
-            title: 'Relatórios de Marketing',
-            description: 'Descubra de onde vêm seus alunos (Instagram, Google, Indicação). Invista seu orçamento apenas no que traz resultado.',
-            icon: <BarChart3 />,
-            color: '#0891B2',
-            bg: '#ECFEFF',
-            href: '/funcionalidades/relatorios'
+            title: 'Funil de Vendas Visual',
+            stage: 'Negociar',
+            description: 'Visualize todos os interessados em colunas (Kanban), saiba quem visitou, quem está negociando e quem sumiu.',
+            icon: <LayoutDashboard />,
+            color: '#2563EB',
+            bg: '#EFF6FF',
+            href: '/funcionalidades/gestao-comercial'
         },
         {
             title: 'Agendamento de Visitas',
+            stage: 'Negociar',
             description: 'Confirme e gerencie visitas direto pelo funil — sem ida e volta manual de mensagens pra fechar horário com as famílias.',
             icon: <CalendarCheck />,
             color: '#4F46E5',
@@ -176,28 +207,49 @@ export default function FeaturesSection() {
             href: '/funcionalidades/agendamento'
         },
         {
-            title: 'Formulários de Captação',
-            description: 'Conecte seus anúncios e site diretamente ao Maskot. Cada novo cadastro cai automaticamente no funil certo.',
-            icon: <MousePointerClick />,
-            color: '#E11D48',
-            bg: '#FFF1F2',
-            href: '/funcionalidades/formularios'
-        },
-        {
-            title: 'Régua de Follow-up',
-            description: 'Crie automações que cobram o retorno da família. Se o lead não respondeu, o Maskot manda mensagem para reaquecer.',
+            title: 'Automações e Jornadas',
+            stage: 'Negociar',
+            description: 'Crie réguas e jornadas que cobram o retorno da família. Se o lead não respondeu, o Maskot manda mensagem para reaquecer.',
             icon: <Zap />,
             color: '#D97706',
             bg: '#FEF3C7',
             href: '/funcionalidades/automacoes'
         },
         {
-            title: 'App Mobile',
-            description: 'Responda os pais, consulte informações e não deixe nenhuma mensagem pendente mesmo fora da escola.',
-            icon: <Smartphone />,
+            title: 'Onboarding de Novos Alunos',
+            stage: 'Matricular',
+            description: 'Padronize a entrada de novos alunos, com checklist de documentos e acolhida desde o primeiro dia.',
+            icon: <GraduationCap />,
+            color: '#7C3AED',
+            bg: '#F5F3FF',
+            href: '/funcionalidades/onboarding'
+        },
+        {
+            title: 'Pesquisas de Satisfação e NPS',
+            stage: 'Matricular',
+            description: 'Meça a satisfação de pais e alunos com NPS e CSAT e antecipe cancelamentos antes que virem perdas.',
+            icon: <ClipboardList />,
+            color: '#0D9488',
+            bg: '#F0FDFA',
+            href: '/funcionalidades/pesquisas'
+        },
+        {
+            title: 'Analytics e Relatórios',
+            stage: 'Matricular',
+            description: 'Descubra de onde vêm seus alunos e onde você perde matrículas. Invista seu orçamento apenas no que traz resultado.',
+            icon: <BarChart3 />,
+            color: '#0891B2',
+            bg: '#ECFEFF',
+            href: '/funcionalidades/analytics'
+        },
+        {
+            title: 'Gestão de Tarefas',
+            stage: 'Gerir',
+            description: 'Demandas da Secretaria, Financeiro e Pedagógico em um só lugar, com Kanban, checklists e tarefas recorrentes.',
+            icon: <CheckSquare />,
             color: '#475569',
             bg: '#F8FAFC',
-            href: '/funcionalidades/app-mobile'
+            href: '/funcionalidades/gestao-tarefas'
         }
     ];
 
@@ -216,6 +268,7 @@ export default function FeaturesSection() {
                 <FeaturesGrid>
                     {features.map((feature, index) => (
                         <FeatureCard key={index} href={feature.href}>
+                            <Stage $color={feature.color} $bg={feature.bg}>{feature.stage}</Stage>
                             <CardHeader>
                                 <IconBox $color={feature.color} $bg={feature.bg}>
                                     {feature.icon}

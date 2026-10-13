@@ -7,7 +7,7 @@ import CrmDeepDive from '@/components/features/CrmDeepDive'
 import CrmFeatures from '@/components/features/CrmFeatures'
 
 export const metadata: Metadata = {
-    title: 'CRM e Gestão de Matrículas | Maskot',
+    title: 'Gestão Comercial e Funil de Matrículas',
     description: 'Organize seu funil de vendas escolar com Kanban, listas inteligentes e automação. O fim das planilhas de Excel na sua escola.',
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/gestao-comercial',

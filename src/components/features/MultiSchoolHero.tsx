@@ -89,7 +89,7 @@ export default function MultiSchoolHero() {
                     <Title>Uma Plataforma.<br/><span>Infinitas Escolas.</span></Title>
                     <Subtitle>
                         Centralize a gestão da sua rede de ensino.
-                        Alterne entre unidades com um clique, acesse relatórios consolidados e padronize o atendimento em todas as filiais.
+                        Alterne entre unidades com um clique, acesse relatórios consolidados e dê a cada pessoa o acesso certo em cada filial.
                     </Subtitle>
                 </TextContent>
             </HeroContainer>

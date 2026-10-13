@@ -267,7 +267,7 @@ export default function BlogSidebar({ recentPosts, currentPostId, category, head
       <ConsultBox>
         <div className="kicker">Maskot Edu</div>
         <h5>Sua escola captando mais alunos</h5>
-        <p>Veja como o Maskot organiza leads, WhatsApp e matrículas em um só lugar.</p>
+        <p>Veja como o Maskot integra marketing, comercial e atendimento em uma só plataforma.</p>
         <button onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
           Falar com um consultor <ArrowRight size={16} />
         </button>

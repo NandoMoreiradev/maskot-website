@@ -7,14 +7,14 @@ import { PageWrapper } from './styles';
 import { BlogPageInner } from './blog-page-styles';
 
 export const metadata: Metadata = {
-  title: 'Blog Educacional | Maskot',
-  description: 'Conteúdo estratégico sobre captação de alunos, gestão escolar e CRM educacional. Dicas práticas para escolas crescerem.',
+  title: 'Blog Educacional',
+  description: 'Conteúdo estratégico sobre captação de alunos, gestão escolar e tecnologia educacional. Dicas práticas para escolas crescerem.',
   alternates: {
     canonical: 'https://www.maskotedu.com.br/blog',
   },
   openGraph: {
     title: 'Blog Educacional | Maskot',
-    description: 'Conteúdo estratégico sobre captação de alunos, gestão escolar e CRM educacional. Dicas práticas para escolas crescerem.',
+    description: 'Conteúdo estratégico sobre captação de alunos, gestão escolar e tecnologia educacional. Dicas práticas para escolas crescerem.',
     url: 'https://www.maskotedu.com.br/blog',
     type: 'website',
   },

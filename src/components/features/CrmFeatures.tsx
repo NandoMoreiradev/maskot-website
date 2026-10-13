@@ -241,7 +241,7 @@ export default function CrmFeatures() {
                     <FeatureCategory>
                         <CategoryHeader $color="#8b5cf6">
                             <div className="icon-wrapper"><Focus size={24} /></div>
-                            <h3>Visão 360º (LeadDetail)</h3>
+                            <h3>Visão 360º do Lead</h3>
                         </CategoryHeader>
                         <FeatureList>
                             <FeatureItem>
@@ -254,7 +254,7 @@ export default function CrmFeatures() {
                             <FeatureItem>
                                 <Wand2 size={18} />
                                 <div>
-                                    <h4>Resgate com IA (Rescue)</h4>
+                                    <h4>Resgate com IA</h4>
                                     <p>Se o lead esfriar e entrar em risco, um clique aciona a IA para redigir a mensagem perfeita de resgate adaptada para o WhatsApp.</p>
                                 </div>
                             </FeatureItem>

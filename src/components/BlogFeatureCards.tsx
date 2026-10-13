@@ -246,7 +246,7 @@ export default function BlogFeatureCards({ category }: { category?: string }) {
           </Card>
         ))}
       </List>
-      <AllLink href="/#funcionalidades">
+      <AllLink href="/#recursos">
         Ver todas as funcionalidades <ArrowRight size={16} />
       </AllLink>
     </section>

@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!category) return {}
 
   const url = `https://www.maskotedu.com.br/blog/categoria/${slug}`
-  const title = `${category} | Blog do Maskot`
+  const title = `Blog: ${category}`
   const description = `Artigos sobre ${category} para escolas: estratégias práticas de gestão, captação e retenção de alunos.`
 
   return {

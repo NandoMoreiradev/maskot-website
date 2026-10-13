@@ -424,7 +424,7 @@ export default function Header() {
                 <LogoLink href="/" aria-label="Maskot Home">
                     <Image
                         src="/logo_maskot_website_preta.png"
-                        alt="Maskot CRM"
+                        alt="Maskot Edu"
                         fill
                         sizes="220px"
                         priority

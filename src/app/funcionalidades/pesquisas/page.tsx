@@ -13,7 +13,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/pesquisas',
     },
     openGraph: {
-        title: 'Pesquisas de Satisfação e NPS para Escolas | Maskot CRM',
+        title: 'Pesquisas de Satisfação e NPS para Escolas | Maskot',
         description: 'Descubra o que os pais realmente pensam antes que eles cancelem a matrícula.',
         url: 'https://www.maskotedu.com.br/funcionalidades/pesquisas',
         images: ['/og-pesquisas.png'], // Sugestão para o futuro: criar imagens específicas por feature

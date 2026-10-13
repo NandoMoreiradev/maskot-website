@@ -237,7 +237,7 @@ export default function BlogHeader() {
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </MenuBtn>
           <SiteLinks aria-label="Site Maskot">
-            <Link href="/#funcionalidades">Funcionalidades</Link>
+            <Link href="/#recursos">Funcionalidades</Link>
             <Link href="/#precos">Preços</Link>
             <Link href="/sobre">Sobre</Link>
           </SiteLinks>
@@ -285,7 +285,7 @@ export default function BlogHeader() {
 
       {menuOpen && (
         <MobilePanel>
-          <Link href="/#funcionalidades" onClick={() => setMenuOpen(false)}>Funcionalidades <ArrowRight size={16} /></Link>
+          <Link href="/#recursos" onClick={() => setMenuOpen(false)}>Funcionalidades <ArrowRight size={16} /></Link>
           <Link href="/#precos" onClick={() => setMenuOpen(false)}>Preços <ArrowRight size={16} /></Link>
           <Link href="/sobre" onClick={() => setMenuOpen(false)}>Sobre <ArrowRight size={16} /></Link>
           <Link href="https://app.maskotedu.com.br/login">Entrar <ArrowRight size={16} /></Link>

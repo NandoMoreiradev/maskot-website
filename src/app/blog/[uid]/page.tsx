@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const category = page.data.category || 'Blog';
   
   return {
-    title: `${title} | Maskot Blog`,
+    title,
     description,
     openGraph: {
       title,
@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       creator: '@maskot',
     },
     alternates: { canonical: `https://www.maskotedu.com.br/blog/${uid}` },
-    keywords: [category, 'gestão escolar', 'CRM educacional', 'Maskot'],
+    keywords: [category, 'gestão escolar', 'captação de alunos', 'Maskot'],
   };
 }
 
@@ -293,7 +293,7 @@ export default async function BlogPost({ params }: { params: Promise<Params> }) 
             <AuthorBox>
               <h3>Gostou deste conteúdo?</h3>
               <p>
-                O Maskot ajuda centenas de escolas a crescerem e fidelizarem alunos.
+                O Maskot ajuda mais de 150 escolas a crescerem e fidelizarem alunos.
                 Que tal conhecer na prática?
               </p>
               <CTAButton href="/">
