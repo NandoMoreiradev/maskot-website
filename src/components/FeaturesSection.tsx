@@ -245,7 +245,7 @@ export default function FeaturesSection() {
         {
             title: 'Gestão de Tarefas',
             stage: 'Gerir',
-            description: 'Demandas da Secretaria, Financeiro e Pedagógico em um só lugar, com Kanban, checklists e tarefas recorrentes.',
+            description: 'Demandas de qualquer setor da escola em um só lugar, com Kanban, checklists e tarefas recorrentes.',
             icon: <CheckSquare />,
             color: '#475569',
             bg: '#F8FAFC',

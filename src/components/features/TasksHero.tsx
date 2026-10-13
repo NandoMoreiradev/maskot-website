@@ -468,7 +468,7 @@ export default function TasksHero() {
                             Sua Escola Organizada. <strong>Sem Post-its nem Prazos Perdidos.</strong>
                         </MainHeading>
                         <Subtitle>
-                            Centralize as demandas da Secretaria, Financeiro e Pedagógico em um só lugar. Acompanhe fluxos no Kanban, delegue responsabilidades com checklists e meça o tempo da equipe com precisão.
+                            Centralize as demandas de todos os setores da escola em um só lugar. Acompanhe fluxos no Kanban, delegue responsabilidades com checklists e meça o tempo da equipe com precisão.
                         </Subtitle>
                         <ButtonGroup>
                             <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>

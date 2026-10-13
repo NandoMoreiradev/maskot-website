@@ -7,7 +7,7 @@ import TasksDeepDive from '@/components/features/TasksDeepDive'
 
 export const metadata: Metadata = {
     title: 'Gestão de Tarefas e Projetos Escolares',
-    description: 'Organize a rotina da sua escola. Kanban, checklists, tarefas recorrentes e automação para Secretaria, Financeiro e Pedagógico.',
+    description: 'Organize a rotina da sua escola. Kanban, checklists, tarefas recorrentes e automação para qualquer setor da escola.',
     keywords: ['gestão de tarefas escolar', 'kanban para escolas', 'organização escolar', 'produtividade secretaria escolar'],
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/gestao-tarefas',

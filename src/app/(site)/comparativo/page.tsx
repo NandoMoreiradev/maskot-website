@@ -1,4 +1,5 @@
 import React from 'react'
+import ComparisonHero from '@/components/comparison/ComparisonHero'
 import ComparisonSection from '@/components/ComparisonSection'
 import CTASection from '@/components/CTASection'
 
@@ -20,9 +21,10 @@ export const metadata: Metadata = {
 
 export default function ComparePage() {
     return (
-        <main style={{ paddingTop: '80px', background: '#F8FAFC' }}>
+        <>
+            <ComparisonHero />
             <ComparisonSection />
             <CTASection />
-        </main>
+        </>
     )
 }

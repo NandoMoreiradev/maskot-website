@@ -429,13 +429,12 @@ export default function SocialMediaDeepDive() {
                         <h3>Comentários e DMs, tudo num só lugar</h3>
                         <p>
                             Veja e responda comentários de cada publicação — Instagram e Facebook — sem
-                            abrir o aplicativo da rede social. Com o módulo de atendimento ativo, as
-                            conversas de Direct chegam no mesmo inbox do WhatsApp.
+                            abrir o aplicativo da rede social. As conversas de Direct chegam no mesmo inbox do WhatsApp.
                         </p>
                         <ul>
-                            <li><MessageSquare size={20}/> <strong>Responder sem sair do CRM:</strong> a resposta sai direto na plataforma de origem.</li>
+                            <li><MessageSquare size={20}/> <strong>Responder sem sair do Maskot:</strong> a resposta sai direto na plataforma de origem.</li>
                             <li><Instagram size={20}/> <strong>Organizado por post e por rede:</strong> filtre rapidamente onde a conversa está acontecendo.</li>
-                            <li><Link2 size={20}/> <strong>Conectado ao atendimento:</strong> DMs chegam no mesmo inbox do WhatsApp, quando o módulo está ativo.</li>
+                            <li><Link2 size={20}/> <strong>Conectado ao atendimento:</strong> DMs chegam no mesmo inbox do WhatsApp.</li>
                         </ul>
                     </TextContent>
                     <MockupCard>

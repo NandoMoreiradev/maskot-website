@@ -21,7 +21,7 @@ type Feature = {
 const FEATURES: Record<string, Feature> = {
   whatsapp: { title: 'WhatsApp & Chatbot', desc: 'Todo o atendimento em um único número oficial, com vários atendentes, chatbot e IA respondendo na hora.', href: '/funcionalidades/whatsapp', Icon: MessageCircle, accent: '#16A34A' },
   comercial: { title: 'Gestão Comercial', desc: 'Todos os interessados em um funil Kanban visual: saiba quantos alunos estão em cada etapa.', href: '/funcionalidades/gestao-comercial', Icon: KanbanSquare, accent: '#2563EB' },
-  tarefas: { title: 'Gestão de Tarefas', desc: 'Demandas da Secretaria, Financeiro e Pedagógico em um só lugar, com Kanban e checklists.', href: '/funcionalidades/gestao-tarefas', Icon: CheckSquare, accent: '#4F46E5' },
+  tarefas: { title: 'Gestão de Tarefas', desc: 'Demandas de qualquer setor da escola em um só lugar, com Kanban e checklists.', href: '/funcionalidades/gestao-tarefas', Icon: CheckSquare, accent: '#4F46E5' },
   automacoes: { title: 'Automações', desc: 'Mensagens, tarefas e nutrição de famílias no piloto automático, 24 horas por dia.', href: '/funcionalidades/automacoes', Icon: Zap, accent: '#9333EA' },
   marketing: { title: 'Marketing', desc: 'Réguas de relacionamento no WhatsApp, E-mail e SMS, disparadas pelo comportamento dos pais.', href: '/funcionalidades/marketing', Icon: Megaphone, accent: '#EA580C' },
   campanhas: { title: 'Campanhas', desc: 'Planeje orçamentos, crie copies com IA e rastreie o ROI de cada canal de captação.', href: '/funcionalidades/campanhas', Icon: Rocket, accent: '#9333EA' },
