@@ -5,6 +5,7 @@ import Script from "next/script";
 import StyledComponentsRegistry from '@/lib/registry'
 import ThemeClientProvider from '@/providers/ThemeClientProvider'
 import CookieConsent from '@/components/legal/CookieConsent'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               `}
             </Script>
             {children}
+            <WhatsAppButton />
             <CookieConsent />
           </ThemeClientProvider>
         </StyledComponentsRegistry>
