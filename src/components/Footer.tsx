@@ -321,6 +321,12 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
+                                <FooterLink href="/seguranca">
+                                    Segurança e LGPD
+                                    <ExternalLink />
+                                </FooterLink>
+                            </LinkItem>
+                            <LinkItem>
                                 <FooterLink href="/#precos">
                                     Preços
                                     <ExternalLink />

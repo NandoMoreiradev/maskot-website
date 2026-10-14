@@ -6,6 +6,7 @@ import ProblemSection from '@/components/ProblemSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
 import FeaturesSection from '@/components/FeaturesSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
+import SecuritySection from '@/components/SecuritySection'
 import PricingSection from '@/components/PricingSection'
 import FaqSection from '@/components/FaqSection'
 import CTASection from '@/components/CTASection'
@@ -42,6 +43,7 @@ export default function Home() {
             <HowItWorksSection />
             <FeaturesSection />
             <TestimonialsSection />
+            <SecuritySection />
             <PricingSection />
             <FaqSection />
             <RecentPostsSection />
