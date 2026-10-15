@@ -3,7 +3,11 @@
 import React, { useId, useState } from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
-import { Check, X, ArrowRight, ChevronDown, MessageCircle, Bot } from 'lucide-react'
+import {
+  Check, X, ArrowRight, ChevronDown, MessageCircle, Bot,
+  Phone, MessageSquareText, BriefcaseBusiness, Volume2, PackagePlus,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
 import { SectionHeader as BaseSectionHeader, GradientText } from '@/components/ui/SectionHeading'
 
@@ -442,6 +446,84 @@ const MultiUnitCTA = styled.button`
   }
 `
 
+// ─── MÓDULOS ADICIONAIS ─────────────────────────────────────────────────────
+
+const AddonsBlock = styled.div`
+  margin-top: 2.25rem;
+`
+
+const AddonsHeading = styled.div`
+  text-align: center;
+  margin-bottom: 1.25rem;
+
+  h3 {
+    font-size: ${props => props.theme.typography.fontSize.xl};
+    font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+    color: ${props => props.theme.colors.textDark};
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: ${props => props.theme.typography.fontSize.sm};
+    color: ${props => props.theme.colors.textMedium};
+    line-height: ${props => props.theme.typography.lineHeight.normal};
+  }
+`
+
+const AddonGrid = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const AddonCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.1rem 1.15rem;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.borderLight};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  box-shadow: ${props => props.theme.shadows.sm};
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: ${props => props.theme.colors.primary};
+    margin-bottom: 0.25rem;
+  }
+
+  strong {
+    font-size: ${props => props.theme.typography.fontSize.base};
+    font-weight: ${props => props.theme.typography.fontWeight.bold};
+    color: ${props => props.theme.colors.textDark};
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: ${props => props.theme.typography.fontSize.sm};
+    color: ${props => props.theme.colors.textMedium};
+    line-height: 1.45;
+    margin: 0;
+  }
+`
+
+const AddonNote = styled.span`
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  color: ${props => props.theme.colors.primary};
+`
+
 // ─── COMPARISON DISCLOSURE ──────────────────────────────────────────────────
 
 const DisclosureButton = styled.button<{ $open: boolean }>`
@@ -631,8 +713,9 @@ const CRM_PLANS: CrmPlan[] = [
     inherits: 'Tudo do Essencial +',
     bullets: [
       'Automações e jornadas de funil',
+      'Landing pages, mídias sociais e comissões',
+      'Analytics avançado',
       'Copilota Mia com IA',
-      'Domínio de e-mail próprio',
     ],
     cta: 'Começar agora',
     primary: true,
@@ -650,7 +733,8 @@ const CRM_PLANS: CrmPlan[] = [
     },
     inherits: 'Tudo do Crescimento +',
     bullets: [
-      'Importação via API e webhook',
+      'Até 20 landing pages e 150 GB de armazenamento',
+      'Importação ilimitada com histórico e reversão',
       'Gerente de sucesso',
       'Suporte prioritário',
     ],
@@ -667,9 +751,58 @@ const INCLUDED_IN_ALL = [
   'Filas e chatbot de regras',
   'Kanban de matrículas',
   'Calendário de visitas',
-  'Analytics de captação',
+  'Indicadores de captação',
+  'Domínio de e-mail próprio',
+  'Webhooks para integrar com seu ERP',
   'Onboarding guiado',
   'Filiais adicionais',
+]
+
+// Módulos contratados à parte, por unidade. Fonte: ADDONS em backend/prisma/seed.ts.
+// Sem preços de propósito: os planos acima também não os exibem (cotação via consultor).
+interface AddonInfo {
+  name: string
+  description: string
+  note: string
+  icon: LucideIcon
+}
+
+const ADDONS: AddonInfo[] = [
+  {
+    name: 'Voz no navegador',
+    description:
+      'Ligue para os leads direto do CRM, sem sair da tela. Sua unidade recebe um número dedicado e a ligação fica registrada no histórico do lead.',
+    note: '30 minutos de cortesia por mês. Para volume, use sua própria conta Sinch.',
+    icon: Phone,
+  },
+  {
+    name: 'SMS',
+    description:
+      'Envie SMS em automações, jornadas e na comunicação pós-visita, com remetente MASKOTEDU.',
+    note: '50 SMS de cortesia por mês. Para volume, use sua própria conta Sinch.',
+    icon: MessageSquareText,
+  },
+  {
+    name: 'Copiloto de Gestão para Diretores',
+    description:
+      'A Mia em modo gestão: calculadora de mensalidade por turma, resumo de custos operacionais, log de decisões e briefing diário para o diretor.',
+    note: 'Não exige o Maskot EDU.',
+    icon: BriefcaseBusiness,
+  },
+  {
+    name: 'Respostas em áudio',
+    description:
+      'A Mia responde em áudio no WhatsApp, com voz natural. Disponível em três faixas mensais.',
+    note: '300, 800 ou 2.000 respostas por mês. Requer WhatsApp com IA.',
+    icon: Volume2,
+  },
+  {
+    name: 'Pacote +1.000 interações de IA',
+    description:
+      'Estourou a franquia do mês? Some quantos pacotes precisar, sem trocar de plano.',
+    note: 'Cumulativo. Requer WhatsApp com IA.',
+    icon: PackagePlus,
+  },
 ]
 
 type CellValue = boolean | string
@@ -686,9 +819,16 @@ const FEATURE_GROUPS: FeatureGroup[] = [
       { label: 'Leads ativos',                 values: ['1.000', '5.000', 'Ilimitados'] },
       { label: 'Automações de funil (régua)',  values: [false, 'Ilimitadas', 'Ilimitadas'] },
       { label: 'Jornadas automatizadas',       values: [false, true, true] },
-      { label: 'Campanhas de matrícula',       values: [false, true, true] },
-      { label: 'E-mails de marketing / mês',   values: ['5.000', '15.000', '25.000'] },
-      { label: 'Domínio de e-mail próprio',    values: [false, '1 domínio', '5 domínios'] },
+      { label: 'Campanhas de matrícula',       values: ['1', 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Comissões de consultores',     values: [false, true, true] },
+    ],
+  },
+  {
+    category: 'Marketing e presença digital',
+    features: [
+      { label: 'Landing pages',                values: [false, '5', '20'] },
+      { label: 'Mídias sociais (publicação, comentários e automações)', values: [false, true, true] },
+      { label: 'Pesquisas',                    values: ['2', 'Ilimitadas', 'Ilimitadas'] },
     ],
   },
   {
@@ -699,7 +839,6 @@ const FEATURE_GROUPS: FeatureGroup[] = [
       { label: 'Agendamento automático de visitas', values: [false, true, true] },
       { label: 'Qualificação automática de leads', values: [false, true, true] },
       { label: 'Transbordo inteligente para humano', values: [false, true, true] },
-      { label: 'Relatórios de conversas e sentimento', values: [false, true, true] },
     ],
   },
   {
@@ -714,9 +853,11 @@ const FEATURE_GROUPS: FeatureGroup[] = [
   {
     category: 'Dados, escala e suporte',
     features: [
-      { label: 'Importação de dados',          values: ['500 linhas', '5.000 linhas', 'Ilimitada + API'] },
-      { label: 'Relatórios customizados',      values: [false, true, true] },
-      { label: 'Upload de arquivos',           values: ['25 MB', '150 MB', '200 MB'] },
+      { label: 'Analytics avançado (gráficos e visão geral)', values: [false, true, true] },
+      { label: 'Importação de dados',          values: ['500 linhas', '5.000 linhas', 'Ilimitada'] },
+      { label: 'Relatórios customizados',      values: ['1', 'Ilimitados', 'Ilimitados'] },
+      { label: 'Armazenamento',                values: ['10 GB', '50 GB', '150 GB'] },
+      { label: 'Upload de arquivos',           values: ['100 MB', '150 MB', '200 MB'] },
       { label: 'Gerente de sucesso',           values: [false, false, true] },
       { label: 'Canal de suporte',             values: ['E-mail', 'E-mail', 'Prioritário'] },
     ],
@@ -810,6 +951,26 @@ export default function PricingSection() {
           </MultiUnitActions>
         </MultiUnitBanner>
 
+        <AddonsBlock>
+          <AddonsHeading>
+            <h3>Módulos para ir além</h3>
+            <p>Contrate à parte, só quando fizer sentido para a sua escola.</p>
+          </AddonsHeading>
+          <AddonGrid>
+            {ADDONS.map(addon => {
+              const Icon = addon.icon
+              return (
+                <AddonCard key={addon.name}>
+                  <Icon aria-hidden="true" />
+                  <strong>{addon.name}</strong>
+                  <p>{addon.description}</p>
+                  <AddonNote>{addon.note}</AddonNote>
+                </AddonCard>
+              )
+            })}
+          </AddonGrid>
+        </AddonsBlock>
+
         <DisclosureButton
           $open={compareOpen}
           aria-expanded={compareOpen}
@@ -865,6 +1026,9 @@ export default function PricingSection() {
           Usuários ilimitados em todos os planos. Onboarding guiado incluso — pode haver taxa
           de migração se a escola quiser trazer os dados de um CRM anterior. As interações de IA
           seguem franquia mensal; as conversas cobradas pela Meta são faturadas direto pelo WhatsApp.
+          O envio de e-mails de marketing tem teto de 20.000 por mês na infraestrutura do Maskot e
+          é ilimitado quando a escola conecta a própria conta Resend, necessária também para usar
+          domínio de e-mail próprio.
         </Disclaimer>
       </Container>
     </Section>
