@@ -695,7 +695,7 @@ const CRM_PLANS: CrmPlan[] = [
     bullets: [
       'Funil de matrículas completo',
       'Resumo de leads com IA',
-      'Suporte por e-mail',
+      'Suporte por chat na plataforma',
     ],
     cta: 'Começar agora',
     primary: false,
@@ -734,7 +734,7 @@ const CRM_PLANS: CrmPlan[] = [
     inherits: 'Tudo do Crescimento +',
     bullets: [
       'Até 20 landing pages e 150 GB de armazenamento',
-      'Importação ilimitada com histórico e reversão',
+      'Importação de leads sem limite de linhas',
       'Gerente de sucesso',
       'Suporte prioritário',
     ],
@@ -846,7 +846,7 @@ const FEATURE_GROUPS: FeatureGroup[] = [
     features: [
       { label: 'Resumo de lead com IA',        values: ['100/mês', '200/mês', '300/mês'] },
       { label: 'Estúdio criativo com IA',      values: ['5/mês', '20/mês', '50/mês'] },
-      { label: 'Mensagens de resgate com IA',  values: ['20/mês', 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Mensagens de resgate com IA',  values: ['10/mês', '100/mês', '300/mês'] },
       { label: 'Copilota Mia (IA do consultor)', values: [false, '200/mês', '500/mês'] },
     ],
   },
@@ -859,7 +859,7 @@ const FEATURE_GROUPS: FeatureGroup[] = [
       { label: 'Armazenamento',                values: ['10 GB', '50 GB', '150 GB'] },
       { label: 'Upload de arquivos',           values: ['100 MB', '150 MB', '200 MB'] },
       { label: 'Gerente de sucesso',           values: [false, false, true] },
-      { label: 'Canal de suporte',             values: ['E-mail', 'E-mail', 'Prioritário'] },
+      { label: 'Canal de suporte',             values: ['Chat', 'Chat', 'Chat prioritário'] },
     ],
   },
 ]
