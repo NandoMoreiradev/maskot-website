@@ -2,10 +2,11 @@
 
 import React, { useId, useState } from 'react'
 import Link from 'next/link'
+import { flushSync } from 'react-dom'
 import styled, { css } from 'styled-components'
 import {
   Check, X, ArrowRight, ChevronDown, MessageCircle, Bot,
-  Phone, MessageSquareText, BriefcaseBusiness, Volume2, PackagePlus,
+  BriefcaseBusiness, Volume2, PackagePlus,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
@@ -18,6 +19,8 @@ const Section = styled.section`
   background: ${props => props.theme.colors.white};
   position: relative;
   overflow: hidden;
+  /* A posição é preservada manualmente em toggleKeepingPosition */
+  overflow-anchor: none;
 
   @media (max-width: 768px) {
     padding: 3rem 0;
@@ -452,9 +455,23 @@ const AddonsBlock = styled.div`
   margin-top: 2.25rem;
 `
 
-const AddonsHeading = styled.div`
-  text-align: center;
-  margin-bottom: 1.25rem;
+const AddonsToggle = styled.button<{ $open: boolean }>`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.borderLight};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  cursor: pointer;
+  transition: all ${props => props.theme.transitions.fast};
+
+  &:hover {
+    border-color: ${props => props.theme.colors.primary};
+  }
 
   h3 {
     font-size: ${props => props.theme.typography.fontSize.xl};
@@ -467,10 +484,19 @@ const AddonsHeading = styled.div`
     font-size: ${props => props.theme.typography.fontSize.sm};
     color: ${props => props.theme.colors.textMedium};
     line-height: ${props => props.theme.typography.lineHeight.normal};
+    margin: 0;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: ${props => props.theme.colors.primary};
+    transition: transform ${props => props.theme.transitions.fast};
+    transform: rotate(${props => props.$open ? '180deg' : '0deg'});
   }
 `
 
 const AddonGrid = styled.div`
+  margin-top: 1rem;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -756,6 +782,8 @@ const INCLUDED_IN_ALL = [
   'Webhooks para integrar com seu ERP',
   'Onboarding guiado',
   'Filiais adicionais',
+  'Chamadas de voz (em breve)',
+  'SMS (em breve)',
 ]
 
 // Módulos contratados à parte, por unidade. Fonte: ADDONS em backend/prisma/seed.ts.
@@ -763,30 +791,15 @@ const INCLUDED_IN_ALL = [
 interface AddonInfo {
   name: string
   description: string
-  note: string
+  note?: string
   icon: LucideIcon
 }
 
 const ADDONS: AddonInfo[] = [
   {
-    name: 'Voz no navegador',
-    description:
-      'Ligue para os leads direto do CRM, sem sair da tela. Sua unidade recebe um número dedicado e a ligação fica registrada no histórico do lead.',
-    note: '30 minutos de cortesia por mês. Para volume, use sua própria conta Sinch.',
-    icon: Phone,
-  },
-  {
-    name: 'SMS',
-    description:
-      'Envie SMS em automações, jornadas e na comunicação pós-visita, com remetente MASKOTEDU.',
-    note: '50 SMS de cortesia por mês. Para volume, use sua própria conta Sinch.',
-    icon: MessageSquareText,
-  },
-  {
-    name: 'Copiloto de Gestão para Diretores',
+    name: 'Mia para Diretores',
     description:
       'A Mia em modo gestão: calculadora de mensalidade por turma, resumo de custos operacionais, log de decisões e briefing diário para o diretor.',
-    note: 'Não exige o Maskot EDU.',
     icon: BriefcaseBusiness,
   },
   {
@@ -797,7 +810,7 @@ const ADDONS: AddonInfo[] = [
     icon: Volume2,
   },
   {
-    name: 'Pacote +1.000 interações de IA',
+    name: 'Pacote +1.000 interações de IA no WhatsApp',
     description:
       'Estourou a franquia do mês? Some quantos pacotes precisar, sem trocar de plano.',
     note: 'Cumulativo. Requer WhatsApp com IA.',
@@ -868,6 +881,15 @@ const FEATURE_GROUPS: FeatureGroup[] = [
 
 const openContact = () => window.dispatchEvent(new Event('open-contact-modal'))
 
+// Abre/fecha um bloco mantendo o botão clicado parado na tela, para a página não "pular"
+// quando o conteúdo expandido muda a altura do documento.
+function toggleKeepingPosition(button: HTMLElement, toggle: () => void) {
+  const topBefore = button.getBoundingClientRect().top
+  flushSync(toggle)
+  const shift = button.getBoundingClientRect().top - topBefore
+  if (shift !== 0) window.scrollBy({ top: shift, behavior: 'instant' })
+}
+
 function Cell({ value }: { value: CellValue }) {
   if (value === true) return <YesIcon aria-label="Incluído" />
   if (value === false) return <NoIcon aria-label="Não incluído" />
@@ -878,8 +900,10 @@ function Cell({ value }: { value: CellValue }) {
 
 export default function PricingSection() {
   const [compareOpen, setCompareOpen] = useState(false)
+  const [addonsOpen, setAddonsOpen] = useState(false)
   const baseId = useId()
   const tableId = `${baseId}-compare`
+  const addonsId = `${baseId}-addons`
 
   return (
     <Section id="precos">
@@ -952,30 +976,44 @@ export default function PricingSection() {
         </MultiUnitBanner>
 
         <AddonsBlock>
-          <AddonsHeading>
-            <h3>Módulos para ir além</h3>
-            <p>Contrate à parte, só quando fizer sentido para a sua escola.</p>
-          </AddonsHeading>
-          <AddonGrid>
-            {ADDONS.map(addon => {
-              const Icon = addon.icon
-              return (
-                <AddonCard key={addon.name}>
-                  <Icon aria-hidden="true" />
-                  <strong>{addon.name}</strong>
-                  <p>{addon.description}</p>
-                  <AddonNote>{addon.note}</AddonNote>
-                </AddonCard>
-              )
-            })}
-          </AddonGrid>
+          <AddonsToggle
+            type="button"
+            $open={addonsOpen}
+            aria-expanded={addonsOpen}
+            aria-controls={addonsId}
+            onClick={e => toggleKeepingPosition(e.currentTarget, () => setAddonsOpen(open => !open))}
+          >
+            <div>
+              <h3>Módulos para ir além</h3>
+              <p>Contrate à parte, só quando fizer sentido para a sua escola.</p>
+            </div>
+            <ChevronDown size={20} aria-hidden="true" />
+          </AddonsToggle>
+
+          <div id={addonsId} hidden={!addonsOpen}>
+            {addonsOpen && (
+              <AddonGrid>
+                {ADDONS.map(addon => {
+                  const Icon = addon.icon
+                  return (
+                    <AddonCard key={addon.name}>
+                      <Icon aria-hidden="true" />
+                      <strong>{addon.name}</strong>
+                      <p>{addon.description}</p>
+                      {addon.note && <AddonNote>{addon.note}</AddonNote>}
+                    </AddonCard>
+                  )
+                })}
+              </AddonGrid>
+            )}
+          </div>
         </AddonsBlock>
 
         <DisclosureButton
           $open={compareOpen}
           aria-expanded={compareOpen}
           aria-controls={tableId}
-          onClick={() => setCompareOpen(open => !open)}
+          onClick={e => toggleKeepingPosition(e.currentTarget, () => setCompareOpen(open => !open))}
         >
           {compareOpen ? 'Ocultar comparação' : 'Comparar todos os recursos'}
           <ChevronDown size={16} aria-hidden="true" />

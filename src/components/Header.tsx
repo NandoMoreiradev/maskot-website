@@ -590,10 +590,6 @@ export default function Header() {
                         </NavItem>
 
                         {/* LINKS SIMPLES */}
-                        <SimpleLink className="top-level-link" href="/#precos" onClick={handleLinkClick}>
-                            Preços
-                        </SimpleLink>
-
                         <SimpleLink className="top-level-link" href="/#recursos" onClick={handleLinkClick}>
                             Recursos
                         </SimpleLink>
@@ -604,6 +600,10 @@ export default function Header() {
 
                         <SimpleLink className="top-level-link" href="/cases" onClick={handleLinkClick}>
                             Cases
+                        </SimpleLink>
+
+                        <SimpleLink className="top-level-link" href="/#precos" onClick={handleLinkClick}>
+                            Preços
                         </SimpleLink>
 
                         <SimpleLink className="top-level-link" href="/sobre" onClick={handleLinkClick}>
