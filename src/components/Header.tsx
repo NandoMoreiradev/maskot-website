@@ -615,6 +615,10 @@ export default function Header() {
                             Preços
                         </SimpleLink>
 
+                        <SimpleLink className="top-level-link" href="/parceiros" onClick={handleLinkClick}>
+                            Parceiros
+                        </SimpleLink>
+
                         <SimpleLink className="top-level-link" href="/sobre" onClick={handleLinkClick}>
                             Sobre
                         </SimpleLink>

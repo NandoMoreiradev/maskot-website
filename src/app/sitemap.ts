@@ -105,6 +105,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: 'https://www.maskotedu.com.br/parceiros',
+      lastModified: SITE_LAST_UPDATED,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
       url: 'https://www.maskotedu.com.br/seguranca',
       lastModified: SITE_LAST_UPDATED,
       changeFrequency: 'monthly' as const,
