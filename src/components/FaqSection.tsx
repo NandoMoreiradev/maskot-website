@@ -107,6 +107,14 @@ const faqs = [
         q: 'Como funciona a cobrança? Tem fidelidade?',
         a: 'Os planos são flexíveis e pensados para se pagarem com poucas matrículas. Todos os planos incluem WhatsApp oficial, e a IA no atendimento entra a partir do Crescimento. Fale com um consultor para escolher o plano ideal para o tamanho da sua escola.',
     },
+    {
+        q: 'O Agente Comercial envia mensagens para as famílias sozinho?',
+        a: 'Não. O Agente Comercial só sugere: ele avisa quem precisa agir e deixa o próximo passo pronto, mas nada é enviado, movido de etapa ou marcado sem uma pessoa da sua equipe decidir. A Mia que atende no WhatsApp é outro recurso, configurado à parte.',
+    },
+    {
+        q: 'O Agente Comercial lê as conversas dos meus leads?',
+        a: 'Não. Ele trabalha com os dados do funil, como horários, etapas, visitas e tarefas, e não lê o conteúdo das mensagens. Para ler uma conversa e ajudar a responder, você chama a Mia copilota, que só olha a conversa que você abrir.',
+    },
 ]
 
 export default function FaqSection() {

@@ -1,6 +1,7 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
+import Link from 'next/link'
 import {
     Sparkles, Wrench, Search, MessageSquare,
     Zap, BrainCircuit, ListChecks, Activity,
@@ -8,7 +9,7 @@ import {
     Calendar, Mail, BookOpen, Globe, Bot,
     TrendingUp, AlertTriangle, CheckCircle2,
     Copy, MessageCircle, Users, BarChart3,
-    History
+    History, BellRing
 } from 'lucide-react'
 
 const float = keyframes`
@@ -644,6 +645,56 @@ const SectionDivider = styled.div`
     }
 `
 
+// --- TEASER DO AGENTE COMERCIAL ---
+const AgentTeaser = styled(Link)`
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 5rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid #FDBA74;
+    background: #FFFBF5;
+    text-decoration: none;
+    transition: all 0.2s;
+
+    &:hover {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        transform: translateY(-2px);
+    }
+
+    .icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: #FFF7ED;
+        border: 1px solid #FED7AA;
+        color: #EA580C;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .text { flex: 1; }
+    h4 { font-size: 1.25rem; font-weight: 700; color: #0F172A; margin: 0 0 0.25rem; }
+    p { font-size: 0.95rem; color: #475569; line-height: 1.5; margin: 0; }
+
+    .go {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        color: #0F172A;
+        white-space: nowrap;
+    }
+
+    @media (max-width: ${props => props.theme.breakpoints.md}) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+`
+
 export default function CopilotMiaDeepDive() {
     return (
         <Section id="recursos">
@@ -959,6 +1010,19 @@ export default function CopilotMiaDeepDive() {
                         <p>Ela se conecta perfeitamente às outras áreas do Maskot — CRM, Financeiro, Automações e Jornadas de marketing.</p>
                     </FeatureCard>
                 </FeatureGrid>
+
+                {/* TEASER: A MIA QUE VIGIA O FUNIL */}
+                <AgentTeaser href="/funcionalidades/agente-comercial">
+                    <div className="icon"><BellRing size={24} /></div>
+                    <div className="text">
+                        <h4>Além de responder, a Mia agora vigia o seu funil</h4>
+                        <p>
+                            O Agente Comercial avisa quando um lead fica sem resposta, uma família falta à visita ou a matrícula para,
+                            com o motivo e o próximo passo.
+                        </p>
+                    </div>
+                    <span className="go">Conhecer o Agente Comercial <ArrowRight size={16} /></span>
+                </AgentTeaser>
             </Container>
         </Section>
     )

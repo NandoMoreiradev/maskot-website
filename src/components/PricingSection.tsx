@@ -6,7 +6,7 @@ import { flushSync } from 'react-dom'
 import styled, { css } from 'styled-components'
 import {
   Check, X, ArrowRight, ChevronDown, MessageCircle, Bot,
-  BriefcaseBusiness, Volume2, PackagePlus,
+  BriefcaseBusiness, Volume2, PackagePlus, BellRing,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
@@ -796,6 +796,13 @@ interface AddonInfo {
 }
 
 const ADDONS: AddonInfo[] = [
+  {
+    name: 'Agente Comercial da Mia',
+    description:
+      'A Mia vigia o funil e avisa a equipe sobre lead sem resposta, falta na visita e matrícula parada, com o motivo e o próximo passo. Inclui a fila do dia e o painel do gestor.',
+    note: 'A Mia só sugere: a sua equipe aprova cada ação.',
+    icon: BellRing,
+  },
   {
     name: 'Mia para Diretores',
     description:

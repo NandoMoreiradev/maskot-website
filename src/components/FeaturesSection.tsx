@@ -14,6 +14,7 @@ import {
     GraduationCap,
     ClipboardList,
     CheckSquare,
+    BellRing,
     ArrowRight
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
@@ -187,6 +188,15 @@ export default function FeaturesSection() {
             color: '#9333EA',
             bg: '#FAF5FF',
             href: '/funcionalidades/copilot-mia'
+        },
+        {
+            title: 'Agente Comercial da Mia',
+            stage: 'Negociar',
+            description: 'A Mia vigia o funil e avisa quando um lead esfria, uma família falta à visita ou a matrícula para, com o próximo passo pronto.',
+            icon: <BellRing />,
+            color: '#EA580C',
+            bg: '#FFF7ED',
+            href: '/funcionalidades/agente-comercial'
         },
         {
             title: 'Funil de Vendas Visual',

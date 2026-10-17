@@ -7,7 +7,7 @@ import {
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
     BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit,
-    ClipboardList, Instagram
+    ClipboardList, Instagram, BellRing
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -584,6 +584,15 @@ export default function Header() {
                                     <div className="text">
                                         <strong>Copilot IA (Mia)</strong>
                                         <span>Sua assistente virtual</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Agente Comercial da Mia (NOVO) */}
+                                <DropdownLink href="/funcionalidades/agente-comercial" onClick={handleLinkClick}>
+                                    <div className="icon-box"><BellRing size={18}/></div>
+                                    <div className="text">
+                                        <strong>Agente Comercial</strong>
+                                        <span>A Mia vigia o seu funil</span>
                                     </div>
                                 </DropdownLink>
                             </DropdownContent>
