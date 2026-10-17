@@ -11,6 +11,7 @@ import PricingSection from '@/components/PricingSection'
 import FaqSection from '@/components/FaqSection'
 import CTASection from '@/components/CTASection'
 import RecentPostsSection from '@/components/RecentPostsSection'
+import PartnersTeaser from '@/components/PartnersTeaser'
 
 const LOGOS_DIR = 'logos-escolas'
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.svg', '.webp'])
@@ -47,6 +48,7 @@ export default function Home() {
             <PricingSection />
             <FaqSection />
             <RecentPostsSection />
+            <PartnersTeaser />
             <CTASection />
         </>
     )

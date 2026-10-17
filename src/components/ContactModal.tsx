@@ -354,19 +354,73 @@ const Footnote = styled.p`
     }
 `
 
+/**
+ * Variantes do modal. `school` é a demonstração para escolas (padrão: quem dispara o evento sem `detail` cai aqui).
+ * `partner` é a candidatura ao Programa de Parceiros (agências e empresas do setor educacional):
+ * `window.dispatchEvent(new CustomEvent('open-contact-modal', { detail: { variant: 'partner' } }))`.
+ */
+type Variant = 'school' | 'partner'
+
+const COPY: Record<Variant, {
+    eyebrow: string
+    title: string
+    subtitle: string
+    benefits: string[]
+    heading: string
+    lead: string
+}> = {
+    school: {
+        eyebrow: 'Demonstração gratuita',
+        title: 'Vamos escalar as matrículas da sua escola?',
+        subtitle: 'Em uma conversa rápida, um especialista mostra o Maskot funcionando com a realidade da sua instituição.',
+        benefits: [
+            'Demonstração personalizada para a sua escola',
+            'Veja o marketing, o comercial, o WhatsApp e a Mia na prática',
+            'Diagnóstico do seu funil de matrículas',
+            'Sem compromisso e sem custo',
+        ],
+        heading: 'Fale com um Consultor',
+        lead: 'Preencha seus dados e nosso time entra em contato.',
+    },
+    partner: {
+        eyebrow: 'Programa de Parceiros',
+        title: 'Vamos crescer junto com as escolas que você atende?',
+        subtitle: 'Conte um pouco sobre a sua empresa. Nosso time apresenta o programa, as condições de comissão e o portal do parceiro.',
+        benefits: [
+            'Comissão sobre as escolas que você indicar',
+            'A escola fica reservada para você depois da validação',
+            'Portal para acompanhar indicações, comissões e repasses',
+            'Sem compromisso: uma conversa para ver se faz sentido',
+        ],
+        heading: 'Quero ser parceiro',
+        lead: 'Preencha os dados e nosso time entra em contato.',
+    },
+}
+
+const EMPTY_FORM = {
+    name: '',
+    email: '',
+    phone: '',
+    schoolName: '',
+    role: '',
+    studentsCount: '',
+    company: '',
+    partnerType: '',
+    schoolsServed: '',
+    website: '',
+}
+
 export default function ContactModal(): React.ReactElement | null {
     const [isOpen, setIsOpen] = useState(false)
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        schoolName: '',
-        role: '',
-        studentsCount: ''
-    })
+    const [variant, setVariant] = useState<Variant>('school')
+    const [formData, setFormData] = useState(EMPTY_FORM)
 
     useEffect(() => {
-        const handleOpen = () => setIsOpen(true)
+        const handleOpen = (event: Event) => {
+            const requested = (event as CustomEvent<{ variant?: Variant } | undefined>).detail?.variant
+            setVariant(requested === 'partner' ? 'partner' : 'school')
+            setIsOpen(true)
+        }
         window.addEventListener('open-contact-modal', handleOpen)
         return () => window.removeEventListener('open-contact-modal', handleOpen)
     }, [])
@@ -393,7 +447,19 @@ export default function ContactModal(): React.ReactElement | null {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        const message = `Olá! Gostaria de falar com um especialista sobre o Maskot.
+        const message = variant === 'partner'
+            ? `Olá! Quero conhecer o Programa de Parceiros do Maskot Edu.
+
+*Meus Dados:*
+- *Nome:* ${formData.name}
+- *E-mail:* ${formData.email}
+- *WhatsApp:* ${formData.phone}
+- *Empresa:* ${formData.company}
+- *Tipo de empresa:* ${formData.partnerType}
+- *Escolas que atende:* ${formData.schoolsServed}${formData.website.trim() ? `
+- *Site ou Instagram:* ${formData.website.trim()}` : ''}
+        `
+            : `Olá! Gostaria de falar com um especialista sobre o Maskot.
 
 *Meus Dados:*
 - *Nome:* ${formData.name}
@@ -410,27 +476,27 @@ export default function ContactModal(): React.ReactElement | null {
 
         window.open(url, '_blank')
         setIsOpen(false)
-        setFormData({ name: '', email: '', phone: '', schoolName: '', role: '', studentsCount: '' })
+        setFormData(EMPTY_FORM)
     }
 
     if (!isOpen) return null
+
+    const copy = COPY[variant]
+    const isPartner = variant === 'partner'
 
     return (
         <Overlay $isOpen={isOpen} onClick={() => setIsOpen(false)}>
             <ModalContainer onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
                 <AsidePanel>
                     <Eyebrow>
-                        <Sparkles size={12} /> Demonstração gratuita
+                        <Sparkles size={12} /> {copy.eyebrow}
                     </Eyebrow>
-                    <AsideTitle>Vamos escalar as matrículas da sua escola?</AsideTitle>
-                    <AsideSubtitle>
-                        Em uma conversa rápida, um especialista mostra o Maskot funcionando com a realidade da sua instituição.
-                    </AsideSubtitle>
+                    <AsideTitle>{copy.title}</AsideTitle>
+                    <AsideSubtitle>{copy.subtitle}</AsideSubtitle>
                     <BenefitList>
-                        <li><CheckCircle2 size={18} /> Demonstração personalizada para a sua escola</li>
-                        <li><CheckCircle2 size={18} /> Veja o marketing, o comercial, o WhatsApp e a Mia na prática</li>
-                        <li><CheckCircle2 size={18} /> Diagnóstico do seu funil de matrículas</li>
-                        <li><CheckCircle2 size={18} /> Sem compromisso e sem custo</li>
+                        {copy.benefits.map(benefit => (
+                            <li key={benefit}><CheckCircle2 size={18} /> {benefit}</li>
+                        ))}
                     </BenefitList>
                     <TrustRow>
                         <div><ShieldCheck /> API Oficial do WhatsApp</div>
@@ -441,53 +507,93 @@ export default function ContactModal(): React.ReactElement | null {
                 <FormPanel>
                     <CloseButton onClick={() => setIsOpen(false)} aria-label="Fechar"><X size={20} /></CloseButton>
                     <FormHeading>
-                        <h3 id="contact-modal-title">Fale com um Consultor</h3>
-                        <p>Preencha seus dados e nosso time entra em contato.</p>
+                        <h3 id="contact-modal-title">{copy.heading}</h3>
+                        <p>{copy.lead}</p>
                     </FormHeading>
                     <Form onSubmit={handleSubmit}>
                         <FormGroup>
-                            <label>Nome Completo</label>
-                            <input required name="name" value={formData.name} onChange={handleChange} placeholder="João da Silva" />
+                            <label htmlFor="contact-name">Nome Completo</label>
+                            <input id="contact-name" required name="name" value={formData.name} onChange={handleChange} placeholder="João da Silva" />
                         </FormGroup>
                         <Row>
                             <FormGroup>
-                                <label>E-mail Profissional</label>
-                                <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="joao@escola.com.br" />
+                                <label htmlFor="contact-email">E-mail Profissional</label>
+                                <input id="contact-email" required type="email" name="email" value={formData.email} onChange={handleChange} placeholder={isPartner ? 'joao@suaempresa.com.br' : 'joao@escola.com.br'} />
                             </FormGroup>
                             <FormGroup>
-                                <label>WhatsApp</label>
-                                <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="(11) 99999-9999" />
+                                <label htmlFor="contact-phone">WhatsApp</label>
+                                <input id="contact-phone" required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="(11) 99999-9999" />
                             </FormGroup>
                         </Row>
-                        <FormGroup>
-                            <label>Nome da Escola</label>
-                            <input required name="schoolName" value={formData.schoolName} onChange={handleChange} placeholder="Colégio Exemplo" />
-                        </FormGroup>
-                        <Row>
-                            <FormGroup>
-                                <label>Cargo</label>
-                                <select required name="role" value={formData.role} onChange={handleChange}>
-                                    <option value="">Selecione...</option>
-                                    <option value="Diretor(a)">Diretor(a)</option>
-                                    <option value="Mantenedor(a)">Mantenedor(a)</option>
-                                    <option value="Coordenador(a)">Coordenador(a)</option>
-                                    <option value="Marketing/Vendas">Marketing / Vendas</option>
-                                    <option value="Secretaria">Secretaria</option>
-                                    <option value="Outro">Outro</option>
-                                </select>
-                            </FormGroup>
-                            <FormGroup>
-                                <label>Nº de Alunos</label>
-                                <select required name="studentsCount" value={formData.studentsCount} onChange={handleChange}>
-                                    <option value="">Selecione...</option>
-                                    <option value="0-100">0 a 100</option>
-                                    <option value="101-300">101 a 300</option>
-                                    <option value="301-600">301 a 600</option>
-                                    <option value="601-1000">601 a 1000</option>
-                                    <option value="1000+">Mais de 1000</option>
-                                </select>
-                            </FormGroup>
-                        </Row>
+
+                        {isPartner ? (
+                            <>
+                                <FormGroup>
+                                    <label htmlFor="contact-company">Nome da Empresa</label>
+                                    <input id="contact-company" required name="company" value={formData.company} onChange={handleChange} placeholder="Agência Exemplo" />
+                                </FormGroup>
+                                <Row>
+                                    <FormGroup>
+                                        <label htmlFor="contact-partnerType">Tipo de Empresa</label>
+                                        <select id="contact-partnerType" required name="partnerType" value={formData.partnerType} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="Agência de marketing">Agência de marketing</option>
+                                            <option value="Consultoria ou assessoria educacional">Consultoria / assessoria educacional</option>
+                                            <option value="Sistema de ensino ou editora">Sistema de ensino / editora</option>
+                                            <option value="Tecnologia para escolas">Tecnologia para escolas</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label htmlFor="contact-schoolsServed">Escolas que Atende</label>
+                                        <select id="contact-schoolsServed" required name="schoolsServed" value={formData.schoolsServed} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="1 a 5">1 a 5</option>
+                                            <option value="6 a 15">6 a 15</option>
+                                            <option value="16 a 50">16 a 50</option>
+                                            <option value="Mais de 50">Mais de 50</option>
+                                        </select>
+                                    </FormGroup>
+                                </Row>
+                                <FormGroup>
+                                    <label htmlFor="contact-website">Site ou Instagram (opcional)</label>
+                                    <input id="contact-website" name="website" value={formData.website} onChange={handleChange} placeholder="www.suaempresa.com.br" />
+                                </FormGroup>
+                            </>
+                        ) : (
+                            <>
+                                <FormGroup>
+                                    <label htmlFor="contact-schoolName">Nome da Escola</label>
+                                    <input id="contact-schoolName" required name="schoolName" value={formData.schoolName} onChange={handleChange} placeholder="Colégio Exemplo" />
+                                </FormGroup>
+                                <Row>
+                                    <FormGroup>
+                                        <label htmlFor="contact-role">Cargo</label>
+                                        <select id="contact-role" required name="role" value={formData.role} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="Diretor(a)">Diretor(a)</option>
+                                            <option value="Mantenedor(a)">Mantenedor(a)</option>
+                                            <option value="Coordenador(a)">Coordenador(a)</option>
+                                            <option value="Marketing/Vendas">Marketing / Vendas</option>
+                                            <option value="Secretaria">Secretaria</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label htmlFor="contact-studentsCount">Nº de Alunos</label>
+                                        <select id="contact-studentsCount" required name="studentsCount" value={formData.studentsCount} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="0-100">0 a 100</option>
+                                            <option value="101-300">101 a 300</option>
+                                            <option value="301-600">301 a 600</option>
+                                            <option value="601-1000">601 a 1000</option>
+                                            <option value="1000+">Mais de 1000</option>
+                                        </select>
+                                    </FormGroup>
+                                </Row>
+                            </>
+                        )}
+
                         <SubmitButton type="submit">
                             Enviar <Send size={18} />
                         </SubmitButton>

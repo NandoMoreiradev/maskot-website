@@ -369,6 +369,12 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
+                                <FooterLink href="/parceiros">
+                                    Programa de Parceiros
+                                    <ExternalLink />
+                                </FooterLink>
+                            </LinkItem>
+                            <LinkItem>
                                 <FooterLinkDisabled>
                                     Webinars
                                     <ComingSoonBadge>Em breve</ComingSoonBadge>
