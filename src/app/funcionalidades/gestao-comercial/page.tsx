@@ -8,7 +8,7 @@ import CrmFeatures from '@/components/features/CrmFeatures'
 
 export const metadata: Metadata = {
     title: 'Gestão Comercial e Funil de Matrículas',
-    description: 'Organize seu funil de vendas escolar com Kanban, listas inteligentes e automação. O fim das planilhas de Excel na sua escola.',
+    description: 'Organize seu funil de matrículas escolar com Kanban, listas inteligentes e automação. O fim das planilhas de Excel na sua escola.',
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/gestao-comercial',
     },

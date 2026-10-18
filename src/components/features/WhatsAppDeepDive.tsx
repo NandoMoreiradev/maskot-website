@@ -781,7 +781,7 @@ export default function WhatsAppDeepDive() {
                                 </div>
                                 <div className="content">
                                     <div className="info-row">
-                                        <label>Funil de Vendas</label>
+                                        <label>Funil de Matrículas</label>
                                         <div className="val">
                                             <span style={{
                                                 width: '8px',

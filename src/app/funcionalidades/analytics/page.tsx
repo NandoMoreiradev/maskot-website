@@ -7,7 +7,7 @@ import AnalyticsDeepDive from '@/components/features/AnalyticsDeepDive'
 
 export const metadata: Metadata = {
     title: 'Analytics e BI para Escolas',
-    description: 'Painel de dados completo para gestão escolar. Acompanhe funil de vendas, performance da equipe e indicadores financeiros em tempo real.',
+    description: 'Painel de dados completo para gestão escolar. Acompanhe funil de matrículas, performance da equipe e indicadores financeiros em tempo real.',
     keywords: ['analytics escolar', 'bi educacional', 'indicadores gestão escolar', 'funil de matrículas', 'relatórios escola'],
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/analytics',

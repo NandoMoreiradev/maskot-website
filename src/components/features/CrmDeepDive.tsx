@@ -605,7 +605,7 @@ export default function CrmDeepDive() {
                 {/* 1. KANBAN BOARD */}
                 <FeatureRow>
                     <TextContent>
-                        <h3>Funil de Vendas Visual<br/>(Kanban)</h3>
+                        <h3>Funil de Matrículas Visual<br/>(Kanban)</h3>
                         <p>
                             Tenha uma visão panorâmica da sua escola. Mova os cartões de Novo Interessado
                             para Visita Agendada ou Matriculado com um simples arrastar e soltar.

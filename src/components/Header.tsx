@@ -457,7 +457,7 @@ export default function Header() {
                                     <div className="icon-box"><KanbanSquare size={18}/></div>
                                     <div className="text">
                                         <strong>Gestão Comercial</strong>
-                                        <span>Funil de vendas CRM</span>
+                                        <span>Funil de Matrículas CRM</span>
                                     </div>
                                 </DropdownLink>
 

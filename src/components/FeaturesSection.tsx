@@ -199,7 +199,7 @@ export default function FeaturesSection() {
             href: '/funcionalidades/agente-comercial'
         },
         {
-            title: 'Funil de Vendas Visual',
+            title: 'Funil de Matrículas Visual',
             stage: 'Negociar',
             description: 'Visualize todos os interessados em colunas (Kanban), saiba quem visitou, quem está negociando e quem sumiu.',
             icon: <LayoutDashboard />,

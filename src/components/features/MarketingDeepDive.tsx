@@ -368,7 +368,7 @@ export default function MarketingDeepDive() {
                         <ul>
                             <li><Filter size={20}/> <strong>Filtros Lógicos:</strong> Combine condições (Ex: &quot;Visitou a Escola&quot; E &quot;Não Matriculou&quot;).</li>
                             <li><Users size={20}/> <strong>Listas Dinâmicas:</strong> O público se atualiza sozinho. Se um aluno visita hoje, ele entra na lista automaticamente.</li>
-                            <li><Target size={20}/> <strong>Tags & Status:</strong> Use as etiquetas do funil de vendas para criar seus grupos.</li>
+                            <li><Target size={20}/> <strong>Tags & Status:</strong> Use as etiquetas do funil de matrículas para criar seus grupos.</li>
                         </ul>
                     </TextContent>
                     <MockupCard>
@@ -540,7 +540,7 @@ export default function MarketingDeepDive() {
                     <PowerCard>
                         <div className="icon"><Target size={24}/></div>
                         <h4>Retargeting CRM</h4>
-                        <p>Fale especificamente com leads que travaram em uma etapa do funil de vendas.</p>
+                        <p>Fale especificamente com leads que travaram em uma etapa do funil de matrículas.</p>
                     </PowerCard>
                     <PowerCard>
                         <div className="icon"><MessageCircle size={24}/></div>

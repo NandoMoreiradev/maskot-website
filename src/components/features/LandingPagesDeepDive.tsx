@@ -839,7 +839,7 @@ export default function LandingPagesDeepDive() {
                         <h3>Formulários Conectados <br />ao seu CRM</h3>
                         <p>
                             O verdadeiro poder está na integração nativa. Qualquer lead que preencher um formulário na sua
-                            Landing Page entra instantaneamente no funil de vendas do Maskot Edu, pronto para atendimento.
+                            Landing Page entra instantaneamente no funil de matrículas do Maskot Edu, pronto para atendimento.
                         </p>
                         <BenefitList>
                             <BenefitItem>
