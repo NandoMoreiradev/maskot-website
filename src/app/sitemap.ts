@@ -3,6 +3,7 @@ import { readdirSync, existsSync } from 'fs'
 import { join } from 'path'
 import { createPrismicClient } from '@/prismicio'
 import { categorySlug } from '@/lib/categories'
+import { TEAMS } from '@/lib/teams'
 
 // Lê dinamicamente as rotas estáticas dentro de src/app/funcionalidades.
 // Cada subpasta com um page.tsx vira uma URL do sitemap — evita manter
@@ -45,6 +46,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const funcionalidades = getFuncionalidadesSlugs().map(f => ({
     url: `https://www.maskotedu.com.br/funcionalidades/${f}`,
     lastModified: new Date('2026-10-13'),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  const equipes = TEAMS.map(t => ({
+    url: `https://www.maskotedu.com.br/equipes/${t.slug}`,
+    lastModified: new Date('2026-10-18'),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }))
@@ -105,6 +113,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: 'https://www.maskotedu.com.br/equipes',
+      lastModified: new Date('2026-10-18'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
       url: 'https://www.maskotedu.com.br/parceiros',
       lastModified: SITE_LAST_UPDATED,
       changeFrequency: 'monthly' as const,
@@ -126,6 +140,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categoryPages,
     ...casePages,
     ...funcionalidades,
+    ...equipes,
     ...legal,
   ]
 }

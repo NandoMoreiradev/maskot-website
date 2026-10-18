@@ -312,6 +312,12 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
+                                <FooterLink href="/equipes">
+                                    Para cada equipe
+                                    <ExternalLink />
+                                </FooterLink>
+                            </LinkItem>
+                            <LinkItem>
                                 <FooterLink href="/comparativo">
                                     Comparativo Real
                                     <ExternalLink />

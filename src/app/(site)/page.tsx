@@ -4,6 +4,7 @@ import Hero from '@/components/Hero'
 import SchoolsSection, { SchoolLogo } from '@/components/SchoolsSection'
 import ProblemSection from '@/components/ProblemSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
+import TeamsPanel from '@/components/teams/TeamsPanel'
 import FeaturesSection from '@/components/FeaturesSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import SecuritySection from '@/components/SecuritySection'
@@ -42,6 +43,7 @@ export default function Home() {
             <SchoolsSection logos={schoolLogos} />
             <ProblemSection />
             <HowItWorksSection />
+            <TeamsPanel />
             <FeaturesSection />
             <TestimonialsSection />
             <SecuritySection />
