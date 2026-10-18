@@ -599,6 +599,10 @@ export default function Header() {
                         </NavItem>
 
                         {/* LINKS SIMPLES */}
+                        <SimpleLink className="top-level-link" href="/equipes" onClick={handleLinkClick}>
+                            Equipes
+                        </SimpleLink>
+
                         <SimpleLink className="top-level-link" href="/#recursos" onClick={handleLinkClick}>
                             Recursos
                         </SimpleLink>
