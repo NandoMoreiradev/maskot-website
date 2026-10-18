@@ -366,6 +366,13 @@ export default function Footer() {
                                 </FooterLink>
                             </LinkItem>
                             <LinkItem>
+                                {/* Documentação técnica pública da API de integração (webhooks, conhecimento da Mia e conectores). */}
+                                <FooterLink href="https://api.maskotedu.com.br/partner/docs" target="_blank" rel="noopener noreferrer">
+                                    API de Integração
+                                    <ExternalLink />
+                                </FooterLink>
+                            </LinkItem>
+                            <LinkItem>
                                 <FooterLink href="/parceiros">
                                     Programa de Parceiros
                                     <ExternalLink />
