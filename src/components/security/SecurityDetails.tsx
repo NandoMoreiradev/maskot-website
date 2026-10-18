@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
 
-const PRIVACY_EMAIL = 'fernandomoreira@maskotedu.com.br'
+const PRIVACY_EMAIL = 'contato@maskotedu.com.br'
 
 const Section = styled.section`
     padding: 5rem 0 6rem;

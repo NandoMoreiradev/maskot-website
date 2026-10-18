@@ -147,7 +147,7 @@ export default function BlogFooter() {
             <SocialIcon href="https://facebook.com/maskotedu" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Facebook size={17} />
             </SocialIcon>
-            <SocialIcon href="mailto:fernandomoreira@maskotedu.com.br" aria-label="E-mail">
+            <SocialIcon href="mailto:contato@maskotedu.com.br" aria-label="E-mail">
               <Mail size={17} />
             </SocialIcon>
           </SocialLinks>
@@ -185,7 +185,7 @@ export default function BlogFooter() {
       </Container>
 
       <Bottom>
-        <p>© {new Date().getFullYear()} Maskot Edu · CNPJ 55.188.948/0001-04 · Todos os direitos reservados.</p>
+        <p>© {new Date().getFullYear()} Maskot Edu · Todos os direitos reservados.</p>
         <div className="legal">
           <Link href="/legal/privacidade">Privacidade</Link>
           <Link href="/legal/termos">Termos</Link>
