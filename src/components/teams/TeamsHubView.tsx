@@ -66,16 +66,25 @@ const Section = styled.section<{ $alt?: boolean }>`
 `
 
 const Grid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.25rem;
 
+    > * {
+        flex: 0 1 calc((100% - 2.5rem) / 3);
+    }
+
     @media (max-width: ${props => props.theme.breakpoints.lg}) {
-        grid-template-columns: repeat(2, 1fr);
+        > * {
+            flex-basis: calc((100% - 1.25rem) / 2);
+        }
     }
 
     @media (max-width: ${props => props.theme.breakpoints.md}) {
-        grid-template-columns: 1fr;
+        > * {
+            flex-basis: 100%;
+        }
     }
 `
 
@@ -189,16 +198,12 @@ const CONNECTIONS = [
         text: 'A conversa que virou oportunidade vira lead, e o consultor assume com todo o histórico.',
     },
     {
-        flow: 'Comercial → Secretaria',
-        text: 'Ao ganhar o lead, a matrícula, o contrato e o plano de pagamento seguem do funil para a secretaria.',
-    },
-    {
-        flow: 'Secretaria → Coordenação',
-        text: 'O aluno matriculado já aparece nas turmas, com onboarding e acompanhamento de retenção.',
+        flow: 'Comercial → Coordenação',
+        text: 'Quando a família fecha, o aluno novo entra no onboarding, e a coordenação acolhe sem pedir os dados de novo.',
     },
     {
         flow: 'Todas → Direção',
-        text: 'Funil, financeiro, retenção e conversão por origem chegam aos painéis da direção sem planilha no meio.',
+        text: 'Funil, conversão por origem, desempenho da equipe e pesquisas chegam aos painéis da direção sem planilha no meio.',
     },
 ]
 
@@ -213,7 +218,7 @@ export default function TeamsHubView() {
                             Sua equipe trabalhando <strong>do jeito certo</strong> e com produtividade
                         </h1>
                         <p>
-                            O Maskot reúne marketing, atendimento, comercial, secretaria, coordenação e direção numa só
+                            O Maskot reúne marketing, atendimento, comercial, coordenação e direção numa só
                             plataforma. Cada equipe usa os módulos da sua rotina, e todas trabalham sobre os mesmos
                             dados.
                         </p>

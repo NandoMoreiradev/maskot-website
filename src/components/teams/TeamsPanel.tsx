@@ -14,16 +14,25 @@ const Section = styled.section`
 `
 
 const Grid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
 
+    > * {
+        flex: 0 1 calc((100% - 2rem) / 3);
+    }
+
     @media (max-width: ${props => props.theme.breakpoints.lg}) {
-        grid-template-columns: repeat(2, 1fr);
+        > * {
+            flex-basis: calc((100% - 1rem) / 2);
+        }
     }
 
     @media (max-width: ${props => props.theme.breakpoints.sm}) {
-        grid-template-columns: 1fr;
+        > * {
+            flex-basis: 100%;
+        }
     }
 `
 
@@ -124,7 +133,7 @@ export default function TeamsPanel() {
                         Sua equipe trabalhando <GradientText>do jeito certo</GradientText> e com produtividade
                     </SectionTitle>
                     <SectionSubtitle>
-                        Marketing, atendimento, comercial, secretaria, coordenação e direção usam os mesmos módulos, cada
+                        Marketing, atendimento, comercial, coordenação e direção usam os mesmos módulos, cada
                         um do seu jeito, e passam a trabalhar juntos. Escolha a sua equipe e veja como.
                     </SectionSubtitle>
                 </SectionHeader>

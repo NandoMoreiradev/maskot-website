@@ -10,7 +10,6 @@ export type TeamSlug =
     | 'marketing'
     | 'atendimento'
     | 'comercial'
-    | 'secretaria'
     | 'coordenacao'
     | 'direcao'
 
@@ -209,7 +208,7 @@ export const TEAMS: Team[] = [
             },
             {
                 name: 'Chat interno',
-                what: 'Tire dúvidas com comercial, secretaria e coordenação sem sair do sistema e sem misturar com o WhatsApp.',
+                what: 'Tire dúvidas com comercial e coordenação sem sair do sistema e sem misturar com o WhatsApp.',
             },
         ],
         routine: [
@@ -338,8 +337,8 @@ export const TEAMS: Team[] = [
                 text: 'Recebe a oportunidade já qualificada, com a conversa completa à mão.',
             },
             {
-                with: 'secretaria',
-                text: 'Quando a família decide, a matrícula segue para a secretaria sem recomeçar o cadastro.',
+                with: 'coordenacao',
+                text: 'Quando a família fecha, o aluno novo entra no onboarding e a coordenação acolhe sem pedir os dados de novo.',
             },
         ],
         outcomes: [
@@ -349,168 +348,77 @@ export const TEAMS: Team[] = [
         ],
     },
     {
-        slug: 'secretaria',
-        name: 'Secretaria e Financeiro',
-        shortName: 'Secretaria',
-        stage: 'Matricular',
-        tagline: 'Da matrícula ao contrato e à cobrança, sem retrabalho e sem planilha solta.',
-        headline: 'Secretaria que matricula sem retrabalho e *mantém tudo em ordem*',
-        intro:
-            'A família que decidiu virar aluno segue do funil para a matrícula, com contrato, plano de pagamento e documentos no mesmo sistema. A secretaria não digita o mesmo dado duas vezes.',
-        seoTitle: 'Maskot para Secretaria e Financeiro Escolar',
-        seoDescription:
-            'Como a secretaria e o financeiro da escola usam o Maskot: nova matrícula, contratos, planos de pagamento, faturas, Drive de documentos, importação e exportação de dados.',
-        keywords: [
-            'secretaria escolar',
-            'matrícula online',
-            'contrato escolar',
-            'gestão financeira escolar',
-            'planos de pagamento escola',
-        ],
-        challenges: [
-            'Os dados da família são digitados de novo quando o lead vira aluno.',
-            'Contratos, documentos e comprovantes ficam em pastas e e-mails diferentes.',
-            'O plano de pagamento combinado na visita não chega igual ao financeiro.',
-            'Trocar de sistema parece impossível por causa do histórico de alunos.',
-        ],
-        modules: [
-            {
-                name: 'Nova Matrícula',
-                what: 'Matricule a partir do lead ganho, já com o plano de pagamento escolhido, ou abra uma matrícula direta pela secretaria.',
-            },
-            {
-                name: 'Secretaria Digital',
-                what: 'Consulte alunos, registre ocorrências e acompanhe o painel da secretaria em um só lugar.',
-            },
-            {
-                name: 'Contratos Escolares',
-                what: 'Trabalhe com modelos de contrato da escola, para cada matrícula sair no padrão.',
-            },
-            {
-                name: 'Planos de Pagamento',
-                what: 'Cadastre as condições comerciais para o que foi combinado com a família ser o que será cobrado.',
-            },
-            {
-                name: 'Gestão Financeira',
-                what: 'Acompanhe faturas, status de pagamento e relatórios financeiros.',
-            },
-            {
-                name: 'Drive de documentos',
-                what: 'Guarde e compartilhe documentos por pasta e por link, com controle de versões e lixeira.',
-            },
-            {
-                name: 'Importação e exportação de dados',
-                what: 'Traga a base que a escola já tem e exporte seus dados quando precisar.',
-            },
-        ],
-        routine: [
-            {
-                when: 'Ao abrir a secretaria',
-                text: 'Veja as matrículas que o comercial liberou e os pendentes de documentação.',
-            },
-            {
-                when: 'Matrícula',
-                text: 'Matricule a partir do lead ganho, gere o contrato e confira o plano de pagamento vinculado.',
-            },
-            {
-                when: 'Rotina',
-                text: 'Atualize cadastros, registre ocorrências e guarde cada documento na pasta do aluno.',
-            },
-            {
-                when: 'Fechamento do mês',
-                text: 'Confira faturas e relatórios financeiros e repasse à direção o que precisa de decisão.',
-            },
-        ],
-        handoffs: [
-            {
-                with: 'comercial',
-                text: 'Recebe o aluno que o comercial fechou, com os dados e as condições já registrados.',
-            },
-            {
-                with: 'coordenacao',
-                text: 'A matrícula alimenta turmas e disciplinas, e a coordenação já enxerga os alunos de cada turma.',
-            },
-            {
-                with: 'direcao',
-                text: 'Os números financeiros chegam à direção sem precisar de planilha intermediária.',
-            },
-        ],
-        outcomes: [
-            'Um cadastro só, do primeiro contato ao aluno matriculado.',
-            'Contrato, plano e documentos no mesmo lugar.',
-            'Migração de dados sem perder o histórico.',
-        ],
-    },
-    {
         slug: 'coordenacao',
         name: 'Equipe da Coordenação',
         shortName: 'Coordenação',
-        stage: 'Acompanhar e reter',
-        tagline: 'Turmas, professores e permanência dos alunos na mesma visão.',
-        headline: 'Coordenação que acompanha cada turma e *antecipa o risco de evasão*',
+        stage: 'Acolher e escutar',
+        tagline: 'Visitas pedagógicas, acolhimento de alunos novos e a voz das famílias.',
+        headline: 'Coordenação que acolhe bem e *escuta as famílias*',
         intro:
-            'Turmas, disciplinas, grade e diário de classe organizados, e uma leitura de risco de evasão que cruza financeiro, desempenho e frequência. A coordenação age antes de a família decidir sair.',
+            'Reuniões pedagógicas na agenda, acolhimento padronizado para quem acabou de chegar e pesquisas que mostram o que as famílias realmente pensam. A coordenação deixa de apagar incêndio e passa a agir com informação.',
         seoTitle: 'Maskot para a Coordenação Pedagógica',
         seoDescription:
-            'Como a coordenação da escola usa o Maskot: turmas, disciplinas, grade horária, diário de classe, análise de retenção, onboarding de novos alunos e pesquisas de satisfação.',
+            'Como a coordenação da escola usa o Maskot: agenda de visitas e reuniões pedagógicas, onboarding de alunos novos, pesquisas de satisfação e NPS, tarefas e chat interno.',
         keywords: [
             'coordenação pedagógica',
-            'diário de classe',
-            'retenção de alunos',
-            'evasão escolar',
             'onboarding de alunos',
+            'pesquisa de satisfação escolar',
+            'NPS escolar',
+            'reunião pedagógica',
         ],
         challenges: [
-            'Os sinais de que um aluno vai sair aparecem tarde demais.',
-            'Os lançamentos dos professores chegam atrasados ou por vários canais.',
+            'Visitas guiadas e reuniões pedagógicas ficam espalhadas em agendas e mensagens.',
             'O aluno novo não tem acolhimento padronizado, e cada turma recebe de um jeito.',
-            'Não se sabe o que as famílias realmente pensam da escola.',
+            'Não se sabe o que as famílias realmente pensam da escola até alguém reclamar.',
+            'Demandas pedagógicas se perdem em grupos de WhatsApp e ninguém sabe quem ficou de resolver.',
         ],
         modules: [
             {
-                name: 'Turmas e Disciplinas',
-                what: 'Organize turmas, disciplinas e a atribuição de professores.',
-            },
-            {
-                name: 'Grade horária',
-                what: 'Monte e consulte a grade horária de cada turma.',
-            },
-            {
-                name: 'Diário de Classe',
-                what: 'O professor lança a aula por turma e disciplina, e a coordenação acompanha sem recolher papel.',
-            },
-            {
-                name: 'Análise de Retenção',
-                what: 'Uma pontuação de risco de evasão que cruza financeiro, desempenho acadêmico e frequência, atualizada toda semana.',
+                name: 'Agendamento de Visitas',
+                href: '/funcionalidades/agendamento',
+                what: 'Receba visitas guiadas e reuniões pedagógicas numa agenda única, com horários e capacidade definidos pela escola.',
             },
             {
                 name: 'Onboarding de alunos',
                 href: '/funcionalidades/onboarding',
-                what: 'Checklists padronizados de acolhimento para que todo aluno novo comece bem.',
+                what: 'Checklists padronizados de acolhimento, para que todo aluno novo comece bem, em qualquer turma.',
             },
             {
                 name: 'Pesquisas e NPS',
                 href: '/funcionalidades/pesquisas',
-                what: 'Meça a satisfação das famílias e transforme a resposta em ação.',
+                what: 'Meça a satisfação das famílias e transforme cada resposta em ação.',
             },
             {
                 name: 'Gestão de Tarefas',
                 href: '/funcionalidades/gestao-tarefas',
-                what: 'Distribua demandas, prazos e projetos pedagógicos em quadros de tarefas.',
+                what: 'Distribua demandas, prazos e projetos pedagógicos em quadros de tarefas, com responsável e data.',
+            },
+            {
+                name: 'Chat interno',
+                what: 'Resolva dúvidas com atendimento e comercial sem sair do sistema e sem misturar com o WhatsApp das famílias.',
+            },
+            {
+                name: 'Drive de documentos',
+                what: 'Guarde e compartilhe materiais por pasta e por link, com controle de versões.',
+            },
+            {
+                name: 'Copilot Mia',
+                href: '/funcionalidades/copilot-mia',
+                what: 'Consulte agenda, tarefas e métricas em linguagem natural e receba o briefing do dia.',
             },
         ],
         routine: [
             {
-                when: 'Segunda-feira',
-                text: 'Abra a Análise de Retenção e veja os alunos com maior risco de evasão na semana.',
+                when: 'Ao abrir o sistema',
+                text: 'Veja a agenda do dia, com as visitas e reuniões pedagógicas, e as tarefas que vencem hoje.',
             },
             {
                 when: 'Durante a semana',
-                text: 'Acompanhe os lançamentos do diário de classe e cobre pendências direto por tarefa.',
+                text: 'Conduza as visitas, registre o que a família perguntou e passe o retorno ao comercial.',
             },
             {
-                when: 'Novos alunos',
-                text: 'Acompanhe o checklist de onboarding de quem acabou de chegar.',
+                when: 'Alunos novos',
+                text: 'Acompanhe o checklist de onboarding de quem acabou de chegar e cobre o que está pendente.',
             },
             {
                 when: 'Fim do ciclo',
@@ -519,8 +427,8 @@ export const TEAMS: Team[] = [
         ],
         handoffs: [
             {
-                with: 'secretaria',
-                text: 'Recebe os alunos já alocados nas turmas e sinaliza à secretaria o que precisa de ajuste de cadastro.',
+                with: 'comercial',
+                text: 'As visitas pedagógicas aparecem no funil do lead, e o comercial sabe como a conversa foi.',
             },
             {
                 with: 'atendimento',
@@ -528,13 +436,13 @@ export const TEAMS: Team[] = [
             },
             {
                 with: 'direcao',
-                text: 'Leva à direção os alunos em risco e os resultados das pesquisas, com dados e não com percepção.',
+                text: 'Leva à direção os resultados das pesquisas, com dados e não com percepção.',
             },
         ],
         outcomes: [
-            'Intervenção antes do cancelamento, não depois.',
+            'Visitas e reuniões pedagógicas numa agenda só.',
             'Acolhimento padronizado para todo aluno novo.',
-            'Reunião pedagógica baseada em dados.',
+            'Reunião pedagógica baseada em dados das famílias.',
         ],
     },
     {
@@ -545,10 +453,10 @@ export const TEAMS: Team[] = [
         tagline: 'Uma visão única da escola para decidir com dados, não com palpite.',
         headline: 'Direção que enxerga a escola inteira e *decide com dados*',
         intro:
-            'Mensalidades, funil, retenção e desempenho da equipe em painéis que se atualizam sozinhos. A direção pergunta à Mia em linguagem natural, define quem pode ver o quê e acompanha várias unidades se precisar.',
+            'Funil, conversão por origem e desempenho da equipe em painéis que se atualizam sozinhos. A direção pergunta à Mia em linguagem natural, define quem pode ver o quê e acompanha várias unidades se precisar.',
         seoTitle: 'Maskot para a Direção da Escola',
         seoDescription:
-            'Como a direção da escola usa o Maskot: Copiloto de Gestão, análise de dados, relatórios, retenção, permissões por cargo e gestão de várias unidades.',
+            'Como a direção da escola usa o Maskot: Copiloto de Gestão, análise de dados, relatórios, painel de gestão comercial, permissões por cargo e gestão de várias unidades.',
         keywords: [
             'gestão escolar',
             'diretor de escola',
@@ -565,7 +473,7 @@ export const TEAMS: Team[] = [
         modules: [
             {
                 name: 'Início do Diretor',
-                what: 'Copiloto de gestão com mensalidades, custos e decisões do dia num só lugar.',
+                what: 'A Mia em modo gestão: calculadora de mensalidade por turma, resumo de custos operacionais, log de decisões e briefing diário.',
             },
             {
                 name: 'Copilot Mia',
@@ -582,8 +490,9 @@ export const TEAMS: Team[] = [
                 what: 'Monte os relatórios que a escola precisa e salve para consultar sempre que quiser.',
             },
             {
-                name: 'Análise de Retenção',
-                what: 'Enxergue os alunos em risco de evasão e o motivo.',
+                name: 'Painel de Gestão Comercial',
+                href: '/funcionalidades/agente-comercial',
+                what: 'Veja como a equipe trata os leads: velocidade de resposta, carga por pessoa e o que está parado.',
             },
             {
                 name: 'Usuários e permissões',
@@ -602,7 +511,7 @@ export const TEAMS: Team[] = [
             },
             {
                 when: 'Reunião semanal',
-                text: 'Use os painéis do funil, a retenção e o painel de gestão comercial como pauta.',
+                text: 'Use os painéis do funil, da conversão por origem e da gestão comercial como pauta.',
             },
             {
                 when: 'Sob demanda',

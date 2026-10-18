@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { Megaphone, Headset, Handshake, FileSignature, GraduationCap, Compass } from 'lucide-react'
+import { Megaphone, Headset, Handshake, GraduationCap, Compass } from 'lucide-react'
 import type { TeamSlug } from '@/lib/teams'
 
 interface TeamVisual {
@@ -12,7 +12,6 @@ export const TEAM_VISUALS: Record<TeamSlug, TeamVisual> = {
     marketing: { icon: Megaphone, accent: '#F97316' },
     atendimento: { icon: Headset, accent: '#16A34A' },
     comercial: { icon: Handshake, accent: '#2563EB' },
-    secretaria: { icon: FileSignature, accent: '#7C3AED' },
     coordenacao: { icon: GraduationCap, accent: '#0D9488' },
     direcao: { icon: Compass, accent: '#1E3A8A' },
 }
