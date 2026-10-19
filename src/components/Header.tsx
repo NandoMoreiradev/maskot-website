@@ -607,10 +607,6 @@ export default function Header() {
                             Recursos
                         </SimpleLink>
 
-                        <SimpleLink className="top-level-link" href="/#impacto" onClick={handleLinkClick}>
-                            Impacto
-                        </SimpleLink>
-
                         <SimpleLink className="top-level-link" href="/cases" onClick={handleLinkClick}>
                             Cases
                         </SimpleLink>
