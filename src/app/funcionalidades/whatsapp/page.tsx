@@ -6,8 +6,8 @@ import WhatsAppDeepDive from '@/components/features/WhatsAppDeepDive'
 import WhatsAppHero from '@/components/features/WhatsAppHero'
 
 export const metadata: Metadata = {
-    title: 'Gestão de WhatsApp Para Escolas',
-    description: 'Centralize o atendimento da sua escola, use nosso chatbot para responder pais e nunca mais perca uma matrícula por demora no WhatsApp.',
+    title: 'Inbox Omnichannel para Escolas: WhatsApp, Instagram, Messenger e Chat Web',
+    description: 'Atenda WhatsApp, Instagram, Messenger e o chat do site da escola numa só fila. A IA Mia responde os pais na hora e nenhuma matrícula se perde por demora.',
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/whatsapp',
     },

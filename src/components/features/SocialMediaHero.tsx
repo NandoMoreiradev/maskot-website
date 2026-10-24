@@ -1,7 +1,7 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
-import { ArrowRight, Share2, Instagram, Facebook, BarChart3, MessageSquare, Heart } from 'lucide-react'
+import { ArrowRight, Share2, Instagram, Sparkles, CalendarClock, CheckCircle2, MessageSquare, Heart } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
 import AuroraBackground from '@/components/AuroraBackground'
 
@@ -379,11 +379,11 @@ export default function SocialMediaHero() {
                         </Tag>
                         
                         <MainHeading>
-                            Redes sociais sob controle, <strong>sem sair do CRM</strong>
+                            Do post ao lead, <strong>sem sair do Maskot</strong>
                         </MainHeading>
 
                         <Subtitle>
-                            Crie, aprove e agende posts para Instagram e Facebook, responda comentários e configure automações de Direct e Messenger — tudo dentro do Maskot Edu.
+                            Crie posts com ajuda da IA, aprove em equipe e agende no Instagram e no Facebook. A Mia responde comentários e DMs e entrega o contato direto no CRM, já como lead.
                         </Subtitle>
 
                         <ButtonGroup>
@@ -396,9 +396,9 @@ export default function SocialMediaHero() {
                         </ButtonGroup>
 
                         <TrustBadges>
-                            <div><Instagram /> Auto-responder de Direct</div>
-                            <div><Facebook /> Posts Agendados</div>
-                            <div><BarChart3 /> Métricas em Tempo Real</div>
+                            <div><Sparkles /> Legendas com IA</div>
+                            <div><CalendarClock /> Posts agendados</div>
+                            <div><CheckCircle2 /> Aprovação em equipe</div>
                         </TrustBadges>
                     </TextContent>
 
@@ -436,8 +436,8 @@ export default function SocialMediaHero() {
                         </FloatingTag>
 
                         <FloatingTag className="bottom-left">
-                            <BarChart3 />
-                            +45% Engajamento
+                            <Sparkles />
+                            Mia responde comentários
                         </FloatingTag>
                     </Visual>
                 </HeroContent>

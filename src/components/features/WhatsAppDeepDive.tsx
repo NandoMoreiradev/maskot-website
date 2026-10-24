@@ -3,11 +3,13 @@
 import styled, {keyframes, css} from 'styled-components'
 import {
     Users, ShieldCheck, Send, LineChart, Filter,
-    Clock, Thermometer, Lock, Mic, Zap, Tag, Paperclip,
-    Workflow, Bot, GitBranch, MessageSquare,
-    Network, Sparkles, CalendarSync, FileHeart, UserPlus, FileDown, Route,
-    Instagram, Facebook, Inbox, Star, CalendarClock
+    Clock, Thermometer, Lock, Zap, Tag,
+    Bot, MessageSquare,
+    Sparkles, CalendarSync, FileHeart, UserPlus, Route,
+    Instagram, Facebook, Inbox, Star, CalendarClock,
+    Globe, MapPin, Mail, BellRing, Shuffle, MoonStar, EyeOff
 } from 'lucide-react'
+import Image from 'next/image'
 
 // --- Animations ---
 const float = keyframes`
@@ -129,7 +131,7 @@ const MockupHeader = styled.div`
     }
 `
 
-// --- MOCKUP 1: INBOX & CHATBOT ---
+// --- MOCKUP 1: INBOX ---
 const ChatLayout = styled.div`
     display: flex;
     height: 400px;
@@ -210,7 +212,7 @@ const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
     ${props => props.$bot && css`
         border-left: 3px solid #16A34A;
         &::before {
-            content: '🤖 Bot';
+            content: '✨ Mia';
             font-size: 9px;
             color: #16A34A;
             font-weight: bold;
@@ -232,7 +234,7 @@ const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
     `}
 `
 
-// --- MOCKUP 2: VISUAL FLOW BUILDER ---
+// --- MOCKUP 2: FLUXO DE AUTOMAÇÃO ---
 const FlowBuilderMock = styled.div`
     height: 380px;
     background: #f0f2f5;
@@ -516,6 +518,244 @@ const DashboardMock = styled.div`
     }
 `
 
+// --- ACT HEADERS ---
+const ActHeader = styled.div`
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 5rem;
+
+    .eyebrow {
+        display: inline-block;
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        background: #DCFCE7;
+        color: #15803D;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1.15;
+        color: #0F172A;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #475569;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    @media (max-width: 640px) {
+        margin-bottom: 3rem;
+
+        h2 { font-size: 1.85rem; }
+    }
+`
+
+const ActDivider = styled.div`
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #E2E8F0, transparent);
+    margin: 2rem 0 6rem;
+`
+
+// --- MOCKUP: CHAT WEB (widget no site da escola) ---
+const WebchatMock = styled.div`
+    position: relative;
+    height: 440px;
+    background: linear-gradient(180deg, #F8FAFC 0%, #EEF2F7 100%);
+    overflow: hidden;
+
+    .page {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        div {
+            height: 10px;
+            border-radius: 5px;
+            background: #E2E8F0;
+        }
+
+        .hero-line {
+            height: 18px;
+            width: 55%;
+            background: #CBD5E1;
+        }
+    }
+
+    .widget {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        width: 250px;
+        background: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+        overflow: hidden;
+        font-size: 12px;
+    }
+
+    .widget-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        background: #2563EB;
+        color: #FFFFFF;
+
+        img {
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        strong { display: block; font-size: 13px; }
+        span { font-size: 11px; opacity: 0.85; }
+    }
+
+    .widget-body {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background: #F8FAFC;
+    }
+
+    .msg {
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: #FFFFFF;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        max-width: 88%;
+        line-height: 1.4;
+        color: #0F172A;
+    }
+
+    .msg.user {
+        align-self: flex-end;
+        background: #2563EB;
+        color: #FFFFFF;
+    }
+
+    .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        span {
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px solid #2563EB;
+            color: #2563EB;
+            font-weight: 700;
+            font-size: 11px;
+            background: #FFFFFF;
+        }
+    }
+
+    .origin {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        width: 190px;
+        padding: 10px 12px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+        font-size: 11px;
+        color: #475569;
+        line-height: 1.4;
+
+        svg { color: #16A34A; flex-shrink: 0; margin-top: 1px; }
+        strong { display: block; color: #0F172A; font-size: 12px; }
+    }
+
+    @media (max-width: 640px) {
+        height: 400px;
+
+        .origin { display: none; }
+        .widget { width: calc(100% - 32px); }
+    }
+`
+
+// --- MOCKUP: GESTÃO DA FILA (alertas de inatividade) ---
+const QueueMock = styled.div`
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #F8FAFC;
+
+    .title {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 4px;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-left: 4px solid #16A34A;
+        border-radius: 10px;
+        font-size: 13px;
+        color: #0F172A;
+    }
+
+    .row.warn { border-left-color: #F59E0B; background: #FFFBEB; }
+    .row.crit { border-left-color: #EF4444; background: #FEF2F2; }
+
+    .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #E2E8F0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 800;
+        color: #475569;
+        flex-shrink: 0;
+    }
+
+    .who { flex: 1; min-width: 0; }
+    .who strong { display: block; }
+    .who span { font-size: 11px; color: #64748B; }
+
+    .time { font-size: 11px; font-weight: 800; color: #16A34A; white-space: nowrap; }
+    .warn .time { color: #B45309; }
+    .crit .time { color: #B91C1C; }
+
+    .note {
+        margin-top: 4px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #EFF6FF;
+        color: #1D4ED8;
+        font-size: 12px;
+        font-weight: 600;
+    }
+`
+
 // --- POWER GRID ---
 const PowerGrid = styled.div`
     display: grid;
@@ -570,24 +810,66 @@ const PowerCard = styled.div`
     }
 `
 
+const MoreTools = styled.div`
+    margin-top: 2.5rem;
+    text-align: center;
+
+    p {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #475569;
+        margin-bottom: 1rem;
+    }
+
+    .chips {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+    }
+
+    span {
+        padding: 0.45rem 0.95rem;
+        border-radius: 999px;
+        background: #F1F5F9;
+        border: 1px solid #E2E8F0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #334155;
+    }
+`
+
+const HEATMAP_LEVELS = [
+    0.15, 0.2, 0.3, 0.55, 0.8, 0.9, 0.85, 0.7, 0.45, 0.3, 0.2, 0.15,
+    0.1, 0.25, 0.4, 0.7, 0.95, 0.85, 0.75, 0.6, 0.5, 0.35, 0.2, 0.1,
+    0.2, 0.3, 0.5, 0.75, 0.85, 0.7, 0.6, 0.65, 0.55, 0.4, 0.25, 0.15,
+    0.1, 0.15, 0.3, 0.5, 0.6, 0.55, 0.4, 0.45, 0.35, 0.25, 0.15, 0.1,
+]
+
 export default function WhatsAppDeepDive() {
     return (
         <Section id="recursos">
             <Container>
 
-                {/* 1. INBOX & CHATBOT */}
+                <ActHeader>
+                    <span className="eyebrow">1 · Atender</span>
+                    <h2>Todos os canais, uma só fila</h2>
+                    <p>Da primeira mensagem à matrícula, a equipe atende tudo no mesmo lugar.</p>
+                </ActHeader>
+
+                {/* 1. INBOX */}
                 <FeatureRow>
                     <TextContent>
-                        <h3>Nenhum pai sem resposta.<br/>Organização total.</h3>
+                        <h3>Nenhuma família fica sem resposta.</h3>
                         <p>
-                            Tenha dezenas de usuários em um único número. Organize o atendimento por departamentos (Secretaria, Financeiro, Pedagógico) e defina regras de distribuição.
+                            Toda a equipe atende pelo mesmo número oficial. Cada conversa cai no setor certo — Secretaria, Financeiro, Pedagógico — e a fila deixa claro quem chegou primeiro.
                         </p>
                         <ul>
-                            <li><Users size={20}/> <strong>Usuários Ilimitados:</strong> Sem limites. Toda a escola conectada ao mesmo tempo.
+                            <li><Users size={20}/> <strong>Usuários ilimitados:</strong> Toda a escola conectada ao mesmo tempo, sem limite de atendentes.
                             </li>
-                            <li><Network size={20}/> <strong>Departamentos e Fila:</strong> Direcione o pai para o setor certo, organizando quem chegou primeiro.
+                            <li><Shuffle size={20}/> <strong>Distribuição automática:</strong> Cada conversa nova vai para o atendente certo — por equilíbrio de carga ou rodízio — e volta para a fila se ninguém responder a tempo.
                             </li>
-                            <li><ShieldCheck size={20}/> <strong>Regras e Transferências:</strong> Transfira conversas entre setores com um clique levando todo o histórico.</li>
+                            <li><ShieldCheck size={20}/> <strong>Transferência com histórico:</strong> Passe a conversa para outro setor com um clique, levando tudo o que já foi dito.</li>
                         </ul>
                     </TextContent>
 
@@ -619,8 +901,8 @@ export default function WhatsAppDeepDive() {
                                 <Bubble>Queria saber os valores do Berçário.</Bubble>
                                 <Bubble $sent $bot>Temos planos a partir de R$ 900. Quer ver a tabela completa?</Bubble>
                                 <Bubble>Não, quero falar com alguém.</Bubble>
-                                <Bubble $note>🚨 <strong>Sistema:</strong> Palavra-chave &quot;falar com
-                                    alguém&quot; detectada. Transferindo para @Secretaria.</Bubble>
+                                <Bubble $note>🚨 <strong>Sistema:</strong> A família pediu atendimento humano.
+                                    Transferindo para @Secretaria.</Bubble>
                                 <Bubble $sent>Olá! Sou a Ana da Secretaria. Como posso ajudar?</Bubble>
                             </ChatAreaMock>
                         </ChatLayout>
@@ -654,6 +936,13 @@ export default function WhatsAppDeepDive() {
                                     </div>
                                 </div>
                                 <div className="item">
+                                    <div className="avatar" style={{ background: '#2563EB', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Globe size={18}/></div>
+                                    <div className="lines">
+                                        <div style={{width: '45%'}}></div>
+                                        <div style={{width: '35%'}}></div>
+                                    </div>
+                                </div>
+                                <div className="item">
                                     <div className="avatar" style={{ background: '#25D366', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><MessageSquare size={18}/></div>
                                     <div className="lines">
                                         <div style={{width: '60%'}}></div>
@@ -669,23 +958,42 @@ export default function WhatsAppDeepDive() {
                     </MockupCard>
 
                     <TextContent>
-                        <h3>Inbox Unificado: <br/>WhatsApp, Instagram e Messenger</h3>
+                        <h3>Inbox omnichannel: <br/>4 canais, uma só fila</h3>
                         <p>
-                            Sua equipe não precisa mais pular entre abas e celulares. Conecte suas contas do Instagram e Facebook e responda a todas as DMs no mesmo lugar em que atende o WhatsApp.
+                            Sua equipe não pula mais entre abas e celulares. WhatsApp, Instagram, Messenger e o chat do seu site chegam na mesma tela, com o mesmo histórico e as mesmas regras de atendimento.
                         </p>
                         <ul>
-                            <li><Inbox size={20}/> <strong>Tudo em um só lugar:</strong> Fila unificada. Não perca nenhum lead, independente de onde ele veio.
+                            <li><Inbox size={20}/> <strong>Tudo em um só lugar:</strong> Uma fila só. Nenhum lead se perde, não importa por onde ele chegou.
                             </li>
-                            <li><Instagram size={20}/> <strong>Instagram Direct:</strong> Responda aos stories e mensagens diretas instantaneamente no CRM.
+                            <li><Instagram size={20}/> <strong>Instagram Direct e comentários:</strong> Responda as mensagens diretas e os comentários dos posts sem sair do CRM.
                             </li>
                             <li><Facebook size={20}/> <strong>Facebook Messenger:</strong> Integre sua página e centralize o atendimento comercial.
+                            </li>
+                            <li><Globe size={20}/> <strong>Chat web:</strong> O chat do site da escola cai na mesma inbox, já com a origem do visitante.
                             </li>
                         </ul>
                     </TextContent>
                 </FeatureRow>
 
-                {/* 2. VISUAL FLOW BUILDER */}
-                <FeatureRow $reverse>
+                {/* 1.6 CHAT WEB */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Chat no site da escola: o visitante vira lead e você sabe de onde ele veio</h3>
+                        <p>
+                            Cole um código no site ou ative o chat nas landing pages do Maskot. A Mia recebe o visitante na hora, tira as dúvidas e, quando precisa, passa a conversa para a sua equipe — na mesma inbox do WhatsApp.
+                        </p>
+                        <ul>
+                            <li><Sparkles size={20}/> <strong>A Mia atende primeiro:</strong> Responde com a base de conhecimento da escola, capta nome e contato e chama um humano quando precisa.
+                            </li>
+                            <li><UserPlus size={20}/> <strong>Lead criado sozinho:</strong> Já na primeira mensagem, o visitante entra no funil de matrículas.
+                            </li>
+                            <li><MapPin size={20}/> <strong>Origem de cada conversa:</strong> Veja a página, o anúncio (Google ou Meta) e a campanha que trouxeram o visitante.
+                            </li>
+                            <li><Mail size={20}/> <strong>Convite e retorno:</strong> Um balão chama o visitante depois de alguns segundos, e quem deixou o e-mail recebe um aviso quando a equipe responde.
+                            </li>
+                        </ul>
+                    </TextContent>
+
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -694,67 +1002,45 @@ export default function WhatsAppDeepDive() {
                                 <div></div>
                             </div>
                         </MockupHeader>
-                        <FlowBuilderMock>
-                            <div className="node start">
-                                <div className="node-header"><GitBranch size={12}/> Início (Mensagem Recebida)</div>
-                                <div className="node-body">Olá! Bem vindo à Escola Maskot...</div>
+                        <WebchatMock>
+                            <div className="page">
+                                <div className="hero-line"></div>
+                                <div style={{width: '80%'}}></div>
+                                <div style={{width: '70%'}}></div>
+                                <div style={{width: '60%'}}></div>
                             </div>
-
-                            <div className="connection-line"
-                                 style={{top: '90px', left: '50%', height: '70px', width: '2px'}}></div>
-                            <div className="connection-line"
-                                 style={{top: '160px', left: '30%', height: '2px', width: '40%'}}></div>
-
-                            <div className="node question">
-                                <div className="node-header"><MessageSquare size={12}/> Pergunta</div>
-                                <div className="node-body">Qual unidade você prefere?</div>
+                            <div className="origin">
+                                <MapPin size={16}/>
+                                <div>
+                                    <strong>Lead criado no CRM</strong>
+                                    Origem: Google Ads · Matrículas 2027
+                                </div>
                             </div>
-
-                            <div className="node action">
-                                <div className="node-header"><Zap size={12}/> Ação Automática</div>
-                                <div className="node-body">Criar Lead no CRM <br/> <span
-                                    style={{fontSize: '10px', color: '#999'}}>Agendar Visita</span></div>
+                            <div className="widget">
+                                <div className="widget-header">
+                                    <Image src="/mia.png" alt="Mia" width={32} height={32}/>
+                                    <div>
+                                        <strong>Fale com a gente</strong>
+                                        <span>Mia · Assistente virtual</span>
+                                    </div>
+                                </div>
+                                <div className="widget-body">
+                                    <div className="msg">Oi! 👋 Sou a Mia, assistente do Colégio. Quer conhecer a escola?</div>
+                                    <div className="chips">
+                                        <span>Agendar visita</span>
+                                        <span>Valores</span>
+                                        <span>Falar com a secretaria</span>
+                                    </div>
+                                    <div className="msg user">Quero saber sobre o 1º ano</div>
+                                    <div className="msg">Claro! Qual é o seu nome e WhatsApp para eu te ajudar melhor?</div>
+                                </div>
                             </div>
-                        </FlowBuilderMock>
+                        </WebchatMock>
                     </MockupCard>
-
-                    <TextContent>
-                        <h3>Editor de Fluxos Visual</h3>
-                        <p>
-                            Configure fluxos de atendimento sem precisar de código. Crie caminhos personalizados para
-                            Matrícula, Financeiro ou Pedagógico.
-                        </p>
-                        <ul>
-                            <li><Workflow size={20}/> <strong>Drag-and-drop:</strong> Arraste e solte para criar seu
-                                robô.
-                            </li>
-                            <li><Zap size={20}/> <strong>Automações:</strong> O bot pode agendar visitas ou criar leads
-                                automaticamente.
-                            </li>
-                            <li><Bot size={20}/> <strong>Retomada:</strong> O sistema detecta inatividade e tenta
-                                retomar a conversa.
-                            </li>
-                        </ul>
-                    </TextContent>
                 </FeatureRow>
 
                 {/* 3. CRM CONTEXT */}
-                <FeatureRow>
-                    <TextContent>
-                        <h3>O CRM na palma da mão<br/>dentro do WhatsApp</h3>
-                        <p>
-                            Não perca tempo trocando de tela. Adicione leads, acesse dados, carteirize contatos e crie tarefas diretamente na interface do chat.
-                        </p>
-                        <ul>
-                            <li><UserPlus size={20}/> <strong>Adicionar Leads & Dados:</strong> Crie um novo lead e edite informações no funil sem sair da conversa.
-                            </li>
-                            <li><CalendarSync size={20}/> <strong>Agendar & Tarefas:</strong> Marque eventos e tarefas pontuais vinculadas ao CRM com 1 clique.
-                            </li>
-                            <li><FileHeart size={20}/> <strong>Carteirização:</strong> Favorite ou designe um lead especificamente para um consultor.
-                            </li>
-                        </ul>
-                    </TextContent>
-
+                <FeatureRow $reverse>
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -814,10 +1100,50 @@ export default function WhatsAppDeepDive() {
                             </ProfileSidebar>
                         </ProfileLayout>
                     </MockupCard>
+
+                    <TextContent>
+                        <h3>O CRM na palma da mão<br/>dentro da conversa</h3>
+                        <p>
+                            Sem trocar de tela. Adicione leads, acesse dados, carteirize contatos e crie tarefas direto na conversa, em qualquer canal.
+                        </p>
+                        <ul>
+                            <li><UserPlus size={20}/> <strong>Adicionar Leads & Dados:</strong> Crie um novo lead e edite informações no funil sem sair da conversa.
+                            </li>
+                            <li><CalendarSync size={20}/> <strong>Agendar & Tarefas:</strong> Marque eventos e tarefas pontuais vinculadas ao CRM com 1 clique.
+                            </li>
+                            <li><FileHeart size={20}/> <strong>Carteirização:</strong> Favorite ou designe um lead especificamente para um consultor.
+                            </li>
+                        </ul>
+                    </TextContent>
                 </FeatureRow>
 
-                {/* 3.1 AI CHATBOT */}
-                <FeatureRow $reverse>
+                
+                <ActDivider />
+
+                <ActHeader>
+                    <span className="eyebrow">2 · Automatizar</span>
+                    <h2>A Mia cuida do repetitivo</h2>
+                    <p>A IA responde na hora, 24 horas por dia, e a equipe entra quando importa.</p>
+                </ActHeader>
+
+                {/* 3.1 MIA (IA) */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Conheça a Mia:<br/>sua melhor secretária 24/7</h3>
+                        <p>
+                            Treine a Mia com a base de conhecimento da sua escola. Ela tira dúvidas, atende de madrugada, capta os dados da família e agenda visitas sozinha — no WhatsApp e no chat do site.
+                        </p>
+                        <ul>
+                            <li><Sparkles size={20}/> <strong>Respostas humanizadas:</strong> Você define o nome, o tom e o que ela pode ou não falar. Ela responde como parte da equipe.
+                            </li>
+                            <li><Clock size={20}/> <strong>Atendimento 24 horas:</strong> Pais nunca ficam sem resposta, mesmo fora do expediente.
+                            </li>
+                            <li><CalendarSync size={20}/> <strong>Agendamento automático:</strong> A Mia consulta a agenda da escola e marca a visita no CRM.
+                            </li>
+                            <li><Bot size={20}/> <strong>Copiloto da equipe:</strong> Dentro da conversa, ela ajuda o atendente e resume o atendimento ao encerrar.
+                            </li>
+                        </ul>
+                    </TextContent>
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -845,42 +1171,14 @@ export default function WhatsAppDeepDive() {
                                 <Bubble $sent $bot>
                                     Deixe-me conferir a agenda... Sim, temos disponibilidade! Agendei sua visita para amanhã às 14h. 🎉
                                 </Bubble>
-                                <Bubble $note>✅ <strong>IA:</strong> Visita agendada. Lead atualizada no CRM.</Bubble>
+                                <Bubble $note>✅ <strong>Mia:</strong> Visita agendada. Lead atualizada no CRM.</Bubble>
                             </ChatAreaMock>
                         </ChatLayout>
                     </MockupCard>
-                    <TextContent>
-                        <h3>Inteligência Artificial:<br/>Sua melhor secretária 24/7</h3>
-                        <p>
-                            Treine nossa Inteligência Artificial com a base de conhecimento da sua escola. Ela tira dúvidas complexas, atende de madrugada e até agenda visitas sozinha.
-                        </p>
-                        <ul>
-                            <li><Sparkles size={20}/> <strong>Respostas Humanizadas:</strong> A IA entende o contexto e responde como membro da sua equipe.
-                            </li>
-                            <li><Clock size={20}/> <strong>Atendimento 24 horas:</strong> Pais nunca ficam sem resposta, mesmo fora do expediente.
-                            </li>
-                            <li><CalendarSync size={20}/> <strong>Agendamento Automático:</strong> A IA acessa a agenda da escola e marca visitas no CRM.
-                            </li>
-                        </ul>
-                    </TextContent>
                 </FeatureRow>
 
                 {/* 3.2 MARKETING & AUTOMATIONS */}
-                <FeatureRow>
-                    <TextContent>
-                        <h3>Jornadas de Marketing<br/>com WhatsApp Nativo</h3>
-                        <p>
-                            Insira o WhatsApp em todas as suas automações. Envie mensagens proativas, réguas de relacionamento e lembretes financeiros baseados em disparos de gatilhos do CRM.
-                        </p>
-                        <ul>
-                            <li><Route size={20}/> <strong>Automações de Funil:</strong> Mande mensagens após X dias do envio da proposta caso o pai não responda.
-                            </li>
-                            <li><Bot size={20}/> <strong>Régua de Cobrança:</strong> Lembretes de vencimento enviados no WhatsApp automaticamente.
-                            </li>
-                            <li><Zap size={20}/> <strong>Disparos em Massa Personalizados:</strong> Comunique campanhas usando as tags do Maskot.
-                            </li>
-                        </ul>
-                    </TextContent>
+                <FeatureRow $reverse>
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -904,6 +1202,78 @@ export default function WhatsAppDeepDive() {
                             </div>
                         </FlowBuilderMock>
                     </MockupCard>
+                    <TextContent>
+                        <h3>Jornadas de Marketing<br/>com WhatsApp Nativo</h3>
+                        <p>
+                            Insira o WhatsApp em todas as suas automações. Envie mensagens proativas, réguas de relacionamento e lembretes financeiros baseados em disparos de gatilhos do CRM.
+                        </p>
+                        <ul>
+                            <li><Route size={20}/> <strong>Automações de Funil:</strong> Mande mensagens após X dias do envio da proposta caso o pai não responda.
+                            </li>
+                            <li><Bot size={20}/> <strong>Régua de Cobrança:</strong> Lembretes de vencimento enviados no WhatsApp automaticamente.
+                            </li>
+                            <li><Zap size={20}/> <strong>Disparos em Massa Personalizados:</strong> Comunique campanhas usando as tags do Maskot.
+                            </li>
+                        </ul>
+                    </TextContent>
+                </FeatureRow>
+
+                
+                <ActDivider />
+
+                <ActHeader>
+                    <span className="eyebrow">3 · Gerenciar</span>
+                    <h2>A equipe sob controle</h2>
+                    <p>Regras, alertas e números para o atendimento nunca travar.</p>
+                </ActHeader>
+
+                {/* 3.3 GESTÃO DA FILA */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Equipe sob controle,<br/>sem microgerenciar</h3>
+                        <p>
+                            Regras que mantêm a fila andando e mostram, em tempo real, onde o atendimento está travando.
+                        </p>
+                        <ul>
+                            <li><BellRing size={20}/> <strong>Alerta de inatividade:</strong> A conversa muda de cor na lista (amarelo, depois vermelho) quando passa do tempo que você definiu.
+                            </li>
+                            <li><Shuffle size={20}/> <strong>Fila que não trava:</strong> Sem resposta no prazo, a conversa volta para a fila e outro atendente assume.
+                            </li>
+                            <li><MoonStar size={20}/> <strong>Mensagem de ausência:</strong> Fora do expediente, a família recebe um aviso automático em vez de silêncio.
+                            </li>
+                            <li><EyeOff size={20}/> <strong>Privacidade (LGPD):</strong> Oculte o telefone dos contatos de quem não precisa vê-lo e consulte o registro de tudo o que aconteceu na conversa.
+                            </li>
+                        </ul>
+                    </TextContent>
+
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </MockupHeader>
+                        <QueueMock>
+                            <div className="title">Conversas abertas</div>
+                            <div className="row crit">
+                                <div className="avatar">PL</div>
+                                <div className="who"><strong>Pai do Lucas</strong><span>Sem resposta da equipe</span></div>
+                                <div className="time">1h10</div>
+                            </div>
+                            <div className="row warn">
+                                <div className="avatar">MA</div>
+                                <div className="who"><strong>Mãe da Ana</strong><span>Sem resposta da equipe</span></div>
+                                <div className="time">35 min</div>
+                            </div>
+                            <div className="row">
+                                <div className="avatar">RC</div>
+                                <div className="who"><strong>Responsável da Carla</strong><span>Respondida pela Secretaria</span></div>
+                                <div className="time">2 min</div>
+                            </div>
+                            <div className="note">↩ Conversa do Pai do Lucas devolvida à fila para o próximo atendente.</div>
+                        </QueueMock>
+                    </MockupCard>
                 </FeatureRow>
 
                 {/* 4. ANALYTICS */}
@@ -918,7 +1288,7 @@ export default function WhatsAppDeepDive() {
                         </MockupHeader>
                         <DashboardMock>
                             <div className="card"><h4><LineChart size={16}/> Total de Atendimentos</h4>
-                                <div className="val">1,284</div>
+                                <div className="val">1.284</div>
                             </div>
                             <div className="card"><h4><Clock size={16}/> Tempo Médio</h4>
                                 <div className="val">4min</div>
@@ -926,8 +1296,8 @@ export default function WhatsAppDeepDive() {
                             <div className="card full-width">
                                 <h4><Thermometer size={16}/> Mapa de Calor (Horários de Pico)</h4>
                                 <div className="heatmap">
-                                    {Array.from({length: 48}).map((_, i) => (
-                                        <div key={i} style={{background: `rgba(22, 163, 74, ${Math.random()})`}}></div>
+                                    {HEATMAP_LEVELS.map((level, i) => (
+                                        <div key={i} style={{background: `rgba(22, 163, 74, ${level})`}}></div>
                                     ))}
                                 </div>
                             </div>
@@ -949,6 +1319,7 @@ export default function WhatsAppDeepDive() {
                     </TextContent>
                 </FeatureRow>
 
+                
                 {/* 5. POWER FEATURES GRID */}
                 <div style={{textAlign: 'center', marginBottom: '3rem'}}>
                     <h3 style={{
@@ -957,82 +1328,46 @@ export default function WhatsAppDeepDive() {
                         color: '#0F172A',
                         fontFamily: 'var(--font-inter)'
                     }}>Ferramentas de Produtividade</h3>
-                    <p style={{color: '#475569', marginTop: '0.5rem'}}>Funcionalidades pensadas para a rotina escolar.</p>
+                    <p style={{color: '#475569', marginTop: '0.5rem'}}>Detalhes que economizam minutos em cada atendimento.</p>
                 </div>
 
                 <PowerGrid>
                     <PowerCard>
                         <div className="icon"><Lock size={24}/></div>
-                        <h4>Notas Internas</h4>
-                        <p>Converse com sua equipe dentro do chat do pai (&quot;@Financeiro, verificar boleto&quot;) sem
-                            que o cliente veja. Colaboração total.</p>
+                        <h4>Notas internas</h4>
+                        <p>Converse com a equipe dentro da conversa (&quot;@Financeiro, verificar boleto&quot;) sem que a família veja.</p>
                     </PowerCard>
-
-                    <PowerCard>
-                        <div className="icon"><Mic size={24}/></div>
-                        <h4>Áudio Acelerado</h4>
-                        <p>Otimize o tempo dos seus consultores ouvindo áudios longos de pais em velocidade 1.5x ou
-                            2x.</p>
-                    </PowerCard>
-
                     <PowerCard>
                         <div className="icon"><Zap size={24}/></div>
-                        <h4>Respostas Rápidas</h4>
-                        <p>Crie atalhos (ex: /materiais) para enviar listas, documentos e textos padrões com apenas um
-                            clique.</p>
+                        <h4>Respostas rápidas</h4>
+                        <p>Crie atalhos (ex: /materiais) para enviar textos, documentos e até botões de resposta com um clique.</p>
                     </PowerCard>
-
                     <PowerCard>
                         <div className="icon"><Tag size={24}/></div>
-                        <h4>Etiquetas Visuais</h4>
-                        <p>Classifique conversas com tags coloridas (&quot;Financeiro&quot;, &quot;Pedagógico&quot;)
-                            para filtrar sua inbox em segundos.</p>
+                        <h4>Etiquetas visuais</h4>
+                        <p>Classifique conversas com tags coloridas (&quot;Financeiro&quot;, &quot;Pedagógico&quot;) e filtre sua inbox em segundos.</p>
                     </PowerCard>
-
-                    <PowerCard>
-                        <div className="icon"><Paperclip size={24}/></div>
-                        <h4>Central de Anexos</h4>
-                        <p>Acesse uma galeria organizada com todos os documentos, fotos e comprovantes trocados na
-                            conversa.</p>
-                    </PowerCard>
-
-                    <PowerCard>
-                        <div className="icon"><Users size={24}/></div>
-                        <h4>Transferência Inteligente</h4>
-                        <p>Transfira atendimentos entre departamentos (ex: Secretaria para Financeiro) levando todo o
-                            histórico junto.</p>
-                    </PowerCard>
-
                     <PowerCard>
                         <div className="icon"><MessageSquare size={24}/></div>
-                        <h4>Templates Aprovados</h4>
-                        <p>Inicie conversas enviando templates oficiais de WhatsApp aprovados pela Meta para reengajar contatos frios.</p>
+                        <h4>Templates aprovados</h4>
+                        <p>Inicie conversas com templates oficiais do WhatsApp aprovados pela Meta para reengajar contatos frios.</p>
                     </PowerCard>
-
-                    <PowerCard>
-                        <div className="icon"><FileDown size={24}/></div>
-                        <h4>Exportação em PDF</h4>
-                        <p>Precisa documentar um atendimento crítico? Exporte o histórico completo da conversa em um arquivo PDF em 1 clique.</p>
-                    </PowerCard>
-
-                    <PowerCard>
-                        <div className="icon"><Clock size={24}/></div>
-                        <h4>Histórico Vitalício</h4>
-                        <p>Nunca perca o contexto. Acesse conversas de meses atrás para relembrar acordos ou informações trocadas com as famílias.</p>
-                    </PowerCard>
-
                     <PowerCard>
                         <div className="icon"><CalendarClock size={24}/></div>
-                        <h4>Agendamento de Mensagens</h4>
-                        <p>Programe o envio de mensagens para a hora certa — lembretes de visita, avisos e retornos saem sozinhos no melhor horário.</p>
+                        <h4>Agendamento de mensagens</h4>
+                        <p>Programe lembretes de visita, avisos e retornos para saírem sozinhos na hora certa.</p>
                     </PowerCard>
-
                     <PowerCard>
                         <div className="icon"><Star size={24}/></div>
-                        <h4>Pesquisa de Satisfação</h4>
-                        <p>Envie uma pesquisa de satisfação (CSAT) ao fim do atendimento e descubra, em números, como as famílias avaliam sua equipe.</p>
+                        <h4>Pesquisa de satisfação</h4>
+                        <p>Envie uma pesquisa (CSAT) ao fim do atendimento e veja, em números, como as famílias avaliam sua equipe.</p>
                     </PowerCard>
                 </PowerGrid>
+
+                <MoreTools>
+                    <p>E também:</p>
+                    <div className="chips"><span>Central de anexos</span><span>Exportação da conversa em PDF</span><span>Áudio em velocidade 1.5x ou 2x</span><span>Favoritos e carteirização</span><span>Fluxos interativos do WhatsApp</span><span>Disparos de campanha</span><span>Aviso da janela de 24h</span><span>Bloqueio de contato</span></div>
+                </MoreTools>
 
             </Container>
         </Section>

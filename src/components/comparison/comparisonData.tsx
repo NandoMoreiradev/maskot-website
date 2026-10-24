@@ -55,7 +55,7 @@ export const MODULES: ComparisonModule[] = [
         name: 'WhatsApp e atendimento',
         tools: ['Digisac', 'Octadesk', 'Kommo', 'Zenvia', 'Blip'],
         pricing: 'Cobram por atendente e por canal. Digisac e Octadesk não divulgam tabela (sob consulta); a Kommo cobra por usuário.',
-        maskot: 'API oficial da Meta, atendentes ilimitados, filas e departamentos e chatbot de regras, tudo no mesmo funil de matrículas.',
+        maskot: 'API oficial da Meta, atendentes ilimitados, filas e departamentos e a IA Mia, tudo no mesmo funil de matrículas.',
         whenOther: 'Se a sua operação é de SAC com tickets e SLA, um help desk dedicado é mais completo.',
     },
     {

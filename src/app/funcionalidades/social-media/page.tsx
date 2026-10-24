@@ -7,14 +7,14 @@ import SocialMediaDeepDive from '@/components/features/SocialMediaDeepDive'
 
 export const metadata: Metadata = {
     title: 'Gestão de Redes Sociais para Escolas',
-    description: 'Crie, aprove e agende posts para Instagram e Facebook, responda comentários e automatize DMs — tudo dentro do Maskot Edu, com métricas de cada publicação.',
-    keywords: ['gestão de redes sociais para escolas', 'agendamento de posts escola', 'instagram para escolas', 'automação de instagram e facebook', 'marketing escolar redes sociais'],
+    description: 'Crie legendas com IA, aprove e agende posts no Instagram e Facebook, deixe a Mia responder comentários e DMs e transforme cada contato em lead no CRM, com métricas de cada publicação.',
+    keywords: ['gestão de redes sociais para escolas', 'agendamento de posts escola', 'instagram para escolas', 'automação de instagram e facebook', 'legenda com IA para escolas', 'responder comentários do instagram com IA', 'marketing escolar redes sociais'],
     alternates: {
         canonical: 'https://www.maskotedu.com.br/funcionalidades/social-media',
     },
     openGraph: {
         title: 'Gestão de Redes Sociais para Escolas | Maskot',
-        description: 'Crie, aprove e agende posts para Instagram e Facebook, responda comentários e automatize DMs — sem sair do Maskot.',
+        description: 'Legendas com IA, aprovação em equipe, posts agendados e a Mia respondendo comentários e DMs, com cada contato virando lead no CRM.',
         url: 'https://www.maskotedu.com.br/funcionalidades/social-media',
         images: ['/og-social-media.png'],
     }

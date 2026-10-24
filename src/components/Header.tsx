@@ -447,7 +447,7 @@ export default function Header() {
                                 <DropdownLink href="/funcionalidades/whatsapp" onClick={handleLinkClick}>
                                     <div className="icon-box"><MessageCircle size={18}/></div>
                                     <div className="text">
-                                        <strong>WhatsApp & Chatbot</strong>
+                                        <strong>WhatsApp & Inbox com IA</strong>
                                         <span>Atendimento centralizado</span>
                                     </div>
                                 </DropdownLink>
@@ -502,7 +502,7 @@ export default function Header() {
                                     <div className="icon-box"><Instagram size={18}/></div>
                                     <div className="text">
                                         <strong>Redes Sociais</strong>
-                                        <span>Posts e automação de DM</span>
+                                        <span>Posts com IA e automação de DM</span>
                                     </div>
                                 </DropdownLink>
 

@@ -19,13 +19,13 @@ type Feature = {
 
 // Nomes e textos vêm do menu "Funcionalidades" e dos heros das páginas de cada funcionalidade.
 const FEATURES: Record<string, Feature> = {
-  whatsapp: { title: 'WhatsApp & Chatbot', desc: 'Todo o atendimento em um único número oficial, com vários atendentes, chatbot e IA respondendo na hora.', href: '/funcionalidades/whatsapp', Icon: MessageCircle, accent: '#16A34A' },
+  whatsapp: { title: 'WhatsApp & Inbox com IA', desc: 'WhatsApp, Instagram, Messenger e chat do site numa fila só, com vários atendentes e a IA Mia respondendo na hora.', href: '/funcionalidades/whatsapp', Icon: MessageCircle, accent: '#16A34A' },
   comercial: { title: 'Gestão Comercial', desc: 'Todos os interessados em um funil Kanban visual: saiba quantos alunos estão em cada etapa.', href: '/funcionalidades/gestao-comercial', Icon: KanbanSquare, accent: '#2563EB' },
   tarefas: { title: 'Gestão de Tarefas', desc: 'Demandas de qualquer setor da escola em um só lugar, com Kanban e checklists.', href: '/funcionalidades/gestao-tarefas', Icon: CheckSquare, accent: '#4F46E5' },
   automacoes: { title: 'Automações', desc: 'Mensagens, tarefas e nutrição de famílias no piloto automático, 24 horas por dia.', href: '/funcionalidades/automacoes', Icon: Zap, accent: '#9333EA' },
   marketing: { title: 'Marketing', desc: 'Réguas de relacionamento no WhatsApp, E-mail e SMS, disparadas pelo comportamento dos pais.', href: '/funcionalidades/marketing', Icon: Megaphone, accent: '#EA580C' },
   campanhas: { title: 'Campanhas', desc: 'Planeje orçamentos, crie copies com IA e rastreie o ROI de cada canal de captação.', href: '/funcionalidades/campanhas', Icon: Rocket, accent: '#9333EA' },
-  social: { title: 'Redes Sociais', desc: 'Crie, aprove e agende posts, responda comentários e automatize Directs e Messenger.', href: '/funcionalidades/social-media', Icon: Instagram, accent: '#EC4899' },
+  social: { title: 'Redes Sociais', desc: 'Legendas com IA, aprovação e agendamento de posts, e a Mia respondendo comentários e DMs para gerar leads.', href: '/funcionalidades/social-media', Icon: Instagram, accent: '#EC4899' },
   jornadas: { title: 'Jornadas', desc: 'Funis automáticos que disparam a mensagem certa, na hora certa, por WhatsApp, E-mail e SMS.', href: '/funcionalidades/marketing-journeys', Icon: GitBranch, accent: '#0284C7' },
   analytics: { title: 'Analytics & BI', desc: 'Matrículas, visitas e atendimentos em gráficos acionáveis. Descubra onde você perde alunos.', href: '/funcionalidades/analytics', Icon: BarChart2, accent: '#0D9488' },
   pesquisas: { title: 'Pesquisas & NPS', desc: 'Meça a satisfação de alunos e responsáveis com NPS e CSAT e antecipe cancelamentos.', href: '/funcionalidades/pesquisas', Icon: ClipboardList, accent: '#4338CA' },

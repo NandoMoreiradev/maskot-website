@@ -162,10 +162,10 @@ export const TEAMS: Team[] = [
         tagline: 'Todas as conversas num só lugar, com a Mia cuidando do que é repetitivo.',
         headline: 'Atendimento rápido e organizado, *sem perder nenhuma família*',
         intro:
-            'WhatsApp, Instagram, Messenger e chat do site numa caixa de entrada compartilhada, com chatbot e IA nas perguntas de sempre. A equipe fica livre para o que exige gente de verdade.',
+            'WhatsApp, Instagram, Messenger e chat do site numa caixa de entrada compartilhada, com a Mia (IA) nas perguntas de sempre. A equipe fica livre para o que exige gente de verdade.',
         seoTitle: 'Maskot para a Equipe de Atendimento Escolar',
         seoDescription:
-            'Como o atendimento da escola usa o Maskot: caixa de entrada compartilhada de WhatsApp, Instagram e chat do site, chatbot, distribuição de conversas e a Mia sugerindo respostas.',
+            'Como o atendimento da escola usa o Maskot: caixa de entrada compartilhada de WhatsApp, Instagram e chat do site, chatbot, distribuição de conversas e a Mia respondendo e sugerindo respostas.',
         keywords: [
             'atendimento escolar',
             'WhatsApp para escolas',
@@ -181,9 +181,9 @@ export const TEAMS: Team[] = [
         ],
         modules: [
             {
-                name: 'WhatsApp e Chatbot',
+                name: 'WhatsApp e Mia (IA)',
                 href: '/funcionalidades/whatsapp',
-                what: 'Atenda em equipe pela mesma caixa de entrada, com chatbot respondendo as dúvidas frequentes e passando para uma pessoa quando precisa.',
+                what: 'Atenda em equipe pela mesma caixa de entrada, com a Mia respondendo as dúvidas frequentes e passando para uma pessoa quando precisa.',
             },
             {
                 name: 'Instagram, Messenger e chat do site',
@@ -214,7 +214,7 @@ export const TEAMS: Team[] = [
         routine: [
             {
                 when: 'Ao abrir a escola',
-                text: 'Veja o que chegou fora do horário e assuma as conversas que o chatbot encaminhou.',
+                text: 'Veja o que chegou fora do horário e assuma as conversas que a Mia encaminhou.',
             },
             {
                 when: 'Durante o dia',

@@ -1,7 +1,8 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
-import { ArrowRight, ShieldCheck, BadgeCheck, Clock, MessageCircle, Bot, Zap } from 'lucide-react'
+import { ArrowRight, ShieldCheck, BadgeCheck, Clock, MessageCircle, Zap, Inbox, Instagram, Facebook, Globe } from 'lucide-react'
+import Image from 'next/image'
 import { Container as BaseContainer } from '@/components/ui/Container'
 import AuroraBackground from '@/components/AuroraBackground'
 
@@ -173,6 +174,46 @@ const SecondaryButton = styled.button`
     }
 `
 
+const ChannelChips = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+
+    span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+        border-radius: 999px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #0F172A;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+
+        i {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+
+            svg {
+                width: 13px;
+                height: 13px;
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        justify-content: center;
+    }
+`
+
 const TrustBadges = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -340,16 +381,23 @@ export default function WhatsAppHero() {
                 <HeroContent>
                     <TextContent>
                         <Tag>
-                            <MessageCircle /> WhatsApp & Chatbot
+                            <MessageCircle /> Inbox omnichannel + IA
                         </Tag>
                         
                         <MainHeading>
-                            O WhatsApp da sua escola, <strong>turbinado com IA</strong>
+                            Todos os canais da sua escola numa fila só, <strong>com a Mia respondendo na hora</strong>
                         </MainHeading>
 
                         <Subtitle>
-                            Centralize todo o atendimento em um único número oficial, com vários atendentes, chatbot e IA respondendo na hora — para que nenhuma família fique esperando.
+                            WhatsApp, Instagram, Messenger e o chat do seu site chegam na mesma tela, com a IA Mia atendendo na hora — para que nenhuma família fique esperando.
                         </Subtitle>
+
+                        <ChannelChips>
+                            <span><i style={{ background: '#25D366' }}><MessageCircle /></i>WhatsApp</span>
+                            <span><i style={{ background: '#E1306C' }}><Instagram /></i>Instagram</span>
+                            <span><i style={{ background: '#0084FF' }}><Facebook /></i>Messenger</span>
+                            <span><i style={{ background: '#2563EB' }}><Globe /></i>Chat web</span>
+                        </ChannelChips>
 
                         <ButtonGroup>
                             <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
@@ -370,15 +418,15 @@ export default function WhatsAppHero() {
                     <Visual>
                         <ChatCard>
                             <ChatHeader>
-                                <div className="avatar"><Bot size={20} /></div>
+                                <div className="avatar"><Image src="/mia.png" alt="Mia" width={40} height={40} style={{ borderRadius: '50%', objectFit: 'cover' }} /></div>
                                 <div className="info">
-                                    <strong>Maskot IA</strong>
-                                    <span>Online agora</span>
+                                    <strong>Mia</strong>
+                                    <span>Assistente virtual · Online agora</span>
                                 </div>
                             </ChatHeader>
                             <ChatBody>
                                 <MessageBubble>
-                                    Olá! Sou o assistente virtual do Colégio. Como posso ajudar com a matrícula do seu filho hoje?
+                                    Olá! Sou a Mia, assistente virtual do Colégio. Como posso ajudar com a matrícula do seu filho hoje?
                                 </MessageBubble>
                                 <MessageBubble $isUser>
                                     Gostaria de saber o valor da mensalidade para o 6º ano, por favor.
@@ -395,8 +443,8 @@ export default function WhatsAppHero() {
                         </FloatingTag>
 
                         <FloatingTag className="bottom-left">
-                            <ShieldCheck />
-                            1 Único Número Oficial
+                            <Inbox />
+                            4 canais, 1 só fila
                         </FloatingTag>
                     </Visual>
                 </HeroContent>

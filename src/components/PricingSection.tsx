@@ -774,7 +774,7 @@ const INCLUDED_IN_ALL = [
   'Usuários ilimitados',
   'WhatsApp oficial (API Meta)',
   'Atendentes ilimitados',
-  'Filas e chatbot de regras',
+  'Filas e departamentos',
   'Kanban de matrículas',
   'Calendário de visitas',
   'Indicadores de captação',
