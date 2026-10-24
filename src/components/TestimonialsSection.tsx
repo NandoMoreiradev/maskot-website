@@ -1,8 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { Zap, Archive, BellRing, Quote } from 'lucide-react'
+import { Zap, Archive, BellRing, Quote, Play } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeader, SectionTitle, SectionSubtitle, GradientText } from '@/components/ui/SectionHeading'
 
@@ -84,10 +85,106 @@ const TestimonialCard = styled.div`
     border-radius: 20px;
     padding: 2.5rem; /* Reduzido de 3rem */
     box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2.5rem;
+    align-items: center;
 
     @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        justify-items: center;
         padding: 2rem 1.5rem;
+        gap: 1.75rem;
     }
+`
+
+const TestimonialBody = styled.div`
+    min-width: 0;
+    width: 100%;
+`
+
+const VideoFrame = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 9 / 16;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0F172A;
+    box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.35);
+`
+
+const VideoPlayButton = styled.button`
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:focus-visible {
+        outline: 3px solid #2563EB;
+        outline-offset: -3px;
+    }
+`
+
+const VideoThumb = styled.img`
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
+
+const VideoShade = styled.span`
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.05) 55%);
+`
+
+const VideoPlayIcon = styled.span`
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #2563EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    ${VideoPlayButton}:hover & {
+        transform: scale(1.08);
+    }
+
+    svg {
+        margin-left: 3px;
+    }
+`
+
+const VideoLabel = styled.span`
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: left;
+`
+
+const VideoIframe = styled.iframe`
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 `
 
 const QuoteIcon = styled(Quote)`
@@ -99,14 +196,10 @@ const QuoteIcon = styled(Quote)`
 `
 
 const TestimonialText = styled.p`
-    font-size: 1rem; /* Reduzido de 1.1rem */
+    font-size: 0.95rem;
     line-height: 1.6;
     color: #334155;
-    margin: 0 0 1.5rem 0;
-
-    @media (max-width: 768px) {
-        font-size: 0.95rem;
-    }
+    margin: 0 0 1.25rem 0;
 `
 
 const TestimonialFooter = styled.div`
@@ -154,7 +247,11 @@ const SchoolLogo = styled(Image)`
     object-fit: contain;
 `
 
+const TESTIMONIAL_VIDEO_ID = 'FEoJjLfu5Sw'
+
 export default function TestimonialsSection() {
+    const [videoPlaying, setVideoPlaying] = useState(false)
+
     return (
         <Section id="impacto"> {/* ID ESSENCIAL PARA O MENU */}
             <Container>
@@ -204,47 +301,69 @@ export default function TestimonialsSection() {
                 </BenefitsGrid>
 
                 <TestimonialCard>
-                    <QuoteIcon />
-                    <TestimonialText>
-                        Estamos muito satisfeitos com o Maskot Edu. Ele é muito completo e atende muito bem às
-                        necessidades do Colégio Intellectus.
-                        <br /><br />
-                        Com ele conseguimos realizar um atendimento mais acolhedor e estratégico, tendo ao nosso
-                        alcance todas as informações importantes para oferecer um atendimento de qualidade às
-                        famílias. Também temos acesso aos dados dos leads, às negociações e a todo o histórico
-                        necessário para acompanhar cada oportunidade de forma mais organizada.
-                        <br /><br />
-                        Além disso, é intuitivo, prático e fácil de utilizar no dia a dia. Estamos gostando bastante
-                        da experiência e percebemos que o Maskot Edu tem contribuído muito para tornar nossos
-                        processos de atendimento, análise de dados e gestão de leads mais eficientes.
-                    </TestimonialText>
-                    <TestimonialFooter>
-                        <TestimonialAuthor>
-                            <AuthorAvatar
-                                src="/depoimento-maria-helena.png"
-                                alt="Maria Helena"
-                                width={56}
-                                height={56}
+                    <VideoFrame>
+                        {videoPlaying ? (
+                            <VideoIframe
+                                src={`https://www.youtube-nocookie.com/embed/${TESTIMONIAL_VIDEO_ID}?autoplay=1&playsinline=1&rel=0&start=0`}
+                                title="Depoimento do Colégio Intellectus"
+                                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                                allowFullScreen
                             />
-                            <AuthorInfo>
-                                <strong>Maria Helena</strong>
-                                <span>Colégio Intellectus</span>
-                            </AuthorInfo>
-                        </TestimonialAuthor>
-                        <SchoolLogoLink
-                            href="https://www.colegiointellectus.com.br/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Site do Colégio Intellectus"
-                        >
-                            <SchoolLogo
-                                src="/logo-colegio-intellectus.png"
-                                alt="Colégio Intellectus"
-                                width={140}
-                                height={48}
-                            />
-                        </SchoolLogoLink>
-                    </TestimonialFooter>
+                        ) : (
+                            <VideoPlayButton
+                                type="button"
+                                onClick={() => setVideoPlaying(true)}
+                                aria-label="Assistir ao depoimento do Colégio Intellectus"
+                            >
+                                <VideoThumb
+                                    src={`https://i.ytimg.com/vi/${TESTIMONIAL_VIDEO_ID}/hqdefault.jpg`}
+                                    alt=""
+                                />
+                                <VideoShade />
+                                <VideoPlayIcon>
+                                    <Play size={24} fill="currentColor" />
+                                </VideoPlayIcon>
+                                <VideoLabel>Assista ao depoimento</VideoLabel>
+                            </VideoPlayButton>
+                        )}
+                    </VideoFrame>
+
+                    <TestimonialBody>
+                        <QuoteIcon />
+                        <TestimonialText>
+                            Estamos muito satisfeitos com o Maskot Edu! É completo, intuitivo e muito fácil de usar
+                            no dia a dia. Com ele, atendemos as famílias de um jeito mais acolhedor e temos leads,
+                            negociações e todo o histórico num só lugar, para acompanhar cada oportunidade com
+                            mais organização.
+                        </TestimonialText>
+                        <TestimonialFooter>
+                            <TestimonialAuthor>
+                                <AuthorAvatar
+                                    src="/depoimento-maria-helena.png"
+                                    alt="Maria Helena"
+                                    width={56}
+                                    height={56}
+                                />
+                                <AuthorInfo>
+                                    <strong>Maria Helena</strong>
+                                    <span>Colégio Intellectus</span>
+                                </AuthorInfo>
+                            </TestimonialAuthor>
+                            <SchoolLogoLink
+                                href="https://www.colegiointellectus.com.br/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Site do Colégio Intellectus"
+                            >
+                                <SchoolLogo
+                                    src="/logo-colegio-intellectus.png"
+                                    alt="Colégio Intellectus"
+                                    width={140}
+                                    height={48}
+                                />
+                            </SchoolLogoLink>
+                        </TestimonialFooter>
+                    </TestimonialBody>
                 </TestimonialCard>
             </Container>
         </Section>
