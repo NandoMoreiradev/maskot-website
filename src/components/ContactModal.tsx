@@ -470,6 +470,17 @@ export default function ContactModal(): React.ReactElement | null {
 - *Nº Alunos:* ${formData.studentsCount}
         `
 
+        if (typeof window !== 'undefined') {
+            const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> }
+            if (win.dataLayer) {
+                win.dataLayer.push({
+                    event: 'form_submission',
+                    form_id: 'form-lead',
+                    form_type: variant,
+                })
+            }
+        }
+
         const whatsappNumber = "5579991064405"
         const encodedMessage = encodeURIComponent(message)
         const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
@@ -510,7 +521,7 @@ export default function ContactModal(): React.ReactElement | null {
                         <h3 id="contact-modal-title">{copy.heading}</h3>
                         <p>{copy.lead}</p>
                     </FormHeading>
-                    <Form onSubmit={handleSubmit}>
+                    <Form id="form-lead" onSubmit={handleSubmit}>
                         <FormGroup>
                             <label htmlFor="contact-name">Nome Completo</label>
                             <input id="contact-name" required name="name" value={formData.name} onChange={handleChange} placeholder="João da Silva" />
