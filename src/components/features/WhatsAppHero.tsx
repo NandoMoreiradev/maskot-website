@@ -1,7 +1,7 @@
 'use client'
 
 import styled, { keyframes } from 'styled-components'
-import { ArrowRight, ShieldCheck, BadgeCheck, Clock, MessageCircle, Zap, Inbox, Instagram, Facebook, Globe } from 'lucide-react'
+import { ArrowRight, ShieldCheck, BadgeCheck, Clock, MessageCircle, Zap, Inbox, Instagram, Facebook, Globe, Database } from 'lucide-react'
 import Image from 'next/image'
 import { Container as BaseContainer } from '@/components/ui/Container'
 import AuroraBackground from '@/components/AuroraBackground'
@@ -411,6 +411,7 @@ export default function WhatsAppHero() {
                         <TrustBadges>
                             <div><ShieldCheck /> API Oficial</div>
                             <div><BadgeCheck /> Provedor Oficial Meta</div>
+                            <div><Database /> Consulta ao ERP</div>
                             <div><Clock /> Atendimento 24/7</div>
                         </TrustBadges>
                     </TextContent>

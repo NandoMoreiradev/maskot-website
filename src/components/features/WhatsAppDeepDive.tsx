@@ -7,7 +7,8 @@ import {
     Bot, MessageSquare,
     Sparkles, CalendarSync, FileHeart, UserPlus, Route,
     Instagram, Facebook, Inbox, Star, CalendarClock,
-    Globe, MapPin, Mail, BellRing, Shuffle, MoonStar, EyeOff
+    Globe, MapPin, Mail, BellRing, Shuffle, MoonStar, EyeOff,
+    Database, CheckCircle2, Layers, Copy, Server
 } from 'lucide-react'
 import Image from 'next/image'
 
@@ -232,6 +233,157 @@ const Bubble = styled.div<{ $sent?: boolean; $bot?: boolean; $note?: boolean }>`
         font-size: 12px;
         text-align: center;
     `}
+`
+
+// --- MOCKUP: ERP INTEGRATION ---
+const ErpHeaderBadge = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 11px;
+    color: #475569;
+    font-weight: 600;
+
+    .status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #15803D;
+        font-weight: 700;
+
+        &::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #16A34A;
+            box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+        }
+    }
+
+    .erp-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        background: #FFFFFF;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid #CBD5E1;
+        color: #334155;
+    }
+`
+
+const ErpQueryPill = styled.div`
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: #15803D;
+    font-size: 11px;
+    font-weight: 600;
+
+    svg {
+        flex-shrink: 0;
+        color: #16A34A;
+    }
+
+    @media (max-width: 640px) {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+`
+
+const BarcodeCard = styled.div`
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    border: 1px solid #CBD5E1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    .code {
+        font-family: monospace;
+        font-size: 10px;
+        color: #0F172A;
+        font-weight: 600;
+        word-break: break-all;
+    }
+
+    .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 4px 8px;
+        background: #16A34A;
+        color: #FFFFFF;
+        border-radius: 4px;
+        font-size: 9.5px;
+        font-weight: 700;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+`
+
+const SecurityNote = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
+    font-size: 10.5px;
+    color: #64748B;
+    font-weight: 500;
+    text-align: center;
+
+    svg {
+        color: #16A34A;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+        font-size: 9.5px;
+        padding: 6px 10px;
+    }
+`
+
+const ErpLogosRow = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+
+    span.label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #64748B;
+        margin-right: 2px;
+    }
+
+    span.tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 9px;
+        border-radius: 6px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #334155;
+    }
 `
 
 // --- MOCKUP 2: FLUXO DE AUTOMAÇÃO ---
@@ -1177,8 +1329,94 @@ export default function WhatsAppDeepDive() {
                     </MockupCard>
                 </FeatureRow>
 
-                {/* 3.2 MARKETING & AUTOMATIONS */}
+                {/* 3.2 MIA + ERP INTEGRATION */}
                 <FeatureRow $reverse>
+                    <MockupCard>
+                        <MockupHeader>
+                            <div className="dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </MockupHeader>
+                        <ErpHeaderBadge>
+                            <div className="status">Conectado ao ERP</div>
+                            <div className="erp-pill">
+                                <Server size={11} /> REST HTTPS
+                            </div>
+                        </ErpHeaderBadge>
+                        <ChatAreaMock style={{ minHeight: 'auto', gap: '10px' }}>
+                            <Bubble>Boa tarde! Qual o vencimento da parcela deste mês do Pedro Henrique?</Bubble>
+                            <ErpQueryPill>
+                                <Database size={12} />
+                                <span>Mia consultando ERP da escola (SophiA / TOTVS)...</span>
+                            </ErpQueryPill>
+                            <Bubble $sent $bot>
+                                Olá, Camila! A parcela de outubro do Pedro Henrique vence em <strong>10/10</strong> no valor de <strong>R$ 1.250,00</strong>. Situação atual: <strong>Em aberto</strong>. Deseja que eu envie a linha digitável do boleto por aqui?
+                            </Bubble>
+                            <Bubble>Sim, por favor! Pode mandar.</Bubble>
+                            <Bubble $sent $bot>
+                                Aqui está a linha digitável do boleto:
+                                <BarcodeCard>
+                                    <span className="code">34191.79001 01043.510047 91020.150008 1 98760000125000</span>
+                                    <span className="copy-btn"><Copy size={11} /> Copiar</span>
+                                </BarcodeCard>
+                                O arquivo em PDF também foi enviado para o seu e-mail cadastrado.
+                            </Bubble>
+                        </ChatAreaMock>
+                        <SecurityNote>
+                            <ShieldCheck size={14} />
+                            <span>Autenticação HMAC-SHA256 · Vinculada estritamente ao WhatsApp da responsável · LGPD</span>
+                        </SecurityNote>
+                    </MockupCard>
+
+                    <TextContent>
+                        <h3>Mia integrada ao ERP:<br/>dados do aluno direto no WhatsApp</h3>
+                        <p>
+                            A Mia não responde apenas dúvidas gerais: ela se conecta ao sistema de gestão da sua escola para responder perguntas sobre dados reais do aluno — sem que a secretaria ou o financeiro precisem abrir o ERP.
+                        </p>
+                        <ul>
+                            <li>
+                                <Database size={20}/> <strong>Consultas em tempo real:</strong> Vencimentos, 2ª via de boleto, situação financeira e status de matrícula respondidos na hora pelo WhatsApp.
+                            </li>
+                            <li>
+                                <ShieldCheck size={20}/> <strong>Segurança e LGPD garantidas:</strong> Autenticação criptográfica HMAC-SHA256. A Mia só consulta o cadastro do telefone de quem está conversando, impedindo qualquer acesso a dados de terceiros.
+                            </li>
+                            <li>
+                                <CheckCircle2 size={20}/> <strong>Zero alucinação:</strong> Se o sistema estiver fora do ar ou o dado não for encontrado, a Mia não inventa dados: ela informa com transparência e oferece transbordo para a equipe humana.
+                            </li>
+                            <li>
+                                <Layers size={20}/> <strong>Compatível com qualquer sistema:</strong> Conexão via API HTTPS com SophiA, TOTVS, Activesoft ou qualquer ERP com API, além de integração rápida com n8n ou Make.
+                            </li>
+                        </ul>
+                        <ErpLogosRow>
+                            <span className="label">Compatível com:</span>
+                            <span className="tag">TOTVS</span>
+                            <span className="tag">SophiA</span>
+                            <span className="tag">Activesoft</span>
+                            <span className="tag">Galileu</span>
+                            <span className="tag">n8n / Make</span>
+                            <span className="tag">Qualquer API REST</span>
+                        </ErpLogosRow>
+                    </TextContent>
+                </FeatureRow>
+
+                {/* 3.3 MARKETING & AUTOMATIONS */}
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Jornadas de Marketing<br/>com WhatsApp Nativo</h3>
+                        <p>
+                            Insira o WhatsApp em todas as suas automações. Envie mensagens proativas, réguas de relacionamento e lembretes financeiros baseados em disparos de gatilhos do CRM.
+                        </p>
+                        <ul>
+                            <li><Route size={20}/> <strong>Automações de Funil:</strong> Mande mensagens após X dias do envio da proposta caso o pai não responda.
+                            </li>
+                            <li><Bot size={20}/> <strong>Régua de Cobrança:</strong> Lembretes de vencimento enviados no WhatsApp automaticamente.
+                            </li>
+                            <li><Zap size={20}/> <strong>Disparos em Massa Personalizados:</strong> Comunique campanhas usando as tags do Maskot.
+                            </li>
+                        </ul>
+                    </TextContent>
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -1202,20 +1440,6 @@ export default function WhatsAppDeepDive() {
                             </div>
                         </FlowBuilderMock>
                     </MockupCard>
-                    <TextContent>
-                        <h3>Jornadas de Marketing<br/>com WhatsApp Nativo</h3>
-                        <p>
-                            Insira o WhatsApp em todas as suas automações. Envie mensagens proativas, réguas de relacionamento e lembretes financeiros baseados em disparos de gatilhos do CRM.
-                        </p>
-                        <ul>
-                            <li><Route size={20}/> <strong>Automações de Funil:</strong> Mande mensagens após X dias do envio da proposta caso o pai não responda.
-                            </li>
-                            <li><Bot size={20}/> <strong>Régua de Cobrança:</strong> Lembretes de vencimento enviados no WhatsApp automaticamente.
-                            </li>
-                            <li><Zap size={20}/> <strong>Disparos em Massa Personalizados:</strong> Comunique campanhas usando as tags do Maskot.
-                            </li>
-                        </ul>
-                    </TextContent>
                 </FeatureRow>
 
                 
@@ -1227,25 +1451,8 @@ export default function WhatsAppDeepDive() {
                     <p>Regras, alertas e números para o atendimento nunca travar.</p>
                 </ActHeader>
 
-                {/* 3.3 GESTÃO DA FILA */}
-                <FeatureRow>
-                    <TextContent>
-                        <h3>Equipe sob controle,<br/>sem microgerenciar</h3>
-                        <p>
-                            Regras que mantêm a fila andando e mostram, em tempo real, onde o atendimento está travando.
-                        </p>
-                        <ul>
-                            <li><BellRing size={20}/> <strong>Alerta de inatividade:</strong> A conversa muda de cor na lista (amarelo, depois vermelho) quando passa do tempo que você definiu.
-                            </li>
-                            <li><Shuffle size={20}/> <strong>Fila que não trava:</strong> Sem resposta no prazo, a conversa volta para a fila e outro atendente assume.
-                            </li>
-                            <li><MoonStar size={20}/> <strong>Mensagem de ausência:</strong> Fora do expediente, a família recebe um aviso automático em vez de silêncio.
-                            </li>
-                            <li><EyeOff size={20}/> <strong>Privacidade (LGPD):</strong> Oculte o telefone dos contatos de quem não precisa vê-lo e consulte o registro de tudo o que aconteceu na conversa.
-                            </li>
-                        </ul>
-                    </TextContent>
-
+                {/* 3.4 GESTÃO DA FILA */}
+                <FeatureRow $reverse>
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -1274,10 +1481,41 @@ export default function WhatsAppDeepDive() {
                             <div className="note">↩ Conversa do Pai do Lucas devolvida à fila para o próximo atendente.</div>
                         </QueueMock>
                     </MockupCard>
+
+                    <TextContent>
+                        <h3>Equipe sob controle,<br/>sem microgerenciar</h3>
+                        <p>
+                            Regras que mantêm a fila andando e mostram, em tempo real, onde o atendimento está travando.
+                        </p>
+                        <ul>
+                            <li><BellRing size={20}/> <strong>Alerta de inatividade:</strong> A conversa muda de cor na lista (amarelo, depois vermelho) quando passa do tempo que você definiu.
+                            </li>
+                            <li><Shuffle size={20}/> <strong>Fila que não trava:</strong> Sem resposta no prazo, a conversa volta para a fila e outro atendente assume.
+                            </li>
+                            <li><MoonStar size={20}/> <strong>Mensagem de ausência:</strong> Fora do expediente, a família recebe um aviso automático em vez de silêncio.
+                            </li>
+                            <li><EyeOff size={20}/> <strong>Privacidade (LGPD):</strong> Oculte o telefone dos contatos de quem não precisa vê-lo e consulte o registro de tudo o que aconteceu na conversa.
+                            </li>
+                        </ul>
+                    </TextContent>
                 </FeatureRow>
 
                 {/* 4. ANALYTICS */}
-                <FeatureRow $reverse>
+                <FeatureRow>
+                    <TextContent>
+                        <h3>Gestão Baseada em Dados</h3>
+                        <p>
+                            O Analytics do Maskot te dá a visão de raio-X sobre o atendimento da sua equipe.
+                        </p>
+                        <ul>
+                            <li><Thermometer size={20}/> <strong>Mapa de Calor:</strong> Descubra horários de pico.</li>
+                            <li><Clock size={20}/> <strong>SLA de Resposta:</strong> Monitore a agilidade da equipe.
+                            </li>
+                            <li><LineChart size={20}/> <strong>Conversão:</strong> Saiba quantos atendimentos viraram
+                                matrícula.
+                            </li>
+                        </ul>
+                    </TextContent>
                     <MockupCard>
                         <MockupHeader>
                             <div className="dots">
@@ -1303,20 +1541,6 @@ export default function WhatsAppDeepDive() {
                             </div>
                         </DashboardMock>
                     </MockupCard>
-                    <TextContent>
-                        <h3>Gestão Baseada em Dados</h3>
-                        <p>
-                            O Analytics do Maskot te dá a visão de raio-X sobre o atendimento da sua equipe.
-                        </p>
-                        <ul>
-                            <li><Thermometer size={20}/> <strong>Mapa de Calor:</strong> Descubra horários de pico.</li>
-                            <li><Clock size={20}/> <strong>SLA de Resposta:</strong> Monitore a agilidade da equipe.
-                            </li>
-                            <li><LineChart size={20}/> <strong>Conversão:</strong> Saiba quantos atendimentos viraram
-                                matrícula.
-                            </li>
-                        </ul>
-                    </TextContent>
                 </FeatureRow>
 
                 
@@ -1366,7 +1590,7 @@ export default function WhatsAppDeepDive() {
 
                 <MoreTools>
                     <p>E também:</p>
-                    <div className="chips"><span>Central de anexos</span><span>Exportação da conversa em PDF</span><span>Áudio em velocidade 1.5x ou 2x</span><span>Favoritos e carteirização</span><span>Fluxos interativos do WhatsApp</span><span>Disparos de campanha</span><span>Aviso da janela de 24h</span><span>Bloqueio de contato</span></div>
+                    <div className="chips"><span>Conectores ERP em tempo real</span><span>Assinatura HMAC-SHA256 (LGPD)</span><span>Central de anexos</span><span>Exportação da conversa em PDF</span><span>Áudio em velocidade 1.5x ou 2x</span><span>Favoritos e carteirização</span><span>Fluxos interativos do WhatsApp</span><span>Disparos de campanha</span><span>Aviso da janela de 24h</span><span>Bloqueio de contato</span></div>
                 </MoreTools>
 
             </Container>
