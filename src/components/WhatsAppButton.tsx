@@ -2,7 +2,7 @@
 
 import styled, { keyframes } from 'styled-components'
 
-const WHATSAPP_NUMBER = '5579991064405'
+const WHATSAPP_NUMBER = '5579981756382'
 const WHATSAPP_MESSAGE = 'Olá! Gostaria de saber mais sobre o Maskot.'
 
 const popIn = keyframes`

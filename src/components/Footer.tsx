@@ -296,7 +296,7 @@ export default function Footer() {
                             </ContactItem>
                             <ContactItem>
                                 <Phone />
-                                <a href="tel:+5579991064405">(79) 99106-4405</a>
+                                <a href="tel:+5579981756382">(79) 98175-6382</a>
                             </ContactItem>
                         </ContactInfo>
                     </CompanySection>

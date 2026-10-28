@@ -481,7 +481,7 @@ export default function ContactModal(): React.ReactElement | null {
             }
         }
 
-        const whatsappNumber = "5579991064405"
+        const whatsappNumber = "5579981756382"
         const encodedMessage = encodeURIComponent(message)
         const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
 
