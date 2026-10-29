@@ -15,6 +15,7 @@ import {
     ClipboardList,
     CheckSquare,
     BellRing,
+    Phone,
     ArrowRight
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
@@ -179,6 +180,15 @@ export default function FeaturesSection() {
             color: '#16A34A',
             bg: '#F0FDF4',
             href: '/funcionalidades/whatsapp'
+        },
+        {
+            title: 'Ligação de Voz',
+            stage: 'Atender',
+            description: 'Ligue e receba chamadas pelo navegador, com gravação, registro no cadastro do lead e a Mia atendendo quando a equipe não puder.',
+            icon: <Phone />,
+            color: '#0E7490',
+            bg: '#ECFEFF',
+            href: '/funcionalidades/ligacao-de-voz'
         },
         {
             title: 'Mia, a Copilota de IA',

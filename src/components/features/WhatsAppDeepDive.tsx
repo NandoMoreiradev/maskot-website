@@ -1590,7 +1590,7 @@ export default function WhatsAppDeepDive() {
 
                 <MoreTools>
                     <p>E também:</p>
-                    <div className="chips"><span>Conectores ERP em tempo real</span><span>Assinatura HMAC-SHA256 (LGPD)</span><span>Central de anexos</span><span>Exportação da conversa em PDF</span><span>Áudio em velocidade 1.5x ou 2x</span><span>Favoritos e carteirização</span><span>Fluxos interativos do WhatsApp</span><span>Disparos de campanha</span><span>Aviso da janela de 24h</span><span>Bloqueio de contato</span></div>
+                    <div className="chips"><span>Conectores ERP em tempo real</span><span>Assinatura HMAC-SHA256 (LGPD)</span><span>Central de anexos</span><span>Exportação da conversa em PDF</span><span>Áudio em velocidade 1.5x ou 2x</span><span>Favoritos e carteirização</span><span>Fluxos interativos do WhatsApp</span><span>Disparos de campanha</span><span>Aviso da janela de 24h</span><span>Bloqueio de contato</span><span>Ligação de voz pela conversa</span></div>
                 </MoreTools>
 
             </Container>

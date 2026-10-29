@@ -392,6 +392,15 @@ export default function AutomationsDeepDive() {
                                     imediatamente.</p>
                             </div>
                         </FeatureItem>
+
+                        <FeatureItem>
+                            <div className="icon-box"><MessageSquare size={20}/></div>
+                            <div>
+                                <h4>SMS como Ação</h4>
+                                <p>Inclua o envio de <strong>SMS</strong> em qualquer fluxo, com o nome da família no texto.
+                                    Fora do horário permitido, o envio fica agendado para a próxima abertura.</p>
+                            </div>
+                        </FeatureItem>
                     </FeatureList>
 
                     <MockupWindow>

@@ -7,7 +7,7 @@ import {
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
     BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit,
-    ClipboardList, Instagram, BellRing
+    ClipboardList, Instagram, BellRing, Phone
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -449,6 +449,15 @@ export default function Header() {
                                     <div className="text">
                                         <strong>WhatsApp & Inbox com IA</strong>
                                         <span>Atendimento centralizado</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Ligação de Voz */}
+                                <DropdownLink href="/funcionalidades/ligacao-de-voz" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Phone size={18}/></div>
+                                    <div className="text">
+                                        <strong>Ligação de Voz</strong>
+                                        <span>Telefone da escola no CRM</span>
                                     </div>
                                 </DropdownLink>
 

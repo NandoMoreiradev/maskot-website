@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import {
     Send, Users, Mail, MessageCircle,
     Filter, BarChart, MousePointerClick, CalendarCheck,
-    Megaphone, Target, Shuffle
+    Megaphone, Target, Shuffle, MessageSquareText
 } from 'lucide-react'
 
 // --- Animations ---
@@ -448,6 +448,7 @@ export default function MarketingDeepDive() {
                         <ul>
                             <li><MessageCircle size={20}/> <strong>WhatsApp em Massa:</strong> Dispare mensagens template (aprovadas pela Meta) com segurança.</li>
                             <li><Mail size={20}/> <strong>E-mail Marketing:</strong> Editor visual para newsletters e comunicados oficiais.</li>
+                            <li><MessageSquareText size={20}/> <strong>SMS no horário certo:</strong> Mensagens curtas para lembretes e avisos, enviadas só dentro da janela de horário da escola (por padrão, das 8h às 20h).</li>
                             <li><Shuffle size={20}/> <strong>Variáveis:</strong> Personalize o texto com &quot;Nome do Aluno&quot;, &quot;Curso&quot;, etc.</li>
                         </ul>
                     </TextContent>

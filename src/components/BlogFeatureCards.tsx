@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import {
   ArrowRight, MessageCircle, KanbanSquare, CheckSquare, Zap, Megaphone, Rocket, Instagram,
-  GitBranch, BarChart2, ClipboardList, BadgeDollarSign, Building2, LayoutTemplate, BrainCircuit,
+  GitBranch, BarChart2, ClipboardList, BadgeDollarSign, Building2, LayoutTemplate, BrainCircuit, Phone,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -20,6 +20,7 @@ type Feature = {
 // Nomes e textos vêm do menu "Funcionalidades" e dos heros das páginas de cada funcionalidade.
 const FEATURES: Record<string, Feature> = {
   whatsapp: { title: 'WhatsApp & Inbox com IA', desc: 'WhatsApp, Instagram, Messenger e chat do site numa fila só, com vários atendentes e a IA Mia respondendo na hora.', href: '/funcionalidades/whatsapp', Icon: MessageCircle, accent: '#16A34A' },
+  voz: { title: 'Ligação de Voz', desc: 'O telefone da escola no CRM: ligue e receba pelo navegador, com gravação e a Mia atendendo quando a equipe não puder.', href: '/funcionalidades/ligacao-de-voz', Icon: Phone, accent: '#0E7490' },
   comercial: { title: 'Gestão Comercial', desc: 'Todos os interessados em um funil Kanban visual: saiba quantos alunos estão em cada etapa.', href: '/funcionalidades/gestao-comercial', Icon: KanbanSquare, accent: '#2563EB' },
   tarefas: { title: 'Gestão de Tarefas', desc: 'Demandas de qualquer setor da escola em um só lugar, com Kanban e checklists.', href: '/funcionalidades/gestao-tarefas', Icon: CheckSquare, accent: '#4F46E5' },
   automacoes: { title: 'Automações', desc: 'Mensagens, tarefas e nutrição de famílias no piloto automático, 24 horas por dia.', href: '/funcionalidades/automacoes', Icon: Zap, accent: '#9333EA' },
@@ -41,7 +42,7 @@ const FEATURES_BY_CATEGORY: Record<string, string[]> = {
   'Marketing': ['marketing', 'campanhas', 'landing', 'social', 'jornadas'],
   'Retenção': ['onboarding', 'pesquisas', 'jornadas', 'whatsapp', 'automacoes'],
   'Retenção de Matrículas': ['onboarding', 'pesquisas', 'jornadas', 'whatsapp', 'automacoes'],
-  'Vendas': ['comercial', 'whatsapp', 'comissoes', 'mia', 'analytics'],
+  'Vendas': ['comercial', 'whatsapp', 'voz', 'comissoes', 'mia'],
   'Funil de Matrículas': ['comercial', 'automacoes', 'whatsapp', 'jornadas', 'analytics'],
   'Gestão de Leads': ['comercial', 'whatsapp', 'automacoes', 'landing', 'mia'],
   'Leads': ['comercial', 'whatsapp', 'automacoes', 'landing', 'mia'],

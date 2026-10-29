@@ -218,7 +218,7 @@ export default function MarketingJourneysFeatures() {
                                 <MessageSquare size={18} />
                                 <div>
                                     <h4>SMS</h4>
-                                    <p>Alcance o responsável direto no celular para lembretes e avisos urgentes.</p>
+                                    <p>Alcance o responsável direto no celular em lembretes e avisos urgentes, com modelos prontos e envio só dentro da janela de horário da escola.</p>
                                 </div>
                             </FeatureItem>
                             <FeatureItem>

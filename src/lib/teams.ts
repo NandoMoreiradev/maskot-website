@@ -190,6 +190,11 @@ export const TEAMS: Team[] = [
                 what: 'As mensagens dos outros canais chegam à mesma caixa de entrada, com o histórico da conversa preservado.',
             },
             {
+                name: 'Ligação de Voz',
+                href: '/funcionalidades/ligacao-de-voz',
+                what: 'Atenda e faça ligações pelo navegador, com ramais por setor, caixa postal e a Mia atendendo o telefone quando ninguém puder.',
+            },
+            {
                 name: 'Copilot Mia',
                 href: '/funcionalidades/copilot-mia',
                 what: 'Resume conversas longas e sugere respostas no tom da escola. Você edita e aprova antes de enviar.',
@@ -279,6 +284,11 @@ export const TEAMS: Team[] = [
                 name: 'Funil de Matrículas (CRM)',
                 href: '/funcionalidades/gestao-comercial',
                 what: 'Acompanhe cada família por etapa, com histórico, anexos, comentários e motivo de perda.',
+            },
+            {
+                name: 'Ligação de Voz',
+                href: '/funcionalidades/ligacao-de-voz',
+                what: 'Ligue para o lead sem sair do CRM, com o histórico na tela, e registre o desfecho da ligação no cadastro em segundos.',
             },
             {
                 name: 'Agendamento de Visitas',

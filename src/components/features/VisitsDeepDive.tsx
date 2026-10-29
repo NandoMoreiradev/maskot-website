@@ -662,7 +662,7 @@ export default function VisitsDeepDive() {
                                 <Bell className="icon"/>
                                 <div>
                                     <h4>Lembrete na Antecedência que Você Definir</h4>
-                                    <p>Configure quando enviar (ex.: 24h antes) por WhatsApp e/ou e-mail, com a localização da escola.</p>
+                                    <p>Configure quando enviar (ex.: 24h antes) por WhatsApp, e-mail e/ou SMS, com a localização da escola.</p>
                                 </div>
                             </BenefitItem>
                             <BenefitItem>

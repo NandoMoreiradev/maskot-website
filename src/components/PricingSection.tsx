@@ -6,7 +6,7 @@ import { flushSync } from 'react-dom'
 import styled, { css } from 'styled-components'
 import {
   Check, X, ArrowRight, ChevronDown, MessageCircle, Bot,
-  BriefcaseBusiness, Volume2, PackagePlus, BellRing,
+  BriefcaseBusiness, Volume2, PackagePlus, BellRing, Phone, MessageSquareText,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
@@ -782,8 +782,6 @@ const INCLUDED_IN_ALL = [
   'Webhooks para integrar com seu ERP',
   'Onboarding guiado',
   'Filiais adicionais',
-  'Chamadas de voz (em breve)',
-  'SMS (em breve)',
 ]
 
 // Módulos contratados à parte, por unidade. Fonte: ADDONS em backend/prisma/seed.ts.
@@ -815,6 +813,20 @@ const ADDONS: AddonInfo[] = [
       'A Mia responde em áudio no WhatsApp, com voz natural. Disponível em três faixas mensais.',
     note: '300, 800 ou 2.000 respostas por mês. Requer WhatsApp com IA.',
     icon: Volume2,
+  },
+  {
+    name: 'Ligação de Voz',
+    description:
+      'Ligue e receba chamadas pelo navegador, com número da escola, ramais por setor, gravação e histórico no cadastro do lead. Contratado por pacote de minutos.',
+    note: 'A Mia atendendo o telefone exige a Mia (IA) e um pacote de minutos próprio.',
+    icon: Phone,
+  },
+  {
+    name: 'SMS',
+    description:
+      'Envie SMS em campanhas, automações, jornadas e lembretes de visita, com janela de horário e modelos prontos. Só envio: o SMS não recebe respostas.',
+    note: 'Franquia de cortesia para testar. Para volume, conecte a sua própria conta.',
+    icon: MessageSquareText,
   },
   {
     name: 'Pacote +1.000 interações de IA no WhatsApp',
