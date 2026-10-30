@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import {
   ArrowRight, MessageCircle, KanbanSquare, CheckSquare, Zap, Megaphone, Rocket, Instagram,
-  GitBranch, BarChart2, ClipboardList, BadgeDollarSign, Building2, LayoutTemplate, BrainCircuit, Phone,
+  GitBranch, BarChart2, ClipboardList, BadgeDollarSign, Building2, LayoutTemplate, BrainCircuit, Phone, FolderOpen,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -23,6 +23,7 @@ const FEATURES: Record<string, Feature> = {
   voz: { title: 'Ligação de Voz', desc: 'O telefone da escola no CRM: ligue e receba pelo navegador, com gravação e a Mia atendendo quando a equipe não puder.', href: '/funcionalidades/ligacao-de-voz', Icon: Phone, accent: '#0E7490' },
   comercial: { title: 'Gestão Comercial', desc: 'Todos os interessados em um funil Kanban visual: saiba quantos alunos estão em cada etapa.', href: '/funcionalidades/gestao-comercial', Icon: KanbanSquare, accent: '#2563EB' },
   tarefas: { title: 'Gestão de Tarefas', desc: 'Demandas de qualquer setor da escola em um só lugar, com Kanban e checklists.', href: '/funcionalidades/gestao-tarefas', Icon: CheckSquare, accent: '#4F46E5' },
+  drive: { title: 'Drive de Documentos', desc: 'Contratos e documentos em pastas com acesso por cargo, edição de Word e Excel no navegador e links com senha.', href: '/funcionalidades/drive-de-documentos', Icon: FolderOpen, accent: '#0369A1' },
   automacoes: { title: 'Automações', desc: 'Mensagens, tarefas e nutrição de famílias no piloto automático, 24 horas por dia.', href: '/funcionalidades/automacoes', Icon: Zap, accent: '#9333EA' },
   marketing: { title: 'Marketing', desc: 'Réguas de relacionamento no WhatsApp, E-mail e SMS, disparadas pelo comportamento dos pais.', href: '/funcionalidades/marketing', Icon: Megaphone, accent: '#EA580C' },
   campanhas: { title: 'Campanhas', desc: 'Planeje orçamentos, crie copies com IA e rastreie o ROI de cada canal de captação.', href: '/funcionalidades/campanhas', Icon: Rocket, accent: '#9333EA' },
@@ -47,7 +48,7 @@ const FEATURES_BY_CATEGORY: Record<string, string[]> = {
   'Gestão de Leads': ['comercial', 'whatsapp', 'automacoes', 'landing', 'mia'],
   'Leads': ['comercial', 'whatsapp', 'automacoes', 'landing', 'mia'],
   'Tecnologia': ['mia', 'automacoes', 'analytics', 'whatsapp', 'multi'],
-  'Gestão Escolar': ['multi', 'analytics', 'tarefas', 'comissoes', 'onboarding'],
+  'Gestão Escolar': ['multi', 'analytics', 'tarefas', 'drive', 'onboarding'],
 }
 const DEFAULT_FEATURES = ['whatsapp', 'comercial', 'mia', 'automacoes', 'analytics']
 const MAX_CARDS = 5

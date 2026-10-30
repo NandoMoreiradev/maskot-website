@@ -16,6 +16,7 @@ import {
     CheckSquare,
     BellRing,
     Phone,
+    FolderOpen,
     ArrowRight
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
@@ -270,6 +271,15 @@ export default function FeaturesSection() {
             color: '#475569',
             bg: '#F8FAFC',
             href: '/funcionalidades/gestao-tarefas'
+        },
+        {
+            title: 'Drive de Documentos',
+            stage: 'Gerir',
+            description: 'Contratos e documentos em pastas com acesso por cargo, edição de Word e Excel no navegador, links com senha, versões e lixeira.',
+            icon: <FolderOpen />,
+            color: '#0369A1',
+            bg: '#F0F9FF',
+            href: '/funcionalidades/drive-de-documentos'
         }
     ];
 

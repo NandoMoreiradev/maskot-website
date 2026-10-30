@@ -409,6 +409,7 @@ export const TEAMS: Team[] = [
             },
             {
                 name: 'Drive de documentos',
+                href: '/funcionalidades/drive-de-documentos',
                 what: 'Guarde e compartilhe materiais por pasta e por link, com controle de versões.',
             },
             {

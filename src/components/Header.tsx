@@ -7,7 +7,7 @@ import {
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
     BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit,
-    ClipboardList, Instagram, BellRing, Phone
+    ClipboardList, Instagram, BellRing, Phone, FolderOpen
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -476,6 +476,15 @@ export default function Header() {
                                     <div className="text">
                                         <strong>Gestão de Tarefas</strong>
                                         <span>Projetos e processos</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Drive de Documentos */}
+                                <DropdownLink href="/funcionalidades/drive-de-documentos" onClick={handleLinkClick}>
+                                    <div className="icon-box"><FolderOpen size={18}/></div>
+                                    <div className="text">
+                                        <strong>Drive de Documentos</strong>
+                                        <span>Arquivos e pastas da escola</span>
                                     </div>
                                 </DropdownLink>
 
