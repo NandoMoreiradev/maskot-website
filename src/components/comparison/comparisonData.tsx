@@ -88,7 +88,7 @@ export const MODULES: ComparisonModule[] = [
         icon: LayoutTemplate,
         name: 'Landing pages',
         tools: ['Unbounce', 'Leadpages', 'Wix', 'Elementor', 'RD Station'],
-        maskot: 'Construtor integrado, em que cada cadastro cai direto no funil certo.',
+        maskot: 'Construtor visual e criação por IA (a Mia escreve a página), em que cada cadastro e cada visita agendada caem direto no funil certo.',
     },
     {
         id: 'social',
@@ -162,7 +162,7 @@ export const LUMNI_ROWS: LumniRow[] = [
     { feature: 'Agente de IA que qualifica e agenda visitas', maskot: { kind: 'yes', text: 'Incluso a partir do Crescimento' }, lumni: { kind: 'yes', text: 'Solução separada (planos IA e IA+)' } },
     { feature: 'Automações e réguas de relacionamento', maskot: { kind: 'yes', text: 'Sim' }, lumni: { kind: 'yes', text: 'Sim' } },
     { feature: 'Campanhas e calendário de marketing', maskot: { kind: 'yes', text: 'Sim' }, lumni: { kind: 'yes', text: 'Sim' } },
-    { feature: 'Landing pages', maskot: { kind: 'yes', text: 'Construtor integrado' }, lumni: { kind: 'partial', text: 'Citado no Marketing, sem detalhes' } },
+    { feature: 'Landing pages', maskot: { kind: 'yes', text: 'Construtor visual e criação com a Mia' }, lumni: { kind: 'partial', text: 'Citado no Marketing, sem detalhes' } },
     { feature: 'Analytics do funil', maskot: { kind: 'yes', text: 'Sim' }, lumni: { kind: 'yes', text: 'Sim' } },
     { feature: 'Gestão de redes sociais (posts, comentários, DM)', maskot: { kind: 'yes', text: 'Sim' }, lumni: { kind: 'unknown', text: 'Não consta no site' } },
     { feature: 'Pesquisas NPS e CSAT', maskot: { kind: 'yes', text: 'Sim' }, lumni: { kind: 'unknown', text: 'Não consta no site' } },

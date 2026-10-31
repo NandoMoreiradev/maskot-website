@@ -1,7 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import styled, { keyframes } from 'styled-components'
-import { ArrowRight, LayoutTemplate, MousePointer2, Zap, CheckCircle2, Monitor, Smartphone, Sparkles, Clock, FormInput } from 'lucide-react'
+import { ArrowRight, Sparkles, CheckCircle2, Monitor, Smartphone, CalendarCheck, Code2, Eye } from 'lucide-react'
 import { Container as BaseContainer } from '@/components/ui/Container'
 import AuroraBackground from '@/components/AuroraBackground'
 
@@ -20,6 +21,11 @@ const floatSlow = keyframes`
 const fadeUp = keyframes`
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
+`
+
+const blink = keyframes`
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 `
 
 const HeroSection = styled.section`
@@ -41,7 +47,7 @@ const Container = styled(BaseContainer)`
 
 const HeroContent = styled.div`
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 4rem;
     align-items: center;
 
@@ -82,6 +88,17 @@ const Tag = styled.div`
         width: 14px;
         height: 14px;
     }
+
+    .new {
+        background: #7C3AED;
+        color: #FFFFFF;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.1rem 0.45rem;
+        border-radius: 100px;
+    }
 `
 
 const MainHeading = styled.h1`
@@ -106,7 +123,7 @@ const Subtitle = styled.p`
     font-size: 1.1rem;
     line-height: 1.6;
     color: #475569;
-    max-width: 530px;
+    max-width: 540px;
     animation: ${fadeUp} 0.8s ease-out 0.2s forwards;
     opacity: 0;
 
@@ -177,9 +194,9 @@ const SecondaryButton = styled.a`
 
 const TrustBadges = styled.div`
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
     animation: ${fadeUp} 0.8s ease-out 0.4s forwards;
     opacity: 0;
 
@@ -187,19 +204,20 @@ const TrustBadges = styled.div`
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 0.85rem;
-        color: #64748B;
+        font-size: 0.9rem;
+        color: #475569;
         font-weight: 600;
 
         svg {
             color: #7C3AED;
             width: 18px;
             height: 18px;
+            flex-shrink: 0;
         }
     }
 
     @media (max-width: 1024px) {
-        justify-content: center;
+        align-items: flex-start;
     }
 `
 
@@ -215,19 +233,20 @@ const Visual = styled.div`
     opacity: 0;
 `
 
-const BuilderCard = styled.div`
+const MiaCard = styled.div`
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 20px;
     width: 100%;
-    max-width: 440px;
+    max-width: 470px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
     transform: rotateY(-4deg) rotateX(2deg);
     animation: ${floatSlow} 8s ease-in-out infinite;
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
+    text-align: left;
 
     &:hover {
         transform: rotateY(0deg) rotateX(0deg);
@@ -240,32 +259,31 @@ const CardHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #F1F5F9;
-    padding-bottom: 1rem;
+    padding-bottom: 0.85rem;
 
     .info {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.7rem;
 
-        .icon-box {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+        .avatar {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             background: #F5F3FF;
-            color: #7C3AED;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
         }
 
         .title {
             font-size: 0.95rem;
             font-weight: 700;
             color: #0F172A;
+            line-height: 1.2;
         }
 
         .subtitle {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #64748B;
         }
     }
@@ -279,7 +297,7 @@ const CardHeader = styled.div`
         border: 1px solid #BBF7D0;
         padding: 0.25rem 0.6rem;
         border-radius: 100px;
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         font-weight: 600;
 
         .dot {
@@ -291,110 +309,134 @@ const CardHeader = styled.div`
     }
 `
 
-const EditorPreview = styled.div`
+const Chat = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+`
+
+const Bubble = styled.div<{ $me?: boolean }>`
+    align-self: ${props => (props.$me ? 'flex-end' : 'flex-start')};
+    max-width: 88%;
+    padding: 0.6rem 0.8rem;
+    border-radius: ${props => (props.$me ? '14px 14px 4px 14px' : '14px 14px 14px 4px')};
+    background: ${props => (props.$me ? '#7C3AED' : '#F1F5F9')};
+    color: ${props => (props.$me ? '#FFFFFF' : '#1E293B')};
+    font-size: 0.78rem;
+    line-height: 1.45;
+    font-weight: 500;
+
+    .caret {
+        display: inline-block;
+        width: 6px;
+        height: 12px;
+        margin-left: 2px;
+        vertical-align: -2px;
+        background: #7C3AED;
+        animation: ${blink} 1s step-end infinite;
+    }
+`
+
+const Preview = styled.div`
     background: #F8FAFC;
     border: 1px solid #E2E8F0;
     border-radius: 12px;
-    padding: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    overflow: hidden;
 
-    .toolbar-row {
+    .toolbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 0.5rem;
+        padding: 0.45rem 0.65rem;
+        background: #FFFFFF;
         border-bottom: 1px solid #E2E8F0;
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         color: #64748B;
 
-        .devices {
+        .tabs, .devices {
             display: flex;
-            gap: 6px;
-            span {
-                padding: 3px 6px;
-                border-radius: 4px;
-                background: #FFFFFF;
-                border: 1px solid #E2E8F0;
-                font-weight: 600;
-                display: flex;
-                align-items: center;
-                gap: 3px;
-                &.active {
-                    color: #7C3AED;
-                    border-color: #DDD6FE;
-                    background: #F5F3FF;
-                }
+            gap: 5px;
+        }
+
+        span {
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            border: 1px solid transparent;
+
+            &.active {
+                color: #7C3AED;
+                background: #F5F3FF;
+                border-color: #DDD6FE;
             }
         }
     }
 
-    .blocks-container {
+    .page {
+        padding: 0.75rem;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
 
-        .block-item {
+        .hero-bar {
+            border-radius: 8px;
+            padding: 0.7rem 0.8rem;
+            background: linear-gradient(135deg, #5B21B6, #7C3AED);
+            color: #FFFFFF;
+
+            strong {
+                display: block;
+                font-size: 0.82rem;
+                margin-bottom: 2px;
+            }
+
+            small {
+                font-size: 0.64rem;
+                opacity: 0.85;
+            }
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .field, .slot {
+            height: 22px;
+            border-radius: 6px;
             background: #FFFFFF;
             border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 0.6rem 0.75rem;
+        }
+
+        .slot {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            font-size: 0.75rem;
+            justify-content: center;
+            font-size: 0.64rem;
+            font-weight: 700;
+            color: #475569;
 
-            .block-name {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                font-weight: 600;
-                color: #1E293B;
-
-                .dot-indicator {
-                    width: 6px;
-                    height: 6px;
-                    border-radius: 50%;
-                }
-            }
-
-            .block-type {
-                font-size: 0.68rem;
-                padding: 2px 6px;
-                border-radius: 4px;
-                background: #F1F5F9;
-                color: #64748B;
-                font-weight: 500;
+            &.picked {
+                background: #F5F3FF;
+                border-color: #7C3AED;
+                color: #7C3AED;
             }
         }
-    }
-`
 
-const StatsGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-
-    .stat-box {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 0.6rem 0.4rem;
-        text-align: center;
-
-        .num {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1;
-            margin-bottom: 2px;
-        }
-
-        .lbl {
-            font-size: 0.65rem;
-            color: #64748B;
-            font-weight: 500;
+        .cta {
+            height: 26px;
+            border-radius: 6px;
+            background: #16A34A;
+            color: #FFFFFF;
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 `
@@ -469,107 +511,90 @@ export default function LandingPagesHero() {
                 <HeroContent>
                     <TextContent>
                         <Tag>
-                            <LayoutTemplate /> Construtor Visual & Landing Pages Escolares
+                            <span className="new">Novo</span> <Sparkles /> Crie landing pages conversando com a Mia
                         </Tag>
                         <MainHeading>
-                            Páginas que Convertem <strong>Sem Digitar Nenhum Código.</strong>
+                            Sua landing page nasce numa <strong>conversa com a Mia.</strong>
                         </MainHeading>
                         <Subtitle>
-                            Crie landing pages de alta conversão para captar mais alunos em minutos. Arraste blocos visuais, ative contadores regressivos e receba os leads diretamente no CRM Maskot Edu.
+                            Conte o que a escola quer divulgar e a Mia escreve a página completa em código, com a logo e as cores da escola, enquanto você acompanha a prévia ao vivo. Ajuste conversando, ou monte do seu jeito no editor visual de arrastar e soltar. Cada contato cai direto no CRM, com a origem da campanha.
                         </Subtitle>
                         <ButtonGroup>
                             <CTAButton onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}>
                                 Falar com um Consultor <ArrowRight size={18} />
                             </CTAButton>
-                            <SecondaryButton href="#recursos">
-                                Conhecer Recursos
+                            <SecondaryButton href="#mia">
+                                Ver a Mia criando páginas
                             </SecondaryButton>
                         </ButtonGroup>
                         <TrustBadges>
-                            <div><CheckCircle2 /> 31 Tipos de Blocos Arraste & Solte</div>
-                            <div><CheckCircle2 /> 7 Templates Especializados</div>
-                            <div><CheckCircle2 /> 100% Integrado ao Pipeline de Matrículas</div>
+                            <div><CheckCircle2 /> Prévia ao vivo no computador e no celular, a cada pedido</div>
+                            <div><CheckCircle2 /> Agenda de visitas, formulários e pesquisas da escola ligados à página</div>
+                            <div><CheckCircle2 /> Editor visual de arrastar e soltar para quem prefere montar à mão</div>
                         </TrustBadges>
                     </TextContent>
 
                     <Visual>
                         <FloatingBadgeTop>
-                            <div className="icon"><MousePointer2 size={14} /></div>
-                            <span>Arraste & Solte em Tempo Real</span>
+                            <div className="icon"><Code2 size={14} /></div>
+                            <span>HTML, CSS e JavaScript escritos pela Mia</span>
                         </FloatingBadgeTop>
 
-                        <BuilderCard>
+                        <MiaCard>
                             <CardHeader>
                                 <div className="info">
-                                    <div className="icon-box"><LayoutTemplate size={18} /></div>
+                                    <div className="avatar">
+                                        <Image src="/mia.png" alt="Mia, a copilota de IA do Maskot Edu" fill sizes="40px" style={{ objectFit: 'contain' }} />
+                                    </div>
                                     <div>
-                                        <div className="title">Campanha Matrículas 2026</div>
-                                        <div className="subtitle">matricula.suaescola.com.br</div>
+                                        <div className="title">Mia</div>
+                                        <div className="subtitle">Descreva a página ou peça ajustes</div>
                                     </div>
                                 </div>
                                 <div className="badge">
                                     <div className="dot" />
-                                    Publicada
+                                    Prévia ao vivo
                                 </div>
                             </CardHeader>
 
-                            <EditorPreview>
-                                <div className="toolbar-row">
+                            <Chat>
+                                <Bubble $me>Crie uma página de matrículas 2027 para o Ensino Fundamental, com formulário e agendamento de visita.</Bubble>
+                                <Bubble>Pronto! Montei a página com a logo e as cores da escola, a agenda de visitas e o formulário. Quer mudar algo?</Bubble>
+                                <Bubble $me>Deixe o topo mais impactante e adicione perguntas frequentes.</Bubble>
+                                <Bubble>Ajustando o topo e escrevendo as perguntas frequentes<span className="caret" /></Bubble>
+                            </Chat>
+
+                            <Preview>
+                                <div className="toolbar">
+                                    <div className="tabs">
+                                        <span className="active"><Eye size={11} /> Prévia</span>
+                                        <span><Code2 size={11} /> Código</span>
+                                    </div>
                                     <div className="devices">
-                                        <span className="active"><Monitor size={11} /> Desktop</span>
-                                        <span><Smartphone size={11} /> Mobile</span>
-                                    </div>
-                                    <span style={{ color: '#16A34A', fontWeight: 600 }}>✓ Auto-salvo</span>
-                                </div>
-
-                                <div className="blocks-container">
-                                    <div className="block-item">
-                                        <div className="block-name">
-                                            <div className="dot-indicator" style={{ background: '#7C3AED' }} />
-                                            <span>Hero Block (Capa Principal)</span>
-                                        </div>
-                                        <span className="block-type">Capa + Vídeo</span>
-                                    </div>
-
-                                    <div className="block-item">
-                                        <div className="block-name">
-                                            <div className="dot-indicator" style={{ background: '#F59E0B' }} />
-                                            <span>Contador Regressivo (Bolsão)</span>
-                                        </div>
-                                        <span className="block-type">Escassez</span>
-                                    </div>
-
-                                    <div className="block-item">
-                                        <div className="block-name">
-                                            <div className="dot-indicator" style={{ background: '#10B981' }} />
-                                            <span>Formulário Direto no CRM</span>
-                                        </div>
-                                        <span className="block-type" style={{ color: '#059669', background: '#ECFDF5' }}>Captura Ativa</span>
+                                        <span className="active"><Monitor size={11} /></span>
+                                        <span><Smartphone size={11} /></span>
                                     </div>
                                 </div>
-                            </EditorPreview>
-
-                            <StatsGrid>
-                                <div className="stat-box">
-                                    <div className="num">1.284</div>
-                                    <div className="lbl">Acessos</div>
+                                <div className="page">
+                                    <div className="hero-bar">
+                                        <strong>Matrículas 2027 abertas</strong>
+                                        <small>Conheça a escola e agende sua visita</small>
+                                    </div>
+                                    <div className="row">
+                                        <div className="slot">Qua 04/11</div>
+                                        <div className="slot picked">14:00</div>
+                                    </div>
+                                    <div className="field" />
+                                    <div className="cta">Agendar visita</div>
                                 </div>
-                                <div className="stat-box">
-                                    <div className="num">94</div>
-                                    <div className="lbl">Novos Leads</div>
-                                </div>
-                                <div className="stat-box">
-                                    <div className="num" style={{ color: '#16A34A' }}>7,3%</div>
-                                    <div className="lbl">Taxa de Conversão</div>
-                                </div>
-                            </StatsGrid>
-                        </BuilderCard>
+                            </Preview>
+                        </MiaCard>
 
                         <FloatingBadgeBottom>
-                            <div className="icon"><Zap size={16} /></div>
+                            <div className="icon"><CalendarCheck size={16} /></div>
                             <div>
-                                <div>Leads Direto no CRM</div>
-                                <div style={{ fontSize: '0.7rem', color: '#64748B', fontWeight: 500 }}>Sem webhooks ou formulários externos</div>
+                                <div>Horários da agenda real</div>
+                                <div style={{ fontSize: '0.7rem', color: '#64748B', fontWeight: 500 }}>A visita cai direto na agenda do anfitrião</div>
                             </div>
                         </FloatingBadgeBottom>
                     </Visual>
