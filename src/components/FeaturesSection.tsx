@@ -158,7 +158,7 @@ export default function FeaturesSection() {
         {
             title: 'Landing Pages que Convertem',
             stage: 'Atrair',
-            description: 'Crie páginas de captação em minutos, sem programar. Cada novo cadastro cai automaticamente no funil certo.',
+            description: 'Descreva a página e a Mia escreve o código, com prévia ao vivo, ou monte no editor visual. Agenda, formulários e leads ligados ao funil.',
             icon: <LayoutTemplate />,
             color: '#E11D48',
             bg: '#FFF1F2',

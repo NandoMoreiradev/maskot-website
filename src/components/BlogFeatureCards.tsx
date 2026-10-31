@@ -34,7 +34,7 @@ const FEATURES: Record<string, Feature> = {
   comissoes: { title: 'Comissões', desc: 'Cálculo automático de comissões, recibos em um clique e regras de estorno.', href: '/funcionalidades/gestao-comissoes', Icon: BadgeDollarSign, accent: '#059669' },
   onboarding: { title: 'Onboarding', desc: 'Padronize a entrada de novos alunos, com checklists de documentos e acolhida desde o primeiro dia.', href: '/funcionalidades/onboarding', Icon: Rocket, accent: '#7C3AED' },
   multi: { title: 'Multi-Escolas', desc: 'Gestão da rede de ensino: alterne entre unidades com um clique e veja relatórios consolidados.', href: '/funcionalidades/multi-escolas', Icon: Building2, accent: '#1E40AF' },
-  landing: { title: 'Landing Pages', desc: 'Páginas de alta conversão em minutos, com leads caindo direto no CRM.', href: '/funcionalidades/criador-de-landing-pages', Icon: LayoutTemplate, accent: '#7C3AED' },
+  landing: { title: 'Landing Pages', desc: 'Descreva a página e a Mia cria, com leads caindo direto no CRM.', href: '/funcionalidades/criador-de-landing-pages', Icon: LayoutTemplate, accent: '#7C3AED' },
   mia: { title: 'Copilot IA (Mia)', desc: 'Sua copilota: analisa leads, cria mensagens e entrega o briefing do seu dia.', href: '/funcionalidades/copilot-mia', Icon: BrainCircuit, accent: '#F97316' },
 }
 

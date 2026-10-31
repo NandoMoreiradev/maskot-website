@@ -592,7 +592,7 @@ export default function Header() {
                                     <div className="icon-box"><LayoutTemplate size={18}/></div>
                                     <div className="text">
                                         <strong>Landing Pages</strong>
-                                        <span>Páginas de conversão</span>
+                                        <span>Crie com a Mia (IA)</span>
                                     </div>
                                 </DropdownLink>
 
