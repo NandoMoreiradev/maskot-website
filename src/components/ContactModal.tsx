@@ -358,8 +358,9 @@ const Footnote = styled.p`
  * Variantes do modal. `school` é a demonstração para escolas (padrão: quem dispara o evento sem `detail` cai aqui).
  * `partner` é a candidatura ao Programa de Parceiros (agências e empresas do setor educacional):
  * `window.dispatchEvent(new CustomEvent('open-contact-modal', { detail: { variant: 'partner' } }))`.
+ * `studio` é a candidatura de uma escola ao Maskot Studio (serviço de marketing), com `variant: 'studio'`.
  */
-type Variant = 'school' | 'partner'
+type Variant = 'school' | 'partner' | 'studio'
 
 const COPY: Record<Variant, {
     eyebrow: string
@@ -395,6 +396,19 @@ const COPY: Record<Variant, {
         heading: 'Quero ser parceiro',
         lead: 'Preencha os dados e nosso time entra em contato.',
     },
+    studio: {
+        eyebrow: 'Maskot Studio',
+        title: 'Vamos ver se a sua escola e o Maskot Studio combinam?',
+        subtitle: 'Conte um pouco sobre a escola. Conferimos a disponibilidade para a sua região e o seu segmento e retornamos a todas as candidaturas.',
+        benefits: [
+            'Atendemos no máximo 15 escolas ao mesmo tempo',
+            'Uma escola por região e segmento: sem concorrentes diretos',
+            'Funil medido até a matrícula, com custo por matrícula',
+            'Sem compromisso: uma conversa para ver se faz sentido',
+        ],
+        heading: 'Candidatar minha escola',
+        lead: 'Preencha os dados e nosso time entra em contato.',
+    },
 }
 
 const EMPTY_FORM = {
@@ -408,6 +422,8 @@ const EMPTY_FORM = {
     partnerType: '',
     schoolsServed: '',
     website: '',
+    city: '',
+    program: '',
 }
 
 export default function ContactModal(): React.ReactElement | null {
@@ -418,7 +434,7 @@ export default function ContactModal(): React.ReactElement | null {
     useEffect(() => {
         const handleOpen = (event: Event) => {
             const requested = (event as CustomEvent<{ variant?: Variant } | undefined>).detail?.variant
-            setVariant(requested === 'partner' ? 'partner' : 'school')
+            setVariant(requested === 'partner' || requested === 'studio' ? requested : 'school')
             setIsOpen(true)
         }
         window.addEventListener('open-contact-modal', handleOpen)
@@ -447,8 +463,8 @@ export default function ContactModal(): React.ReactElement | null {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        const message = variant === 'partner'
-            ? `Olá! Quero conhecer o Programa de Parceiros do Maskot Edu.
+        const messages: Record<Variant, string> = {
+            partner: `Olá! Quero conhecer o Programa de Parceiros do Maskot Edu.
 
 *Meus Dados:*
 - *Nome:* ${formData.name}
@@ -458,8 +474,20 @@ export default function ContactModal(): React.ReactElement | null {
 - *Tipo de empresa:* ${formData.partnerType}
 - *Escolas que atende:* ${formData.schoolsServed}${formData.website.trim() ? `
 - *Site ou Instagram:* ${formData.website.trim()}` : ''}
-        `
-            : `Olá! Gostaria de falar com um especialista sobre o Maskot.
+        `,
+            studio: `Olá! Quero candidatar a minha escola ao Maskot Studio.
+
+*Meus Dados:*
+- *Nome:* ${formData.name}
+- *E-mail:* ${formData.email}
+- *WhatsApp:* ${formData.phone}
+- *Escola:* ${formData.schoolName}
+- *Cidade/UF:* ${formData.city}
+- *Cargo:* ${formData.role}
+- *Nº Alunos:* ${formData.studentsCount}
+- *Programa de interesse:* ${formData.program}
+        `,
+            school: `Olá! Gostaria de falar com um especialista sobre o Maskot.
 
 *Meus Dados:*
 - *Nome:* ${formData.name}
@@ -468,7 +496,9 @@ export default function ContactModal(): React.ReactElement | null {
 - *Escola:* ${formData.schoolName}
 - *Cargo:* ${formData.role}
 - *Nº Alunos:* ${formData.studentsCount}
-        `
+        `,
+        }
+        const message = messages[variant]
 
         if (typeof window !== 'undefined') {
             const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> }
@@ -494,6 +524,7 @@ export default function ContactModal(): React.ReactElement | null {
 
     const copy = COPY[variant]
     const isPartner = variant === 'partner'
+    const isStudio = variant === 'studio'
 
     return (
         <Overlay $isOpen={isOpen} onClick={() => setIsOpen(false)}>
@@ -510,8 +541,17 @@ export default function ContactModal(): React.ReactElement | null {
                         ))}
                     </BenefitList>
                     <TrustRow>
-                        <div><ShieldCheck /> API Oficial do WhatsApp</div>
-                        <div><BadgeCheck /> Provedor Oficial Meta</div>
+                        {isStudio ? (
+                            <>
+                                <div><ShieldCheck /> Até 15 escolas</div>
+                                <div><BadgeCheck /> Equipe própria</div>
+                            </>
+                        ) : (
+                            <>
+                                <div><ShieldCheck /> API Oficial do WhatsApp</div>
+                                <div><BadgeCheck /> Provedor Oficial Meta</div>
+                            </>
+                        )}
                     </TrustRow>
                 </AsidePanel>
 
@@ -570,6 +610,52 @@ export default function ContactModal(): React.ReactElement | null {
                                     <label htmlFor="contact-website">Site ou Instagram (opcional)</label>
                                     <input id="contact-website" name="website" value={formData.website} onChange={handleChange} placeholder="www.suaempresa.com.br" />
                                 </FormGroup>
+                            </>
+                        ) : isStudio ? (
+                            <>
+                                <FormGroup>
+                                    <label htmlFor="contact-schoolName">Nome da Escola</label>
+                                    <input id="contact-schoolName" required name="schoolName" value={formData.schoolName} onChange={handleChange} placeholder="Colégio Exemplo" />
+                                </FormGroup>
+                                <Row>
+                                    <FormGroup>
+                                        <label htmlFor="contact-city">Cidade / UF</label>
+                                        <input id="contact-city" required name="city" value={formData.city} onChange={handleChange} placeholder="Aracaju / SE" />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label htmlFor="contact-role">Cargo</label>
+                                        <select id="contact-role" required name="role" value={formData.role} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="Diretor(a)">Diretor(a)</option>
+                                            <option value="Mantenedor(a)">Mantenedor(a)</option>
+                                            <option value="Coordenador(a)">Coordenador(a)</option>
+                                            <option value="Marketing/Comercial">Marketing / Comercial</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </FormGroup>
+                                </Row>
+                                <Row>
+                                    <FormGroup>
+                                        <label htmlFor="contact-studentsCount">Nº de Alunos</label>
+                                        <select id="contact-studentsCount" required name="studentsCount" value={formData.studentsCount} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="Até 500">Até 500</option>
+                                            <option value="501 a 1000">501 a 1000</option>
+                                            <option value="1001 a 2000">1001 a 2000</option>
+                                            <option value="Mais de 2000">Mais de 2000</option>
+                                        </select>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label htmlFor="contact-program">Programa de Interesse</label>
+                                        <select id="contact-program" required name="program" value={formData.program} onChange={handleChange}>
+                                            <option value="">Selecione...</option>
+                                            <option value="Captação">Captação</option>
+                                            <option value="Captação + Atendimento">Captação + Atendimento</option>
+                                            <option value="Parceria completa">Parceria completa</option>
+                                            <option value="Ainda não sei">Ainda não sei</option>
+                                        </select>
+                                    </FormGroup>
+                                </Row>
                             </>
                         ) : (
                             <>
