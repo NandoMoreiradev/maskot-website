@@ -7,7 +7,7 @@ import {
     MessageCircle, KanbanSquare, GitBranch, CalendarCheck, Zap,
     // Novos Ícones
     BadgeDollarSign, Rocket, Megaphone, BarChart2, Building2, CheckSquare, LayoutTemplate, BrainCircuit,
-    ClipboardList, Instagram, BellRing, Phone, FolderOpen
+    ClipboardList, Instagram, BellRing, Phone, FolderOpen, Mail
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -110,12 +110,12 @@ interface DropdownContentProps {
 const DropdownContent = styled.div<DropdownContentProps>`
     position: absolute;
     top: 100%;
-    left: -100px; /* Ajuste para o menu */
-    width: 660px; /* Mais compacto */
+    left: -80px; /* Ajuste para o menu */
+    width: 820px; /* Mais largo para não quebrar títulos e subtítulos */
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-    padding: 12px;
+    border-radius: 14px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+    padding: 14px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -125,7 +125,7 @@ const DropdownContent = styled.div<DropdownContentProps>`
     /* Grid Layout para Desktop */
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 colunas */
-    gap: 2px; /* Gap menor entre itens */
+    gap: 4px; /* Espaço confortável entre itens */
 
     @media (max-width: 1180px) {
         /* Reset para Mobile */
@@ -259,15 +259,23 @@ const DropdownLink = styled(Link)`
         flex-direction: column;
 
         strong {
-            font-size: 0.8rem; /* Título menor */
+            font-size: 0.82rem;
             color: ${props => props.theme.colors.textDark};
             font-weight: 700;
+            white-space: nowrap;
         }
 
         span {
-            font-size: 0.7rem; /* Subtítulo bem menor */
+            font-size: 0.72rem;
             color: ${props => props.theme.colors.textMedium};
-            line-height: 1.2;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 1180px) {
+            strong, span {
+                white-space: normal;
+            }
         }
     }
 `
@@ -458,6 +466,15 @@ export default function Header() {
                                     <div className="text">
                                         <strong>Ligação de Voz</strong>
                                         <span>Telefone da escola no CRM</span>
+                                    </div>
+                                </DropdownLink>
+
+                                {/* Caixa de E-mail (NOVO) */}
+                                <DropdownLink href="/funcionalidades/caixa-de-email" onClick={handleLinkClick}>
+                                    <div className="icon-box"><Mail size={18}/></div>
+                                    <div className="text">
+                                        <strong>Caixa de E-mail</strong>
+                                        <span>E-mails integrados ao CRM</span>
                                     </div>
                                 </DropdownLink>
 

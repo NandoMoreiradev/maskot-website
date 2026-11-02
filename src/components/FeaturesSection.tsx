@@ -17,6 +17,7 @@ import {
     BellRing,
     Phone,
     FolderOpen,
+    Mail,
     ArrowRight
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
@@ -190,6 +191,15 @@ export default function FeaturesSection() {
             color: '#0E7490',
             bg: '#ECFEFF',
             href: '/funcionalidades/ligacao-de-voz'
+        },
+        {
+            title: 'Caixa de E-mail Integrada',
+            stage: 'Atender',
+            description: 'Centralize as caixas da escola (matrículas, secretaria e financeiro) com histórico de leads, respostas automáticas e threads organizadas.',
+            icon: <Mail />,
+            color: '#2563EB',
+            bg: '#EFF6FF',
+            href: '/funcionalidades/caixa-de-email'
         },
         {
             title: 'Mia, a Copilota de IA',

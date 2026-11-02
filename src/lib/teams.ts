@@ -195,6 +195,11 @@ export const TEAMS: Team[] = [
                 what: 'Atenda e faça ligações pelo navegador, com ramais por setor, caixa postal e a Mia atendendo o telefone quando ninguém puder.',
             },
             {
+                name: 'Caixa de E-mail Escolar',
+                href: '/funcionalidades/caixa-de-email',
+                what: 'Atenda e-mails de matrículas e secretaria com a ficha do lead na tela, respostas automáticas de recesso e caixas compartilhadas.',
+            },
+            {
                 name: 'Copilot Mia',
                 href: '/funcionalidades/copilot-mia',
                 what: 'Resume conversas longas e sugere respostas no tom da escola. Você edita e aprova antes de enviar.',
