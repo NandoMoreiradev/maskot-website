@@ -630,7 +630,7 @@ export default function EmailInboxHero() {
                         </MainHeading>
 
                         <Subtitle>
-                            Reúna as caixas de matrículas, secretaria e financeiro em um só lugar. Atenda em equipe sem repassar senhas, veja a ficha do lead ao abrir a mensagem, adie pendências com snooze e nunca deixe uma família sem resposta.
+                            Reúna as caixas de e-mails de toda a escola. Atenda em equipe sem repassar senhas, veja a ficha do lead ao abrir a mensagem, adie pendências com snooze e nunca deixe uma família sem resposta.
                         </Subtitle>
 
                         <ChannelChips>
