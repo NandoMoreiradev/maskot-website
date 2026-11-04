@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {
   ArrowRight, MessageCircle, KanbanSquare, CheckSquare, Zap, Megaphone, Rocket, Instagram,
   GitBranch, BarChart2, ClipboardList, BadgeDollarSign, Building2, LayoutTemplate, BrainCircuit, Phone, FolderOpen,
+  Mail,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -21,6 +22,7 @@ type Feature = {
 const FEATURES: Record<string, Feature> = {
   whatsapp: { title: 'WhatsApp & Inbox com IA', desc: 'WhatsApp, Instagram, Messenger e chat do site numa fila só, com vários atendentes e a IA Mia respondendo na hora.', href: '/funcionalidades/whatsapp', Icon: MessageCircle, accent: '#16A34A' },
   voz: { title: 'Ligação de Voz', desc: 'O telefone da escola no CRM: ligue e receba pelo navegador, com gravação e a Mia atendendo quando a equipe não puder.', href: '/funcionalidades/ligacao-de-voz', Icon: Phone, accent: '#0E7490' },
+  email: { title: 'Caixa de E-mail', desc: 'Centralize as caixas da escola integradas ao CRM: histórico do lead, caixas compartilhadas e respostas automáticas.', href: '/funcionalidades/caixa-de-email', Icon: Mail, accent: '#2563EB' },
   comercial: { title: 'Gestão Comercial', desc: 'Todos os interessados em um funil Kanban visual: saiba quantos alunos estão em cada etapa.', href: '/funcionalidades/gestao-comercial', Icon: KanbanSquare, accent: '#2563EB' },
   tarefas: { title: 'Gestão de Tarefas', desc: 'Demandas de qualquer setor da escola em um só lugar, com Kanban e checklists.', href: '/funcionalidades/gestao-tarefas', Icon: CheckSquare, accent: '#4F46E5' },
   drive: { title: 'Drive de Documentos', desc: 'Contratos e documentos em pastas com acesso por cargo, edição de Word e Excel no navegador e links com senha.', href: '/funcionalidades/drive-de-documentos', Icon: FolderOpen, accent: '#0369A1' },
@@ -34,13 +36,14 @@ const FEATURES: Record<string, Feature> = {
   comissoes: { title: 'Comissões', desc: 'Cálculo automático de comissões, recibos em um clique e regras de estorno.', href: '/funcionalidades/gestao-comissoes', Icon: BadgeDollarSign, accent: '#059669' },
   onboarding: { title: 'Onboarding', desc: 'Padronize a entrada de novos alunos, com checklists de documentos e acolhida desde o primeiro dia.', href: '/funcionalidades/onboarding', Icon: Rocket, accent: '#7C3AED' },
   multi: { title: 'Multi-Escolas', desc: 'Gestão da rede de ensino: alterne entre unidades com um clique e veja relatórios consolidados.', href: '/funcionalidades/multi-escolas', Icon: Building2, accent: '#1E40AF' },
-  landing: { title: 'Landing Pages', desc: 'Páginas de alta conversão em minutos, com leads caindo direto no CRM.', href: '/funcionalidades/criador-de-landing-pages', Icon: LayoutTemplate, accent: '#7C3AED' },
+  landing: { title: 'Landing Pages', desc: 'Descreva a página e a Mia cria, com leads caindo direto no CRM.', href: '/funcionalidades/criador-de-landing-pages', Icon: LayoutTemplate, accent: '#7C3AED' },
   mia: { title: 'Copilot IA (Mia)', desc: 'Sua copilota: analisa leads, cria mensagens e entrega o briefing do seu dia.', href: '/funcionalidades/copilot-mia', Icon: BrainCircuit, accent: '#F97316' },
 }
 
 /** Funcionalidades mais afins a cada categoria do blog (as 5 primeiras da lista são exibidas). */
 const FEATURES_BY_CATEGORY: Record<string, string[]> = {
   'Marketing': ['marketing', 'campanhas', 'landing', 'social', 'jornadas'],
+  'Atendimento': ['whatsapp', 'email', 'voz', 'mia', 'automacoes'],
   'Retenção': ['onboarding', 'pesquisas', 'jornadas', 'whatsapp', 'automacoes'],
   'Retenção de Matrículas': ['onboarding', 'pesquisas', 'jornadas', 'whatsapp', 'automacoes'],
   'Vendas': ['comercial', 'whatsapp', 'voz', 'comissoes', 'mia'],

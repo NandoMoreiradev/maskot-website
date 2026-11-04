@@ -17,6 +17,7 @@ import {
     BellRing,
     Phone,
     FolderOpen,
+    Mail,
     ArrowRight
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
@@ -158,7 +159,7 @@ export default function FeaturesSection() {
         {
             title: 'Landing Pages que Convertem',
             stage: 'Atrair',
-            description: 'Crie páginas de captação em minutos, sem programar. Cada novo cadastro cai automaticamente no funil certo.',
+            description: 'Descreva a página e a Mia escreve o código, com prévia ao vivo, ou monte no editor visual. Agenda, formulários e leads ligados ao funil.',
             icon: <LayoutTemplate />,
             color: '#E11D48',
             bg: '#FFF1F2',
@@ -190,6 +191,15 @@ export default function FeaturesSection() {
             color: '#0E7490',
             bg: '#ECFEFF',
             href: '/funcionalidades/ligacao-de-voz'
+        },
+        {
+            title: 'Caixa de E-mail Integrada',
+            stage: 'Atender',
+            description: 'Centralize as caixas da escola (matrículas, secretaria e financeiro) com histórico de leads, respostas automáticas e threads organizadas.',
+            icon: <Mail />,
+            color: '#2563EB',
+            bg: '#EFF6FF',
+            href: '/funcionalidades/caixa-de-email'
         },
         {
             title: 'Mia, a Copilota de IA',

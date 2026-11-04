@@ -788,7 +788,7 @@ export default function LandingPagesDeepDive() {
                             Nosso construtor visual intuitivo permite montar landing pages completas e responsivas sem esforço.
                         </p>
                         <ul>
-                            <li><LayoutTemplate size={20}/> <strong>31 tipos de blocos:</strong> Capas, Formulários, Contadores, Depoimentos, FAQs e Vídeos.</li>
+                            <li><LayoutTemplate size={20}/> <strong>35 tipos de blocos:</strong> Capas, Formulários, Contadores, Depoimentos, FAQs e Vídeos.</li>
                             <li><Palette size={20}/> <strong>Customização Completa:</strong> Altere cores, tipografia e backgrounds com pré-visualização em tempo real.</li>
                             <li><MousePointer2 size={20}/> <strong>Nenhuma linha de código:</strong> Arraste os componentes necessários e veja o resultado instantâneo.</li>
                         </ul>

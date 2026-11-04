@@ -739,7 +739,7 @@ const CRM_PLANS: CrmPlan[] = [
     inherits: 'Tudo do Essencial +',
     bullets: [
       'Automações e jornadas de funil',
-      'Landing pages, mídias sociais e comissões',
+      'Landing pages (criadas com a Mia), mídias sociais e comissões',
       'Analytics avançado',
       'Copilota Mia com IA',
     ],
@@ -859,6 +859,7 @@ const FEATURE_GROUPS: FeatureGroup[] = [
     category: 'Marketing e presença digital',
     features: [
       { label: 'Landing pages',                values: [false, '5', '20'] },
+      { label: 'Criar landing pages com a Mia (código)', values: [false, true, true] },
       { label: 'Mídias sociais (publicação, comentários e automações)', values: [false, true, true] },
       { label: 'Pesquisas',                    values: ['2', 'Ilimitadas', 'Ilimitadas'] },
     ],
