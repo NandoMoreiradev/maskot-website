@@ -6,14 +6,14 @@ import CTASection from '@/components/CTASection'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Comparativo Real de Ferramentas para Escolas',
-  description: 'Veja como o Maskot reúne em uma só plataforma o que escolas pagam em várias ferramentas separadas, e por que escolhem o Maskot para captação de alunos.',
+  title: 'Comparativo Real de Ferramentas para Escolas | Investigação Competitiva Maskot',
+  description: 'Investigação competitiva completa: compare os 20 módulos do stack comercial de escolas no Brasil (RD Station, Calendly, Kommo, Blip, Zapier) com o que o Maskot entrega em uma só plataforma.',
   alternates: {
     canonical: 'https://www.maskotedu.com.br/comparativo',
   },
   openGraph: {
-    title: 'Comparativo Real de Ferramentas para Escolas | Maskot',
-    description: 'Veja como o Maskot reúne em uma só plataforma o que escolas pagam em várias ferramentas separadas, e por que escolhem o Maskot para captação de alunos.',
+    title: 'Comparativo Real de Ferramentas para Escolas | Investigação Competitiva Maskot',
+    description: 'Investigação competitiva completa: compare os 20 módulos do stack comercial de escolas no Brasil com o Maskot.',
     url: 'https://www.maskotedu.com.br/comparativo',
     type: 'website',
   },
